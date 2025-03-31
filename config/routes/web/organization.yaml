@@ -1,9 +1,9 @@
 list:
-  path: /organizacoes
+  path: /municipios
   controller: App\Controller\Web\OrganizationWebController::list
   methods: ['GET']
 
 getOne:
-  path: /organizacoes/{id}
+  path: /municipios/{id}
   controller: App\Controller\Web\OrganizationWebController::getOne
   methods: ['GET']
