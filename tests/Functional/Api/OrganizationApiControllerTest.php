@@ -38,6 +38,7 @@ class OrganizationApiControllerTest extends AbstractApiTestCase
             'id' => $requestBody['id'],
             'name' => $requestBody['name'],
             'description' => null,
+            'type' => 'Empresa',
             'image' => null,
             'agents' => [],
             'owner' => ['id' => AgentFixtures::AGENT_ID_1],
@@ -66,6 +67,7 @@ class OrganizationApiControllerTest extends AbstractApiTestCase
             'id' => $requestBody['id'],
             'name' => $requestBody['name'],
             'description' => 'Test Organization',
+            'type' => 'Empresa',
             'image' => null,
             'agents' => array_map(fn ($id) => ['id' => $id], $requestBody['agents']),
             'owner' => ['id' => AgentFixtures::AGENT_ID_1],
@@ -182,6 +184,7 @@ class OrganizationApiControllerTest extends AbstractApiTestCase
             'id' => OrganizationFixtures::ORGANIZATION_ID_1,
             'name' => 'Fortaleza',
             'description' => 'Municipio de Fortaleza, Capital do Ceará',
+            'type' => 'Municipio',
             'image' => $organization->getImage(),
             'agents' => [],
             'owner' => [
@@ -214,6 +217,7 @@ class OrganizationApiControllerTest extends AbstractApiTestCase
             'id' => OrganizationFixtures::ORGANIZATION_ID_3,
             'name' => 'Alto Santo',
             'description' => 'Município de Alto Santo, no Ceará',
+            'type' => 'Municipio',
             'image' => $organization->getImage(),
             'agents' => [],
             'owner' => [
@@ -289,6 +293,7 @@ class OrganizationApiControllerTest extends AbstractApiTestCase
             'id' => OrganizationFixtures::ORGANIZATION_ID_4,
             'name' => $requestBody['name'],
             'description' => $requestBody['description'],
+            'type' => 'Empresa',
             'image' => $organization->getImage(),
             'agents' => array_map(fn ($id) => ['id' => $id], $requestBody['agents']),
             'owner' => ['id' => AgentFixtures::AGENT_ID_1],
@@ -419,6 +424,7 @@ class OrganizationApiControllerTest extends AbstractApiTestCase
             'id' => OrganizationFixtures::ORGANIZATION_ID_10,
             'name' => 'Indanhatuba',
             'description' => 'Municipio de Indanhatuba-SP',
+            'type' => 'Municipio',
             'image' => $organization->getImage(),
             'agents' => [],
             'owner' => [

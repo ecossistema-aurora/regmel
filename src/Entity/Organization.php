@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Enum\OrganizationTypeEnum;
 use App\Enum\SocialNetworkEnum;
 use App\Helper\DateFormatHelper;
 use App\Repository\OrganizationRepository;
@@ -32,6 +33,10 @@ class Organization extends AbstractEntity
     #[ORM\Column(nullable: true)]
     #[Groups('organization.get')]
     private ?string $description = null;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Groups('organization.get')]
+    private string $type = OrganizationTypeEnum::UNDEFINED->value;
 
     #[ORM\Column(nullable: true)]
     #[Groups('organization.get')]
@@ -110,6 +115,16 @@ class Organization extends AbstractEntity
     public function setDescription(?string $description): void
     {
         $this->description = $description;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): void
+    {
+        $this->type = $type;
     }
 
     public function getImage(): ?string
@@ -226,6 +241,7 @@ class Organization extends AbstractEntity
             'id' => $this->id?->toRfc4122(),
             'name' => $this->name,
             'description' => $this->description,
+            'type' => $this->type,
             'agents' => $this->agents->map(fn ($agent) => $agent->getId()->toRfc4122()),
             'owner' => $this->owner->toArray(),
             'createdBy' => $this->createdBy->toArray(),

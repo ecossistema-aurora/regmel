@@ -21,6 +21,7 @@ final class OrganizationTest extends AbstractApiTestCase
         $id = Uuid::v4();
         $name = 'PHP com RAPadura';
         $description = 'Comunidade de devs PHP do Estado do Ceará';
+        $type = 'EMPRESA';
         $image = 'phprapadura.jpg';
         $createdAt = new DateTimeImmutable();
         $updatedAt = new DateTime();
@@ -38,6 +39,7 @@ final class OrganizationTest extends AbstractApiTestCase
         $organization->setId($id);
         $organization->setName($name);
         $organization->setDescription($description);
+        $organization->setType($type);
         $organization->setImage($image);
         $organization->setCreatedAt($createdAt);
         $organization->setUpdatedAt($updatedAt);
@@ -54,6 +56,7 @@ final class OrganizationTest extends AbstractApiTestCase
         $this->assertSame($id, $organization->getId());
         $this->assertSame($name, $organization->getName());
         $this->assertSame($description, $organization->getDescription());
+        $this->assertSame($type, $organization->getType());
         $this->assertSame($image, $organization->getImage());
         $this->assertSame($createdAt, $organization->getCreatedAt());
         $this->assertSame($updatedAt, $organization->getUpdatedAt());
@@ -68,6 +71,7 @@ final class OrganizationTest extends AbstractApiTestCase
             'id' => $id->toRfc4122(),
             'name' => $name,
             'description' => $description,
+            'type' => $type,
             'agents' => $agents->map(fn ($agent) => $agent->getId()->toRfc4122()),
             'owner' => $owner->toArray(),
             'createdBy' => $createdBy->toArray(),
