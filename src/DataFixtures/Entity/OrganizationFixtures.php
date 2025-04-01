@@ -80,7 +80,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'space' => null,
             'extraFields' => [],
             'socialNetworks' => [
-                    SocialNetworkEnum::INSTAGRAM->value => 'devsdosertao',
+                SocialNetworkEnum::INSTAGRAM->value => 'devsdosertao',
             ],
             'createdAt' => '2024-07-16T17:22:00+00:00',
             'updatedAt' => null,
