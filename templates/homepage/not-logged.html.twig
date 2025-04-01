@@ -32,13 +32,24 @@
     <div class=" bg-green text-white py-5">
         <div class="container pb-5">
             <div class="row text-start">
-                <div class="col-md-auto">
+                <div class="col-md-12">
                     <h1 class="fw-bold mt-4">{{ 'create_account'|trans }}</h1>
                     <p class="lead mt-3">{{ 'view.homepage.registration_info'|trans }}</p>
-                    <a href="{{ path('web_auth_register') }}" class="col-sm-5 mx-auto btn btn-light btn-lg text-green icon-link justify-content-between mt-5">
-                        <h4 class="fw-bold mt-2 text-uppercase">{{ 'register'|trans }}</h4>
-                        <span class="material-icons fs-2">arrow_forward</span>
-                    </a>
+                    {% if env.aurora.homepage.sections.register.options %}
+                        {% for option in env.aurora.homepage.sections.register.options %}
+                            <div>
+                                <a href="{{ path(option.route   ) }}" class="col-sm-4 mx-auto btn btn-light btn-lg text-green icon-link justify-content-between mt-5">
+                                    <h4 class="fw-bold mt-2 text-uppercase">{{ option.title|trans }}</h4>
+                                    <span class="material-icons fs-2">arrow_forward</span>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <a href="{{ path('web_auth_register') }}" class="col-sm-3 mx-auto btn btn-light btn-lg text-green icon-link justify-content-between mt-5">
+                            <h4 class="fw-bold mt-2 text-uppercase">{{ 'register'|trans }}</h4>
+                            <span class="material-icons fs-2">arrow_forward</span>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
