@@ -1,0 +1,117 @@
+name: Mapa das Periferias
+author: Secretaria Nacional de Periferias
+logo:
+  horizontal:
+    path: https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/periferias/mapa-das-periferias/@@images/c2b71df1-508b-4c56-b863-9527afc9bad8.png
+    width: 70px
+  vertical:
+    path: https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/periferias/mapa-das-periferias/@@images/c2b71df1-508b-4c56-b863-9527afc9bad8.png
+modules:
+  organizations: Municipios
+  agents: Agentes Promotores
+  opportunities: Credenciamento
+  events:
+  spaces:
+  initiatives:
+
+sidebar:
+  dashboard:
+    title: menu
+    items:
+      admin_dashboard:
+        icon: dashboard
+        text: control_panel
+        color: text-info
+
+  my_opportunities:
+    title: Anuencia
+    items:
+      admin_registration_list:
+        icon: app_registration
+        text: my_subscriptions
+      admin_accountability_list:
+        icon: payments
+        text: accountability
+
+  notice_opportunity:
+    title: footer.notices_opportunities
+    items:
+      admin_opportunity_list:
+        icon: diversity_2
+        text: Credenciamento
+      admin_review_list:
+        icon: manage_search
+        text: my_reviews
+
+  entity:
+    title: management
+    items:
+      admin_agent_list:
+        icon: people
+        text: Agentes Promotores
+#      admin_event_list:
+#        icon: event
+#        text: my_events
+#      admin_space_list:
+#        icon: apartment
+#        text: my_spaces
+      admin_initiative_list:
+        icon: article
+        text: Propostas
+      admin_organization_list:
+        icon: place
+        text: Municipios
+
+  admin:
+    title: admin_options
+    items:
+      admin_seal_list:
+        icon: bookmark
+        text: seals
+#      admin_subsite_list:
+#        icon: account_tree
+#        text: subsites
+      admin_user_list:
+        icon: manage_accounts
+        text: users
+      admin_faq_list:
+        icon: quiz
+        text: faq
+      admin_role_list:
+        icon: newspaper
+        text: functions
+
+homepage:
+  sections:
+    header:
+      enabled: true
+      title: Mapa das Periferias
+      subtitle: subtitulo aqui
+      action:
+        route: regmel_about
+        title: SAIBA MAIS
+      description: descricao aqui
+      background: bg-dark
+      image: img/regmel.png
+      image_width: 70%
+    register:
+      enabled: true
+      options:
+        municipio:
+          title: Município
+          route: regmel_register_city
+        empresa:
+          title: Empresa/OCSC
+          route: regmel_register_company
+    opportunities:
+      enabled: false
+    modules:
+      enabled: true
+    happen_now:
+      enabled: false
+    maps:
+      enabled: true
+      background: bg-dark
+      color: text-light
+    contribute:
+      enabled: false

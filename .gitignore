@@ -15,7 +15,7 @@ package-lock.json
 ###< symfony/framework-bundle ###
 
 ###> envinronment customization ###
-/config/environment/aurora.regmel.yaml
+/config/environment/aurora.local.yaml
 /config/environment/aurora.prod.yaml
 ###< envinronment customization ###
 

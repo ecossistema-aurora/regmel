@@ -19,6 +19,9 @@
                         </strong></h1>
                     <p class="lead mt-3 fw-bold">{{ env.aurora.homepage.sections.header.subtitle ?? 'view.homepage.subtitle'|trans }}</p>
                     <p class="lead mt-2">{{ env.aurora.homepage.sections.header.description ?? 'view.homepage.header_text'|trans }}</p>
+                    {% if env.aurora.homepage.sections.header.action is defined %}
+                        <a class="btn btn-lg btn-primary w-100 mt-4" href="{{ path(env.aurora.homepage.sections.header.action.route) }}">{{ env.aurora.homepage.sections.header.action.title }}</a>
+                    {% endif %}
                 </div>
                 <div class="col-md-7 mt-4 text-end">
                     <img src="{{ asset(env.aurora.homepage.sections.header.image ?? 'img/pessoas-home.png') }}" width="{{ env.aurora.homepage.sections.header.image_width ?? '100%' }}" alt="{{ 'illustration'|trans }}" class="img-fluid">
@@ -35,21 +38,19 @@
                 <div class="col-md-12">
                     <h1 class="fw-bold mt-4">{{ 'create_account'|trans }}</h1>
                     <p class="lead mt-3">{{ 'view.homepage.registration_info'|trans }}</p>
-                    {% if env.aurora.homepage.sections.register.options %}
-                        {% for option in env.aurora.homepage.sections.register.options %}
-                            <div>
-                                <a href="{{ path(option.route   ) }}" class="col-sm-4 mx-auto btn btn-light btn-lg text-green icon-link justify-content-between mt-5">
-                                    <h4 class="fw-bold mt-2 text-uppercase">{{ option.title|trans }}</h4>
-                                    <span class="material-icons fs-2">arrow_forward</span>
-                                </a>
-                            </div>
-                        {% endfor %}
+                    {% for option in env.aurora.homepage.sections.register.options ?? [] %}
+                        <div>
+                            <a href="{{ path(option.route) }}" class="col-sm-4 mx-auto btn btn-light btn-lg text-green icon-link justify-content-between mt-5">
+                                <h4 class="fw-bold mt-2 text-uppercase">{{ option.title|trans }}</h4>
+                                <span class="material-icons fs-2">arrow_forward</span>
+                            </a>
+                        </div>
                     {% else %}
                         <a href="{{ path('web_auth_register') }}" class="col-sm-3 mx-auto btn btn-light btn-lg text-green icon-link justify-content-between mt-5">
                             <h4 class="fw-bold mt-2 text-uppercase">{{ 'register'|trans }}</h4>
                             <span class="material-icons fs-2">arrow_forward</span>
                         </a>
-                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
