@@ -1,0 +1,37 @@
+<h3>{{ 'organization_data' | trans }}</h3>
+
+<div class="row">
+    <div class="col-6 mb-3">
+        <label for="state" class="form-label">{{ 'state' | trans }}</label>
+        <select class="form-select" id="state">
+            <option value="">{{ 'select' | trans }}</option>
+            {% for state in states %}
+                <option value="{{ state.id }}">{{ state.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-6 mb-3">
+        <label for="city" class="form-label">{{ 'city' | trans }}</label>
+        <select class="form-select" id="city" name="city">
+            <option value="">{{ 'select' | trans }}</option>
+        </select>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6 mb-3">
+        <label for="cnpj" class="form-label">{{ 'view.organization.cnpj' | trans }}</label>
+        <input type="text" class="form-control" id="cnpj" name="cnpj" placeholder={{ 'view.organization.cnpj' | trans}} required>
+    </div>
+    <div class="col-6 mb-3">
+        <label for="phone" class="form-label">{{ 'view.organization.phone' | trans }}</label>
+        <input type="tel" class="form-control" id="phone" name="phone" placeholder={{ 'view.organization.phone' | trans}} required>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 mb-3">
+        <label for="email" class="form-label">{{ 'view.organization.email' | trans }}</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder={{ 'view.organization.email' | trans}} required>
+    </div>
+</div>

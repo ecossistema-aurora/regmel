@@ -4,32 +4,93 @@ declare(strict_types=1);
 
 namespace App\Regmel\Controller\Web;
 
-use App\Regmel\Service\RegisterService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Controller\Web\AbstractWebController;
+use App\Enum\OrganizationTypeEnum;
+use App\Exception\ValidatorException;
+use App\Regmel\Service\Interface\RegisterServiceInterface;
+use App\Service\Interface\CityServiceInterface;
+use App\Service\Interface\StateServiceInterface;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-class RegisterController extends AbstractController
+class RegisterController extends AbstractWebController
 {
+    public const VIEW_CITY = 'regmel/register/city.html.twig';
+
+    public const FORM_CITY = 'register-city';
+
     public function __construct(
-        private RegisterService $registerService
+        private readonly RegisterServiceInterface $registerService,
+        private readonly StateServiceInterface $stateService,
+        private readonly CityServiceInterface $cityService,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
     #[Route('/cadastro/municipio', name: 'regmel_register_city', methods: ['GET', 'POST'])]
     public function registerCity(Request $request): Response
     {
-        if (true === $request->isMethod(Request::METHOD_POST)) {
-            $this->registerService->save();
+        $states = $this->stateService->list();
+
+        if ('POST' !== $request->getMethod()) {
+            return $this->render(self::VIEW_CITY, [
+                'form_id' => self::FORM_CITY,
+                'states' => $states,
+            ]);
         }
 
-        // cadastrar o usuario
-        // cadastrar o agente
-        // criar a organizacao/municipio (setando o agente como createdBy)
-        // add essa organizacao dentro da oportunidade X
+        $this->validCsrfToken(self::FORM_CITY, $request);
 
-        return $this->render('regmel/register/city.html.twig');
+        $city = $this->cityService->get($request->get('city'));
+
+        $errors = [];
+
+        try {
+            $this->registerService->saveOrganization([
+                'organization' => [
+                    'id' => Uuid::v4(),
+                    'name' => $city?->getName(),
+                    'type' => OrganizationTypeEnum::MUNICIPIO->value,
+                    'extraFields' => [
+                        'cityId' => $city?->getId(),
+                        'email' => $request->get('email'),
+                        'phone' => $request->get('phone'),
+                        'cnpj' => $request->get('cnpj'),
+                    ],
+                ],
+                'user' => [
+                    'id' => Uuid::v4(),
+                    'firstname' => $request->get('firstname'),
+                    'lastname' => $request->get('lastname'),
+                    'email' => $request->get('userEmail'),
+                    'password' => $request->get('password'),
+                    'extraFields' => [
+                        'cpf' => $request->get('cpf'),
+                        'position' => $request->get('position'),
+                    ],
+                ],
+            ]);
+        } catch (ValidatorException $exception) {
+            $errors = $exception->getConstraintViolationList();
+        } catch (Exception $exception) {
+            $errors = [$exception->getMessage()];
+        }
+
+        if (false === empty($errors)) {
+            return $this->render(self::VIEW_CITY, [
+                'errors' => $errors,
+                'form_id' => self::FORM_CITY,
+                'states' => $states,
+            ]);
+        }
+
+        $this->addFlash('success', $this->translator->trans('view.organization.message.created'));
+
+        return $this->redirectToRoute('web_organization_list');
     }
 
     #[Route('/cadastro/empresa', name: 'regmel_register_company', methods: ['GET', 'POST'])]

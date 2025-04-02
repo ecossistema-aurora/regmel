@@ -6,6 +6,7 @@ namespace App\EventListener\Audit;
 
 use App\DocumentService\AbstractTimelineDocumentService;
 use App\Entity\Agent;
+use App\Entity\Organization;
 use App\Entity\User;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
@@ -62,6 +63,7 @@ class AuditCreateListener extends AbstractAuditListener
     {
         return match ($class) {
             User::class,
+            Organization::class,
             Agent::class => false,
             default => true,
         };

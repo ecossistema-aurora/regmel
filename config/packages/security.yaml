@@ -17,6 +17,10 @@ security:
             stateless: true
             json_login:
                 check_path: api_auth_login
+        api_public:
+            pattern: ^/api/states
+            methods: [GET]
+            security: false
         api:
             pattern: ^/api
             stateless: true
