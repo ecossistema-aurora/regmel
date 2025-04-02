@@ -99,6 +99,9 @@ sidebar:
       admin_role_list:
         icon: newspaper
         text: functions
+      admin_regmel_company_list:
+        icon: business
+        text: Empresas/OSC
 
 homepage:
   sections:

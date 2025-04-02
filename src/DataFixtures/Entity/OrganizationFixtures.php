@@ -29,6 +29,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
     public const string ORGANIZATION_ID_8 = '7241a715-453a-12db-c707-725dc3ab988c';
     public const string ORGANIZATION_ID_9 = '7cb6a1b8-f33e-1218-cb41-820b0f74e4d1';
     public const string ORGANIZATION_ID_10 = '8c4ca8bd-6e33-1b62-c58b-a66969c49f66';
+    public const string ORGANIZATION_ID_11 = '8c4ca8bd-6e33-1b62-c58b-a66969c49f77';
 
     public const array ORGANIZATIONS = [
         [
@@ -218,6 +219,32 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
                 SocialNetworkEnum::INSTAGRAM->value => 'forrotonemveno',
             ],
             'createdAt' => '2024-08-14T10:00:00+00:00',
+            'updatedAt' => null,
+            'deletedAt' => null,
+        ],
+        [
+            'id' => self::ORGANIZATION_ID_11,
+            'name' => 'Empresa Teste AI',
+            'image' => null,
+            'type' => OrganizationTypeEnum::EMPRESA->value,
+            'description' => 'Organização do tipo EMPRESA para testes do painel',
+            'createdBy' => AgentFixtures::AGENT_ID_1,
+            'owner' => AgentFixtures::AGENT_ID_1,
+            'agents' => [],
+            'parent' => null,
+            'space' => null,
+            'extraFields' => [
+                'cnpj' => '00.000.000/0001-00',
+                'email' => 'teste@gmail.com,',
+                'telefone' => '(85) 99999-9999',
+                'tipo' => 'OSC',
+                'razaoSocial' => 'Razão Social Teste',
+                'site' => 'https://www.empresa.com.br',
+            ],
+            'socialNetworks' => [
+                SocialNetworkEnum::INSTAGRAM->value => 'empresa_ai_test',
+            ],
+            'createdAt' => '2024-08-20T09:00:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
         ],
