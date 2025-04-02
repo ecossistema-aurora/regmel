@@ -180,8 +180,8 @@ class OrganizationApiControllerTest extends AbstractApiTestCase
 
         $this->assertJsonContains([
             'id' => OrganizationFixtures::ORGANIZATION_ID_1,
-            'name' => 'PHP com Rapadura',
-            'description' => 'Comunidade de devs PHP do Estado do Ceará',
+            'name' => 'Fortaleza',
+            'description' => 'Municipio de Fortaleza, Capital do Ceará',
             'image' => $organization->getImage(),
             'agents' => [],
             'owner' => [
@@ -212,8 +212,8 @@ class OrganizationApiControllerTest extends AbstractApiTestCase
 
         $this->assertResponseBodySame([
             'id' => OrganizationFixtures::ORGANIZATION_ID_3,
-            'name' => 'Devs do Sertão',
-            'description' => 'Grupo de devs que se reúnem velas veredas do sertão',
+            'name' => 'Alto Santo',
+            'description' => 'Município de Alto Santo, no Ceará',
             'image' => $organization->getImage(),
             'agents' => [],
             'owner' => [
@@ -417,8 +417,8 @@ class OrganizationApiControllerTest extends AbstractApiTestCase
 
         $this->assertResponseBodySame([
             'id' => OrganizationFixtures::ORGANIZATION_ID_10,
-            'name' => 'Banda de Forró tô nem veno',
-            'description' => 'Banda de forró formada com pessoas de baixa ou nenhuma visão',
+            'name' => 'Indanhatuba',
+            'description' => 'Municipio de Indanhatuba-SP',
             'image' => $organization->getImage(),
             'agents' => [],
             'owner' => [
