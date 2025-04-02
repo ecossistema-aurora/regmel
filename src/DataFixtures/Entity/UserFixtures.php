@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\DataFixtures\Entity;
 
 use App\Entity\User;
+use App\Enum\UserStatusEnum;
 use App\Service\Interface\FileServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -37,6 +38,7 @@ final class UserFixtures extends AbstractFixture
             'socialName' => 'Alessandro Feitoza',
             'email' => 'alessandrofeitoza@example.com',
             'image' => null,
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => '2024-07-10T11:30:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -48,6 +50,7 @@ final class UserFixtures extends AbstractFixture
             'socialName' => 'Henrique Lima',
             'email' => 'henriquelopeslima@example.com',
             'image' => null,
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => '2024-07-11T10:49:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -59,6 +62,7 @@ final class UserFixtures extends AbstractFixture
             'socialName' => 'Kelly Moura',
             'email' => 'kellymoura@example.com',
             'image' => null,
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => '2024-07-16T17:22:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -70,6 +74,7 @@ final class UserFixtures extends AbstractFixture
             'socialName' => 'Sara Camilo',
             'email' => 'saracamilo@example.com',
             'image' => null,
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => '2024-07-17T15:12:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -81,6 +86,7 @@ final class UserFixtures extends AbstractFixture
             'socialName' => null,
             'email' => 'talysonsoares@example.com',
             'image' => null,
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => '2024-07-22T16:20:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -92,6 +98,7 @@ final class UserFixtures extends AbstractFixture
             'socialName' => null,
             'email' => 'raquelbenlabao@example.com',
             'image' => null,
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => '2024-08-10T11:26:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -103,6 +110,7 @@ final class UserFixtures extends AbstractFixture
             'socialName' => 'Pampleno',
             'email' => 'lucaspamplona@example.com',
             'image' => null,
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => '2024-08-11T15:54:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -114,6 +122,7 @@ final class UserFixtures extends AbstractFixture
             'socialName' => null,
             'email' => 'mariadebetania@example.com',
             'image' => null,
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => '2024-08-12T14:24:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -125,6 +134,7 @@ final class UserFixtures extends AbstractFixture
             'socialName' => 'Abner C.',
             'email' => 'abnercarvalho@example.com',
             'image' => null,
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => '2024-08-13T20:25:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -136,6 +146,7 @@ final class UserFixtures extends AbstractFixture
             'socialName' => null,
             'email' => 'paulodetarso@example.com',
             'image' => null,
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => '2024-08-14T10:00:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -150,6 +161,7 @@ final class UserFixtures extends AbstractFixture
             'socialName' => 'Alessandro Feitoza',
             'email' => 'alessandrofeitoza@example.com',
             'image' => null,
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => '2024-07-10T11:30:00+00:00',
             'updatedAt' => '2024-07-10T11:35:00+00:00',
             'deletedAt' => null,
