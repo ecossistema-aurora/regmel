@@ -62,7 +62,7 @@ describe('Página de Lista de Espaços', () => {
     it('Garante que filtrar por cidade funciona', () => {
         cy.get('#open-filter').click();
         cy.get('#state').select('Ceará');
-        cy.get('#address').select('Nova Russas');
+        cy.get('#city').select('Nova Russas');
         cy.get('#apply-filters').click();
 
         cy.get('.align-items-end > .fw-bold').contains('1 Espaços Encontrados').should('be.visible');

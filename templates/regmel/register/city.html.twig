@@ -1,1 +1,70 @@
-<h1>Cadastro de Municipio</h1>
+{% extends "_layouts/blank-not-logged.html.twig" %}
+
+{% block title %} {{ 'organization_register'|trans }} {% endblock %}
+
+{% block content %}
+    <div class="toast-container p-3 top-0 start-50 translate-middle-x">
+        {% if error ?? false %}
+            <div class="toast danger snackbar" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000" data-bs-autohide="true">
+                <div class="d-flex">
+                    <span class="icon material-icons align-self-start">check_circle</span>
+                    <div class="toast-body">
+                        {{ error }}
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="container my-5">
+        <div class="row mb-3">
+            <a href="{{ path('web_home_homepage') }}" class="nav-link text-primary">
+                <i class="material-icons align-middle">arrow_back</i>
+                {{ 'back'|trans }}
+            </a>
+        </div>
+
+        <div class="row justify-content-md-center">
+            <div class="col-md-10 col-lg-8 col-xl-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="fw-bold fs-3">{{ 'organization_register'|trans }}</h1>
+                    </div>
+
+                    <div class="card-body">
+                        <form method="POST" action="">
+                            <input type="hidden" name="token" value="{{ csrf_token(form_id) }}">
+
+                            {% include "regmel/register/_partials/user-data.html.twig" %}
+
+                            {% include "regmel/register/_partials/organization-data.html.twig" %}
+
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="acceptTerms" name="acceptTerms" required>
+                                        <label for="acceptTerms" class="form-check-label"><a href="#" data-bs-toggle="modal" data-bs-target="#modal-about-program">{{ 'view.organization.accept_terms' | trans }}</a></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="btn-form-group">
+                                <button class="btn btn-primary" type="submit">
+                                    {{ 'save' | trans }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include "regmel/register/_partials/modal-about-program.html.twig" %}
+    
+{% endblock %}
+
+{% block extra_javascripts %}
+    <script type="module" src="{{ asset('js/load-cities.js') }}"></script>
+{% endblock %}

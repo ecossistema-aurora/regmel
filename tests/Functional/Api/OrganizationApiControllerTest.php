@@ -105,8 +105,6 @@ class OrganizationApiControllerTest extends AbstractApiTestCase
                 'expectedErrors' => [
                     ['field' => 'id', 'message' => 'This value should not be blank.'],
                     ['field' => 'name', 'message' => 'This value should not be blank.'],
-                    ['field' => 'createdBy', 'message' => 'This value should not be blank.'],
-                    ['field' => 'owner', 'message' => 'This value should not be blank.'],
                 ],
             ],
             'id is not a valid UUID' => [

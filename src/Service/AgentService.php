@@ -69,14 +69,15 @@ readonly class AgentService extends AbstractEntityService implements AgentServic
         return $this->repository->save($agentObj);
     }
 
-    public function createFromUser(array $user): void
+    public function createFromUser(array $user, ?array $extraFields = null): Agent
     {
         $agent = $this->organizeDefaultAgentData($user);
+        $agent['extraFields'] = $extraFields;
         $agent = $this->validateInput($agent, AgentDto::class, AgentDto::CREATE);
 
         $agentObj = $this->serializer->denormalize($agent, Agent::class);
 
-        $this->repository->save($agentObj);
+        return $this->repository->save($agentObj);
     }
 
     public function findBy(array $params = [], int $limit = 50): array

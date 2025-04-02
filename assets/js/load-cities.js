@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const stateSelect = document.getElementById("state");
-    const citySelect = document.getElementById("address");
-    const token = document.getElementById("filter-sidebar").getAttribute("token");
+    const citySelect = document.getElementById("city");
 
     stateSelect.addEventListener("change", function () {
         const stateId = this.value;
@@ -9,11 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!stateId) return;
 
-        fetch(`/api/states/${stateId}/cities`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+        fetch(`/api/states/${stateId}/cities`)
             .then(res => res.json())
             .then(cities => {
                 cities.forEach(city => {

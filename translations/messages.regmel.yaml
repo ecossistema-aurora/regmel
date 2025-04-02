@@ -210,6 +210,8 @@ inactive: Inativo
 is_itinerant: É agente itinerante?
 is-accessible: O espaço é acessível?
 
+join_terms: Termos de Adesão
+
 language: Idioma
 lastname: Sobrenome
 last_login: Último Login
@@ -303,6 +305,7 @@ opening-hours: Horário de funcionamento
 opportunity: Oportunidade
 opportunities: Oportunidades
 organizations: Municípios
+organization_data: Dados do Município
 organization_register: Criar um Município
 orientation: Selecione a Orientação Sexual
 other_files: Outros arquivos
@@ -336,6 +339,7 @@ phase_error: Erro ao criar a fase
 phase_timeline: Timeline da fase
 physical: Física
 physical_accessibility: Recursos de acessibilidade física
+position: Cargo
 postal_code: CEP
 private_email: Email privado
 private_phone: Telefone privado (com DDD)
@@ -390,8 +394,13 @@ type_space: Tipo do espaço
 total_value: Valor total
 
 user: Usuário
-user_name: Nome do Usuário
 users: Usuários
+user_cpf: CPF do Usuário
+user_data: Dados do Usuário
+user_email: Email do Usuário
+user_name: Nome do Usuário
+user_password: Senha do Usuário
+user_position: Cargo do Usuário
 
 view_all: Ver todas
 view_file: ver arquivo
@@ -792,11 +801,16 @@ view:
     date: Município foi criado em
     message:
       deleted: O Município foi excluído
+      created: O município foi criado com sucesso
     quantity:
       total: Municípios Encontrados
       culture: Municípios Ativos
       inactive: Municípios Inativos
       last_days: Registrados nos últimos 7 dias
+    cnpj: CNPJ
+    phone: Telefone
+    email: Email
+    accept_terms: Aceito os termos de adesão
 
   success:
     successfully: Seu cadastro foi criado com sucesso!
