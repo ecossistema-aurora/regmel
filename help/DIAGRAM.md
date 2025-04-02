@@ -111,6 +111,7 @@ direction BT
        created_by_id  /* (DC2Type:uuid) */ uuid
        varchar(100) name
        varchar(255) description
+       varchar(20) type
        created_at  /* (DC2Type:datetime_immutable) */ timestamp(0)
        timestamp(0) updated_at
        timestamp(0) deleted_at

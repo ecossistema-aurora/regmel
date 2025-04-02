@@ -6,6 +6,7 @@ namespace App\DataFixtures\Entity;
 
 use App\Entity\Agent;
 use App\Entity\Organization;
+use App\Enum\OrganizationTypeEnum;
 use App\Enum\SocialNetworkEnum;
 use App\Service\Interface\FileServiceInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -34,6 +35,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'id' => self::ORGANIZATION_ID_1,
             'name' => 'Fortaleza',
             'image' => null,
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
             'description' => 'Municipio de Fortaleza, Capital do Ceará',
             'createdBy' => AgentFixtures::AGENT_ID_1,
             'owner' => AgentFixtures::AGENT_ID_1,
@@ -52,6 +54,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'id' => self::ORGANIZATION_ID_2,
             'name' => 'São Gonçalo do Amarante',
             'image' => null,
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
             'description' => 'SGA',
             'createdBy' => AgentFixtures::AGENT_ID_1,
             'owner' => AgentFixtures::AGENT_ID_1,
@@ -73,6 +76,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'id' => self::ORGANIZATION_ID_3,
             'name' => 'Alto Santo',
             'image' => null,
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
             'description' => 'Município de Alto Santo, no Ceará',
             'createdBy' => AgentFixtures::AGENT_ID_3,
             'owner' => AgentFixtures::AGENT_ID_3,
@@ -90,6 +94,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'id' => self::ORGANIZATION_ID_4,
             'name' => 'Recife',
             'image' => null,
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
             'description' => 'Recife, Pernambuco',
             'createdBy' => AgentFixtures::AGENT_ID_1,
             'owner' => AgentFixtures::AGENT_ID_1,
@@ -107,6 +112,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'id' => self::ORGANIZATION_ID_5,
             'name' => 'Parambu',
             'image' => null,
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
             'description' => 'Parambu-CE',
             'createdBy' => AgentFixtures::AGENT_ID_3,
             'owner' => AgentFixtures::AGENT_ID_3,
@@ -124,6 +130,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'id' => self::ORGANIZATION_ID_6,
             'name' => 'Russas-CE',
             'image' => null,
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
             'description' => 'Cidade de Russas, Municipio no Ceará',
             'createdBy' => AgentFixtures::AGENT_ID_2,
             'owner' => AgentFixtures::AGENT_ID_2,
@@ -146,6 +153,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'id' => self::ORGANIZATION_ID_7,
             'name' => 'Mamanguape-PB',
             'image' => null,
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
             'description' => 'Municipio de Mamanguape-PB, não confundir com Maranguape-CE',
             'createdBy' => AgentFixtures::AGENT_ID_1,
             'owner' => AgentFixtures::AGENT_ID_1,
@@ -163,6 +171,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'id' => self::ORGANIZATION_ID_8,
             'name' => 'Maranguape',
             'image' => null,
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
             'description' => 'Municipio de Maranguape-CE',
             'createdBy' => AgentFixtures::AGENT_ID_1,
             'owner' => AgentFixtures::AGENT_ID_1,
@@ -180,6 +189,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'id' => self::ORGANIZATION_ID_9,
             'name' => 'Arneiroz',
             'image' => null,
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
             'description' => 'Municipio de Arneiros, no sertão cearense',
             'createdBy' => AgentFixtures::AGENT_ID_1,
             'owner' => AgentFixtures::AGENT_ID_1,
@@ -197,6 +207,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'id' => self::ORGANIZATION_ID_10,
             'name' => 'Indanhatuba',
             'image' => null,
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
             'description' => 'Municipio de Indanhatuba-SP',
             'createdBy' => AgentFixtures::AGENT_ID_1,
             'owner' => AgentFixtures::AGENT_ID_1,
@@ -217,6 +228,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'id' => self::ORGANIZATION_ID_1,
             'name' => 'Fortaleza',
             'image' => null,
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
             'description' => 'Municipio de Fortaleza, Capital do Ceará',
             'createdBy' => AgentFixtures::AGENT_ID_1,
             'owner' => AgentFixtures::AGENT_ID_1,
