@@ -15,6 +15,36 @@ modules:
   spaces: Espaços
   initiatives: Iniciativas
 
+navbar:
+  web_home_homepage:
+    text: home
+    icon: home
+    color: "#224638"
+  web_opportunity_list:
+    text: opportunities
+    icon: lightbulb
+    color: "#E70DCB"
+  web_agent_list:
+    text: agents
+    icon: group
+    color: "#F59E00"
+  web_organization_list:
+    text: organizations
+    icon: corporate_fare
+    color: "#6A5ACD"
+  web_event_list:
+    text: events
+    icon: event
+    color: "#36B39E"
+  web_space_list:
+    text: spaces
+    icon: apartment
+    color: "#22A638"
+  web_initiative_list:
+    text: initiatives
+    icon: article
+    color: "#0074C1"
+
 sidebar:
   dashboard:
     title: menu

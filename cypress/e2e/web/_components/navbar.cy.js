@@ -21,32 +21,44 @@ describe('Página de Home do ambiente web', () => {
     });
 
     it('Clica no ícone de Oportunidades e garante o redirecionamento', () => {
-        cy.get('a.nav-link.opportunity').should('be.visible').and('not.be.disabled').click({ force: true });
+        cy.get(':nth-child(2) > .nav-link')
+            .contains('Oportunidades')
+            .should('be.visible').and('not.be.disabled').click({ force: true });
         cy.url().should('include', '/oportunidades');
     });
 
     it('Clica no ícone de Agentes e garante o redirecionamento', () => {
-        cy.get('a.nav-link.agent').should('be.visible').and('not.be.disabled').click({ force: true });
+        cy.get(':nth-child(3) > .nav-link')
+            .contains('Agentes')
+            .should('be.visible').and('not.be.disabled').click({ force: true });
         cy.url().should('include', '/agentes');
     });
 
     it('Clica no ícone de Organizações e garante o redirecionamento', () => {
-        cy.get('a.nav-link.organization').should('be.visible').and('not.be.disabled').click({ force: true });
+        cy.get(':nth-child(4) > .nav-link')
+            .contains('Organizações')
+            .should('be.visible').and('not.be.disabled').click({ force: true });
         cy.url().should('include', '/organizacoes');
     });
 
     it('Clica no ícone de Eventos e garante o redirecionamento', () => {
-        cy.get('a.nav-link.event').should('be.visible').and('not.be.disabled').click({ force: true });
+        cy.get(':nth-child(5) > .nav-link')
+            .contains('Eventos')
+            .should('be.visible').and('not.be.disabled').click({ force: true });
         cy.url().should('include', '/eventos');
     });
 
     it('Clica no ícone de Espaços e garante o redirecionamento', () => {
-        cy.get('a.nav-link.space').should('be.visible').and('not.be.disabled').click({ force: true });
+        cy.get(':nth-child(6) > .nav-link')
+            .contains('Espaços')
+            .should('be.visible').and('not.be.disabled').click({ force: true });
         cy.url().should('include', '/espacos');
     });
 
     it('Clica no ícone de Iniciativas e garante o redirecionamento', () => {
-        cy.contains('a', 'Iniciativas').should('be.visible').click({ force: true });
+        cy.get(':nth-child(7) > .nav-link')
+            .contains('Iniciativas')
+            .should('be.visible').click({ force: true });
         cy.url().should('include', '/iniciativas');
     });
 });
