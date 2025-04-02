@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Enum\UserStatusEnum;
 use App\Helper\DateFormatHelper;
 use App\Repository\UserRepository;
 use DateTime;
@@ -51,6 +52,10 @@ class User extends AbstractEntity implements UserInterface, PasswordAuthenticate
     #[ORM\OneToMany(targetEntity: Agent::class, mappedBy: 'user')]
     #[Groups(['user.get'])]
     private Collection $agents;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Groups(['user.get'])]
+    private string $status = UserStatusEnum::AWAITING_CONFIRMATION->value;
 
     #[ORM\Column]
     #[Groups(['user.get'])]
@@ -162,6 +167,16 @@ class User extends AbstractEntity implements UserInterface, PasswordAuthenticate
         }
     }
 
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
+    }
+
     public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
@@ -225,6 +240,7 @@ class User extends AbstractEntity implements UserInterface, PasswordAuthenticate
             'socialName' => $this->socialName,
             'email' => $this->email,
             'image' => $this->image,
+            'status' => $this->status,
             'createdAt' => $this->createdAt->format(DateFormatHelper::DEFAULT_FORMAT),
             'updatedAt' => $this->updatedAt?->format(DateFormatHelper::DEFAULT_FORMAT),
             'deletedAt' => $this->deletedAt?->format(DateFormatHelper::DEFAULT_FORMAT),

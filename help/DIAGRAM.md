@@ -19,6 +19,7 @@ direction BT
        varchar(100) social_name
        varchar(100) email
        varchar(255) password
+       varchar(20) status
        created_at  /* (DC2Type:datetime_immutable) */ timestamp(0)
        timestamp(0) updated_at
        timestamp(0) deleted_at

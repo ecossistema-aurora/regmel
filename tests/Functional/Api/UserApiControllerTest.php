@@ -7,6 +7,7 @@ namespace App\Tests\Functional\Api;
 use App\DataFixtures\Entity\AgentFixtures;
 use App\DataFixtures\Entity\UserFixtures;
 use App\Entity\User;
+use App\Enum\UserStatusEnum;
 use App\Tests\AbstractApiTestCase;
 use App\Tests\Fixtures\UserTestFixtures;
 use DateTimeInterface;
@@ -50,6 +51,7 @@ class UserApiControllerTest extends AbstractApiTestCase
             'socialName' => null,
             'image' => null,
             'agents' => $user->getAgents()->getValues(),
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => $user->getCreatedAt()->format(DateTimeInterface::ATOM),
             'updatedAt' => null,
             'deletedAt' => null,
@@ -77,6 +79,7 @@ class UserApiControllerTest extends AbstractApiTestCase
             'socialName' => $requestBody['socialName'],
             'image' => $user->getImage(),
             'agents' => $user->getAgents()->getValues(),
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => $user->getCreatedAt()->format(DateTimeInterface::ATOM),
             'updatedAt' => null,
             'deletedAt' => null,
@@ -146,6 +149,7 @@ class UserApiControllerTest extends AbstractApiTestCase
             'agents' => [
                 ['id' => AgentFixtures::AGENT_ID_5],
             ],
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => $user->getCreatedAt()->format(DateTimeInterface::ATOM),
             'updatedAt' => $user->getUpdatedAt()->format(DateTimeInterface::ATOM),
             'deletedAt' => null,
@@ -183,6 +187,7 @@ class UserApiControllerTest extends AbstractApiTestCase
             'agents' => [
                 ['id' => AgentFixtures::AGENT_ID_5],
             ],
+            'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => $userUpdated->getCreatedAt()->format(DateTimeInterface::ATOM),
             'updatedAt' => $userUpdated->getUpdatedAt()->format(DateTimeInterface::ATOM),
             'deletedAt' => null,
