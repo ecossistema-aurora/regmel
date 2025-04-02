@@ -3,8 +3,8 @@ framework:
     translator:
         default_path: '%kernel.project_dir%/translations'
         fallbacks:
-            - en
             - regmel
             - pt-br
+            - en
             - es
         providers:

@@ -81,8 +81,32 @@ jobs:
       - name: Compile frontend dependencies
         run: docker compose exec --user root php bin/console asset-map:compile
 
+      - name: Remove regmel config
+        run: mv config/environment/aurora.regmel.yaml config/environment/aurora.regmel_test.yaml
+
+      - name: Set Locale to PT-BR
+        run: "sed -i 's/default_locale: regmel/default_locale: pt-br/' config/packages/translation.yaml"
+
+      - name: Modify web routes to organizations
+        run: "sed -i 's/municipios/organizacoes/' config/routes/web.yaml"
+
+      - name: Modify admin routes to organizations
+        run: "sed -i 's/municipios/organizacoes/' config/routes/admin.yaml"
+
       - name: Run cypress
         run: docker compose run --rm cypress
+
+      - name: Retrieve regmel config
+        run: mv config/environment/aurora.regmel_test.yaml config/environment/aurora.regmel.yaml
+
+      - name: Set Locale to REGMEL
+        run: "sed -i 's/default_locale: pt-br/default_locale: regmel/' config/packages/translation.yaml"
+
+      - name: Modify web routes to cities from regmel
+        run: "sed -i 's/organizacoes/municipios/' config/routes/web.yaml"
+
+      - name: Modify admin routes to cities from regmel
+        run: "sed -i 's/organizacoes/municipios/' config/routes/admin.yaml"
 
       - name: Upload cypress screenshots
         if: failure()
