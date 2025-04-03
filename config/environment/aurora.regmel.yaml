@@ -7,12 +7,31 @@ logo:
   vertical:
     path: https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/periferias/mapa-das-periferias/@@images/c2b71df1-508b-4c56-b863-9527afc9bad8.png
 modules:
-  organizations: Municipios
+  organizations: Municípios
   agents: Agentes Promotores
   opportunities: Credenciamento
   events:
   spaces:
   initiatives:
+
+navbar:
+  web_home_homepage:
+    text: home
+    icon: home
+    color: "#224638"
+  web_opportunity_list:
+    text: Credenciamento
+    icon: lightbulb
+    color: "#E70DCB"
+  web_agent_list:
+    text: Agentes Promotores
+    icon: group
+    color: "#F59E00"
+  web_organization_list:
+    text: Municípios
+    icon: corporate_fare
+    color: "#6A5ACD"
+
 
 sidebar:
   dashboard:

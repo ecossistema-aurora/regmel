@@ -22,66 +22,16 @@
 
             <div class="offcanvas-body">
                 <ul class="navbar-nav nav-entities fs-5 flex-grow-1 pe-3">
-                    <li class="nav-item">
-                        <a class="nav-link home" aria-current="page" href="{{ path('web_home_homepage') }}">
-                            <i class="material-icons navbar-icons">home</i>
-                            <p>{{ 'home'|trans }}</p>
-                        </a>
-                    </li>
-
-                    {% if (env.aurora.modules.opportunities != '' ) %}
+                    {% set current_route = app.request.attributes.get('_route')%}
+                    {% for route, item in env.aurora.navbar %}
+                        {% set activeClass = (current_route == route) ? 'active' : '' %}
                         <li class="nav-item">
-                            <a class="nav-link opportunity" aria-current="page" href="{{ path('web_opportunity_list') }}">
-                                <i class="material-icons navbar-icons">lightbulb</i>
-                                <p>{{env.aurora.modules.opportunities ?? 'opportunities'|trans }}</p>
+                            <a class="nav-link" style="--hover-color: {{ item.color }};" aria-current="page" href="{{ path(route) }}">
+                                <i class="material-icons navbar-icons {{ activeClass }}">{{ item.icon }}</i>
+                                <p class="{{ activeClass }}">{{ item.text | trans }}</p>
                             </a>
                         </li>
-                    {% endif %}
-
-                    {% if (env.aurora.modules.agents != '' ) %}
-                        <li class="nav-item">
-                            <a class="nav-link agent" aria-current="page" href="{{ path('web_agent_list') }}">
-                                <i class="material-icons navbar-icons">group</i>
-                                <p>{{ env.aurora.modules.agents ?? 'agents'|trans }}</p>
-                            </a>
-                        </li>
-                    {% endif %}
-
-                    {% if (env.aurora.modules.organizations != '' ) %}
-                        <li class="nav-item">
-                            <a class="nav-link organization" aria-current="page" href="{{ path('web_organization_list') }}">
-                                <i class="material-icons navbar-icons">corporate_fare</i>
-                                <p>{{ env.aurora.modules.organizations ?? 'organizations'|trans }}</p>
-                            </a>
-                        </li>
-                    {% endif %}
-
-                    {% if (env.aurora.modules.events != '' ) %}
-                        <li class="nav-item">
-                            <a class="nav-link event" aria-current="page" href="{{ path('web_event_list') }}">
-                                <i class="material-icons navbar-icons">event</i>
-                                <p>{{ env.aurora.modules.events ?? 'events'|trans }}</p>
-                            </a>
-                        </li>
-                    {% endif %}
-
-                    {% if (env.aurora.modules.spaces != '' ) %}
-                        <li class="nav-item">
-                            <a class="nav-link space" aria-current="page" href="{{ path('web_space_list') }}">
-                                <i class="material-icons navbar-icons">domain</i>
-                                <p>{{ env.aurora.modules.spaces ?? 'spaces'|trans }}</p>
-                            </a>
-                        </li>
-                    {% endif %}
-
-                    {% if (env.aurora.modules.initiatives != '' ) %}
-                        <li class="nav-item">
-                            <a class="nav-link project" aria-current="page" href="{{ path('web_initiative_list') }}">
-                                <i class="material-icons navbar-icons">article</i>
-                                <p>{{ env.aurora.modules.initiatives ?? 'initiatives'|trans }}</p>
-                            </a>
-                        </li>
-                    {% endif %}
+                    {% endfor %}
                 </ul>
 
                 {% if app.user.name is defined %}

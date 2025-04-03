@@ -145,6 +145,23 @@
     border-color: transparent;
 }
 
+.nav-item .nav-link:hover p{
+    color: var(--hover-color);
+}
+
+.nav-item .nav-link:hover .material-icons{
+    background-color: var(--hover-color);
+}
+
+.nav-item .nav-link p.active {
+    color: var(--hover-color);
+}
+
+.nav-item .nav-link .material-icons.active {
+    background-color: var(--hover-color);
+}
+
+
 @media (max-width: 768px) {
     .dropdown-menu {
         width: 100%;
