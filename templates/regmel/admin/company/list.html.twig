@@ -13,7 +13,7 @@
                 <div class="col-12">
                     <div class="card card-body shadow">
                         <div class="d-flex justify-content-between">
-                            <h2>{{ 'companies'|trans }}</h2>
+                            <h2>{{ 'companies'|trans }}/OSC</h2>
                         </div>
 
                         <hr>
@@ -22,6 +22,7 @@
                             <thead class="table-dark">
                             <tr>
                                 <th>{{ 'name'|trans }}</th>
+                                <th>{{ 'type'|trans }}</th>
                                 <th>{{ 'description'|trans }}</th>
                                 <th>{{ 'cnpj'|trans }}</th>
                                 <th>{{ 'phone'|trans }}</th>
@@ -32,24 +33,23 @@
                             </thead>
                             <tbody>
                             {% for company in companies %}
+                                {% if company.extraFields.tipo == 'OSC' %}
+                                    {% set label = 'bg-primary' %}
+                                {% else %}
+                                    {% set label = 'bg-info' %}
+                                {% endif %}
+
                                 <tr>
                                     <td><a href="#">{{ company.name }}</a></td>
+                                    <td><span class="badge {{ label }}">{{ company.extraFields.tipo ?? '-' }}</span></td>
                                     <td>{{ company.description ?? '-' }}</td>
                                     <td>{{ company.extraFields.cnpj ?? '-' }}</td>
                                     <td>{{ company.extraFields.telefone ?? '-' }}</td>
-                                    <td>{{ company.extraFields.site ?? '-' }}</td>
+                                    <td><a href="{{ company.extraFields.site }}" target="_blank">{{ company.extraFields.site ?? '-' }}</a></td>
                                     <td>{{ company.createdAt|date('d/m/Y H:i:s') }}</td>
                                     <td>
-                                        <button class="btn btn-outline-warning btn-sm">
+                                        <button class="btn btn-warning btn-sm">
                                             {{ 'edit'|trans }}
-                                        </button>
-                                        <button
-                                                class="btn btn-outline-danger btn-sm"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalRemoveConfirm"
-                                                onclick="confirmRemove(this)"
-                                                data-href="#">
-                                            {{ 'delete'|trans }}
                                         </button>
                                     </td>
                                 </tr>
@@ -70,5 +70,4 @@
 
 {% block extra_javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/modal-confirm-remove.js') }}"></script>
 {% endblock %}

@@ -128,11 +128,11 @@ homepage:
     opportunities:
       enabled: false
     modules:
-      enabled: true
+      enabled: false
     happen_now:
       enabled: false
     maps:
-      enabled: true
+      enabled: false
       background: bg-dark
       color: text-light
     contribute:

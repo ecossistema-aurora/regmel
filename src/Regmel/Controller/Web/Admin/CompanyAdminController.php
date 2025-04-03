@@ -20,19 +20,9 @@ class CompanyAdminController extends AbstractController
     #[Route('/painel/admin/empresas', name: 'admin_regmel_company_list', methods: ['GET'])]
     public function list(): Response
     {
-        $organizations = $this->organizationService->findBy([
+        $companies = $this->organizationService->findBy([
             'type' => OrganizationTypeEnum::EMPRESA->value,
         ]);
-
-        $companies = array_map(function ($org) {
-            return [
-                'id' => $org->getId()?->toRfc4122(),
-                'name' => $org->getName(),
-                'description' => $org->getDescription(),
-                'createdAt' => $org->getCreatedAt()?->format('Y-m-d H:i:s'),
-                'extraFields' => $org->getExtraFields(),
-            ];
-        }, $organizations);
 
         return $this->render('regmel/admin/company/list.html.twig', [
             'companies' => $companies,
