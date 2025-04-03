@@ -77,9 +77,9 @@ sidebar:
       admin_initiative_list:
         icon: article
         text: Propostas
-      admin_organization_list:
-        icon: place
-        text: Municipios
+#      admin_organization_list:
+#        icon: place
+#        text: Municipios
 
   admin:
     title: admin_options
@@ -102,6 +102,9 @@ sidebar:
       admin_regmel_company_list:
         icon: business
         text: Empresas/OSC
+      admin_regmel_municipality_list:
+        icon: location_city
+        text: Municípios
 
 homepage:
   sections:
