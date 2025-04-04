@@ -44,7 +44,7 @@ abstract readonly class AbstractEntityService
         if (null !== $this->security->getUser()) {
             $agents = $this->security->getUser()->getAgents()->getValues();
 
-            $params['owner'] = $agents;
+            $params['createdBy'] = $agents;
         }
 
         return $params;
