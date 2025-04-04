@@ -9,6 +9,7 @@ use App\Service\Interface\EventServiceInterface;
 use App\Service\Interface\InitiativeServiceInterface;
 use App\Service\Interface\InscriptionOpportunityServiceInterface;
 use App\Service\Interface\OpportunityServiceInterface;
+use App\Service\Interface\OrganizationServiceInterface;
 use App\Service\Interface\SpaceServiceInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,6 +22,7 @@ class DashboardAdminController extends AbstractAdminController
         readonly private SpaceServiceInterface $spaceService,
         readonly private InitiativeServiceInterface $initiativeService,
         readonly private InscriptionOpportunityServiceInterface $inscriptionService,
+        readonly private OrganizationServiceInterface $organizationService,
     ) {
     }
 
@@ -35,15 +37,21 @@ class DashboardAdminController extends AbstractAdminController
         $totalEvents = $this->eventService->count($createdBy);
         $totalSpaces = $this->spaceService->count($createdBy);
         $totalInitiatives = $this->initiativeService->count($createdBy);
+        $totalOrganizations = $this->organizationService->count($createdBy);
 
-        return $this->render('dashboard/index.html.twig', [
-            'user' => $user,
+        $totals = [
             'totalAgents' => $totalAgents,
             'totalOpportunities' => $totalOpportunities,
             'totalEvents' => $totalEvents,
             'totalSpaces' => $totalSpaces,
             'totalInitiatives' => $totalInitiatives,
+            'totalOrganizations' => $totalOrganizations,
+        ];
+
+        return $this->render('dashboard/index.html.twig', [
+            'user' => $user,
             'recentRegistrations' => $recentRegistrations,
+            'totals' => $totals,
         ]);
     }
 }

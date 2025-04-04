@@ -45,6 +45,46 @@ navbar:
     icon: article
     color: "#0074C1"
 
+dashboard:
+  cards:
+    agents:
+      title: Agentes
+      icon: group
+      color: "#F59E00"
+      route_create: "admin_agent_create"
+      total_key: totalAgents
+    opportunities:
+      title: Oportunidades
+      icon: lightbulb
+      color: "#E70DCB"
+      route_create: "admin_opportunity_create"
+      total_key: totalOpportunities
+    organizations:
+      title: Organizações
+      icon: corporate_fare
+      color: "#6A5ACD"
+      route_create: "admin_organization_add"
+      total_key: totalOrganizations
+    events:
+      title: Eventos
+      icon: event
+      color: "#36B39E"
+      route_create: "admin_event_create"
+      total_key: totalEvents
+    spaces:
+      title: Espaços
+      icon: apartment
+      color: "#22A638"
+      route_create: "admin_space_create"
+      total_key: totalSpaces
+    initiatives:
+      title: Iniciativas
+      icon: article
+      color: "#0074C1"
+      route_create: "admin_initiative_create"
+      total_key: totalInitiatives
+  inscriptions_area: true
+
 sidebar:
   dashboard:
     title: menu
