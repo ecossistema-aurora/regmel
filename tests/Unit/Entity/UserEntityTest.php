@@ -21,7 +21,7 @@ class UserEntityTest extends AbstractApiTestCase
 
         $this->assertCount(0, $user->getAgents());
         $this->assertNull($user->getLastLogin());
-        $this->assertTrue($user->isActive());
+        $this->assertFalse($user->isActive());
 
         $id = Uuid::v4();
         $firstname = 'Fulano';
