@@ -32,6 +32,26 @@ navbar:
     icon: corporate_fare
     color: "#6A5ACD"
 
+dashboard:
+  agents:
+    title: Agentes Promotores
+    icon: group
+    color: "#F59E00"
+    route_create: "admin_agent_create"
+    total_key: totalAgents
+  opportunities:
+    title: Credenciamento
+    icon: lightbulb
+    color: "#E70DCB"
+    route_create: "admin_opportunity_create"
+    total_key: totalOpportunities
+  organizations:
+    title: Municípios
+    icon: corporate_fare
+    color: "#6A5ACD"
+    route_create: "admin_organization_add"
+    total_key: totalOrganizations
+
 
 sidebar:
   dashboard:
