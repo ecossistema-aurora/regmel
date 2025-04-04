@@ -23,13 +23,14 @@
                         <p class="text-muted mb-0" style="font-size: 1rem;">ID: {{ user.id }}</p>
                         <p>Status:
                             <strong class="{% if user.isActive %}text-success{% else %}text-danger{% endif %}">
-                                {{ user.isActive ? 'Ativo' : 'Inativo' }}
+                                {{ user.status|trans }}
                             </strong>
                         </p>
                     </div>
                     <div class="ms-4">
-                        <p class="mb-1"><strong>{{ 'last_login' | trans }}</strong> {{ user.lastLogin|date('d/m/Y H:i') }}</p>
+                        <p class="mb-1"><strong>{{ 'last_login' | trans }}</strong> {{ lastLogin|date('d/m/Y H:i') }}</p>
                         <p class="mb-0"><strong>{{ 'date_created' | trans }}</strong> {{ user.createdAt|date('d/m/Y H:i') }}</p>
+                        <p class="mb-0"><strong>{{ 'last_updated' | trans }}</strong> {{ user.updatedAt|date('d/m/Y H:i') }}</p>
                     </div>
                 </div>
             </div>
@@ -38,18 +39,32 @@
                 <div class="card-body">
                     <h5 class="mb-3">{{ 'account_settings' | trans }}</h5>
                     <p>
-                        <strong>{{ 'E-mail' }}:</strong> {{ user.email }}
-                        <a href="#" class="text-primary ms-2">
-                            {{ 'change_email' | trans }}
-                            <span class="iconify" data-icon="bi:pencil-fill" style="font-size: 1rem; margin-left: 5px;"></span>
-                        </a>
+                        <strong>{{ 'first_name' | trans }}:</strong> {{ user.firstname }}
                     </p>
                     <p>
-                        <strong>{{ 'password' }}:</strong> ********
-                        <a href="#" class="text-primary ms-2">
-                            {{ 'change_password' | trans }}
-                            <span class="iconify" data-icon="bi:pencil-fill" style="font-size: 1rem; margin-left: 5px;"></span>
-                        </a>
+                        <strong>{{ 'lastname' | trans }}:</strong> {{ user.lastname }}
+                    </p>
+                    <p>
+                        <strong>{{ 'social_name' | trans }}:</strong> {{ user.socialName }}
+                    </p>
+                    <p>
+                        <strong>{{ 'email' | trans }}:</strong> {{ user.email }}
+                    </p>
+                    <p>
+                        <strong>{{ 'agents' | trans }}:</strong>
+
+                        <table class="table table-hover table-striped">
+                            <tbody>
+                            {% for agent in agents %}
+                                <tr>
+                                    <td><a href="{{ path('web_agent_getOne', { 'id': agent.id }) }}">{{ agent.name }}</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </p>
+                    <p>
+                        <a href="{{ path('admin_user_edit_profile', {id: user.id}) }}" class="btn btn-warning">{{ 'edit_data' | trans }}</a>
                     </p>
                 </div>
             </div>
@@ -57,8 +72,8 @@
             <div class="card shadow-sm mb-4">
                 <div class="card-body">
                     <h5 class="mb-3">{{ 'accept_terms' | trans }}</h5>
-                    {% if user.acceptedTerms %}
-                        <p> Os termos foram aceitos em {{ user.acceptedTermsDate|date('d/m/Y') }}</p>
+                    {% if true %}
+                        <p> Os termos foram aceitos em {{ user.createdAt|date('d/m/Y') }}</p>
                     {% else %}
                         <p class="text-danger">O usuário ainda não aceitou os termos.</p>
                     {% endif %}
