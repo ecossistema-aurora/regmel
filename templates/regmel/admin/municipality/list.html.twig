@@ -1,7 +1,7 @@
 {% extends "_layouts/blank.html.twig" %}
 
 {% block title %}
-    {{ 'control_panel'|trans }} - {{ 'municipalities'|trans }}
+    {{ 'control_panel'|trans }} - {{ 'cities'|trans }}
 {% endblock %}
 
 {% block content %}
@@ -15,7 +15,7 @@
                 <div class="col-12">
                     <div class="card card-body shadow">
                         <div class="d-flex justify-content-between">
-                            <h2>{{ 'municipalities'|trans }}</h2>
+                            <h2>{{ 'organizations'|trans }}</h2>
                         </div>
 
                         <hr>
@@ -35,24 +35,16 @@
                             <tbody>
                             {% for municipality in municipalities %}
                                 <tr>
-                                    <td><a href="#">{{ municipality.name }}</a></td>
+                                    <td><a href="{{ path('admin_regmel_municipality_details', {id: municipality.id}) }}">{{ municipality.name }}</a></td>
                                     <td>{{ municipality.description }}</td>
-                                    <td>{{ municipality.extraFields.cnpj }}</td>
-                                    <td>{{ municipality.extraFields.email }}</td>
-                                    <td>{{ municipality.extraFields.site }}</td>
+                                    <td>{{ municipality.extraFields.cnpj ?? '' }}</td>
+                                    <td>{{ municipality.extraFields.email ?? '' }}</td>
+                                    <td>{{ municipality.extraFields.site ?? '' }}</td>
                                     <td>{{ municipality.createdAt|date('d/m/Y H:i:s') }}</td>
                                     <td>
-                                        <button class="btn btn-outline-warning btn-sm">
+                                        <a href="#" class="btn btn-warning btn-sm">
                                             {{ 'edit'|trans }}
-                                        </button>
-                                        <button
-                                                class="btn btn-outline-danger btn-sm"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalRemoveConfirm"
-                                                onclick="confirmRemove(this)"
-                                                data-href="#">
-                                            {{ 'delete'|trans }}
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                             {% else %}
@@ -72,5 +64,4 @@
 
 {% block extra_javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/modal-confirm-remove.js') }}"></script>
 {% endblock %}

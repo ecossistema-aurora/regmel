@@ -40,7 +40,7 @@
                                 {% endif %}
 
                                 <tr>
-                                    <td><a href="#">{{ company.name }}</a></td>
+                                    <td><a href="{{ path('admin_regmel_company_details', {id: company.id}) }}">{{ company.name }}</a></td>
                                     <td><span class="badge {{ label }}">{{ company.extraFields.tipo ?? '-' }}</span></td>
                                     <td>{{ company.description ?? '-' }}</td>
                                     <td>{{ company.extraFields.cnpj ?? '-' }}</td>
@@ -48,9 +48,9 @@
                                     <td><a href="{{ company.extraFields.site }}" target="_blank">{{ company.extraFields.site ?? '-' }}</a></td>
                                     <td>{{ company.createdAt|date('d/m/Y H:i:s') }}</td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm">
+                                        <a href="#" class="btn btn-warning btn-sm">
                                             {{ 'edit'|trans }}
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                             {% else %}

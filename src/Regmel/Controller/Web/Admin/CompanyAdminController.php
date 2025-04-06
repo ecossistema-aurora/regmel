@@ -9,6 +9,7 @@ use App\Service\Interface\OrganizationServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Uid\Uuid;
 
 class CompanyAdminController extends AbstractController
 {
@@ -26,6 +27,19 @@ class CompanyAdminController extends AbstractController
 
         return $this->render('regmel/admin/company/list.html.twig', [
             'companies' => $companies,
+        ]);
+    }
+
+    #[Route('/painel/admin/empresas/{id}', name: 'admin_regmel_company_details', methods: ['GET'])]
+    public function details(Uuid $id): Response
+    {
+        $details = $this->organizationService->findOneBy([
+            'id' => $id,
+            'type' => OrganizationTypeEnum::EMPRESA->value,
+        ]);
+
+        return $this->render('regmel/admin/company/details.html.twig', [
+            'details' => $details,
         ]);
     }
 }

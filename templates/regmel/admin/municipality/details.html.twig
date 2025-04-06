@@ -1,0 +1,31 @@
+{% extends "_layouts/blank.html.twig" %}
+
+{% block title %}{{ 'control_panel'|trans }} - {{ 'organizations'|trans }} - {{ 'details'|trans }}{% endblock %}
+
+{% block content %}
+    {% include '_components/modal-confirm-remove.html.twig' %}
+
+    <section class="d-flex">
+        {% include "_components/side-bar.html.twig" %}
+
+        <div class="management-content w-100 p-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-body shadow">
+                        <div class="d-flex justify-content-between">
+                            <h2>{{ 'municipality'|trans }} - {{ details.name }}</h2>
+                        </div>
+
+                        <hr>
+
+                        Details - {{ details.name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_javascripts %}
+    {{ parent() }}
+{% endblock %}

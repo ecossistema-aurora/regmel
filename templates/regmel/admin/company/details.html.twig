@@ -1,0 +1,72 @@
+{% extends "_layouts/blank.html.twig" %}
+
+{% block title %}{{ 'control_panel'|trans }} - {{ 'companies'|trans }} - {{ 'details'|trans }}{% endblock %}
+
+{% block content %}
+    {% include '_components/modal-confirm-remove.html.twig' %}
+
+    <section class="d-flex">
+        {% include "_components/side-bar.html.twig" %}
+
+        <div class="management-content w-100 p-4">
+            <div class="card card-body shadow">
+                <div class="d-flex justify-content-between">
+                    <h2>{{ 'company'|trans }} - {{ details.name }}</h2>
+                </div>
+
+                <hr>
+
+                <ul class="nav nav-tabs" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <div class="d-flex align-items-center">
+                            <a class="centered-icon-text nav-link active" id="pills-info-tab" data-bs-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-info" aria-selected="true">
+                                <i class="material-icons">description</i>
+                                <span class="ms-2 font-title">Informações</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <div class="d-flex align-items-center">
+                            <a class="centered-icon-text nav-link" id="pills-list-tab" data-bs-toggle="pill" href="#pills-list" role="tab" aria-controls="pills-list" aria-selected="true">
+                                <i class="material-icons">list</i>
+                                <span class="ms-2 font-title">Opção 01</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <div class="d-flex align-items-center">
+                            <a class="centered-icon-text nav-link" id="pills-map-tab" data-bs-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="false">
+                                <i class="material-icons">map</i>
+                                <span class="ms-2 font-title">Opção 02</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab" tabindex="0">
+                        <div class="bd-callout bd-callout-secondary">
+                            <p>
+                                <strong>CNPJ: </strong>{{ details.extraFields.cnpj ?? '' }}
+                            </p>
+                            <p>
+                                <strong>Email: </strong>{{ details.extraFields.email ?? '' }}
+                            </p>
+                            <p>
+                                <strong>Site: </strong>{{ details.extraFields.site ?? '' }}
+                            </p>
+                            <p>
+                                <strong>Telefone: </strong>{{ details.extraFields.telefone ?? '' }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade pt-3" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab" tabindex="0">Conteúdo 1</div>
+                    <div class="tab-pane fade pt-3" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab" tabindex="0">Conteúdo 2</div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_javascripts %}
+    {{ parent() }}
+{% endblock %}
