@@ -376,6 +376,7 @@ export declare const THEATER: Message<{ 'messages': { parameters: NoParametersTy
 export declare const THE_RESOURCE_WAS_CREATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const THE_RESOURCE_WAS_UPDATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const THE_RESOURCE_WAS_DELETED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const PASSWORD_TOO_WEAK: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const TO: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TYPE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TYPE_HERE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;

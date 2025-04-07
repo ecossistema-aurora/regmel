@@ -393,6 +393,7 @@ theater: Teatro
 The resource was created: A entidade foi criada
 The resource was updated: A entidade foi atualizada
 The resource was deleted: A entidade foi excluída
+password.too_weak: A senha é muito fraca. Use pelo menos 8 caracteres, incluindo números e letras.
 to: até
 type: Tipo
 type_here: Digite aqui

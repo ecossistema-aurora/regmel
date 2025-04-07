@@ -4,12 +4,14 @@
 
 {% block content %}
     <div class="toast-container p-3 top-0 start-50 translate-middle-x">
-        {% if error ?? false %}
-            <div class="toast danger snackbar" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000" data-bs-autohide="true">
+        {% if errors is defined and errors|length > 0 %}
+            <div class="toast danger snackbar show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000" data-bs-autohide="true">
                 <div class="d-flex">
                     <span class="icon material-icons align-self-start">check_circle</span>
                     <div class="toast-body">
-                        {{ error }}
+                        {% for error in errors %}
+                            <div>{{ error }}</div>
+                        {% endfor %}
                     </div>
                     <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>

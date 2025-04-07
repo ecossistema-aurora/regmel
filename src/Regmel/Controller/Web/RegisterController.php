@@ -55,7 +55,9 @@ class RegisterController extends AbstractWebController
                 $this->createOrganizationDataForMunicipality($request)
             );
         } catch (ValidatorException $exception) {
-            $errors = $exception->getConstraintViolationList();
+            foreach ($exception->getConstraintViolationList() as $violation) {
+                $errors[] = $this->translator->trans($violation->getMessage());
+            }
         } catch (Exception $exception) {
             $errors = [$exception->getMessage()];
         }
