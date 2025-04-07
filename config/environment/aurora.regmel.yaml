@@ -32,6 +32,40 @@ navbar:
     icon: corporate_fare
     color: "#6A5ACD"
 
+dashboard:
+  # Cards de quantidade do dashboard
+  cards:
+    agents:
+      title: Agentes Promotores
+      icon: group
+      color: "#F59E00"
+      route_create: "admin_agent_create"
+      total_key: totalAgents
+    opportunities:
+      title: Credenciamento
+      icon: lightbulb
+      color: "#E70DCB"
+      route_create: "admin_opportunity_create"
+      total_key: totalOpportunities
+    organizations:
+      title: Municípios
+      icon: corporate_fare
+      color: "#6A5ACD"
+      route_create: "admin_organization_add"
+      total_key: totalOrganizations
+    Teste1:
+      title: Teste 1
+      icon: corporate_fare
+      color: "#6A5ACD"
+      route_create: "admin_organization_add"
+      total_key: totalOrganizations
+    Test2:
+      title: Teste 2
+      icon: corporate_fare
+      color: "#6A5ACD"
+      route_create: "admin_organization_add"
+      total_key: totalOrganizations
+  inscriptions_area: false
 
 sidebar:
   dashboard:
