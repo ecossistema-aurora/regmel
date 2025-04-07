@@ -12,6 +12,7 @@ use App\Regmel\Service\RegisterService;
 use App\Service\Interface\CityServiceInterface;
 use App\Service\Interface\StateServiceInterface;
 use App\Tests\AbstractWebTestCase;
+use App\Tests\Fixtures\RegisterTestFixtures;
 use App\Tests\Utils\CsrfTokenHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -36,19 +37,9 @@ final class RegisterControllerTest extends AbstractWebTestCase
 
         $token = $request->filter('input[name="token"]')->attr('value');
 
-        $formData = [
+        $formData = array_merge(RegisterTestFixtures::city(), [
             'token' => $token,
-            'firstname' => 'Bonitão',
-            'lastname' => 'das Tapiocas',
-            'userEmail' => 'bonitao@example.com',
-            'password' => '!@#tdsyfd$%hhjghj',
-            'cpf' => '1111111111111',
-            'position' => 'Bonzão',
-            'city' => '42b2c26f-85f0-44db-a7f9-758788d4e9a8',
-            'cnpj' => '111111111111111111',
-            'phone' => '9876541230',
-            'email' => 'quixelo@quixelo.ce.gov.br',
-        ];
+        ]);
 
         $this->client->request(Request::METHOD_POST, $createUrl, $formData);
 
@@ -90,19 +81,9 @@ final class RegisterControllerTest extends AbstractWebTestCase
             ->method('saveOrganization')
             ->willThrowException(new Exception('Generic error'));
 
-        $formData = [
+        $formData = array_merge(RegisterTestFixtures::city(), [
             'token' => CsrfTokenHelper::getValidToken(RegisterController::FORM_CITY, $this->client),
-            'firstname' => 'Bonitão',
-            'lastname' => 'das Tapiocas',
-            'userEmail' => 'bonitao@example.com',
-            'password' => '!@#tdsyfd$%hhjghj',
-            'cpf' => '1111111111111',
-            'position' => 'Bonzão',
-            'city' => '42b2c26f-85f0-44db-a7f9-758788d4e9a8',
-            'cnpj' => '111111111111111111',
-            'phone' => '9876541230',
-            'email' => 'quixelo@quixelo.ce.gov.br',
-        ];
+        ]);
 
         $translator = self::getContainer()->get('translator');
         $stateService = self::getContainer()->get(StateServiceInterface::class);
@@ -115,6 +96,108 @@ final class RegisterControllerTest extends AbstractWebTestCase
 
         $this->expectException(Exception::class);
         $controller->registerCity($request);
+
+        $this->expectExceptionMessage('Generic Error');
+    }
+
+    public function testCreateCompanyWithFormData(): void
+    {
+        $createUrl = $this->router->generate('regmel_register_company');
+        $request = $this->client->request(Request::METHOD_GET, $createUrl);
+
+        $token = $request->filter('input[name="token"]')->attr('value');
+
+        $formData = array_merge(RegisterTestFixtures::company(), [
+            'token' => $token,
+        ]);
+
+        $this->client->request(Request::METHOD_POST, $createUrl, $formData);
+
+        $listUrl = $this->router->generate('web_organization_list');
+
+        $this->assertResponseRedirects($listUrl, Response::HTTP_FOUND);
+
+        $organizations = $this->entityManager->getRepository(Organization::class)->findBy([
+            'name' => 'Movimento de Todos ONG',
+            'type' => OrganizationTypeEnum::EMPRESA->value,
+        ]);
+
+        self::assertCount(1, $organizations);
+
+        $agents = $this->entityManager->getRepository(Agent::class)->findBy([
+            'name' => 'José das Tapiocas',
+        ]);
+
+        self::assertCount(1, $agents);
+    }
+
+    public function testCreateEntityWithFormData(): void
+    {
+        $createUrl = $this->router->generate('regmel_register_company');
+        $request = $this->client->request(Request::METHOD_GET, $createUrl);
+
+        $token = $request->filter('input[name="token"]')->attr('value');
+
+        $formData = array_merge(RegisterTestFixtures::company(), [
+            'type' => OrganizationTypeEnum::ENTIDADE->name,
+            'token' => $token,
+        ]);
+
+        $this->client->request(Request::METHOD_POST, $createUrl, $formData);
+
+        $listUrl = $this->router->generate('web_organization_list');
+
+        $this->assertResponseRedirects($listUrl, Response::HTTP_FOUND);
+
+        $organizations = $this->entityManager->getRepository(Organization::class)->findBy([
+            'name' => 'Movimento de Todos ONG',
+            'type' => OrganizationTypeEnum::ENTIDADE->value,
+        ]);
+
+        self::assertCount(1, $organizations);
+
+        $agents = $this->entityManager->getRepository(Agent::class)->findBy([
+            'name' => 'José das Tapiocas',
+        ]);
+
+        self::assertCount(1, $agents);
+    }
+
+    public function testCreateCompanyWithInvalidFormData(): void
+    {
+        $createUrl = $this->router->generate('regmel_register_company');
+
+        $request = $this->client->request(Request::METHOD_GET, $createUrl);
+
+        $form = $request->selectButton('Salvar')->form([]);
+
+        $this->client->submit($form);
+
+        $this->assertSelectorTextContains('.toast-body', 'Nome: This value should not be blank.');
+    }
+
+    public function testCreateCompanyThrowGeneralException(): void
+    {
+        $serviceStub = $this->createMock(RegisterService::class);
+        $serviceStub->expects($this->once())
+            ->method('saveOrganization')
+            ->willThrowException(new Exception('Generic error'));
+
+        $formData = array_merge(RegisterTestFixtures::company(), [
+            'token' => CsrfTokenHelper::getValidToken(RegisterController::FORM_COMPANY, $this->client),
+        ]);
+
+        $translator = self::getContainer()->get('translator');
+        $stateService = self::getContainer()->get(StateServiceInterface::class);
+        $cityService = self::getContainer()->get(CityServiceInterface::class);
+        $controller = new RegisterController($serviceStub, $stateService, $cityService, $translator);
+        $controller->setContainer($this->client->getContainer());
+
+        $request = new Request(request: $formData);
+        $request->setMethod(Request::METHOD_POST);
+
+        $this->expectException(Exception::class);
+        $controller->registerCompany($request);
 
         $this->expectExceptionMessage('Generic Error');
     }
