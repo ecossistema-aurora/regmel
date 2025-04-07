@@ -140,6 +140,7 @@ edit_initiative: Editar Iniciativa
 edit_seals: Editar Selos
 edit_space: Editar Espaços
 edit_activity_area: Editar Área de Atuação
+edit_data: Editar dados
 email: Email
 entity_banner: Banner da Entidade
 entity: Entidade
@@ -403,6 +404,10 @@ user_email: Email do Usuário
 user_name: Nome do Usuário
 user_password: Senha do Usuário
 user_position: Cargo do Usuário
+user_information: Informações do usuário
+agent_information: Informações do agente
+select_agent: Selecione o agente
+
 
 view_all: Ver todas
 view_file: ver arquivo
@@ -455,11 +460,11 @@ street: Logradouro
 subscribe: Inscreva-se
 subsites: Subsites
 suggestions: Sugestões
-
 your_name: Digite seu nome
-your_question: Escreva sua pergunta
 
+your_question: Escreva sua pergunta
 higher: Superior
+
 
 welcome: Olá
 week_days: Dias da semana
@@ -492,6 +497,11 @@ thursday: Quinta-feira
 friday: Sexta-feira
 saturday: Sábado
 
+# Status
+AwaitingConfirmation: Aguardando Confirmação
+#active: Ativo
+Blocked: Bloqueado
+
 #components
 
 accept-policies:
@@ -519,6 +529,10 @@ footer:
 
 #pages
 view:
+  user:
+    message:
+      updated: O usuário foi atualizado
+
   faq:
     description: Perguntas Frequentes
     answer_1: Aqui você encontra informações sobre como participar e acompanhar resultados.
@@ -923,3 +937,4 @@ view:
     error-text_third: Mas não se preocupe, existem muitas outras páginas para conhecer aqui na Aurora.
     error-homepage: Voltar para a página inicial
     error-image: Imagem de dúvida
+

@@ -223,7 +223,7 @@ class User extends AbstractEntity implements UserInterface, PasswordAuthenticate
 
     public function isActive(): bool
     {
-        return null === $this->deletedAt;
+        return null === $this->deletedAt && UserStatusEnum::ACTIVE->value === $this->status;
     }
 
     public function getLastLogin(): ?DateTime

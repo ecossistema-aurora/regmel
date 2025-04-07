@@ -101,7 +101,7 @@ class RegisterController extends AbstractWebController
                 'password' => PasswordHasher::hash($request->get('password')),
                 'extraFields' => [
                     'cpf' => $request->get('cpf'),
-                    'position' => $request->get('position'),
+                    'cargo' => $request->get('position'),
                 ],
             ],
         ];

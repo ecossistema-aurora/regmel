@@ -7,9 +7,16 @@ namespace App\Controller\Web\Admin;
 use App\Document\UserTimeline;
 use App\DocumentService\AuthTimelineDocumentService;
 use App\DocumentService\UserTimelineDocumentService;
+use App\Security\PasswordHasher;
+use App\Service\Interface\AgentServiceInterface;
 use App\Service\Interface\UserServiceInterface;
+use Exception;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use TypeError;
 
 class UserAdminController extends AbstractAdminController
 {
@@ -18,6 +25,9 @@ class UserAdminController extends AbstractAdminController
         private readonly UserServiceInterface $service,
         private readonly UserTimeline $userTimeline,
         private readonly AuthTimelineDocumentService $authDocumentService,
+        private readonly AgentServiceInterface $agentService,
+        private JWTTokenManagerInterface $jwtManager,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -53,17 +63,85 @@ class UserAdminController extends AbstractAdminController
 
         $lastLogin = $this->documentService->getLastLoginByUserId($id);
 
+        $agents = $this->agentService->findBy(['user' => $user]);
+
         return $this->render('user/account-privacy.html.twig', [
+            'user' => $user,
+            'lastLogin' => $lastLogin,
+            'agents' => $agents,
+        ]);
+    }
+
+    public function editUserProfile(Uuid $id, Request $request): Response
+    {
+        $user = $this->service->get($id);
+
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        $agents = $this->agentService->findBy(['user' => $user]);
+        $token = $this->jwtManager->create($user);
+
+        if (!$request->isMethod(Request::METHOD_POST)) {
+            return $this->renderEditProfile($user, $agents, $token);
+        }
+
+        $this->validCsrfToken('edit_profile', $request);
+
+        $userData = [
+            'firstname' => $request->request->get('firstname'),
+            'lastname' => $request->request->get('lastname'),
+            'socialName' => $request->request->get('socialName'),
+            'email' => $request->request->get('email'),
+            'password' => $request->request->get('password')
+                ? PasswordHasher::hash($request->request->get('password'))
+                : $user->getPassword(),
+        ];
+
+        try {
+            $this->service->update($user->getId(), $userData);
+
+            if ($agentIdString = $request->request->get('agent')) {
+                $agentId = Uuid::fromString($agentIdString);
+                $agentData = [
+                    'name' => $request->request->get('name'),
+                    'shortBio' => $request->request->get('short_description'),
+                    'longBio' => $request->request->get('long_description'),
+                    'extraFields' => [
+                        'cargo' => $request->request->get('cargo'),
+                        'cpf' => $request->request->get('cpf'),
+                    ],
+                ];
+
+                $this->agentService->update($agentId, $agentData);
+            }
+
+            $this->addFlashSuccess($this->translator->trans('view.user.message.updated'));
+        } catch (Exception|TypeError $exception) {
+            $this->addFlashError($exception->getMessage());
+
+            return $this->renderEditProfile($user, $agents, $token, $exception->getMessage());
+        }
+
+        return $this->accountPrivacy($user->getId());
+    }
+
+    private function renderEditProfile($user, $agents, $token, ?string $error = null): Response
+    {
+        return $this->render('user/edit-profile.html.twig', [
             'user' => [
                 'name' => $user->getName(),
                 'id' => $user->getId(),
-                'isActive' => $user->isActive(),
-                'lastLogin' => $lastLogin,
-                'createdAt' => $user->getCreatedAt(),
+                'firstname' => $user->getFirstname(),
+                'lastname' => $user->getLastname(),
+                'socialName' => $user->getSocialName(),
                 'email' => $user->getEmail(),
-                'acceptedTerms' => null !== $user->getUpdatedAt(),
-                'acceptedTermsDate' => $user->getUpdatedAt(),
             ],
+            'form_id' => 'edit_profile',
+            'agents' => $agents,
+            'token' => $token,
+            'error' => $error,
         ]);
     }
 }
