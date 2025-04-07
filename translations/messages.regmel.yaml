@@ -216,6 +216,7 @@ introduction: Apresentação
 inactive: Inativo
 is_itinerant: É agente itinerante?
 is-accessible: O espaço é acessível?
+invalid_credentials: E-mail ou senha incorretos
 
 join_terms: Termos de Adesão
 
