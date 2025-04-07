@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    {% include '_components/modal-confirm-remove.html.twig' %}
+    {% include '_admin/organization/_partials/modal-edit.html.twig' %}
 
     <section class="d-flex">
         {% include "_components/side-bar.html.twig" %}
@@ -42,9 +42,7 @@
                                     <td>{{ municipality.extraFields.site ?? '' }}</td>
                                     <td>{{ municipality.createdAt|date('d/m/Y H:i:s') }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-warning btn-sm">
-                                            {{ 'edit'|trans }}
-                                        </a>
+                                        <button class="btn btn-outline-warning btn-sm edit-organization" data-bs-toggle="modal" data-bs-target="#modalEditOrganization" data-id="{{ municipality.id }}" data-token="{{ token }}">{{ 'edit'|trans }}</button>
                                     </td>
                                 </tr>
                             {% else %}
