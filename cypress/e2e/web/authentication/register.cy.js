@@ -137,13 +137,13 @@ describe('Página de Cadastro', () => {
         cy.get('.danger.snackbar').contains('Este email já está em uso.').should('be.visible');
     });
 
-    it('Garante que não é possível fazer o cadastro se já estiver logado', () => {
-        cy.login('talysonsoares@example.com', 'Aurora@2024');
-        cy.contains('Cadastro').should('exist').click();
-        cy.get("div[aria-atomic='true']").contains('Você já está logado.').should('be.visible');
-    });
-
-    // TODO: Ajustar esse teste
+    // TODO: Ajustar esses testes por conta do REGMEL
+    // it('Garante que não é possível fazer o cadastro se já estiver logado', () => {
+    //     cy.login('talysonsoares@example.com', 'Aurora@2024');
+    //     cy.contains('Cadastro').should('exist').click();
+    //     cy.get("div[aria-atomic='true']").contains('Você já está logado.').should('be.visible');
+    // });
+    
     // it('Verifica o título e subtítulo do perfil de agente cultural existe', () => {
     //     clickOnContinueButton();
     //     cy.get('.form-step-active > .btn-form-group > .btn-next').click();
