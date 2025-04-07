@@ -43,34 +43,19 @@
                         <div class="dropdown-menu dropdown-menu-end" id="customDropdown">
                             <div class="dropdown-content">
                                 <div class="menu-column w-100">
-                                    <div class="dropdown-header">{{ 'control_panel' | trans }}</div>
-                                    <a class="dropdown-item" href="{{ path('admin_dashboard') }}">
-                                        <i class="material-icons">touch_app</i> {{ 'control_panel' | trans }}
-                                    </a>
-                                    <div class="dropdown-header">{{ 'footer.notices_opportunities' | trans }}</div>
-                                    <a class="dropdown-item" href="{{ path('admin_opportunity_list') }}">
-                                        <i class="material-icons">lightbulb</i> {{ 'my_opportunities' | trans }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ path('admin_registration_list') }}">
-                                        <i class="material-icons">assignment</i> {{ 'my_subscriptions' | trans }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ path('admin_dashboard') }}">
-                                        <i class="material-icons">grading</i> {{ 'my_reviews' | trans }}
-                                    </a>
-                                    <div class="dropdown-header">{{ 'management' | trans }}</div>
-                                    <a class="dropdown-item" href="{{ path('admin_agent_list') }}">
-                                        <i class="material-icons">group</i> {{ 'my_agents' | trans }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ path('admin_space_list') }}">
-                                        <i class="material-icons">domain</i> {{ 'my_spaces' | trans }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ path('admin_event_list') }}">
-                                        <i class="material-icons">event</i> {{ 'my_events' | trans }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ path('admin_initiative_list') }}">
-                                        <i class="material-icons">article</i> {{ 'my_initiatives' | trans }}
-                                    </a>
+                                    {% for sectionKey, section in env.aurora.dropdown %}
+                                        {% if section.enabled and section.items is not empty %}
+                                            <h6 class="dropdown-header">{{ section.title | trans }}</h6>
+                                            {% for item in section.items %}
+                                                <a class="dropdown-item" href="{{ path(item.route) }}">
+                                                    <i class="material-icons">{{ item.icon }}</i>
+                                                    {{ item.text | trans }} 
+                                                </a>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
+
                                 <div class="menu-column w-100">
                                     <div class="dropdown-header">{{ 'other_options' | trans }}</div>
                                     <a class="dropdown-item" href="{{ path('admin_user_account_privacy', {id: app.user.id}) }}">

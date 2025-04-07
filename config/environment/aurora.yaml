@@ -45,6 +45,46 @@ navbar:
     icon: article
     color: "#0074C1"
 
+dropdown:
+  control_panel:
+    title: "control_panel"
+    enabled: true
+    items:
+      - text: "control_panel"
+        icon: touch_app
+        route: "admin_dashboard"
+
+  notices_opportunities:
+    title: "footer.notices_opportunities"
+    enabled: true
+    items:
+      - text: "my_opportunities"
+        icon: lightbulb
+        route: "admin_opportunity_list"
+      - text: "my_subscriptions"
+        icon: assignment
+        route: "admin_registration_list"
+      - text: "my_reviews"
+        icon: grading
+        route: "admin_review_list"
+
+  management:
+    title: "management"
+    enabled: true
+    items:
+      - text: "my_agents"
+        icon: group
+        route: "admin_agent_list"
+      - text: "my_spaces"
+        icon: domain
+        route: "admin_space_list"
+      - text: "my_events"
+        icon: event
+        route: "admin_event_list"
+      - text: "my_initiatives"
+        icon: article
+        route: "admin_initiative_list"
+
 dashboard:
   cards:
     agents:
