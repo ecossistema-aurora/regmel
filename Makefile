@@ -105,6 +105,12 @@ style:
 	docker compose exec -T php bash -c "php vendor/bin/phpcs --config-set installed_paths src/Standards"
 	docker compose exec -T php bash -c "php vendor/bin/phpcs"
 
+create-admin-user:
+	docker compose exec -T php bash -c "php bin/console app:create-admin-user"
+
+demo-regmel:
+	docker compose exec	 -T php bash -c "php bin/console app:create-admin-user"
+
 # Gera as chaves de autenticação JWT
 generate_keys:
 	docker compose exec -T php bash -c "php bin/console lexik:jwt:generate-keypair --overwrite -n"

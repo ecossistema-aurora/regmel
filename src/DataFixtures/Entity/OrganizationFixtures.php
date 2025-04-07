@@ -43,7 +43,13 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'agents' => [],
             'parent' => null,
             'space' => null,
-            'extraFields' => [],
+            'extraFields' => [
+                'cnpj' => '00.000.123/0001-00',
+                'email' => 'contato@fortaleza.ce.gov.br',
+                'telefone' => '(85) 9 8765-9999',
+                'razaoSocial' => 'Razão Social Teste',
+                'site' => 'https://www.empresa.com.br',
+            ],
             'socialNetworks' => [
                 SocialNetworkEnum::INSTAGRAM->value => 'fortaleza_ce',
             ],
@@ -235,7 +241,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
             'space' => null,
             'extraFields' => [
                 'cnpj' => '00.000.000/0001-00',
-                'email' => 'teste@gmail.com,',
+                'email' => 'teste@gmail.com',
                 'telefone' => '(85) 99999-9999',
                 'tipo' => 'OSC',
                 'razaoSocial' => 'Razão Social Teste',

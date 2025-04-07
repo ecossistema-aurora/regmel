@@ -111,6 +111,7 @@ export const COMMUNICATIONAL_ACCESSIBILITY = {"id":"communicational_accessibilit
 export const CONTACT = {"id":"contact","translations":{"messages":{"regmel":"Contato","pt-br":"Contato","en":"Contact","es":"Contacto"}}};
 export const CONTACTS = {"id":"contacts","translations":{"messages":{"regmel":"Contatos","pt-br":"Contatos","en":"Contacts","es":"Contactos"}}};
 export const COMPANIES = {"id":"companies","translations":{"messages":{"regmel":"Empresas"}}};
+export const COMPANY = {"id":"company","translations":{"messages":{"regmel":"Empresa"}}};
 export const CULTURAL_LANGUAGE = {"id":"cultural_language","translations":{"messages":{"regmel":"Linguagem cultural","pt-br":"Linguagem cultural","en":"Cultural language","es":"Lenguaje cultural"}}};
 export const CULTURAL_LANGUAGES = {"id":"cultural_languages","translations":{"messages":{"regmel":"Linguagens culturais","pt-br":"Linguagens culturais","en":"Cultural languages","es":"Lenguajes culturales"}}};
 export const DATE = {"id":"date","translations":{"messages":{"regmel":"Data","pt-br":"Data","en":"Date","es":"Fecha"}}};

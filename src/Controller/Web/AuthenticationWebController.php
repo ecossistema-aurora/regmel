@@ -29,7 +29,7 @@ class AuthenticationWebController extends AbstractWebController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if (null !== $this->getUser()) {
-            return $this->redirectToRoute('web_home_homepage');
+            return $this->redirectToRoute('admin_dashboard');
         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
