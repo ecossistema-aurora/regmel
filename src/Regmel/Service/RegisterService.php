@@ -15,6 +15,7 @@ use App\Service\Interface\AgentServiceInterface;
 use App\Service\OrganizationService;
 use App\Service\UserService;
 use Exception;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class RegisterService implements RegisterServiceInterface
@@ -26,6 +27,7 @@ class RegisterService implements RegisterServiceInterface
         private readonly OrganizationRepositoryInterface $organizationRepository,
         private readonly UserRepositoryInterface $userRepository,
         private readonly AgentServiceInterface $agentService,
+        private readonly PasswordHasherFactoryInterface $passwordHasherFactory,
     ) {
     }
 
@@ -35,7 +37,10 @@ class RegisterService implements RegisterServiceInterface
         $user = $this->userService->validateInput($data['user'], UserDto::class, UserDto::CREATE);
 
         $organizationObj = $this->serializer->denormalize($organization, Organization::class);
+
         $userObj = $this->serializer->denormalize($user, User::class);
+        $password = $this->passwordHasherFactory->getPasswordHasher(User::class)->hash($user['password']);
+        $userObj->setPassword($password);
 
         try {
             $this->userRepository->beginTransaction();

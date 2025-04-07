@@ -40,14 +40,7 @@
 
                             {% include "regmel/register/_partials/organization-data.html.twig" %}
 
-                            <div class="row">
-                                <div class="col-12 mb-3">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="acceptTerms" name="acceptTerms" required>
-                                        <label for="acceptTerms" class="form-check-label"><a href="#" data-bs-toggle="modal" data-bs-target="#modal-about-program">{{ 'view.organization.accept_terms' | trans }}</a></label>
-                                    </div>
-                                </div>
-                            </div>
+                            {% include "regmel/register/_partials/accept-terms.html.twig" %}
 
                             <div class="btn-form-group">
                                 <button class="btn btn-primary" type="submit">
@@ -60,9 +53,6 @@
             </div>
         </div>
     </div>
-
-    {% include "regmel/register/_partials/modal-about-program.html.twig" %}
-    
 {% endblock %}
 
 {% block extra_javascripts %}

@@ -116,6 +116,8 @@ contacts: Contatos
 companies: Empresas
 company: Empresa
 company_name: Razão Social
+company_data: Dados da Empresa/OCSC
+company_register: Criar uma Empresa/OCSC
 cultural_language: Linguagem cultural
 cultural_languages: Linguagens culturais
 
@@ -315,6 +317,8 @@ organization_register: Criar um Município
 orientation: Selecione a Orientação Sexual
 other_files: Outros arquivos
 other_information: Outras informações
+organization_with_profit: Organização com fins lucrativos
+organization_without_profit: Organização sem fins lucrativos
 
 pardo: Pardo
 paid: Pago
@@ -817,6 +821,27 @@ view:
     phone: Telefone
     email: Email
     accept_terms: Aceito os termos de adesão
+
+  company:
+    access: Acessar Empresa
+    date: Empresa foi criada em
+    message:
+      deleted: A empresa foi excluída
+      created: O empresa foi criada com sucesso
+    quantity:
+      total: Empresas Encontradas
+      culture: Empresas Ativas
+      inactive: Empresas Inativas
+      last_days: Registradas nos últimos 7 dias
+    name: Razão Social
+    cnpj: CNPJ
+    phone: Telefone
+    email: Email
+    framework: Enquadramento
+    site: Site
+    regime: Regime
+    accept_terms: Aceito os termos de adesão
+    user_data: Dados do Representante
 
   success:
     successfully: Seu cadastro foi criado com sucesso!

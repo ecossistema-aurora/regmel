@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Regmel\Controller\Web;
 
 use App\Controller\Web\AbstractWebController;
+use App\Enum\CompanyFrameworkEnum;
 use App\Enum\OrganizationTypeEnum;
 use App\Exception\ValidatorException;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
@@ -21,8 +22,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class RegisterController extends AbstractWebController
 {
     public const VIEW_CITY = 'regmel/register/city.html.twig';
+    public const VIEW_COMPANY = 'regmel/register/company.html.twig';
 
     public const FORM_CITY = 'register-city';
+    public const FORM_COMPANY = 'register-company';
 
     public function __construct(
         private readonly RegisterServiceInterface $registerService,
@@ -72,9 +75,64 @@ class RegisterController extends AbstractWebController
     }
 
     #[Route('/cadastro/empresa', name: 'regmel_register_company', methods: ['GET', 'POST'])]
-    public function registerCompany(): Response
+    public function registerCompany(Request $request): Response
     {
-        return $this->render('regmel/register/company.html.twig');
+        if ('POST' !== $request->getMethod()) {
+            return $this->render(self::VIEW_COMPANY, [
+                'form_id' => self::FORM_COMPANY,
+            ]);
+        }
+
+        $this->validCsrfToken(self::FORM_COMPANY, $request);
+
+        $errors = [];
+
+        $type = OrganizationTypeEnum::fromName($request->get('type'));
+        $framework = CompanyFrameworkEnum::fromName($request->get('framework'));
+
+        try {
+            $this->registerService->saveOrganization([
+                'organization' => [
+                    'id' => Uuid::v4(),
+                    'name' => $request->get('name'),
+                    'type' => $type?->value,
+                    'extraFields' => [
+                        'email' => $request->get('email'),
+                        'phone' => $request->get('phone'),
+                        'cnpj' => $request->get('cnpj'),
+                        'framework' => $framework?->value,
+                        'site' => $request->get('site'),
+                    ],
+                ],
+                'user' => [
+                    'id' => Uuid::v4(),
+                    'firstname' => $request->get('firstname'),
+                    'lastname' => $request->get('lastname'),
+                    'email' => $request->get('userEmail'),
+                    'password' => $request->get('password'),
+                    'extraFields' => [
+                        'phone' => $request->get('userPhone'),
+                        'cpf' => $request->get('cpf'),
+                        'position' => $request->get('position'),
+                    ],
+                ],
+            ]);
+        } catch (ValidatorException $exception) {
+            $errors = $exception->getConstraintViolationList();
+        } catch (Exception $exception) {
+            $errors = [$exception->getMessage()];
+        }
+
+        if (false === empty($errors)) {
+            return $this->render(self::VIEW_COMPANY, [
+                'errors' => $errors,
+                'form_id' => self::FORM_COMPANY,
+            ]);
+        }
+
+        $this->addFlash('success', $this->translator->trans('view.organization.message.created'));
+
+        return $this->redirectToRoute('web_organization_list');
     }
 
     private function createOrganizationDataForMunicipality(Request $request): array
