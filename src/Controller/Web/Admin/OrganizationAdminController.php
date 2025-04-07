@@ -24,22 +24,23 @@ class OrganizationAdminController extends AbstractAdminController
     public const CREATE_FORM_ID = 'add-organization';
 
     public function __construct(
-        private OrganizationServiceInterface $service,
+        private readonly OrganizationServiceInterface $service,
         private readonly TranslatorInterface $translator,
         private readonly OrganizationTimelineDocumentService $documentService,
         private readonly OrganizationTimeline $organizationTimeline,
     ) {
     }
 
+    private function renderOrganizationList(array $organizations, ?array $organization = null, ?string $formId = null, ?string $token = null): Response
+    {
+        return $this->render('organization/list.html.twig', compact('organizations', 'organization', 'formId', 'token'));
+    }
+
     public function list(): Response
     {
-        $organizations = $this->service->findBy([
-            'type' => OrganizationTypeEnum::MUNICIPIO->value,
-        ]);
-
-        return $this->render('organization/list.html.twig', [
-            'organizations' => $organizations,
-        ]);
+        return $this->renderOrganizationList(
+            $this->service->findBy(['type' => OrganizationTypeEnum::MUNICIPIO->value])
+        );
     }
 
     public function add(Request $request, ValidatorInterface $validator): Response

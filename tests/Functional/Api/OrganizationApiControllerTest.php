@@ -224,7 +224,14 @@ class OrganizationApiControllerTest extends AbstractApiTestCase
             'createdBy' => [
                 'id' => AgentFixtures::AGENT_ID_3,
             ],
-            'extraFields' => [],
+            'extraFields' => [
+                'cnpj' => '00.000.000/0001-03',
+                'email' => 'altosanto@example.com',
+                'phone' => '(85) 99999-0003',
+                'tipo' => 'OSC',
+                'companyName' => 'Razão Social Alto Santo',
+                'site' => 'https://www.altosanto.ce.gov.br',
+            ],
             'createdAt' => $organization->getCreatedAt()->format(DateTimeInterface::ATOM),
             'updatedAt' => null,
             'deletedAt' => null,
@@ -431,7 +438,14 @@ class OrganizationApiControllerTest extends AbstractApiTestCase
             'createdBy' => [
                 'id' => AgentFixtures::AGENT_ID_1,
             ],
-            'extraFields' => [],
+            'extraFields' => [
+                'cnpj' => '00.000.000/0001-10',
+                'email' => 'indanhatuba@example.com',
+                'phone' => '(85) 99999-0010',
+                'tipo' => 'OSC',
+                'companyName' => 'Razão Social Indanhatuba',
+                'site' => 'https://www.indanhatuba.sp.gov.br',
+            ],
             'createdAt' => $organization->getCreatedAt()->format(DateTimeInterface::ATOM),
             'updatedAt' => $organization->getUpdatedAt()->format(DateTimeInterface::ATOM),
             'deletedAt' => null,

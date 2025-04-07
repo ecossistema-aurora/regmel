@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractAdminController extends AbstractWebController
 {
-    protected function render(string $view, array $parameters = [], ?Response $response = null): Response
+    protected function render(string $view, array $parameters = [], ?Response $response = null, string $parentPath = '_admin/'): Response
     {
-        return parent::render("_admin/{$view}", $parameters, $response);
+        return parent::render("{$parentPath}{$view}", $parameters, $response);
     }
 
     public function addFlashSuccess(mixed $message): void
