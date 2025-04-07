@@ -113,6 +113,7 @@ export declare const COMMUNICATIONAL_ACCESSIBILITY: Message<{ 'messages': { para
 export declare const CONTACT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CONTACTS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const COMPANIES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const COMPANY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const CULTURAL_LANGUAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CULTURAL_LANGUAGES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;

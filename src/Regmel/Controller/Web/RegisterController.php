@@ -8,6 +8,7 @@ use App\Controller\Web\AbstractWebController;
 use App\Enum\OrganizationTypeEnum;
 use App\Exception\ValidatorException;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
+use App\Security\PasswordHasher;
 use App\Service\Interface\CityServiceInterface;
 use App\Service\Interface\StateServiceInterface;
 use Exception;
@@ -36,7 +37,7 @@ class RegisterController extends AbstractWebController
     {
         $states = $this->stateService->list();
 
-        if ('POST' !== $request->getMethod()) {
+        if (Request::METHOD_POST !== $request->getMethod()) {
             return $this->render(self::VIEW_CITY, [
                 'form_id' => self::FORM_CITY,
                 'states' => $states,
@@ -45,35 +46,12 @@ class RegisterController extends AbstractWebController
 
         $this->validCsrfToken(self::FORM_CITY, $request);
 
-        $city = $this->cityService->get($request->get('city'));
-
         $errors = [];
 
         try {
-            $this->registerService->saveOrganization([
-                'organization' => [
-                    'id' => Uuid::v4(),
-                    'name' => $city?->getName(),
-                    'type' => OrganizationTypeEnum::MUNICIPIO->value,
-                    'extraFields' => [
-                        'cityId' => $city?->getId(),
-                        'email' => $request->get('email'),
-                        'phone' => $request->get('phone'),
-                        'cnpj' => $request->get('cnpj'),
-                    ],
-                ],
-                'user' => [
-                    'id' => Uuid::v4(),
-                    'firstname' => $request->get('firstname'),
-                    'lastname' => $request->get('lastname'),
-                    'email' => $request->get('userEmail'),
-                    'password' => $request->get('password'),
-                    'extraFields' => [
-                        'cpf' => $request->get('cpf'),
-                        'position' => $request->get('position'),
-                    ],
-                ],
-            ]);
+            $this->registerService->saveOrganization(
+                $this->createOrganizationDataForMunicipality($request)
+            );
         } catch (ValidatorException $exception) {
             $errors = $exception->getConstraintViolationList();
         } catch (Exception $exception) {
@@ -90,12 +68,42 @@ class RegisterController extends AbstractWebController
 
         $this->addFlash('success', $this->translator->trans('view.organization.message.created'));
 
-        return $this->redirectToRoute('web_organization_list');
+        return $this->redirectToRoute('web_home_homepage');
     }
 
     #[Route('/cadastro/empresa', name: 'regmel_register_company', methods: ['GET', 'POST'])]
     public function registerCompany(): Response
     {
         return $this->render('regmel/register/company.html.twig');
+    }
+
+    private function createOrganizationDataForMunicipality(Request $request): array
+    {
+        $city = $this->cityService->get($request->get('city'));
+
+        return [
+            'organization' => [
+                'id' => Uuid::v4(),
+                'name' => $city?->getName(),
+                'type' => OrganizationTypeEnum::MUNICIPIO->value,
+                'extraFields' => [
+                    'cityId' => $city?->getId(),
+                    'email' => $request->get('email'),
+                    'phone' => $request->get('phone'),
+                    'cnpj' => $request->get('cnpj'),
+                ],
+            ],
+            'user' => [
+                'id' => Uuid::v4(),
+                'firstname' => $request->get('firstname'),
+                'lastname' => $request->get('lastname'),
+                'email' => $request->get('userEmail'),
+                'password' => PasswordHasher::hash($request->get('password')),
+                'extraFields' => [
+                    'cpf' => $request->get('cpf'),
+                    'position' => $request->get('position'),
+                ],
+            ],
+        ];
     }
 }
