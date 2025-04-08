@@ -280,7 +280,7 @@ class UserApiControllerTest extends AbstractApiTestCase
             'password too weak' => [
                 'requestBody' => array_merge($requestBody, ['password' => '123456']),
                 'expectedErrors' => [
-                    ['field' => 'password', 'message' => 'The password strength is too low. Please use a stronger password.'],
+                    ['field' => 'password', 'message' => 'password.too_weak'],
                 ],
             ],
         ];

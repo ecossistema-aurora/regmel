@@ -374,6 +374,7 @@ export const THEATER = {"id":"theater","translations":{"messages":{"regmel":"Tea
 export const THE_RESOURCE_WAS_CREATED = {"id":"The resource was created","translations":{"messages":{"regmel":"A entidade foi criada","pt-br":"A entidade foi criada","en":"The entity was created","es":"La entidad fue creada"}}};
 export const THE_RESOURCE_WAS_UPDATED = {"id":"The resource was updated","translations":{"messages":{"regmel":"A entidade foi atualizada","pt-br":"A entidade foi atualizada","en":"The entity was updated","es":"La entidad fue actualizada"}}};
 export const THE_RESOURCE_WAS_DELETED = {"id":"The resource was deleted","translations":{"messages":{"regmel":"A entidade foi exclu\u00edda","pt-br":"A entidade foi exclu\u00edda","en":"The entity was deleted","es":"La entidad fue eliminada"}}};
+export const PASSWORD_TOO_WEAK = {"id":"password.too_weak","translations":{"messages":{"regmel":"A senha \u00e9 muito fraca. Use pelo menos 8 caracteres, incluindo n\u00fameros e letras."}}};
 export const TO = {"id":"to","translations":{"messages":{"regmel":"at\u00e9","pt-br":"at\u00e9","en":"to","es":"hasta"}}};
 export const TYPE = {"id":"type","translations":{"messages":{"regmel":"Tipo","pt-br":"Tipo","en":"Type","es":"Tipo"}}};
 export const TYPE_HERE = {"id":"type_here","translations":{"messages":{"regmel":"Digite aqui","pt-br":"Digite aqui","en":"Type here","es":"Escriba aqu\u00ed"}}};
