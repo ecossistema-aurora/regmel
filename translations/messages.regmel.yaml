@@ -43,6 +43,7 @@ ages_rating:
     fourteen: 14 anos
     sixteen: 16 anos
     eighteen: 18 anos
+agent_information: Informações do Agente
 all: Tudo
 allow_free_linking: Permitir livre vinculação com
 allowed: Com permissão
@@ -411,6 +412,7 @@ user_email: Email do Usuário
 user_name: Nome do Usuário
 user_password: Senha do Usuário
 user_position: Cargo do Usuário
+user_information: Informações do Usuário
 
 view_all: Ver todas
 view_file: ver arquivo
@@ -435,6 +437,7 @@ select_municipality: Selecione o Município
 select_race: Selecione a Raça/Cor
 select_day: Selecione o dia
 select: Selecione
+select_agent: Selecione o agente
 seal_name: Nome do Selo
 send: Enviar
 send_message: Enviar mensagem
