@@ -32,8 +32,31 @@ navbar:
     icon: corporate_fare
     color: "#6A5ACD"
 
+dropdown:
+  control_panel:
+    title: 'control_panel'
+    enabled: true
+    items:
+      - text: 'control_panel'
+        icon: 'touch_app'
+        route: 'admin_dashboard'
+
+  management:
+    title: 'management'
+    enabled: true
+    items:
+      - text: 'my_agents'
+        icon: 'group'
+        route: 'admin_agent_list'
+      - text: 'my_opportunities'
+        icon: 'lightbulb'
+        route: 'admin_opportunity_list'
+      - text: 'my_organizations'
+        icon: 'corporate_fare'
+        route: 'admin_organization_list'
+
+
 dashboard:
-  # Cards de quantidade do dashboard
   cards:
     agents:
       title: Agentes Promotores
