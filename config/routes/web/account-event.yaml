@@ -1,0 +1,4 @@
+confirmation:
+  path: /confirmation/{token}
+  controller: App\Controller\Web\AccountEventWebController::confirmAccount
+  methods: ['GET']

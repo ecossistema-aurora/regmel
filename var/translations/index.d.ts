@@ -11,6 +11,8 @@ export declare const ADD_OPENING_HOURS: Message<{ 'messages': { parameters: NoPa
 export declare const ADD_PHASE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ADD_SPECIFIC_OBJECTIVE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ADAPTED_BATHROOM: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const ACCOUNT_CONFIRMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const ACCOUNT_CONFIRMED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ACCOUNT_PRIVACY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ACCOUNT_SETTINGS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ACCESS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -394,9 +396,6 @@ export declare const USER_EMAIL: Message<{ 'messages': { parameters: NoParameter
 export declare const USER_NAME: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const USER_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const USER_POSITION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
-export declare const USER_INFORMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
-export declare const AGENT_INFORMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
-export declare const SELECT_AGENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_ALL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIDEO: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -475,8 +474,6 @@ export declare const WEDNESDAY: Message<{ 'messages': { parameters: NoParameters
 export declare const THURSDAY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FRIDAY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const SATURDAY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
-export declare const AWAITING_CONFIRMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
-export declare const BLOCKED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ACCEPT_POLICIES_ACCEPT_ALL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ACCEPT_POLICIES_DESCRIPTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ACCEPT_POLICIES_IMAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -494,7 +491,6 @@ export declare const FOOTER_PLATFORM_CREATED: Message<{ 'messages': { parameters
 export declare const FOOTER_PRIVACY_POLICY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FOOTER_SEND_EMAIL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FOOTER_VISIT_REPOSITORY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
-export declare const VIEW_USER_MESSAGE_UPDATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_FAQ_DESCRIPTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_FAQ_ANSWER1: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_FAQ_ANSWER2: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -570,6 +566,7 @@ export declare const VIEW_AUTHENTICATION_ERROR_LAST_NAME_LENGTH: Message<{ 'mess
 export declare const VIEW_AUTHENTICATION_ERROR_PASSWORD_MISMATCH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_ERROR_CPF_INVALID: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_ERROR_PHONE_INVALID: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const VIEW_AUTHENTICATION_ERROR_ACCOUNT_NOT_CONFIRMED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_FORGOT_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_PARAGRAPH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_REGISTER_CREATE_ACCOUNT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
