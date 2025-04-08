@@ -7,7 +7,6 @@ namespace App\Regmel\Service;
 use App\DTO\OrganizationDto;
 use App\DTO\UserDto;
 use App\Entity\Organization;
-use App\Entity\User;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Repository\Interface\OrganizationRepositoryInterface;
 use App\Repository\Interface\UserRepositoryInterface;
@@ -38,11 +37,9 @@ class RegisterService implements RegisterServiceInterface
 
         $organizationObj = $this->serializer->denormalize($organization, Organization::class);
 
-        $userObj = $this->serializer->denormalize($user, User::class);
-        $password = $this->passwordHasherFactory->getPasswordHasher(User::class)->hash($user['password']);
-        $userObj->setPassword($password);
-
         try {
+            $userObj = $this->userService->create($user);
+
             $this->userRepository->beginTransaction();
             $this->userRepository->save($userObj);
             $this->userRepository->commit();
