@@ -36,7 +36,7 @@ describe('Pagina de Login do ambiente web', () => {
             .should('be.visible')
             .click();
 
-        cy.contains('Credenciais inválidas.')
+        cy.contains('E-mail ou senha incorretos')
             .should('be.visible');
     })
 
