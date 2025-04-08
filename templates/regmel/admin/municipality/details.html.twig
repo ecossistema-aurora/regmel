@@ -21,7 +21,15 @@
                         <ul class="nav nav-tabs" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <div class="d-flex align-items-center">
-                                    <a class="centered-icon-text nav-link active" id="pills-info-tab" data-bs-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-info" aria-selected="true">
+                                    <a class="centered-icon-text nav-link active" id="pills-proposal-tab" data-bs-toggle="pill" href="#pills-proposal" role="tab" aria-controls="pills-info" aria-selected="true">
+                                        <i class="material-icons">description</i>
+                                        <span class="ms-2 font-title">Propostas</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <div class="d-flex align-items-center">
+                                    <a class="centered-icon-text nav-link" id="pills-info-tab" data-bs-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-info" aria-selected="true">
                                         <i class="material-icons">description</i>
                                         <span class="ms-2 font-title">Informações</span>
                                     </a>
@@ -31,7 +39,7 @@
                                 <div class="d-flex align-items-center">
                                     <a class="centered-icon-text nav-link" id="pills-list-tab" data-bs-toggle="pill" href="#pills-list" role="tab" aria-controls="pills-list" aria-selected="true">
                                         <i class="material-icons">list</i>
-                                        <span class="ms-2 font-title">Opção 01</span>
+                                        <span class="ms-2 font-title">Anuencias</span>
                                     </a>
                                 </div>
                             </li>
@@ -39,13 +47,103 @@
                                 <div class="d-flex align-items-center">
                                     <a class="centered-icon-text nav-link" id="pills-map-tab" data-bs-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="false">
                                         <i class="material-icons">map</i>
-                                        <span class="ms-2 font-title">Opção 02</span>
+                                        <span class="ms-2 font-title">Membros</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <div class="d-flex align-items-center">
+                                    <a class="centered-icon-text nav-link" id="pills-files-tab" data-bs-toggle="pill" href="#pills-files" role="tab" aria-controls="pills-map" aria-selected="false">
+                                        <i class="material-icons">picture_as_pdf</i>
+                                        <span class="ms-2 font-title">Documentos</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <div class="d-flex align-items-center">
+                                    <a class="centered-icon-text nav-link" id="pills-timeline-tab" data-bs-toggle="pill" href="#pills-timeline" role="tab" aria-controls="pills-map" aria-selected="false">
+                                        <i class="material-icons">clock</i>
+                                        <span class="ms-2 font-title">Linha do tempo</span>
                                     </a>
                                 </div>
                             </li>
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab" tabindex="0">
+                            <div class="tab-pane fade show active" id="pills-proposal" role="tabpanel" aria-labelledby="pills-proposal-tab" tabindex="0">
+
+                                <div class="modal fade" id="modalConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <label for="">Status</label>
+                                                <select name="" id="" class="form-control mb-3">
+                                                    <option value="">-- Selecione --</option>
+                                                    <option value="">Aprovado</option>
+                                                    <option value="">Reprovado</option>
+                                                </select>
+
+                                                <label for="">Motivo</label>
+                                                <textarea name="" id=""
+                                                          class="form-control"></textarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <table class="table table-hover table-striped mt-3">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Titulo</th>
+                                            <th>Empresa/OSC</th>
+                                            <th>Status</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Titulo da Proposta</td>
+                                            <td>Empresa X</td>
+                                            <td>
+                                                <span class="badge bg-success">Anuído</span>
+                                            </td>
+                                            <td>
+                                                <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
+                                                <a href="" data-bs-toggle="modal" data-bs-target="#modalConfirmation" class="btn btn-outline-success btn-sm">Avaliar</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Titulo da Proposta</td>
+                                            <td>Empresa Y</td>
+                                            <td>
+                                                <span class="badge bg-danger">Não Anuído</span>
+                                            </td>
+                                            <td>
+                                                <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Titulo da Proposta</td>
+                                            <td>Empresa Z</td>
+                                            <td>
+                                                <span class="badge bg-success">Anuído</span>
+                                            </td>
+                                            <td>
+                                                <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab" tabindex="0">
                                 <div class="bd-callout bd-callout-secondary">
                                     <p>
                                         <strong>CNPJ: </strong>{{ details.extraFields.cnpj ?? '' }}
@@ -63,6 +161,8 @@
                             </div>
                             <div class="tab-pane fade pt-3" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab" tabindex="0">Conteúdo 1</div>
                             <div class="tab-pane fade pt-3" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab" tabindex="0">Conteúdo 2</div>
+                            <div class="tab-pane fade pt-3" id="pills-files" role="tabpanel" aria-labelledby="pills-files-tab" tabindex="0">Conteúdo 2</div>
+                            <div class="tab-pane fade pt-3" id="pills-timeline" role="tabpanel" aria-labelledby="pills-timeline-tab" tabindex="0">Conteúdo 2</div>
                         </div>
                     </div>
                 </div>

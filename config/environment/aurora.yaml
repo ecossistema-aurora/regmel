@@ -215,6 +215,9 @@ homepage:
       image:
     register:
       enabled: true
+      color: "var(--bg-green)"
+    banner:
+      enabled: false
     opportunities:
       enabled: true
     modules:
@@ -227,4 +230,8 @@ homepage:
       color:
     contribute:
       enabled: true
+    footer:
+      discover: false
+      control_panel: false
+      help: true
 

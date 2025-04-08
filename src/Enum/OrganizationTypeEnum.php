@@ -14,4 +14,5 @@ enum OrganizationTypeEnum: string
     case MUNICIPIO = 'Municipio';
     case EMPRESA = 'Empresa';
     case ENTIDADE = 'Entidade';
+    case OSC = 'OSC';
 }

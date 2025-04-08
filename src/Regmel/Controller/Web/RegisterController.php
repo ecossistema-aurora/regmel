@@ -11,6 +11,7 @@ use App\Exception\ValidatorException;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Service\Interface\CityServiceInterface;
 use App\Service\Interface\StateServiceInterface;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,8 +59,10 @@ class RegisterController extends AbstractWebController
             foreach ($exception->getConstraintViolationList() as $violation) {
                 $errors[] = $this->translator->trans($violation->getMessage());
             }
+        } catch (UniqueConstraintViolationException $exception) {
+            $errors[] = ['message' => $this->translator->trans('view.authentication.error.email_in_use')];
         } catch (Exception $exception) {
-            $errors = [$exception->getMessage()];
+            $errors = ['message' => $exception->getMessage()];
         }
 
         if (false === empty($errors)) {
@@ -88,7 +91,6 @@ class RegisterController extends AbstractWebController
 
         $errors = [];
 
-        $type = OrganizationTypeEnum::fromName($request->get('type'));
         $framework = CompanyFrameworkEnum::fromName($request->get('framework'));
 
         try {
@@ -96,10 +98,11 @@ class RegisterController extends AbstractWebController
                 'organization' => [
                     'id' => Uuid::v4(),
                     'name' => $request->get('name'),
-                    'type' => $type?->value,
+                    'type' => OrganizationTypeEnum::EMPRESA->value,
                     'extraFields' => [
+                        'tipo' => OrganizationTypeEnum::fromName($request->get('type'))->value,
                         'email' => $request->get('email'),
-                        'phone' => $request->get('phone'),
+                        'telefone' => $request->get('phone'),
                         'cnpj' => $request->get('cnpj'),
                         'framework' => $framework?->value,
                         'site' => $request->get('site'),
@@ -112,9 +115,9 @@ class RegisterController extends AbstractWebController
                     'email' => $request->get('userEmail'),
                     'password' => $request->get('password'),
                     'extraFields' => [
-                        'phone' => $request->get('userPhone'),
+                        'telefone' => $request->get('userPhone'),
                         'cpf' => $request->get('cpf'),
-                        'position' => $request->get('position'),
+                        'cargo' => $request->get('position'),
                     ],
                 ],
             ]);
@@ -148,8 +151,7 @@ class RegisterController extends AbstractWebController
                 'extraFields' => [
                     'cityId' => $city?->getId(),
                     'email' => $request->get('email'),
-                    'phone' => $request->get('phone'),
-                    'cnpj' => $request->get('cnpj'),
+                    'telefone' => $request->get('phone'),
                 ],
             ],
             'user' => [

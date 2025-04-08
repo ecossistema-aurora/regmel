@@ -61,7 +61,7 @@
                                     <a class="dropdown-item" href="{{ path('admin_user_account_privacy', {id: app.user.id}) }}">
                                         <i class="material-icons">settings</i> {{ 'account_privacy' | trans }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ path('admin_dashboard') }}">
+                                    <a class="dropdown-item" href="{{ path('admin_user_edit_profile', {id: app.user.id}) }}">
                                         <i class="material-icons">person</i> {{ 'my_profile' | trans }}
                                     </a>
                                     <a class="dropdown-item text-danger" href="{{ path('_logout_web') }}">

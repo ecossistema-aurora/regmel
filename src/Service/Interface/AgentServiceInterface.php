@@ -13,7 +13,7 @@ interface AgentServiceInterface
 {
     public function create(array $agent): Agent;
 
-    public function createFromUser(array $user, ?array $extraFields = null);
+    public function createFromUser(array $user, ?array $extraFields = null): Agent;
 
     public function get(Uuid $id): Agent;
 
