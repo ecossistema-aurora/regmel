@@ -23,7 +23,7 @@
                         <p class="text-muted mb-0" style="font-size: 1rem;">ID: {{ user.id }}</p>
                         <p>Status:
                             <strong class="{% if user.isActive %}text-success{% else %}text-danger{% endif %}">
-                                {{ user.status|trans }}
+                                {{ "view.opportunity_admin.inscriptions.status.active" |trans }}
                             </strong>
                         </p>
                     </div>
