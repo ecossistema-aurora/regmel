@@ -9,7 +9,6 @@ use App\Enum\CompanyFrameworkEnum;
 use App\Enum\OrganizationTypeEnum;
 use App\Exception\ValidatorException;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
-use App\Security\PasswordHasher;
 use App\Service\Interface\CityServiceInterface;
 use App\Service\Interface\StateServiceInterface;
 use Exception;
@@ -156,7 +155,7 @@ class RegisterController extends AbstractWebController
                 'firstname' => $request->get('firstname'),
                 'lastname' => $request->get('lastname'),
                 'email' => $request->get('userEmail'),
-                'password' => PasswordHasher::hash($request->get('password')),
+                'password' => $request->get('password'),
                 'extraFields' => [
                     'cpf' => $request->get('cpf'),
                     'cargo' => $request->get('position'),

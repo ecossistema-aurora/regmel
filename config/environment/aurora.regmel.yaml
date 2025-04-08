@@ -45,13 +45,13 @@ dropdown:
     title: 'management'
     enabled: true
     items:
-      - text: 'my_agents'
+      - text: 'agents'
         icon: 'group'
         route: 'admin_agent_list'
-      - text: 'my_opportunities'
+      - text: 'opportunities'
         icon: 'lightbulb'
         route: 'admin_opportunity_list'
-      - text: 'my_organizations'
+      - text: 'organizations'
         icon: 'corporate_fare'
         route: 'admin_organization_list'
 
@@ -105,9 +105,9 @@ sidebar:
       admin_registration_list:
         icon: app_registration
         text: my_subscriptions
-      admin_accountability_list:
-        icon: payments
-        text: accountability
+#      admin_accountability_list:
+#        icon: payments
+#        text: accountability
 
   notice_opportunity:
     title: footer.notices_opportunities
@@ -141,9 +141,9 @@ sidebar:
   admin:
     title: admin_options
     items:
-      admin_seal_list:
-        icon: bookmark
-        text: seals
+#      admin_seal_list:
+#        icon: bookmark
+#        text: seals
 #      admin_subsite_list:
 #        icon: account_tree
 #        text: subsites
