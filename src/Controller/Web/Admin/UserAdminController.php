@@ -72,6 +72,48 @@ class UserAdminController extends AbstractAdminController
         ]);
     }
 
+    private function updateUserData($user, Request $request): void
+    {
+        $userData = [
+            'firstname' => $request->request->get('firstname'),
+            'lastname' => $request->request->get('lastname'),
+            'socialName' => $request->request->get('socialName'),
+            'email' => $request->request->get('email'),
+            'password' => $request->request->get('password')
+                ? PasswordHasher::hash($request->request->get('password'))
+                : $user->getPassword(),
+        ];
+
+        $this->service->update($user->getId(), $userData);
+
+        if ($uploadedImage = $request->files->get('profileImage')) {
+            $this->service->updateImage($user->getId(), $uploadedImage);
+        }
+    }
+
+    private function updateAgentData(Request $request): void
+    {
+        if ($agentIdString = $request->request->get('agent')) {
+            $agentId = Uuid::fromString($agentIdString);
+
+            $agentData = [
+                'name' => $request->request->get('name'),
+                'shortBio' => $request->request->get('short_description'),
+                'longBio' => $request->request->get('long_description'),
+                'extraFields' => [
+                    'cargo' => $request->request->get('cargo'),
+                    'cpf' => $request->request->get('cpf'),
+                ],
+            ];
+
+            if ($uploadedImage = $request->files->get('profileImage')) {
+                $this->agentService->updateImage($agentId, $uploadedImage);
+            }
+
+            $this->agentService->update($agentId, $agentData);
+        }
+    }
+
     public function editUserProfile(Uuid $id, Request $request): Response
     {
         $user = $this->service->get($id);
@@ -89,33 +131,9 @@ class UserAdminController extends AbstractAdminController
 
         $this->validCsrfToken('edit_profile', $request);
 
-        $userData = [
-            'firstname' => $request->request->get('firstname'),
-            'lastname' => $request->request->get('lastname'),
-            'socialName' => $request->request->get('socialName'),
-            'email' => $request->request->get('email'),
-            'password' => $request->request->get('password')
-                ? PasswordHasher::hash($request->request->get('password'))
-                : $user->getPassword(),
-        ];
-
         try {
-            $this->service->update($user->getId(), $userData);
-
-            if ($agentIdString = $request->request->get('agent')) {
-                $agentId = Uuid::fromString($agentIdString);
-                $agentData = [
-                    'name' => $request->request->get('name'),
-                    'shortBio' => $request->request->get('short_description'),
-                    'longBio' => $request->request->get('long_description'),
-                    'extraFields' => [
-                        'cargo' => $request->request->get('cargo'),
-                        'cpf' => $request->request->get('cpf'),
-                    ],
-                ];
-
-                $this->agentService->update($agentId, $agentData);
-            }
+            $this->updateUserData($user, $request);
+            $this->updateAgentData($request);
 
             $this->addFlashSuccess($this->translator->trans('view.user.message.updated'));
         } catch (Exception|TypeError $exception) {
@@ -137,6 +155,7 @@ class UserAdminController extends AbstractAdminController
                 'lastname' => $user->getLastname(),
                 'socialName' => $user->getSocialName(),
                 'email' => $user->getEmail(),
+                'image' => $user->getImage(),
             ],
             'form_id' => 'edit_profile',
             'agents' => $agents,

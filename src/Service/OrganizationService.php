@@ -156,7 +156,8 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
             $uploadedFile
         );
 
-        $organization->setImage($this->fileService->urlOfImage($uploadedImage->getFilename()));
+        $relativePath = '/uploads'.$this->parameterBag->get(self::DIR_ORGANIZATION_PROFILE).'/'.$uploadedImage->getFilename();
+        $organization->setImage($relativePath);
 
         $organization->setUpdatedAt(new DateTime());
 

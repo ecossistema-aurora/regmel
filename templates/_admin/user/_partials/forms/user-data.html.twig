@@ -9,13 +9,16 @@
 
     <div class="profile-pic">
         <label for="profile-input" class="profile-label">
-            <img id="profile-img" src="{{ asset('default-image-path') }}" alt="{{ 'photo' | trans }}" class="profile-label">
-            <input id="profile-input" type="file" accept="image/*" onchange="previewImage(event, 'profile-img')"/>
+            <img id="profile-img" src="{{ user.image }}" alt="{{ 'photo' | trans }}" class="profile-label">
+            <input id="profile-input" type="file" accept="image/*" name="profileImage" />
         </label>
     </div>
 </div>
 
 <div class="entity-introduction-data">
+
+    <div id="image-error"></div>
+
     <label for="firstname">
         {{ 'first_name' | trans }}
         <span class="text-danger">*</span>

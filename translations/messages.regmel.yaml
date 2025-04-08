@@ -416,6 +416,8 @@ user_name: Nome do Usuário
 user_password: Senha do Usuário
 user_position: Cargo do Usuário
 user_information: Informações do Usuário
+user_edit_data: Edição de dados do usuario
+
 
 view_all: Ver todas
 view_file: ver arquivo
@@ -533,6 +535,10 @@ footer:
 
 #pages
 view:
+  user:
+    message:
+      updated: O usuário foi atualizado
+
   faq:
     description: Perguntas Frequentes
     answer_1: Aqui você encontra informações sobre como participar e acompanhar resultados.

@@ -1,9 +1,9 @@
 <section class="entity-address-data">
         <label for="agent-select">{{ 'select_agent' | trans }} <span class="text-danger">*</span></label>
         <select class="form-select" id="agent-select" name="agent" required>
-                <option value="" disabled selected>{{ 'select_agent' | trans }}</option>
                 {% for agent in agents %}
-                        <option value="{{ agent.id }}">{{ agent.name }}</option>
+                        {% set selected = loop.index == 1?'selected':'' %}
+                        <option {{ selected}} value="{{ agent.id }}">{{ agent.name }}</option>
                 {% endfor %}
         </select>
 
