@@ -28,6 +28,7 @@ security:
         web:
             lazy: true
             provider: app_user_provider
+            user_checker: App\Security\UserChecker
             form_login:
                 login_path: web_auth_login
                 check_path: web_auth_login

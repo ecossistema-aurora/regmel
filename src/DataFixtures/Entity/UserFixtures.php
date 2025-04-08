@@ -134,7 +134,7 @@ final class UserFixtures extends AbstractFixture
             'socialName' => 'Abner C.',
             'email' => 'abnercarvalho@example.com',
             'image' => null,
-            'status' => UserStatusEnum::ACTIVE->value,
+            'status' => UserStatusEnum::AWAITING_CONFIRMATION->value,
             'createdAt' => '2024-08-13T20:25:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,

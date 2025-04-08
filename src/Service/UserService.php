@@ -34,6 +34,7 @@ readonly class UserService extends AbstractEntityService implements UserServiceI
         private ParameterBagInterface $parameterBag,
         private ValidatorInterface $validator,
         private EntityManagerInterface $entityManager,
+        private AccountEventService $accountEventService,
         private PasswordHasherFactoryInterface $passwordHasherFactory,
     ) {
         parent::__construct(
@@ -67,6 +68,8 @@ readonly class UserService extends AbstractEntityService implements UserServiceI
             $this->repository->rollback();
             throw $exception;
         }
+
+        $this->accountEventService->sendConfirmationEmail($userObj);
 
         return $userObj;
     }

@@ -9,6 +9,8 @@ add_opening_hours: Add Opening Hours
 add_phase: Add Phase
 add_specific_objective: Add Specific Objective
 adapted_bathroom: Adapted bathroom
+account_confirmation: Confirmación de cuenta
+account_confirmed: Cuenta confirmada
 account_privacy: Account and Privacy
 account_settings: User Account Settings
 access: Access
@@ -601,6 +603,7 @@ view:
       password_mismatch: The passwords do not match.
       cpf_invalid: Please enter a valid CPF.
       phone_invalid: Please enter a valid phone number.
+      account_not_confirmed: Account not confirmed
 
     forgot_password: Forgot my password
     paragraph: Log in with your account

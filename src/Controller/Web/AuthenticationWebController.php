@@ -18,7 +18,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AuthenticationWebController extends AbstractWebController
 {
-    public const REGISTER_FORM_ID = 'add-user';
+    public const string REGISTER_FORM_ID = 'add-user';
 
     public function __construct(
         private readonly TranslatorInterface $translator,

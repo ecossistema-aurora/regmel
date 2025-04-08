@@ -81,6 +81,18 @@ services:
     networks:
       - regmel_network
 
+  mailer:
+    container_name: regmel-mailer
+    image: axllent/mailpit
+    ports:
+      - '1025'
+      - '8025'
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    networks:
+      - regmel_network
+
 networks:
   regmel_network:
     driver: bridge
