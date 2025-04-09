@@ -43,9 +43,9 @@ final class RegisterControllerTest extends AbstractWebTestCase
 
         $this->client->request(Request::METHOD_POST, $createUrl, $formData);
 
-        $listUrl = $this->router->generate('web_organization_list');
+        $homepageUrl = $this->router->generate('web_home_homepage');
 
-        $this->assertResponseRedirects($listUrl, Response::HTTP_FOUND);
+        $this->assertResponseRedirects($homepageUrl, Response::HTTP_FOUND);
 
         $organizations = $this->entityManager->getRepository(Organization::class)->findBy([
             'name' => 'Quixelô',
@@ -94,10 +94,9 @@ final class RegisterControllerTest extends AbstractWebTestCase
         $request = new Request(request: $formData);
         $request->setMethod(Request::METHOD_POST);
 
-        $this->expectException(Exception::class);
-        $controller->registerCity($request);
+        $response = $controller->registerCity($request);
 
-        $this->expectExceptionMessage('Generic Error');
+        self::assertStringContainsString('Generic error', $response->getContent());
     }
 
     public function testCreateCompanyWithFormData(): void
@@ -196,9 +195,8 @@ final class RegisterControllerTest extends AbstractWebTestCase
         $request = new Request(request: $formData);
         $request->setMethod(Request::METHOD_POST);
 
-        $this->expectException(Exception::class);
-        $controller->registerCompany($request);
+        $response = $controller->registerCompany($request);
 
-        $this->expectExceptionMessage('Generic Error');
+        self::assertStringContainsString('Generic error', $response->getContent());
     }
 }

@@ -13,6 +13,8 @@ interface FileServiceInterface
 
     public function uploadImage(string $path, UploadedFile $uploadedFile): File;
 
+    public function uploadPDF(UploadedFile $uploadedFile, string $extraPath = ''): File;
+
     public function readFile(string $filename): string;
 
     public function deleteFile(string $filename): void;
@@ -22,4 +24,6 @@ interface FileServiceInterface
     public function getFileUrl(string $path): string;
 
     public function urlOfImage(string $path): string;
+
+    public function urlOfPDF(string $filename): string;
 }
