@@ -50,7 +50,11 @@ class UserApiControllerTest extends AbstractApiTestCase
             'lastname' => $requestBody['lastname'],
             'socialName' => null,
             'image' => null,
-            'agents' => $user->getAgents()->getValues(),
+            'agents' => [
+                [
+                    'id' => $user->getAgents()->first()->getId()->toRfc4122(),
+                ],
+            ],
             'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => $user->getCreatedAt()->format(DateTimeInterface::ATOM),
             'updatedAt' => null,
@@ -78,7 +82,11 @@ class UserApiControllerTest extends AbstractApiTestCase
             'lastname' => $requestBody['lastname'],
             'socialName' => $requestBody['socialName'],
             'image' => $user->getImage(),
-            'agents' => $user->getAgents()->getValues(),
+            'agents' => [
+                [
+                    'id' => $user->getAgents()->first()->getId()->toRfc4122(),
+                ],
+            ],
             'status' => UserStatusEnum::ACTIVE->value,
             'createdAt' => $user->getCreatedAt()->format(DateTimeInterface::ATOM),
             'updatedAt' => null,

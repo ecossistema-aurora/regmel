@@ -3,22 +3,6 @@
 {% block title %} {{ 'organization_register'|trans }} {% endblock %}
 
 {% block content %}
-    <div class="toast-container p-3 top-0 start-50 translate-middle-x">
-        {% if errors is defined and errors|length > 0 %}
-            <div class="toast danger snackbar show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000" data-bs-autohide="true">
-                <div class="d-flex">
-                    <span class="icon material-icons align-self-start">check_circle</span>
-                    <div class="toast-body">
-                        {% for error in errors %}
-                            <div>{{ error }}</div>
-                        {% endfor %}
-                    </div>
-                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-            </div>
-        {% endif %}
-    </div>
-
     <div class="container my-5">
         <div class="row mb-3">
             <a href="{{ path('web_home_homepage') }}" class="nav-link text-primary">

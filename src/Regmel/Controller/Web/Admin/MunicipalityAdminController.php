@@ -55,7 +55,7 @@ class MunicipalityAdminController extends AbstractAdminController
 
         return $this->render('regmel/admin/municipality/details.html.twig', [
             'details' => $details,
-        ]);
+        ], parentPath: '');
     }
 
     #[Route('/painel/admin/municipios/{id}/editar', name: 'admin_regmel_municipality_edit', methods: ['GET', 'POST'])]

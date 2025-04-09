@@ -9,12 +9,9 @@ use App\DTO\UserDto;
 use App\Entity\Organization;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Repository\Interface\OrganizationRepositoryInterface;
-use App\Repository\Interface\UserRepositoryInterface;
-use App\Service\Interface\AgentServiceInterface;
 use App\Service\OrganizationService;
 use App\Service\UserService;
 use Exception;
-use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class RegisterService implements RegisterServiceInterface
@@ -24,9 +21,6 @@ class RegisterService implements RegisterServiceInterface
         private readonly UserService $userService,
         private readonly SerializerInterface $serializer,
         private readonly OrganizationRepositoryInterface $organizationRepository,
-        private readonly UserRepositoryInterface $userRepository,
-        private readonly AgentServiceInterface $agentService,
-        private readonly PasswordHasherFactoryInterface $passwordHasherFactory,
     ) {
     }
 
@@ -40,17 +34,12 @@ class RegisterService implements RegisterServiceInterface
         try {
             $userObj = $this->userService->create($user);
 
-            $this->userRepository->beginTransaction();
-            $this->userRepository->save($userObj);
-            $this->userRepository->commit();
-
-            $agent = $this->agentService->createFromUser($user, $data['user']['extraFields'] ?? null);
+            $agent = $userObj->getAgents()->first();
 
             $organizationObj->setOwner($agent);
             $organizationObj->setCreatedBy($agent);
             $this->organizationRepository->save($organizationObj);
         } catch (Exception $exception) {
-            $this->userRepository->rollback();
             throw $exception;
         }
 

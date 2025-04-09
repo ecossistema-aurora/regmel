@@ -1,11 +1,12 @@
-name: Mapa das Periferias
+name: Minha Casa Melhor
 author: Secretaria Nacional de Periferias
 logo:
   horizontal:
-    path: https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/periferias/mapa-das-periferias/@@images/c2b71df1-508b-4c56-b863-9527afc9bad8.png
-    width: 70px
+    path: /img/regmel/regmel-logo.svg
+    width: 100px
   vertical:
-    path: https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/periferias/mapa-das-periferias/@@images/c2b71df1-508b-4c56-b863-9527afc9bad8.png
+    path: /img/regmel/regmel-logo.svg
+    width: 200px
 modules:
   organizations: Municípios
   agents: Agentes Promotores
@@ -20,17 +21,13 @@ navbar:
     icon: home
     color: "#224638"
   web_opportunity_list:
-    text: Credenciamento
-    icon: lightbulb
-    color: "#E70DCB"
-  web_agent_list:
-    text: Agentes Promotores
-    icon: group
+    text: Adesão e Proposta
+    icon: description
     color: "#F59E00"
-  web_organization_list:
-    text: Municípios
-    icon: corporate_fare
-    color: "#6A5ACD"
+  web_faq_faq:
+    text: Perguntas Frequentes
+    icon: quiz
+    color: "#E70DCB"
 
 dropdown:
   control_panel:
@@ -45,15 +42,15 @@ dropdown:
     title: 'management'
     enabled: true
     items:
-      - text: 'agents'
-        icon: 'group'
-        route: 'admin_agent_list'
-      - text: 'opportunities'
-        icon: 'lightbulb'
-        route: 'admin_opportunity_list'
-      - text: 'organizations'
-        icon: 'corporate_fare'
-        route: 'admin_organization_list'
+#      - text: 'agents'
+#        icon: 'group'
+#        route: 'admin_agent_list'
+#      - text: 'opportunities'
+#        icon: 'lightbulb'
+#        route: 'admin_opportunity_list'
+#      - text: 'organizations'
+#        icon: 'corporate_fare'
+#        route: 'admin_organization_list'
 
 
 dashboard:
@@ -166,24 +163,28 @@ sidebar:
 homepage:
   sections:
     header:
-      enabled: true
-      title: Mapa das Periferias
+      enabled: false
+      title: Minha Casa Melhor
       subtitle: subtitulo aqui
       action:
         route: regmel_about
         title: SAIBA MAIS
       description: descricao aqui
       background: bg-dark
-      image: img/regmel.png
+      image: img/regmel.svg
       image_width: 70%
+    banner:
+      enabled: true
+      image: /img/regmel/minha-casa-melhor-banner.svg
     register:
       enabled: true
+      color: "#1c8230"
       options:
         municipio:
           title: Município
           route: regmel_register_city
         empresa:
-          title: Empresa/OCSC
+          title: Empresa/OSC
           route: regmel_register_company
     opportunities:
       enabled: false
@@ -197,3 +198,7 @@ homepage:
       color: text-light
     contribute:
       enabled: false
+    footer:
+      discover: false
+      control_panel: false
+      help: true

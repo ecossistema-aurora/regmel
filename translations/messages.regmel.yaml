@@ -119,8 +119,8 @@ contacts: Contatos
 companies: Empresas
 company: Empresa
 company_name: Razão Social
-company_data: Dados da Empresa/OCSC
-company_register: Criar uma Empresa/OCSC
+company_data: Dados da Empresa/OSC
+company_register: Criar uma Empresa/OSC
 cultural_language: Linguagem cultural
 cultural_languages: Linguagens culturais
 
@@ -416,7 +416,7 @@ user_name: Nome do Usuário
 user_password: Senha do Usuário
 user_position: Cargo do Usuário
 user_information: Informações do Usuário
-user_edit_data: Edição de dados do usuario
+user_edit_data: Edição de dados do usuário
 
 
 view_all: Ver todas
@@ -620,7 +620,7 @@ view:
     error:
       already_logged_in: Você já está logado.
       age_rating_valid: Você deve selecionar uma classificação etária válida.
-      email_in_use: Este email já está em uso.
+      email_in_use: Já exist um usuário com o email informado.
       error_message: Ocorreu um erro ao tentar criar a conta.
       first_name_length: O nome deve ter entre 2 e 50 caracteres.
       invalid_email: Insira um email válido com até 100 caracteres.

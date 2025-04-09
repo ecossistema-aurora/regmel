@@ -57,6 +57,7 @@ readonly class UserService extends AbstractEntityService implements UserServiceI
 
         $password = $this->passwordHasherFactory->getPasswordHasher(User::class)->hash($user['password']);
 
+        /** @var User $userObj */
         $userObj = $this->serializer->denormalize($user, User::class);
         $userObj->setPassword($password);
 
@@ -65,7 +66,9 @@ readonly class UserService extends AbstractEntityService implements UserServiceI
             $this->repository->save($userObj);
             $this->repository->commit();
 
-            $this->agentService->createFromUser($user);
+            $agent = $this->agentService->createFromUser($user, $user['extraFields'] ?? []);
+
+            $userObj->addAgent($agent);
         } catch (Exception $exception) {
             $this->repository->rollback();
             throw $exception;
