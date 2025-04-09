@@ -369,6 +369,8 @@ export declare const RELATED_AGENTS: Message<{ 'messages': { parameters: NoParam
 export declare const REQUIRED_FIELD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const REPORT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const RESPONSIBLE_AGENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const RESET: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const RESET_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const TAGS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TERM: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TERMS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -574,6 +576,9 @@ export declare const VIEW_AUTHENTICATION_ERROR_PHONE_INVALID: Message<{ 'message
 export declare const VIEW_AUTHENTICATION_ERROR_ACCOUNT_NOT_CONFIRMED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_FORGOT_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_PARAGRAPH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const VIEW_AUTHENTICATION_FORGOT_FORGOT_YOUR_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const VIEW_AUTHENTICATION_FORGOT_PARAGRAPH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const VIEW_AUTHENTICATION_PASSWORD_RESET_DEFINE_YOUR_NEW_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_AUTHENTICATION_REGISTER_CREATE_ACCOUNT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_REGISTER_PARAGRAPH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_REGISTER_PASSWORD_INFO1: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
