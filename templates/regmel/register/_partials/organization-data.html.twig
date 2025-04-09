@@ -12,7 +12,7 @@
     </div>
     <div class="col-6 mb-3">
         <label for="city" class="form-label">{{ 'city' | trans }}</label>
-        <select class="form-select" id="city" name="city">
+        <select class="form-select" id="city" name="city" required>
             <option value="">{{ 'select' | trans }}</option>
         </select>
     </div>
@@ -20,12 +20,12 @@
 
 <div class="row">
     <div class="col-6 mb-3">
-        <label for="cnpj" class="form-label">{{ 'view.organization.cnpj' | trans }}</label>
-        <input type="text" class="form-control" id="cnpj" name="cnpj" placeholder={{ 'view.organization.cnpj' | trans}} required>
+        <label for="site" class="form-label">{{ 'view.organization.site' | trans }}</label>
+        <input type="text" class="form-control" id="site" name="site" placeholder={{ 'view.organization.site' | trans}} required>
     </div>
     <div class="col-6 mb-3">
         <label for="phone" class="form-label">{{ 'view.organization.phone' | trans }}</label>
-        <input type="tel" class="form-control" id="phone" name="phone" placeholder={{ 'view.organization.phone' | trans}} required>
+        <input type="tel" class="form-control" maxlength="16" data-mask="phone" id="phone" name="phone" placeholder={{ 'view.organization.phone' | trans}} required>
     </div>
 </div>
 

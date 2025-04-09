@@ -624,7 +624,7 @@ view:
       error_message: Ocorreu um erro ao tentar criar a conta.
       first_name_length: O nome deve ter entre 2 e 50 caracteres.
       invalid_email: Insira um email válido com até 100 caracteres.
-      invalid_password: A senha deve ter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números.
+      invalid_password: A senha deve ter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, símbolos e números.
       last_name_length: O sobrenome deve ter entre 2 e 50 caracteres.
       password_mismatch: As senhas não correspondem.
       cpf_invalid: Insira um CPF válido.
@@ -838,6 +838,7 @@ view:
     file: Formulário de Adesão
     download_form_model: Baixe o modelo de Formulário de Adesão
     pdf_advice: O formato do arquivo deve ser PDF
+    site: Site
 
   company:
     access: Acessar Empresa
