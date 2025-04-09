@@ -104,7 +104,7 @@ readonly class FileService implements FileServiceInterface
      */
     private function validateExtension(UploadedFile $uploadedFile): void
     {
-        $extension = $uploadedFile->getClientOriginalExtension();
+        $extension = strtolower($uploadedFile->getClientOriginalExtension());
 
         if (false === in_array($extension, self::IMAGE_ALLOWED_EXTENSIONS)) {
             throw new InvalidFileExtensionException();

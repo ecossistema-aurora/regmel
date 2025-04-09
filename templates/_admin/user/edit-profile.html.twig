@@ -17,11 +17,11 @@
 
             <div class="entity-edit-submit">
                 <div class="delete-archive">
-                    <button class="btn btn-outline-light">
+                    <button class="btn btn-outline-light d-none">
                         <i class="iconify fs-3" data-icon="mynaui:trash"></i>
                         {{ 'delete' | trans }}
                     </button>
-                    <button class="btn btn-outline-light">
+                    <button class="btn btn-outline-light d-none">
                         <i class="iconify fs-3" data-icon="mingcute:box-2-line"></i>
                         {{ 'archive' | trans }}
                     </button>
@@ -31,12 +31,10 @@
                     <button form="user-edit-form" type="submit" class="btn btn-light">{{ 'save' | trans}}</button>
                 </div>
             </div>
-
-            {% if error is defined and error %}
-                <div class="alert alert-danger mt-3">
-                    {{ error }}
-                </div>
-            {% endif %}
         </div>
     </section>
+{% endblock %}
+
+{% block extra_javascripts %}
+    <script src="{{ asset('js/user/edit-profile/image-validation.js') }}"></script>
 {% endblock %}

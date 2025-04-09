@@ -206,7 +206,8 @@ readonly class AgentService extends AbstractEntityService implements AgentServic
             $uploadedFile
         );
 
-        $agent->setImage($this->fileService->urlOfImage($uploadedImage->getFilename()));
+        $relativePath = '/uploads'.$this->parameterBag->get(self::DIR_AGENT_PROFILE).'/'.$uploadedImage->getFilename();
+        $agent->setImage($relativePath);
 
         $agent->setUpdatedAt(new DateTime());
 

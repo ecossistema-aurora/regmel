@@ -16,9 +16,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 readonly class UserService extends AbstractEntityService implements UserServiceInterface
@@ -106,5 +108,37 @@ readonly class UserService extends AbstractEntityService implements UserServiceI
         $userObj->setUpdatedAt(new DateTime());
 
         return $this->repository->save($userObj);
+    }
+
+    public function updateImage(Uuid $id, UploadedFile $uploadedFile): User
+    {
+        $user = $this->get($id);
+
+        $userDto = new UserDto();
+        $userDto->image = $uploadedFile;
+
+        $violations = $this->validator->validate($userDto, groups: [UserDto::UPDATE]);
+
+        if ($violations->count() > 0) {
+            throw new ValidatorException(violations: $violations);
+        }
+
+        if ($user->getImage()) {
+            $this->fileService->deleteFileByUrl($user->getImage());
+        }
+
+        $uploadedImage = $this->fileService->uploadImage(
+            $this->parameterBag->get(self::DIR_USER_PROFILE),
+            $uploadedFile
+        );
+
+        $relativePath = '/uploads'.$this->parameterBag->get(self::DIR_USER_PROFILE).'/'.$uploadedImage->getFilename();
+        $user->setImage($relativePath);
+
+        $user->setUpdatedAt(new DateTime());
+
+        $this->repository->save($user);
+
+        return $user;
     }
 }
