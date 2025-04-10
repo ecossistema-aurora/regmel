@@ -846,7 +846,9 @@ view:
     cnpj: CNPJ
     phone: Telefone
     email: Email
-    accept_terms: Aceito os termos de adesão
+    accept_terms: Aceito os Termos e condições de uso
+    accept_privacy: Aceito a Política de Privacidade
+    accept_image: Autorizo o Uso de Imagem
     file: Formulário de Adesão
     download_form_model: Baixe o modelo de Formulário de Adesão
     pdf_advice: O formato do arquivo deve ser PDF
