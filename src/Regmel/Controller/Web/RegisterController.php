@@ -53,16 +53,22 @@ class RegisterController extends AbstractWebController
 
         try {
             $this->registerService->saveOrganization(
-                $this->createOrganizationDataForMunicipality($request)
+                $this->createOrganizationDataForMunicipality($request),
+                $request->files->get('joinForm'),
             );
         } catch (ValidatorException $exception) {
             foreach ($exception->getConstraintViolationList() as $violation) {
-                $errors[] = $this->translator->trans($violation->getMessage());
+                $errors[] = [
+                    'propertyPath' => $violation->getPropertyPath(),
+                    'message' => $this->translator->trans($violation->getMessage()),
+                ];
             }
         } catch (UniqueConstraintViolationException $exception) {
             $errors[] = ['message' => $this->translator->trans('view.authentication.error.email_in_use')];
         } catch (Exception $exception) {
-            $errors = ['message' => $exception->getMessage()];
+            $errors[] = [
+                'message' => $exception->getMessage(),
+            ];
         }
 
         if (false === empty($errors)) {
@@ -122,9 +128,16 @@ class RegisterController extends AbstractWebController
                 ],
             ]);
         } catch (ValidatorException $exception) {
-            $errors = $exception->getConstraintViolationList();
+            foreach ($exception->getConstraintViolationList() as $violation) {
+                $errors[] = [
+                    'propertyPath' => $violation->getPropertyPath(),
+                    'message' => $this->translator->trans($violation->getMessage()),
+                ];
+            }
         } catch (Exception $exception) {
-            $errors = [$exception->getMessage()];
+            $errors[] = [
+                'message' => $exception->getMessage(),
+            ];
         }
 
         if (false === empty($errors)) {

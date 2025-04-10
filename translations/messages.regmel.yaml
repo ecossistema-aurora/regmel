@@ -317,7 +317,7 @@ opportunity: Oportunidade
 opportunities: Oportunidades
 organizations: Municípios
 organization_data: Dados do Município
-organization_register: Criar um Município
+organization_register: Cadastrar um Município
 orientation: Selecione a Orientação Sexual
 other_files: Outros arquivos
 other_information: Outras informações
@@ -835,6 +835,9 @@ view:
     phone: Telefone
     email: Email
     accept_terms: Aceito os termos de adesão
+    file: Formulário de Adesão
+    download_form_model: Baixe o modelo de Formulário de Adesão
+    pdf_advice: O formato do arquivo deve ser PDF
 
   company:
     access: Acessar Empresa

@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form method="POST" action="" enctype="multipart/form-data">
                             <input type="hidden" name="token" value="{{ csrf_token(form_id) }}">
 
                             {% include "regmel/register/_partials/user-data.html.twig" %}

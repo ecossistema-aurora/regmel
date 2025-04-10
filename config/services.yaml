@@ -5,8 +5,10 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     app.migrations.odm: 'migrations-odm'
-    app.dir.storage: '%env(resolve:STORAGE_IMAGES_DIR)%'
+    app.dir.storage: '%env(resolve:STORAGE_DIR)%'
     app.url.storage: '%env(resolve:STORAGE_BASE_URL)%'
+    app.dir.storage.images: '%env(resolve:STORAGE_IMAGES_DIR)%'
+    app.url.storage.images: '%env(resolve:STORAGE_IMAGES_BASE_URL)%'
 
 imports:
     - { resource: directories.yaml }
