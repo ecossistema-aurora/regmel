@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Uid\Uuid;
 
 class CreateAdminUserCommand extends Command
@@ -24,6 +25,7 @@ class CreateAdminUserCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $io = new SymfonyStyle($input, $output);
         $output->writeln('------------------------------------');
 
         $user = new User();
@@ -44,10 +46,10 @@ class CreateAdminUserCommand extends Command
         $this->entityManager->persist($agent);
         $this->entityManager->flush();
 
-        $output->writeln('Created Admin User');
+        $io->title('Admin User created');
         $output->writeln('User: admin@regmel.com');
         $output->writeln('Pass: Aurora@2024');
-        $output->writeln('------------------------------------');
+        $output->writeln('------------------------------------'.PHP_EOL);
 
         return Command::SUCCESS;
     }

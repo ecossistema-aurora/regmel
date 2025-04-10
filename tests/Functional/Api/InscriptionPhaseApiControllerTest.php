@@ -39,6 +39,7 @@ class InscriptionPhaseApiControllerTest extends AbstractApiTestCase
         $this->assertResponseBodySame([
             'id' => $requestBody['id'],
             'agent' => ['id' => AgentFixtures::AGENT_ID_2],
+            'organization' => null,
             'phase' => ['id' => PhaseFixtures::PHASE_ID_10],
             'status' => 'active',
             'createdAt' => $inscriptionPhase->getCreatedAt()->format(DateTimeInterface::ATOM),

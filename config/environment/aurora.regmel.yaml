@@ -1,5 +1,6 @@
 name: Minha Casa Melhor
 author: Secretaria Nacional de Periferias
+email: emaildasecretaria@email
 logo:
   horizontal:
     path: /img/regmel/regmel-logo.svg
