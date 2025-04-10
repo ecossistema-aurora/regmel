@@ -106,7 +106,7 @@ configure: Configurar
 create: Criar
 create_and_publish: Criar e Publicar
 create_in_draft: Criar em Rascunho
-create_account: Crie sua conta
+create_account: Faça sua Inscrição
 created_at: Criado em
 created_by: Criado por
 created_in: Criado em
@@ -120,7 +120,7 @@ companies: Empresas
 company: Empresa
 company_name: Razão Social
 company_data: Dados da Empresa/OSC
-company_register: Criar uma Empresa/OSC
+company_register: Cadastrar uma Empresa/OSC
 cultural_language: Linguagem cultural
 cultural_languages: Linguagens culturais
 
@@ -523,14 +523,14 @@ modal_confirm_remove:
 
 footer:
   and_developed: e desenvolvida por
-  contact_support: para falar com nossa equipe de suporte por chat.
+  contact_support: ''
   control_panel: Painel de controle
   help: Precisa de ajuda?
   image_authorization: Autorização de uso de imagem
   notices_opportunities: Editais e Oportunidades
   platform_created: plataforma criada pela comunidade
   privacy_policy: Termos de uso e Política de privacidade
-  send_email: Ou envie um email para
+  send_email: Envie um email para
   visit_repository: visite o repositório
 
 #pages
@@ -694,7 +694,7 @@ view:
     free_software_info: Sabia que a Aurora é um software livre?
     register_access: Faça a sua inscrição e acesse os resultados de editais, oficinas, prêmios e concursos. Você também pode criar o seu próprio formulário e divulgar uma oportunidade.
     register_artists: Conheça ou cadastre artistas, pessoas gestoras e produtoras, grupos, coletivos, bandas, instituições e empresas da cena artística e cultural da região.
-    registration_info: O cadastro é fundamental para organizar informações e facilitar o acesso a serviços e oportunidades dentro da Aurora.
+    registration_info: ''
     search_calendar: Pesquise o calendário de atividades culturais que estão acontecendo na sua região. Ou crie e divulgue seus eventos gratuitamente na plataforma.
     subtitle: Um novo amanhecer para a gestão e para o fomento cultural.
     header_text: Encontre cultura em cada canto da cidade e promova a sua própria cultura. Participe da produção artística do seu território com uma plataforma livre, gratuita e colaborativa.

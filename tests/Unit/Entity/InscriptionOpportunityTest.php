@@ -13,7 +13,7 @@ use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;
 
-class InsciptionOpportunityTest extends TestCase
+class InscriptionOpportunityTest extends TestCase
 {
     public function testGettersAndSetters(): void
     {
@@ -76,6 +76,7 @@ class InsciptionOpportunityTest extends TestCase
         $expectedArray = [
             'id' => $uuid->toRfc4122(),
             'agent' => $agentUuid,
+            'organization' => null,
             'opportunity' => $opportunityUuid,
             'status' => 1,
             'createdAt' => $createdAt->format(DateFormatHelper::DEFAULT_FORMAT),
