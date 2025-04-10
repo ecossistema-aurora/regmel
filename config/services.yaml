@@ -9,6 +9,7 @@ parameters:
     app.url.storage: '%env(resolve:STORAGE_BASE_URL)%'
     app.dir.storage.images: '%env(resolve:STORAGE_IMAGES_DIR)%'
     app.url.storage.images: '%env(resolve:STORAGE_IMAGES_BASE_URL)%'
+    app.email.from_address: '%env(EMAIL_FROM_ADDRESS)%'
 
 imports:
     - { resource: directories.yaml }

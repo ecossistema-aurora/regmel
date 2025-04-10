@@ -14,4 +14,8 @@ interface AccountEventServiceInterface
     public function confirmAccount(string $token): void;
 
     public function sendConfirmationEmail(User $user): void;
+
+    public function resetPassword(string $token, string $password): void;
+
+    public function sendResetPasswordEmail(string $email): void;
 }
