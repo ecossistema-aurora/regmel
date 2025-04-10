@@ -20,7 +20,7 @@ container_php:
 
 # Instala dependências dentro do contêiner PHP
 install_dependencies:
-	docker compose exec -T php bash -c "composer install"
+	docker compose exec -T php bash -c "composer install --ignore-platform-req=ext-mongodb"
 
 # Gera os arquivos de Proxies do MongoDB
 generate_proxies:
