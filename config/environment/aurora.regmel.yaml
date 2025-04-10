@@ -8,6 +8,57 @@ logo:
   vertical:
     path: /img/regmel/regmel-logo.svg
     width: 200px
+terms:
+  lgpd: >
+    Nos termos da Lei nº 13.709/2018 (Lei Geral de Proteção de Dados Pessoais – LGPD), garantimos o respeito à privacidade e a proteção dos dados pessoais dos usuários da nossa aplicação.
+
+    Ao utilizar nossos serviços, o usuário concorda com a coleta, uso, armazenamento e tratamento de seus dados pessoais, conforme descrito nesta Política. As informações coletadas têm como finalidade:
+
+    Viabilizar o acesso e uso adequado da aplicação;
+
+    Cumprir obrigações legais e regulatórias;
+
+    Personalizar a experiência do usuário;
+
+    Garantir a segurança e integridade da aplicação e dos dados dos usuários;
+
+    Enviar comunicações, avisos ou atualizações importantes relacionadas ao serviço.
+
+    Comprometemo-nos a:
+
+    Utilizar os dados apenas para as finalidades informadas e consentidas;
+
+    Adotar medidas técnicas e administrativas para proteger os dados contra acessos não autorizados, vazamentos, perdas ou quaisquer formas de tratamento inadequado ou ilícito;
+
+    Garantir ao titular dos dados os direitos previstos na LGPD, como acesso, correção, exclusão, portabilidade, oposição e revogação do consentimento.
+
+    O usuário poderá exercer seus direitos entrando em contato conosco por meio do canal: [inserir e-mail de contato ou canal específico].
+
+    Ao continuar utilizando nossa aplicação, o usuário declara estar ciente e de acordo com os termos desta Política de Privacidade.
+  image_authorization: >
+    Autorizo, para todos os fins em direito admitidos, a publicização de minha imagem, áudio, fotografias e vídeos, na Plataforma Aurora.
+
+    A autorização neste termo especificada é gratuita e irá perdurar enquanto meu cadastro estiver ativo no sistema.
+
+    O cadastramento na Aurora é necessário para que o Usuário possa utilizar os nossos serviços, seja consultando, publicando ou participando de editais, prêmios, chamadas, concursos, espaços culturais, sociais e públicos etc. A Secult/CE compromete-se a não utilizar as informações cadastrais fornecidas pelos Usuários para a realização de quaisquer atividades ilícitas, mas apenas para aquelas expressamente permitidas pela legislação brasileira e/ou pelo presente instrumento.
+
+    Por ser esta expressão de minha vontade, nada terei a reclamar a título de direitos conexos à minha imagem e áudio.
+
+    Meu consentimento pode ser revogado a qualquer momento mediante manifestação expressa, por procedimento gratuito e facilitado, através do e-mail do Encarregado da SECULT, localizado do canal de comunicação disponível na tela inicial da Plataforma.
+  privacy_policy: >
+    A Aurora é uma plataforma livre, gratuita e colaborativa de mapeamento da Secretaria da Cultura do Estado sobre o cenário cultural, a qual está disponibilizada por meio de página eletrônica na internet (https://www.mapacultural.pe.gov.br/). Nesta ferramenta os Usuários poderão publicar os seus perfis artísticos, consultar agendas culturais, participar de editais da cultura e receber recompensas e prêmios. O serviço Aurora é gratuito e sua utilização é facultada ao cidadão que, ao utilizá-lo e dando seu aceite, adere aos termos aqui dispostos, concordando e se submetendo integralmente às suas condições.
+
+    O presente documento tem o objetivo de reafirmar e esclarecer os compromissos da Secretaria de Cultura , bem como estabelecer ao Usuário as regras e condições gerais de acesso, cadastro, aceite e uso da Plataforma Aurora .
+
+    O cadastramento na Aurora é necessário para que o Usuário possa utilizar os nossos serviços, seja consultando, publicando ou participando de editais, prêmios, chamadas, concursos, espaços culturais, sociais e públicos etc. A Secult/PE compromete-se a não utilizar as informações cadastrais fornecidas pelos Usuários para a realização de quaisquer atividades ilícitas, mas apenas para aquelas expressamente permitidas pela legislação brasileira e/ou pelo presente instrumento.
+
+    Para utilizar os Serviços da Plataforma, o Usuário deverá criar seu Cadastro, utilizando os seguintes dados: nome artístico, CPF, e-mail e senha de acesso. Posteriormente, receberá um e-mail de confirmação, para a devida concordância integral deste Termo e Condições de Uso e da Política de Privacidade, separadamente, mediante o aceite eletrônico assinalando a caixa de seleção.
+
+    Após concordar com este Termo, o Usuário deverá complementar seu cadastro com as seguintes informações: Área de atuação e uma breve descrição sobre seu trabalho.
+
+    A criação e o acesso ao cadastro são gratuitos e o Usuário está ciente de que alguns dados cadastrais de seu perfil (nome artístico, breve descrição sobre o Usuário e a área de atuação) serão publicados a todos que acessarem a Plataforma.
+
+    O Usuário, com seu email de login e senha, conseguirá acessar a Plataforma, adicionar ao seu perfil fotos e vídeos de seus trabalhos culturais, mediante aceite do Termo de Uso de Imagem e de Voz.
 modules:
   organizations: Municípios
   agents: Agentes Promotores
