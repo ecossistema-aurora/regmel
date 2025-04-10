@@ -333,6 +333,7 @@ permissions: Permissões
 portfolio: Portfólio
 privacy: Privacidade
 profile: Perfil
+provided_violates: Os dados fornecidos violam uma ou mais restrições.
 password: Senha
 password_strength: Força da senha
 participants: Participantes

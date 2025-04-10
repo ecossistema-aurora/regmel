@@ -137,9 +137,15 @@ class UserAdminController extends AbstractAdminController
 
             $this->addFlashSuccess($this->translator->trans('view.user.message.updated'));
         } catch (Exception|TypeError $exception) {
-            $this->addFlashError($exception->getMessage());
+            $message = $exception->getMessage();
 
-            return $this->renderEditProfile($user, $agents, $token, $exception->getMessage());
+            if (str_contains($message, 'violates one or more constraints')) {
+                $message = $this->translator->trans('provided_violates', domain: 'aurora.regmel');
+            }
+
+            $this->addFlashError($message);
+
+            return $this->renderEditProfile($user, $agents, $token, $message);
         }
 
         return $this->accountPrivacy($user->getId());
