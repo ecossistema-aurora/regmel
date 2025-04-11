@@ -41,7 +41,9 @@
                         <div class="text-end mt-3">
                             <a href="{{ path('web_account_event_forgot') }}">{{ 'view.authentication.forgot_password'|trans }}</a>
                             <br>
-                            <a class="d-none" href="{{ path('web_auth_register') }}">{{ 'register'|trans }}</a>
+                            {% if (env.aurora.register.any == "true") %}
+                                <a href="{{ path('web_auth_register') }}">{{ 'register'|trans }}</a>
+                            {% endif %}
                         </div>
                     </form>
                 </div>
