@@ -13,12 +13,10 @@ use App\Exception\AccountEvent\InvalidTokenException;
 use App\Exception\User\UserResourceNotFoundException;
 use App\Repository\Interface\AccountEventRepositoryInterface;
 use App\Service\Interface\AccountEventServiceInterface;
+use App\Service\Interface\EmailServiceInterface;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Uid\Uuid;
@@ -29,13 +27,12 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
     public const string TIME_TO_EXPIRATION = '+24 hours';
 
     public function __construct(
-        private MailerInterface $mailer,
         private EntityManagerInterface $entityManager,
+        private EmailServiceInterface $emailService,
         private AccountEventRepositoryInterface $accountEventRepository,
         private UrlGeneratorInterface $urlGenerator,
         private TranslatorInterface $translator,
         private PasswordHasherFactoryInterface $passwordHasherFactory,
-        private ParameterBagInterface $parameterBag,
         private Security $security,
     ) {
         parent::__construct($this->security);
@@ -71,18 +68,16 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
 
         $expirationAt = new DateTimeImmutable(self::TIME_TO_EXPIRATION);
 
-        $email = (new TemplatedEmail())
-            ->from($this->parameterBag->get('app.email.from_address'))
-            ->to($user->getEmail())
-            ->subject($this->translator->trans('account_confirmation'))
-            ->htmlTemplate('_emails/account-event/account-confirmation.html.twig')
-            ->context([
+        $this->emailService->sendTemplatedEmail(
+            [$user->getEmail()],
+            $this->translator->trans('account_confirmation'),
+            '_emails/account-event/account-confirmation.html.twig',
+            [
                 'first_name' => $user->getFirstName(),
                 'confirmation_link' => $confirmationUrl,
                 'expiration_date' => $expirationAt,
-            ]);
-
-        $this->mailer->send($email);
+            ]
+        );
 
         $this->create([
             'id' => Uuid::v4(),
@@ -130,18 +125,16 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
             throw new UserResourceNotFoundException();
         }
 
-        $email = (new TemplatedEmail())
-            ->from($this->parameterBag->get('app.email.from_address'))
-            ->to($user->getEmail())
-            ->subject($this->translator->trans('reset_password'))
-            ->htmlTemplate('_emails/account-event/password-reset.html.twig')
-            ->context([
+        $this->emailService->sendTemplatedEmail(
+            [$user->getEmail()],
+            $this->translator->trans('reset_password'),
+            '_emails/account-event/password-reset.html.twig',
+            [
                 'first_name' => $user->getFirstName(),
                 'reset_link' => $resetUrl,
                 'expiration_date' => $expirationAt,
-            ]);
-
-        $this->mailer->send($email);
+            ]
+        );
 
         $this->create([
             'id' => Uuid::v4(),
