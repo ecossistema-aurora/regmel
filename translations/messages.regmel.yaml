@@ -148,6 +148,7 @@ edit_space: Editar Espaços
 edit_activity_area: Editar Área de Atuação
 edit_data: Editar dados
 edit_municipality: Editar Município
+edit_company: Editar Empresa/OSC
 email: Email
 entity_banner: Banner da Entidade
 entity: Entidade
@@ -858,6 +859,7 @@ view:
     access: Acessar Empresa
     date: Empresa foi criada em
     message:
+      updated: A empresa foi atualizada
       deleted: A empresa foi excluída
       created: O empresa foi criada com sucesso
     quantity:
