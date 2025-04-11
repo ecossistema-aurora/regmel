@@ -140,7 +140,7 @@ class UserAdminController extends AbstractAdminController
             $message = $exception->getMessage();
 
             if (str_contains($message, 'violates one or more constraints')) {
-                $message = $this->translator->trans('provided_violates', domain: 'aurora.regmel');
+                $message = $this->translator->trans('provided_violates');
             }
 
             $this->addFlashError($message);
