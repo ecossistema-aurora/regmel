@@ -13,26 +13,69 @@
 
 <div class="row">
     <div class="col-6 mb-3">
-        <label for="userEmail" class="form-label">{{ 'email' | trans }}</label>
-        <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder={{ 'email' | trans}} required>
+        <label for="cpf" class="form-label">CPF</label>
+        <input type="text"
+               class="form-control"
+               maxlength="14"
+               data-mask="cpf"
+               id="cpf"
+               name="cpf"
+               placeholder="CPF"
+               required
+        >
     </div>
     <div class="col-6 mb-3">
-        <label for="password" class="form-label">{{ 'password' | trans }}</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder={{ 'password' | trans}} autocomplete="new-password" required>
+        <label for="userPhone" class="form-label">{{ 'phone' | trans }}</label>
+        <input type="text" maxlength="16" data-mask="phone" class="form-control" id="userPhone" name="userPhone" placeholder={{ 'phone' | trans}} required>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-4 mb-3">
-        <label for="cpf" class="form-label">CPF</label>
-        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
-    </div>
-    <div class="col-4 mb-3">
+    <div class="col mb-3">
         <label for="position" class="form-label">{{ 'position' | trans }}</label>
         <input type="text" class="form-control" id="position" name="position" placeholder={{ 'position' | trans}} required>
     </div>
-    <div class="col-4 mb-3">
-        <label for="userPhone" class="form-label">{{ 'phone' | trans }}</label>
-        <input type="text" class="form-control" id="userPhone" name="userPhone" placeholder={{ 'phone' | trans}} required>
+</div>
+
+<div class="row">
+    <div class="col mb-3">
+        <label for="userEmail" class="form-label">{{ 'email' | trans }}</label>
+        <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder={{ 'email' | trans}} required>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-6 mb-3">
+        <label for="password" class="form-label">{{ 'password' | trans }}</label>
+        <input type="password"
+               class="form-control"
+               minlength="8"
+               id="password"
+               name="password"
+               placeholder={{ 'password' | trans}}
+               autocomplete="new-password"
+               required
+        >
+    </div>
+    <div class="col-6 mb-3">
+        <label for="confirm_password" class="form-label">{{ 'confirm_password' | trans }}</label>
+        <input type="password"
+               class="form-control"
+               minlength="8"
+               id="confirm_password" name="confirm_password"
+               placeholder={{ 'confirm_password' | trans}}
+               autocomplete="new-password"
+               required
+        >
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <p id="strengthMessage"></p>
+        <div class="progress-password">
+            <div id="progressBar" class="progress-bar-password" style="width: 0"></div>
+        </div>
+    </div>
+</div>
+
