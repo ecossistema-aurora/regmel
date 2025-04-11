@@ -218,6 +218,8 @@ input_search: Busque por palavras-chave
 inscriptions: Inscrições
 introduction: Apresentação
 inactive: Inativo
+invite_sent: Convite enviado
+invite_to_municipality: Convite para município
 is_itinerant: É agente itinerante?
 is-accessible: O espaço é acessível?
 invalid_credentials: E-mail ou senha incorretos
@@ -986,3 +988,4 @@ view:
     error-text_third: Mas não se preocupe, existem muitas outras páginas para conhecer aqui na Aurora.
     error-homepage: Voltar para a página inicial
     error-image: Imagem de dúvida
+

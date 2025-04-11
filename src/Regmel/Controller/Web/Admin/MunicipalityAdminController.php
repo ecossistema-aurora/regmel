@@ -6,6 +6,7 @@ namespace App\Regmel\Controller\Web\Admin;
 
 use App\Controller\Web\Admin\AbstractAdminController;
 use App\Enum\OrganizationTypeEnum;
+use App\Service\Interface\EmailServiceInterface;
 use App\Service\Interface\OrganizationServiceInterface;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -25,6 +26,7 @@ class MunicipalityAdminController extends AbstractAdminController
         private readonly JWTTokenManagerInterface $jwtManager,
         private readonly Security $security,
         private readonly TranslatorInterface $translator,
+        private readonly EmailServiceInterface $emailService,
     ) {
     }
 
@@ -65,14 +67,56 @@ class MunicipalityAdminController extends AbstractAdminController
     #[Route('/painel/admin/municipios/{id}', name: 'admin_regmel_municipality_details', methods: ['GET'])]
     public function details(Uuid $id): Response
     {
-        $details = $this->organizationService->findOneBy([
+        $municipality = $this->organizationService->findOneBy([
             'id' => $id,
             'type' => OrganizationTypeEnum::MUNICIPIO->value,
         ]);
 
         return $this->render('regmel/admin/municipality/details.html.twig', [
-            'details' => $details,
+            'municipality' => $municipality,
         ], parentPath: '');
+    }
+
+    #[Route('/painel/admin/municipios/{id}/convidar-agente', name: 'admin_regmel_municipality_invite_agent', methods: ['POST'])]
+    public function inviteAgent(Uuid $id, Request $request): Response
+    {
+        $name = $request->request->get('name');
+        $email = $request->request->get('email');
+
+        $error = [];
+
+        if (false === is_string($name)) {
+            $error[] = $this->translator->trans('view.authentication.error.first_name_length');
+        }
+
+        if (false === filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error[] = $this->translator->trans('view.authentication.error.invalid_email');
+        }
+
+        if ([] === $error) {
+            $municipality = $this->organizationService->findOneBy([
+                'id' => $id,
+                'type' => OrganizationTypeEnum::MUNICIPIO->value,
+            ]);
+
+            $this->emailService->sendTemplatedEmail(
+                [$email],
+                $this->translator->trans('invite_to_municipality'),
+                '_emails/agent-invitation.html.twig',
+                [
+                    'name' => $name,
+                    'municipality' => $municipality->getName(),
+                ]
+            );
+
+            $this->addFlash('success', $this->translator->trans('invite_sent'));
+        }
+
+        foreach ($error as $errorMessage) {
+            $this->addFlash('error', $errorMessage);
+        }
+
+        return $this->redirectToRoute('admin_regmel_municipality_details', ['id' => $id->toRfc4122()]);
     }
 
     #[Route('/painel/admin/municipios/{id}/editar', name: 'admin_regmel_municipality_edit', methods: ['GET', 'POST'])]
