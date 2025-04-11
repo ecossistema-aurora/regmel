@@ -28,6 +28,8 @@
 
                             {% include "regmel/register/_partials/accept-terms.html.twig" %}
 
+                            <div class="alert alert-danger d-none" id="error-message"></div>
+
                             <div class="btn-form-group">
                                 <button class="btn btn-primary" type="submit">
                                     {{ 'save' | trans }}
@@ -38,5 +40,9 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
+{% endblock %}
+
+{% block extra_javascripts %}
+    <script type="module" src="{{ asset('js/regmel/register.js') }}"></script>
 {% endblock %}

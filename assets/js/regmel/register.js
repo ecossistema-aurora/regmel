@@ -23,8 +23,17 @@ document.addEventListener('DOMContentLoaded', function () {
         phone: document.querySelector('input[name="phone"]'),
         email: document.querySelector('input[name="email"]'),
         password: document.querySelector('input[name="password"]'),
-        confirmPassword: document.querySelector('input[name="confirm_password"]')
+        confirmPassword: document.querySelector('input[name="confirm_password"]'),
     };
+
+    const userEmail = document.querySelector('input[name="userEmail"]');
+    const userPhone = document.querySelector('input[name="userPhone"]');
+    if (userEmail) {
+        inputs.userEmail = userEmail;
+    }
+    if (userPhone) {
+        inputs.userPhone = userPhone;
+    }
 
     const progressBar = document.querySelector('#passwordStrength .progress-bar');
 
@@ -36,6 +45,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const email = inputs.email.value.trim();
         const password = inputs.password.value.trim();
         const confirmPassword = inputs.confirmPassword.value.trim();
+        const userEmail = inputs.userEmail ? inputs.userEmail.value.trim() : '';
+        const userPhone = inputs.userPhone ? inputs.userPhone.value.trim() : '';
         let errorMessage = '';
 
         Object.values(inputs).forEach(input => {
@@ -84,6 +95,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 message: trans(VIEW_AUTHENTICATION_ERROR_INVALID_PASSWORD)
             },
         ];
+
+        if (inputs.userEmail) {
+            validations.push({
+                valid: () => validateEmail(userEmail),
+                input: inputs.userEmail,
+                message: trans(VIEW_AUTHENTICATION_ERROR_INVALID_EMAIL)
+            });
+        }
+
+        if (inputs.userPhone) {
+            validations.push({
+                valid: () => validatePhone(userPhone),
+                input: inputs.userPhone,
+                message: trans(VIEW_AUTHENTICATION_ERROR_PHONE_INVALID)
+            });
+        }
 
         for (const rule of validations) {
             if (!rule.valid()) {
@@ -190,4 +217,9 @@ function validatePassword(password) {
 
 function validateConfirmPassword(password, confirmPassword) {
     return password === confirmPassword;
+}
+
+function validateCnpj(cnpj) {
+    const cnpjPattern = /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/;
+    return cnpjPattern.test(cnpj) && cnpj.length === 18;
 }
