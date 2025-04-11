@@ -1,8 +1,8 @@
-FROM php:8.4-fpm
+FROM php:8.4-fpm as base
 
 WORKDIR /var/www
 
-RUN rm -rf /var/www/html && apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y \
     build-essential \
     libpng-dev \
     libjpeg62-turbo-dev \
@@ -31,19 +31,16 @@ RUN rm -rf /var/www/html && apt-get update && apt-get install -y \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN groupadd -g 1000 developer && useradd -u 1000 -ms /bin/bash -g developer user
+FROM base as worker
 
-COPY --chown=user:developer . /var/www
+RUN apt-get update && apt-get install -y supervisor \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /var/www/assets/uploads && chown -R www-data /var/www/assets/uploads
-RUN mkdir -p /var/www/storage && chown -R www-data /var/www/storage
+COPY docker/worker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug \
-    && echo "zend_extension=xdebug.so" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.mode=coverage" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.start_with_request=no" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN mkdir -p /var/log/supervisor \
+    && chown -R www-data:www-data /var/log/supervisor /var/www
 
-USER user
+USER www-data
 
-EXPOSE 9000
+CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf", "-n"]

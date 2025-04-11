@@ -12,14 +12,15 @@ use App\Enum\UserStatusEnum;
 use App\Exception\AccountEvent\ExpiredTokenException;
 use App\Exception\AccountEvent\InvalidTokenException;
 use App\Exception\User\UserResourceNotFoundException;
+use App\Message\EmailMessage;
 use App\Repository\Interface\AccountEventRepositoryInterface;
 use App\Repository\Interface\UserRepositoryInterface;
 use App\Service\Interface\AccountEventServiceInterface;
-use App\Service\Interface\EmailServiceInterface;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Uid\Uuid;
@@ -31,11 +32,11 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
 
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private EmailServiceInterface $emailService,
         private AccountEventRepositoryInterface $accountEventRepository,
         private UrlGeneratorInterface $urlGenerator,
         private TranslatorInterface $translator,
         private PasswordHasherFactoryInterface $passwordHasherFactory,
+        private MessageBusInterface $messageBus,
         private UserRepositoryInterface $userRepository,
         private Security $security,
     ) {
@@ -72,7 +73,7 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
 
         $expirationAt = new DateTimeImmutable(self::TIME_TO_EXPIRATION);
 
-        $this->emailService->sendTemplatedEmail(
+        $this->messageBus->dispatch(new EmailMessage(
             [$user->getEmail()],
             $this->translator->trans('account_confirmation'),
             '_emails/account-event/account-confirmation.html.twig',
@@ -81,7 +82,7 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
                 'confirmation_link' => $confirmationUrl,
                 'expiration_date' => $expirationAt,
             ]
-        );
+        ));
 
         $this->create([
             'id' => Uuid::v4(),
@@ -136,7 +137,7 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
             ? '_emails/account-event/password-reset-new-user.html.twig'
             : '_emails/account-event/password-reset.html.twig';
 
-        $this->emailService->sendTemplatedEmail(
+        $this->messageBus->dispatch(new EmailMessage(
             [$user->getEmail()],
             $isNewUser ? $this->translator->trans('welcome_reset_password') : $this->translator->trans('reset_password'),
             $template,
@@ -145,7 +146,7 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
                 'reset_link' => $resetUrl,
                 'expiration_date' => $expirationAt,
             ]
-        );
+        ));
 
         $this->create([
             'id' => Uuid::v4(),
@@ -190,7 +191,7 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
     ): void {
         $managerEmail = $this->getManagerEmail();
 
-        $this->emailService->sendTemplatedEmail(
+        $this->messageBus->dispatch(new EmailMessage(
             [$managerEmail],
             $this->translator->trans('new_registration_notification'),
             '_emails/notifications/manager/new-registration.html.twig',
@@ -201,7 +202,7 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
                 'organization_type' => $organizationType,
                 'organization_created_at' => $organizationCreatedAt->format('Y/m/d \à\s H:i:s'),
             ]
-        );
+        ));
     }
 
     public function notifyManagerOfNewMunicipalityDocument(
