@@ -145,6 +145,7 @@ export declare const EDIT_SPACE: Message<{ 'messages': { parameters: NoParameter
 export declare const EDIT_ACTIVITY_AREA: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EDIT_DATA: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EDIT_MUNICIPALITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const EDIT_COMPANY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const EMAIL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ENTITY_BANNER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ENTITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -738,6 +739,7 @@ export declare const VIEW_ORGANIZATION_PDF_ADVICE: Message<{ 'messages': { param
 export declare const VIEW_ORGANIZATION_SITE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_COMPANY_ACCESS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_COMPANY_DATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const VIEW_COMPANY_MESSAGE_UPDATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_COMPANY_MESSAGE_DELETED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_COMPANY_MESSAGE_CREATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_COMPANY_QUANTITY_TOTAL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;

@@ -161,7 +161,6 @@
     background-color: var(--hover-color);
 }
 
-
 @media (max-width: 768px) {
     .dropdown-menu {
         width: 100%;

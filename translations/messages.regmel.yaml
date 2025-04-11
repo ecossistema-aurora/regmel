@@ -427,6 +427,7 @@ view_all: Ver todas
 view_file: ver arquivo
 video: vídeo
 visualization: Visual
+view_changes: Visualizar alterações
 
 save: Salvar
 save_and_publish: Salvar e Publicar
@@ -486,8 +487,10 @@ week_days: Dias da semana
 where: Onde
 white: Branca
 work_plan: Plano de trabalho
+what_mean: O que significa?
 
 yes: Sim
+your_notifications: Você não tem novas notificações
 
 #months
 January: Janeiro
