@@ -8,6 +8,8 @@ logo:
   vertical:
     path: /img/regmel/regmel-logo.svg
     width: 200px
+register:
+  any: false
 terms:
   lgpd: >
     Nos termos da Lei nº 13.709/2018 (Lei Geral de Proteção de Dados Pessoais – LGPD), garantimos o respeito à privacidade e a proteção dos dados pessoais dos usuários da nossa aplicação.

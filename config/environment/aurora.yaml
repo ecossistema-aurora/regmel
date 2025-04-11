@@ -8,10 +8,12 @@ logo:
   vertical:
     path: img/aurora-horizontal.png
     width: 250
+register:
+  any: true
 terms:
   lgpd: texto lgpd
-  image: texto imagem
-  policy: texto policy
+  image_authorization: texto imagem
+  privacy_policy: texto policy
 modules:
   organizations: Organizações
   agents: Agentes
