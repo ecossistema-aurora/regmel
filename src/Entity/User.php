@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Enum\UserRolesEnum;
 use App\Enum\UserStatusEnum;
 use App\Helper\DateFormatHelper;
 use App\Repository\UserRepository;
@@ -56,6 +57,9 @@ class User extends AbstractEntity implements UserInterface, PasswordAuthenticate
     #[ORM\Column(type: 'string', nullable: false)]
     #[Groups(['user.get'])]
     private string $status = UserStatusEnum::AWAITING_CONFIRMATION->value;
+
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
 
     #[ORM\Column]
     #[Groups(['user.get'])]
@@ -177,6 +181,25 @@ class User extends AbstractEntity implements UserInterface, PasswordAuthenticate
         $this->status = $status;
     }
 
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+
+        $roles[] = UserRolesEnum::ROLE_USER->value;
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): void
+    {
+        $this->roles = $roles;
+    }
+
+    public function addRole(string $role): void
+    {
+        $this->roles[] = $role;
+    }
+
     public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
@@ -205,11 +228,6 @@ class User extends AbstractEntity implements UserInterface, PasswordAuthenticate
     public function setDeletedAt(?DateTime $deletedAt): void
     {
         $this->deletedAt = $deletedAt;
-    }
-
-    public function getRoles(): array
-    {
-        return [];
     }
 
     public function eraseCredentials(): void

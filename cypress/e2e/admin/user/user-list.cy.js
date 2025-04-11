@@ -1,7 +1,7 @@
 describe('Painel de Controle - Página de listar Usuários', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
-        cy.login('talysonsoares@example.com', 'Aurora@2024');
+        cy.login('henriquelopeslima@example.com', 'Aurora@2024');
         cy.visit('/painel/admin/usuarios');
     });
 

@@ -14,6 +14,7 @@ use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use TypeError;
@@ -31,6 +32,7 @@ class UserAdminController extends AbstractAdminController
     ) {
     }
 
+    #[IsGranted('list', statusCode: 404)]
     public function list(): Response
     {
         $users = $this->service->findAll();
