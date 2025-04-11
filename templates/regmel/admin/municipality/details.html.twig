@@ -1,6 +1,6 @@
 {% extends "_layouts/blank.html.twig" %}
 
-{% block title %}{{ 'control_panel'|trans }} - {{ 'organizations'|trans }} - {{ 'details'|trans }}{% endblock %}
+{% block title %}{{ 'control_panel'|trans }} - {{ 'organizations'|trans }} - {{ 'municipality'|trans }}{% endblock %}
 
 {% block content %}
     {% include '_components/modal-confirm-remove.html.twig' %}
@@ -13,7 +13,7 @@
                 <div class="col-12">
                     <div class="card card-body shadow">
                         <div class="d-flex justify-content-between">
-                            <h2>{{ 'municipality'|trans }} - {{ details.name }}</h2>
+                            <h2>{{ 'municipality'|trans }} - {{ municipality.name }}</h2>
                         </div>
 
                         <hr>
@@ -146,25 +146,69 @@
                             <div class="tab-pane fade" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab" tabindex="0">
                                 <div class="bd-callout bd-callout-secondary">
                                     <p>
-                                        <strong>CNPJ: </strong>{{ details.extraFields.cnpj ?? '' }}
+                                        <strong>CNPJ: </strong>{{ municipality.extraFields.cnpj ?? '' }}
                                     </p>
                                     <p>
-                                        <strong>Email: </strong>{{ details.extraFields.email ?? '' }}
+                                        <strong>Email: </strong>{{ municipality.extraFields.email ?? '' }}
                                     </p>
                                     <p>
-                                        <strong>Site: </strong>{{ details.extraFields.site ?? '' }}
+                                        <strong>Site: </strong>{{ municipality.extraFields.site ?? '' }}
                                     </p>
                                     <p>
-                                        <strong>Telefone: </strong>{{ details.extraFields.telefone ?? '' }}
+                                        <strong>Telefone: </strong>{{ municipality.extraFields.telefone ?? '' }}
                                     </p>
                                 </div>
                             </div>
                             <div class="tab-pane fade pt-3" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab" tabindex="0">Conteúdo 1</div>
-                            <div class="tab-pane fade pt-3" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab" tabindex="0">Conteúdo 2</div>
+                            <div class="tab-pane fade pt-3" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab" tabindex="0">
+                                <div class="modal fade" id="modalInvite" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Convidar agente</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{ path('admin_regmel_municipality_invite_agent', {id: municipality.id}) }}" method="post">
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="name" class="mb-1">{{ 'name'|trans }}</label>
+                                                        <input type="text" class="form-control" id="name" name="name" data-cy="name" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="email" class="mb-1">{{ 'email'|trans }}</label>
+                                                        <input type="text" class="form-control" id="email" name="email" data-cy="email" required>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                    <button type="submit" class="btn btn-primary">Convidar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a href="" data-bs-toggle="modal" data-bs-target="#modalInvite" class="btn btn-outline-success btn-sm">Convidar</a>
+
+                                <table class="table table-hover table-striped mt-3">
+                                    <thead class="table-dark">
+                                    <tr>
+                                        <th>Nome</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for agent in municipality.agents %}
+                                        <tr>
+                                            <td> {{ agent.name }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="tab-pane fade pt-3" id="pills-files" role="tabpanel" aria-labelledby="pills-files-tab" tabindex="0">
 
-                                <a href="{{ path('regmel_municipality_form_file', {id: details.id}) }}" target="_blank">
-                                    {{ details.extraFields.form }}
+                                <a href="{{ path('regmel_municipality_form_file', {id: municipality.id}) }}" target="_blank">
+                                    {{ municipality.extraFields.form }}
                                 </a>
 
                             </div>
