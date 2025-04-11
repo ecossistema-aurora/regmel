@@ -34,6 +34,51 @@
                     {% endfor %}
                 </ul>
 
+                {% if app.user %}
+                <div class="d-flex align-items-center gap-3">
+                    <div class="dropdown dropdown-notification">
+                        <button class="btn btn-light d-flex align-items-center position-relative gap-2" id="notificationDropdown">
+                            <span class="fw-semibold text-dark small">{{ 'notifications' | trans }}</span>
+                            <span class="d-flex align-items-center position-relative">
+                                    <span class="material-icons">notifications</span>
+                                    <span class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle p-1" style="font-size: 0.7rem;">2</span>
+                                </span>
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end shadow mt-2" aria-labelledby="notificationDropdown" style="min-width: 400px;">
+                            <li>
+                                <div class="dropdown-header">
+                                    <strong>{{ 'your_notifications' | trans }}</strong>
+                                </div>
+                                <div class="px-3 py-2">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>Você <strong>aprovou</strong> o cadastro da empresa <strong>Empresa Teste AI</strong>.</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1 mb-1" style="line-height: 1;">
+                                        <span class="material-icons" style="font-size: 1rem;">help_outline</span>
+                                        <a href="#" class="text-decoration-underline small">{{ 'what_mean' | trans }}</a>
+                                    </div>
+                                    <small class="text-muted">Aprovado em 20/08/2024 às 09h00</small>
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <div class="px-3 py-2">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>O município <strong>Recife</strong> atualizou seus dados cadastrais.</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1 mb-1" style="line-height: 1;">
+                                        <span class="material-icons" style="font-size: 1rem;">help_outline</span>
+                                        <a href="#" class="text-decoration-underline small">{{ 'view_changes' | trans }}</a>
+                                    </div>
+                                    <small class="text-muted">Atualizado em 17/07/2024 às 15h12</small>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+
                 {% if app.user.name is defined %}
                     <div class="dropdown notifications-login">
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton">
