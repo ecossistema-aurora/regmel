@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="container my-5">
-        <div class="row mb-3">
+        <div class="row mb-1">
             <a href="{{ path('web_home_homepage') }}" class="nav-link text-primary">
                 <i class="material-icons align-middle">arrow_back</i>
                 {{ 'back'|trans }}
@@ -12,7 +12,7 @@
         </div>
 
         <div class="row justify-content-md-center">
-            <div class="col-md-10 col-lg-8 col-xl-6">
+            <div class="col-md-12 col-lg-10 col-xl-8">
                 <div class="card">
                     <div class="card-header">
                         <h1 class="fw-bold fs-3">{{ 'organization_register'|trans }}</h1>
@@ -21,6 +21,16 @@
                     <div class="card-body">
                         <form method="POST" action="" enctype="multipart/form-data">
                             <input type="hidden" name="token" value="{{ csrf_token(form_id) }}">
+
+                            <label for="opportunity">{{ 'view.authentication.register.opportunity_type'|trans }}</label>
+                            <select name="opportunity" id="opportunity" required class="form-select mt-1 mb-3">
+                                {% for opportunity in opportunities %}
+                                    <option value="{{ opportunity.id }}">{{ opportunity.name }}</option>
+                                {% else %}
+                                    <option selected disabled value="">{{ 'view.authentication.register.no_opportunities'|trans }}</option>
+                                {% endfor %}
+                            </select>
+                            <hr>
 
                             {% include "regmel/register/_partials/user-data.html.twig" %}
 
@@ -31,7 +41,7 @@
                             <div class="alert alert-danger d-none" id="error-message"></div>
 
                             <div class="btn-form-group">
-                                <button class="btn btn-primary" type="submit">
+                                <button class="btn btn-primary w-100 btn-lg" type="submit">
                                     {{ 'save' | trans }}
                                 </button>
                             </div>

@@ -50,7 +50,7 @@ class CreateDemoForRegmelCommand extends Command
         $opportunityForCompany->setName('Propostas das Empresas/OSCs - 2025');
         $opportunityForCompany->setCreatedBy($agent);
         $opportunityForCompany->setImage('/img/regmel/icon.svg');
-        $opportunityForMunicipality->setExtraFields([
+        $opportunityForCompany->setExtraFields([
             'type' => OrganizationTypeEnum::EMPRESA->value,
         ]);
 

@@ -210,6 +210,8 @@ export declare const INPUT_SEARCH: Message<{ 'messages': { parameters: NoParamet
 export declare const INSCRIPTIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const INTRODUCTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const INACTIVE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const INVITE_SENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const INVITE_TO_MUNICIPALITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const IS_ITINERANT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const IS_ACCESSIBLE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const INVALID_CREDENTIALS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
@@ -374,6 +376,7 @@ export declare const REPORT: Message<{ 'messages': { parameters: NoParametersTyp
 export declare const RESPONSIBLE_AGENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const RESET: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const RESET_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const SELECTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const TAGS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TERM: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TERMS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -408,6 +411,7 @@ export declare const VIEW_ALL: Message<{ 'messages': { parameters: NoParametersT
 export declare const VIEW_FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIDEO: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VISUALIZATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const VIEW_CHANGES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const SAVE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const SAVE_AND_PUBLISH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const SAVE_DRAFT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -463,7 +467,9 @@ export declare const WEEK_DAYS: Message<{ 'messages': { parameters: NoParameters
 export declare const WHERE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const WHITE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const WORK_PLAN: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const WHAT_MEAN: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const YES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const YOUR_NOTIFICATIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const JANUARY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FEBRUARY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MARCH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -584,6 +590,8 @@ export declare const VIEW_AUTHENTICATION_FORGOT_PARAGRAPH: Message<{ 'messages':
 export declare const VIEW_AUTHENTICATION_FORGOT_SUCCESS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_AUTHENTICATION_FORGOT_LINK_SENT_TO_EMAIL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_AUTHENTICATION_PASSWORD_RESET_DEFINE_YOUR_NEW_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const VIEW_AUTHENTICATION_REGISTER_OPPORTUNITY_TYPE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const VIEW_AUTHENTICATION_REGISTER_NO_OPPORTUNITIES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_AUTHENTICATION_REGISTER_CREATE_ACCOUNT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_REGISTER_PARAGRAPH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_REGISTER_PASSWORD_INFO1: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -734,7 +742,8 @@ export declare const VIEW_ORGANIZATION_EMAIL: Message<{ 'messages': { parameters
 export declare const VIEW_ORGANIZATION_ACCEPT_TERMS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_ORGANIZATION_ACCEPT_PRIVACY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_ORGANIZATION_ACCEPT_IMAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
-export declare const VIEW_ORGANIZATION_FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const VIEW_ORGANIZATION_FILE_PART1: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const VIEW_ORGANIZATION_FILE_PART2: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_ORGANIZATION_DOWNLOAD_FORM_MODEL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_ORGANIZATION_PDF_ADVICE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_ORGANIZATION_SITE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;

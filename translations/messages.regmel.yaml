@@ -393,6 +393,8 @@ responsible_agent: Agente Responsável
 reset: Redefinir
 reset_password: Redefinir Senha
 
+selection: Seleção
+
 tags: Tags
 term: Termo
 terms: Termos
@@ -654,6 +656,8 @@ view:
       define_your_new_password: Defina sua nova senha.
 
     register:
+      opportunity_type: Tipo de Credenciamento
+      no_opportunities: Não existe nenhum credenciamento disponivel no momento
       create_account: Criar conta
       paragraph: Siga os passos para completar o seu cadastro na plataforma
       password_info_1: A senha deve ter
@@ -856,8 +860,9 @@ view:
     accept_terms: Aceito os Termos e condições de uso
     accept_privacy: Aceito a Política de Privacidade
     accept_image: Autorizo o Uso de Imagem
-    file: Formulário de Adesão
-    download_form_model: Baixe o modelo de Formulário de Adesão
+    file_part1: Fazer upload do
+    file_part2: assinado conforme previsto no edital
+    download_form_model: Termo de Adesão ao Programa
     pdf_advice: O formato do arquivo deve ser PDF
     site: Site
 
