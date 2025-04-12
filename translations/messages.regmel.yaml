@@ -254,9 +254,11 @@ maroons: Quilombola
 maximum_capacity: Capacidade máxima de pessoas
 max-capacity: Capacidade máxima do espaço
 max_capacity: Capacidade máxima
+mark_as_read: Marcar como lida
 mei: MEI (CNPJ do MEI)
 menu: Menu do Painel de Controle
 medium: Médio
+message: Mensagem
 months: meses
 most_recent: Mais Recente
 municipality: Município
@@ -392,6 +394,7 @@ report: Denúncia
 responsible_agent: Agente Responsável
 reset: Redefinir
 reset_password: Redefinir Senha
+read_notifications: Notificações Lidas
 
 selection: Seleção
 
@@ -426,7 +429,7 @@ user_password: Senha do Usuário
 user_position: Cargo do Usuário
 user_information: Informações do Usuário
 user_edit_data: Edição de dados do usuário
-
+unread_notifications: Notificações Não Lidas
 
 view_all: Ver todas
 view_file: ver arquivo
