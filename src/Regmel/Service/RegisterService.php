@@ -6,15 +6,25 @@ namespace App\Regmel\Service;
 
 use App\DTO\OrganizationDto;
 use App\DTO\UserDto;
+use App\Entity\InscriptionOpportunity;
+use App\Entity\Opportunity;
 use App\Entity\Organization;
+use App\Entity\User;
+use App\Enum\InscriptionOpportunityStatusEnum;
+use App\Enum\OrganizationTypeEnum;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Repository\Interface\OrganizationRepositoryInterface;
 use App\Service\Interface\FileServiceInterface;
+use App\Service\OpportunityService;
 use App\Service\OrganizationService;
 use App\Service\UserService;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Uid\Uuid;
 
 class RegisterService implements RegisterServiceInterface
 {
@@ -23,7 +33,10 @@ class RegisterService implements RegisterServiceInterface
         private readonly UserService $userService,
         private readonly SerializerInterface $serializer,
         private readonly OrganizationRepositoryInterface $organizationRepository,
+        private readonly OpportunityService $opportunityService,
         private readonly FileServiceInterface $fileService,
+        private readonly EntityManagerInterface $entityManager,
+        protected TokenStorageInterface $tokenStorage,
     ) {
     }
 
@@ -36,16 +49,23 @@ class RegisterService implements RegisterServiceInterface
         $organization = $this->organizationService->validateInput($data['organization'], OrganizationDto::class, OrganizationDto::CREATE);
         $user = $this->userService->validateInput($data['user'], UserDto::class, UserDto::CREATE);
 
+        /** @var Organization $organizationObj */
         $organizationObj = $this->serializer->denormalize($organization, Organization::class);
 
         try {
             $userObj = $this->userService->create($user);
+            $this->manualLogin($userObj);
 
             $agent = $userObj->getAgents()->first();
 
             $organizationObj->setOwner($agent);
             $organizationObj->setCreatedBy($agent);
+            $organizationObj->addAgent($agent);
+
+            $this->createInscriptionForOrganization($data['opportunity'], $organizationObj);
+
             $this->organizationRepository->save($organizationObj);
+            $this->manualLogout();
         } catch (Exception $exception) {
             throw $exception;
         }
@@ -53,10 +73,46 @@ class RegisterService implements RegisterServiceInterface
         return $organizationObj;
     }
 
+    public function findOpportunitiesBy(OrganizationTypeEnum $enum): array
+    {
+        $opportunities = $this->opportunityService->findBy();
+
+        return array_filter(
+            $opportunities,
+            fn (Opportunity $opportunity) => ($opportunity->getExtraFields()['type'] ?? null) === $enum->value
+        );
+    }
+
+    private function createInscriptionForOrganization(string $opportunityId, Organization $organization): void
+    {
+        $opportunity = $this->opportunityService->get(
+            Uuid::fromString($opportunityId)
+        );
+
+        $inscription = new InscriptionOpportunity();
+        $inscription->setOpportunity($opportunity);
+        $inscription->setOrganization($organization);
+        $inscription->setId(Uuid::v4());
+        $inscription->setStatus(InscriptionOpportunityStatusEnum::ACTIVE->value);
+
+        $this->entityManager->persist($inscription);
+    }
+
     private function uploadFile(UploadedFile $uploadedFile): string
     {
         $pdf = $this->fileService->uploadPDF($uploadedFile, extraPath: '/regmel/municipality/documents');
 
         return $pdf->getFilename();
+    }
+
+    private function manualLogin(User $user): void
+    {
+        $token = new UsernamePasswordToken($user, 'web');
+        $this->tokenStorage->setToken($token);
+    }
+
+    private function manualLogout(): void
+    {
+        $this->tokenStorage->setToken(null);
     }
 }

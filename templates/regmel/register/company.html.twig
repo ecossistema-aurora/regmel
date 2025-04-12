@@ -15,12 +15,22 @@
             <div class="col-md-10 col-lg-8 col-xl-6">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="fw-bold fs-3">{{ 'company_register'|trans }}</h1>
+                        <h2 class="fw-bold fs-3">{{ 'company_register'|trans }}</h2>
                     </div>
 
                     <div class="card-body">
                         <form method="POST" action="">
                             <input type="hidden" name="token" value="{{ csrf_token(form_id) }}">
+
+                            <label for="opportunity">{{ 'view.authentication.register.opportunity_type'|trans }}</label>
+                            <select name="opportunity" id="opportunity" required class="form-select mt-1 mb-3">
+                                {% for opportunity in opportunities %}
+                                    <option value="{{ opportunity.id }}">{{ opportunity.name }}</option>
+                                {% else %}
+                                    <option selected disabled value="">{{ 'view.authentication.register.no_opportunities'|trans }}</option>
+                                {% endfor %}
+                            </select>
+                            <hr>
 
                             {% include "regmel/register/_partials/company-data.html.twig" %}
 

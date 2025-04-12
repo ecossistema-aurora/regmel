@@ -43,6 +43,7 @@ class RegisterController extends AbstractWebController
         if (Request::METHOD_POST !== $request->getMethod()) {
             return $this->render(self::VIEW_CITY, [
                 'form_id' => self::FORM_CITY,
+                'opportunities' => $this->registerService->findOpportunitiesBy(OrganizationTypeEnum::MUNICIPIO),
                 'states' => $states,
             ]);
         }
@@ -89,6 +90,7 @@ class RegisterController extends AbstractWebController
     {
         if ('POST' !== $request->getMethod()) {
             return $this->render(self::VIEW_COMPANY, [
+                'opportunities' => $this->registerService->findOpportunitiesBy(OrganizationTypeEnum::EMPRESA),
                 'form_id' => self::FORM_COMPANY,
             ]);
         }
@@ -97,36 +99,10 @@ class RegisterController extends AbstractWebController
 
         $errors = [];
 
-        $framework = CompanyFrameworkEnum::fromName($request->get('framework'));
-
         try {
-            $this->registerService->saveOrganization([
-                'organization' => [
-                    'id' => Uuid::v4(),
-                    'name' => $request->get('name'),
-                    'type' => OrganizationTypeEnum::EMPRESA->value,
-                    'extraFields' => [
-                        'tipo' => OrganizationTypeEnum::fromName($request->get('type'))->value,
-                        'email' => $request->get('email'),
-                        'telefone' => $request->get('phone'),
-                        'cnpj' => $request->get('cnpj'),
-                        'framework' => $framework?->value,
-                        'site' => $request->get('site'),
-                    ],
-                ],
-                'user' => [
-                    'id' => Uuid::v4(),
-                    'firstname' => $request->get('firstname'),
-                    'lastname' => $request->get('lastname'),
-                    'email' => $request->get('userEmail'),
-                    'password' => $request->get('password'),
-                    'extraFields' => [
-                        'telefone' => $request->get('userPhone'),
-                        'cpf' => $request->get('cpf'),
-                        'cargo' => $request->get('position'),
-                    ],
-                ],
-            ]);
+            $this->registerService->saveOrganization(
+                $this->createOrganizationDataForCompany($request),
+            );
         } catch (ValidatorException $exception) {
             foreach ($exception->getConstraintViolationList() as $violation) {
                 $errors[] = [
@@ -149,7 +125,41 @@ class RegisterController extends AbstractWebController
 
         $this->addFlash('success', $this->translator->trans('view.organization.message.created'));
 
-        return $this->redirectToRoute('web_organization_list');
+        return $this->redirectToRoute('web_home_homepage');
+    }
+
+    private function createOrganizationDataForCompany(Request $request): array
+    {
+        $framework = CompanyFrameworkEnum::fromName($request->get('framework'));
+
+        return [
+            'organization' => [
+                'id' => Uuid::v4(),
+                'name' => $request->get('name'),
+                'type' => OrganizationTypeEnum::EMPRESA->value,
+                'extraFields' => [
+                    'tipo' => OrganizationTypeEnum::fromName($request->get('type'))->value,
+                    'email' => $request->get('email'),
+                    'telefone' => $request->get('phone'),
+                    'cnpj' => $request->get('cnpj'),
+                    'framework' => $framework?->value,
+                    'site' => $request->get('site'),
+                ],
+            ],
+            'user' => [
+                'id' => Uuid::v4(),
+                'firstname' => $request->get('firstname'),
+                'lastname' => $request->get('lastname'),
+                'email' => $request->get('userEmail'),
+                'password' => $request->get('password'),
+                'extraFields' => [
+                    'telefone' => $request->get('userPhone'),
+                    'cpf' => $request->get('cpf'),
+                    'cargo' => $request->get('position'),
+                ],
+            ],
+            'opportunity' => $request->get('opportunity'),
+        ];
     }
 
     private function createOrganizationDataForMunicipality(Request $request): array
@@ -165,6 +175,7 @@ class RegisterController extends AbstractWebController
                     'cityId' => $city?->getId(),
                     'email' => $request->get('email'),
                     'telefone' => $request->get('phone'),
+                    'site' => $request->get('site'),
                 ],
             ],
             'user' => [
@@ -178,6 +189,7 @@ class RegisterController extends AbstractWebController
                     'cargo' => $request->get('position'),
                 ],
             ],
+            'opportunity' => $request->get('opportunity'),
         ];
     }
 }
