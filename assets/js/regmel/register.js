@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const firstName = inputs.firstName.value.trim();
         const lastName = inputs.lastName.value.trim();
         const cpf = inputs.cpf.value.trim();
-        const phone = inputs.phone.value.trim();
+        const phone = inputs.phone?.value.trim() || '';
         const email = inputs.email.value.trim();
         const password = inputs.password.value.trim();
         const confirmPassword = inputs.confirmPassword.value.trim();
@@ -50,7 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
         let errorMessage = '';
 
         Object.values(inputs).forEach(input => {
-            input.classList.remove('border-danger');
+            if (input) {
+                input.classList.remove('border-danger');
+            }
         });
 
         const validations = [
@@ -69,11 +71,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 input: inputs.cpf,
                 message: trans(VIEW_AUTHENTICATION_ERROR_CPF_INVALID)
             },
-            {
+            ...(inputs.phone ? [{
                 valid: () => validatePhone(phone),
                 input: inputs.phone,
                 message: trans(VIEW_AUTHENTICATION_ERROR_PHONE_INVALID)
-            },
+            }] : []),
             {
                 valid: () => validateEmail(email),
                 input: inputs.email,
@@ -115,7 +117,9 @@ document.addEventListener('DOMContentLoaded', function () {
         for (const rule of validations) {
             if (!rule.valid()) {
                 errorMessage = rule.message;
-                rule.input.classList.add('border-danger');
+                if (rule.input) {
+                    rule.input.classList.add('border-danger');
+                }
                 break;
             }
         }
@@ -131,7 +135,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     Object.values(inputs).forEach(input => {
-        input.addEventListener('input', validateFields);
+        if (input) {
+            input.addEventListener('input', validateFields);
+        }
     });
 
     inputs.password.addEventListener('input', function() {

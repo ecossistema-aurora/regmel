@@ -73,6 +73,7 @@ readonly class AgentService extends AbstractEntityService implements AgentServic
     {
         $agent = $this->organizeDefaultAgentData($user);
         $agent['extraFields'] = $extraFields;
+        $agent['main'] = true;
         $agent = $this->validateInput($agent, AgentDto::class, AgentDto::CREATE);
 
         $agentObj = $this->serializer->denormalize($agent, Agent::class);
@@ -115,6 +116,11 @@ readonly class AgentService extends AbstractEntityService implements AgentServic
         }
 
         return $agent;
+    }
+
+    public function getMainAgentByEmail(string $email): ?Agent
+    {
+        return $this->repository->getMainAgentByEmail($email);
     }
 
     public function list(int $limit = 50, array $params = [], string $order = 'DESC'): array

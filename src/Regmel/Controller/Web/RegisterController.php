@@ -21,11 +21,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegisterController extends AbstractWebController
 {
-    public const VIEW_CITY = 'regmel/register/city.html.twig';
-    public const VIEW_COMPANY = 'regmel/register/company.html.twig';
+    public const string VIEW_CITY = 'regmel/register/city.html.twig';
+    public const string VIEW_COMPANY = 'regmel/register/company.html.twig';
 
-    public const FORM_CITY = 'register-city';
-    public const FORM_COMPANY = 'register-company';
+    public const string FORM_CITY = 'register-city';
+    public const string FORM_COMPANY = 'register-company';
 
     public function __construct(
         private readonly RegisterServiceInterface $registerService,

@@ -18,6 +18,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Exception\ValidatorException;
@@ -38,6 +39,7 @@ readonly class UserService extends AbstractEntityService implements UserServiceI
         private EntityManagerInterface $entityManager,
         private AccountEventService $accountEventService,
         private PasswordHasherFactoryInterface $passwordHasherFactory,
+        private UserPasswordHasherInterface $userPasswordHasher,
     ) {
         parent::__construct(
             $this->security,
@@ -86,8 +88,13 @@ readonly class UserService extends AbstractEntityService implements UserServiceI
 
     public function get(Uuid $id): User
     {
+        return $this->findOneBy(['id' => $id]);
+    }
+
+    public function findOneBy(array $params): User
+    {
         $user = $this->repository->findOneBy([
-            ...['id' => $id],
+            ...$params,
             ...self::DEFAULT_FILTERS,
         ]);
 
@@ -143,5 +150,10 @@ readonly class UserService extends AbstractEntityService implements UserServiceI
         $this->repository->save($user);
 
         return $user;
+    }
+
+    public function authenticate(User $user, $password): bool
+    {
+        return $this->userPasswordHasher->isPasswordValid($user, $password);
     }
 }
