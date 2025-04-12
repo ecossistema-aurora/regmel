@@ -80,7 +80,7 @@ class RegisterController extends AbstractWebController
             ]);
         }
 
-        $this->addFlash('success', $this->translator->trans('view.organization.message.created'));
+        $this->addFlash('success', $this->translator->trans('create_municipality'));
 
         return $this->redirectToRoute('web_home_homepage');
     }
@@ -123,7 +123,7 @@ class RegisterController extends AbstractWebController
             ]);
         }
 
-        $this->addFlash('success', $this->translator->trans('view.organization.message.created'));
+        $this->addFlash('success', $this->translator->trans('create_company'));
 
         return $this->redirectToRoute('web_home_homepage');
     }
