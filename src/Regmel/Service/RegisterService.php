@@ -40,6 +40,19 @@ class RegisterService implements RegisterServiceInterface
     ) {
     }
 
+    public function saveUser(array $data): User
+    {
+        try {
+            $user = $this->userService->validateInput($data, UserDto::class, UserDto::CREATE);
+
+            $userObj = $this->userService->create($user);
+        } catch (Exception $exception) {
+            throw $exception;
+        }
+
+        return $userObj;
+    }
+
     public function saveOrganization(array $data, ?UploadedFile $uploadedFile = null): Organization
     {
         if (null !== $uploadedFile) {

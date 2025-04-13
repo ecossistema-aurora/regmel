@@ -17,6 +17,8 @@ interface AgentServiceInterface
 
     public function get(Uuid $id): Agent;
 
+    public function getMainAgentByEmail(string $email): ?Agent;
+
     public function findOneBy(array $params): ?Agent;
 
     public function findBy(array $params = []): array;
