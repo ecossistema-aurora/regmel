@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Regmel\Controller\Web\Admin;
 
 use App\Controller\Web\Admin\AbstractAdminController;
+use App\DocumentService\OrganizationTimelineDocumentService;
 use App\Enum\OrganizationTypeEnum;
 use App\Service\Interface\OrganizationServiceInterface;
 use Exception;
@@ -21,6 +22,7 @@ class CompanyAdminController extends AbstractAdminController
 {
     public function __construct(
         private readonly OrganizationServiceInterface $organizationService,
+        private readonly OrganizationTimelineDocumentService $documentService,
         private readonly JWTTokenManagerInterface $jwtManager,
         private readonly Security $security,
         private readonly TranslatorInterface $translator,
@@ -53,8 +55,11 @@ class CompanyAdminController extends AbstractAdminController
             'type' => OrganizationTypeEnum::EMPRESA->value,
         ]);
 
+        $timeline = $this->documentService->getEventsByEntityId($id);
+
         return $this->render('regmel/admin/company/details.html.twig', [
             'details' => $details,
+            'timeline' => $timeline,
         ], parentPath: '');
     }
 

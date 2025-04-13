@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Regmel\Controller\Web\Admin;
 
 use App\Controller\Web\Admin\AbstractAdminController;
+use App\DocumentService\OrganizationTimelineDocumentService;
 use App\Entity\Agent;
 use App\Enum\OrganizationTypeEnum;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
@@ -39,6 +40,7 @@ class MunicipalityAdminController extends AbstractAdminController
 
     public function __construct(
         private readonly OrganizationServiceInterface $organizationService,
+        private readonly OrganizationTimelineDocumentService $documentService,
         private readonly JWTTokenManagerInterface $jwtManager,
         private readonly Security $security,
         private readonly TranslatorInterface $translator,
@@ -93,8 +95,11 @@ class MunicipalityAdminController extends AbstractAdminController
             'type' => OrganizationTypeEnum::MUNICIPIO->value,
         ]);
 
+        $timeline = $this->documentService->getEventsByEntityId($id);
+
         return $this->render('regmel/admin/municipality/details.html.twig', [
             'municipality' => $municipality,
+            'timeline' => $timeline,
         ], parentPath: '');
     }
 

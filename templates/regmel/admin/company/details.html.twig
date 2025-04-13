@@ -35,9 +35,9 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <div class="d-flex align-items-center">
-                            <a class="centered-icon-text nav-link" id="pills-map-tab" data-bs-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="false">
+                            <a class="centered-icon-text nav-link" id="pills-timeline-tab" data-bs-toggle="pill" href="#pills-timeline" role="tab" aria-controls="pills-map" aria-selected="false">
                                 <i class="material-icons">map</i>
-                                <span class="ms-2 font-title">Opção 02</span>
+                                <span class="ms-2 font-title">Linha do tempo</span>
                             </a>
                         </div>
                     </li>
@@ -60,7 +60,9 @@
                         </div>
                     </div>
                     <div class="tab-pane fade pt-3" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab" tabindex="0">Conteúdo 1</div>
-                    <div class="tab-pane fade pt-3" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab" tabindex="0">Conteúdo 2</div>
+                    <div class="tab-pane fade pt-3" id="pills-timeline" role="tabpanel" aria-labelledby="pills-timeline-tab" tabindex="0">
+                        {% include "regmel/admin/company/timeline.html.twig" %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -69,4 +71,5 @@
 
 {% block extra_javascripts %}
     {{ parent() }}
+    <script type="module" src="{{ asset('js/modal-timeline.js') }}"></script>
 {% endblock %}

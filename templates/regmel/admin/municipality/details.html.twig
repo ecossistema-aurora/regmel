@@ -206,13 +206,14 @@
                                 </table>
                             </div>
                             <div class="tab-pane fade pt-3" id="pills-files" role="tabpanel" aria-labelledby="pills-files-tab" tabindex="0">
-
                                 <a href="{{ path('regmel_municipality_form_file', {id: municipality.id}) }}" target="_blank">
                                     {{ municipality.extraFields.form }}
                                 </a>
 
                             </div>
-                            <div class="tab-pane fade pt-3" id="pills-timeline" role="tabpanel" aria-labelledby="pills-timeline-tab" tabindex="0">Conteúdo 2</div>
+                            <div class="tab-pane fade pt-3" id="pills-timeline" role="tabpanel" aria-labelledby="pills-timeline-tab" tabindex="0">
+                                {% include "regmel/admin/municipality/timeline.html.twig" %}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -223,4 +224,5 @@
 
 {% block extra_javascripts %}
     {{ parent() }}
+    <script type="module" src="{{ asset('js/modal-timeline.js') }}"></script>
 {% endblock %}
