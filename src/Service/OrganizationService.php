@@ -165,4 +165,9 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
 
         return $organization;
     }
+
+    public function getMunicipalitiesByAgents(iterable $agents): array
+    {
+        return $this->repository->findMunicipalitiesByAgents($agents);
+    }
 }

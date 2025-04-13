@@ -265,6 +265,7 @@ export declare const MY_PROFILE: Message<{ 'messages': { parameters: NoParameter
 export declare const MY_SPACES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MY_SUBSCRIPTIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MY_REVIEWS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const MY_MUNICIPALITIES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const MODIFIED_BY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const NAME: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const NAME_SPACE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -413,6 +414,7 @@ export declare const USER_POSITION: Message<{ 'messages': { parameters: NoParame
 export declare const USER_INFORMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const USER_EDIT_DATA: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const UNREAD_NOTIFICATIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const USER_ASSOCIATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_ALL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIDEO: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
