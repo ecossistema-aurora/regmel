@@ -20,5 +20,7 @@ interface InscriptionOpportunityRepositoryInterface
 
     public function findUserInscriptionsWithDetails(Uuid $agentId): iterable;
 
+    public function findOrganizationInscriptionsWithDetails(Uuid $organizationId): iterable;
+
     public function findInscriptionWithDetails(Uuid $identifier, array $userAgents): ?array;
 }
