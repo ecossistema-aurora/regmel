@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\DataFixtures\Entity;
 
 use App\Entity\User;
+use App\Enum\UserRolesEnum;
 use App\Enum\UserStatusEnum;
 use App\Service\Interface\FileServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,6 +40,7 @@ final class UserFixtures extends AbstractFixture
             'email' => 'alessandrofeitoza@example.com',
             'image' => null,
             'status' => UserStatusEnum::ACTIVE->value,
+            'role' => [UserRolesEnum::ROLE_ADMIN->value],
             'createdAt' => '2024-07-10T11:30:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -51,6 +53,7 @@ final class UserFixtures extends AbstractFixture
             'email' => 'henriquelopeslima@example.com',
             'image' => null,
             'status' => UserStatusEnum::ACTIVE->value,
+            'role' => [UserRolesEnum::ROLE_ADMIN->value],
             'createdAt' => '2024-07-11T10:49:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -63,6 +66,7 @@ final class UserFixtures extends AbstractFixture
             'email' => 'kellymoura@example.com',
             'image' => null,
             'status' => UserStatusEnum::ACTIVE->value,
+            'role' => [UserRolesEnum::ROLE_USER->value],
             'createdAt' => '2024-07-16T17:22:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -75,6 +79,7 @@ final class UserFixtures extends AbstractFixture
             'email' => 'saracamilo@example.com',
             'image' => null,
             'status' => UserStatusEnum::ACTIVE->value,
+            'role' => [UserRolesEnum::ROLE_USER->value],
             'createdAt' => '2024-07-17T15:12:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -87,6 +92,7 @@ final class UserFixtures extends AbstractFixture
             'email' => 'talysonsoares@example.com',
             'image' => null,
             'status' => UserStatusEnum::ACTIVE->value,
+            'role' => [UserRolesEnum::ROLE_USER->value],
             'createdAt' => '2024-07-22T16:20:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -99,6 +105,7 @@ final class UserFixtures extends AbstractFixture
             'email' => 'raquelbenlabao@example.com',
             'image' => null,
             'status' => UserStatusEnum::ACTIVE->value,
+            'role' => [UserRolesEnum::ROLE_USER->value],
             'createdAt' => '2024-08-10T11:26:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -111,6 +118,7 @@ final class UserFixtures extends AbstractFixture
             'email' => 'lucaspamplona@example.com',
             'image' => null,
             'status' => UserStatusEnum::ACTIVE->value,
+            'role' => [UserRolesEnum::ROLE_USER->value],
             'createdAt' => '2024-08-11T15:54:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -123,6 +131,7 @@ final class UserFixtures extends AbstractFixture
             'email' => 'mariadebetania@example.com',
             'image' => null,
             'status' => UserStatusEnum::ACTIVE->value,
+            'role' => [UserRolesEnum::ROLE_USER->value],
             'createdAt' => '2024-08-12T14:24:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -135,6 +144,7 @@ final class UserFixtures extends AbstractFixture
             'email' => 'abnercarvalho@example.com',
             'image' => null,
             'status' => UserStatusEnum::AWAITING_CONFIRMATION->value,
+            'role' => [UserRolesEnum::ROLE_USER->value],
             'createdAt' => '2024-08-13T20:25:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -147,6 +157,7 @@ final class UserFixtures extends AbstractFixture
             'email' => 'paulodetarso@example.com',
             'image' => null,
             'status' => UserStatusEnum::ACTIVE->value,
+            'role' => [UserRolesEnum::ROLE_USER->value],
             'createdAt' => '2024-08-14T10:00:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,
@@ -162,6 +173,7 @@ final class UserFixtures extends AbstractFixture
             'email' => 'alessandrofeitoza@example.com',
             'image' => null,
             'status' => UserStatusEnum::ACTIVE->value,
+            'role' => [UserRolesEnum::ROLE_USER->value],
             'createdAt' => '2024-07-10T11:30:00+00:00',
             'updatedAt' => '2024-07-10T11:35:00+00:00',
             'deletedAt' => null,

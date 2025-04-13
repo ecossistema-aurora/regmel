@@ -6,6 +6,7 @@ namespace App\Regmel\Command;
 
 use App\Entity\Agent;
 use App\Entity\User;
+use App\Enum\UserRolesEnum;
 use App\Enum\UserStatusEnum;
 use App\Security\PasswordHasher;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,6 +35,7 @@ class CreateAdminUserCommand extends Command
         $user->setEmail('admin@regmel.com');
         $user->setPassword(PasswordHasher::hash('Aurora@2024'));
         $user->setStatus(UserStatusEnum::ACTIVE->value);
+        $user->addRole(UserRolesEnum::ROLE_ADMIN->value);
         $user->setId(Uuid::fromString('7dafebe2-a47c-4119-a81d-3257fc721026'));
 
         $agent = new Agent();

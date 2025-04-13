@@ -7,6 +7,7 @@ namespace App\Regmel\Controller\Web;
 use App\Controller\Web\AbstractWebController;
 use App\Enum\CompanyFrameworkEnum;
 use App\Enum\OrganizationTypeEnum;
+use App\Enum\UserRolesEnum;
 use App\Exception\ValidatorException;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Service\Interface\CityServiceInterface;
@@ -152,6 +153,7 @@ class RegisterController extends AbstractWebController
                 'lastname' => $request->get('lastname'),
                 'email' => $request->get('userEmail'),
                 'password' => $request->get('password'),
+                'role' => UserRolesEnum::ROLE_COMPANY->value,
                 'extraFields' => [
                     'telefone' => $request->get('userPhone'),
                     'cpf' => $request->get('cpf'),
@@ -184,6 +186,7 @@ class RegisterController extends AbstractWebController
                 'lastname' => $request->get('lastname'),
                 'email' => $request->get('userEmail'),
                 'password' => $request->get('password'),
+                'role' => UserRolesEnum::ROLE_MUNICIPALITY->value,
                 'extraFields' => [
                     'cpf' => $request->get('cpf'),
                     'cargo' => $request->get('position'),
