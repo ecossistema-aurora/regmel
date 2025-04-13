@@ -114,6 +114,24 @@ class InscriptionOpportunityRepository extends AbstractRepository implements Ins
             ->getResult();
     }
 
+    public function findOrganizationInscriptionsWithDetails(Uuid $organizationId): iterable
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        $subQuery = $this->getEntityManager()->createQueryBuilder()
+            ->select('MAX(p2.startDate)')
+            ->from(Phase::class, 'p2')
+            ->where('p2.opportunity = o.id');
+
+        return $qb->select('i', 'o', 'p')
+            ->join('i.opportunity', 'o')
+            ->join(Phase::class, 'p', 'WITH', 'p.opportunity = o.id AND p.startDate = ('.$subQuery->getDQL().')')
+            ->where('i.agent = :organizationId')
+            ->setParameter('organizationId', $organizationId)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findInscriptionWithDetails(Uuid $identifier, array $userAgents): ?array
     {
         $sql = <<<SQL

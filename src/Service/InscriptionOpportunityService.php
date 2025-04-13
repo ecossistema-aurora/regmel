@@ -87,7 +87,7 @@ readonly class InscriptionOpportunityService extends AbstractEntityService imple
         $userParams = $this->getUserParams()['agent'][0];
         $agent = $userParams->getId();
 
-        $inscriptionsWithDetails = $this->repository->findUserInscriptionsWithDetails($agent);
+        $inscriptionsWithDetails = $this->repository->findOrganizationInscriptionsWithDetails($agent);
 
         $phaseData = [];
 

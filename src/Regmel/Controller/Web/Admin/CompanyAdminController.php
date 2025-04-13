@@ -55,7 +55,7 @@ class CompanyAdminController extends AbstractAdminController
 
         return $this->render('regmel/admin/company/details.html.twig', [
             'details' => $details,
-        ]);
+        ], parentPath: '');
     }
 
     #[Route('/painel/admin/empresas/{id}/editar', name: 'admin_regmel_company_edit', methods: ['GET', 'POST'])]
