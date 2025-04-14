@@ -7,11 +7,13 @@ namespace App\Controller\Web\Admin;
 use App\Document\OrganizationTimeline;
 use App\DocumentService\OrganizationTimelineDocumentService;
 use App\Enum\OrganizationTypeEnum;
+use App\Enum\UserRolesEnum;
 use App\Exception\ValidatorException;
 use App\Service\Interface\OrganizationServiceInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -36,6 +38,7 @@ class OrganizationAdminController extends AbstractAdminController
         return $this->render('organization/list.html.twig', compact('organizations', 'organization', 'formId', 'token'));
     }
 
+    #[IsGranted(UserRolesEnum::ROLE_ADMIN->value, statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
     public function list(): Response
     {
         return $this->renderOrganizationList(
@@ -43,6 +46,7 @@ class OrganizationAdminController extends AbstractAdminController
         );
     }
 
+    #[IsGranted(UserRolesEnum::ROLE_ADMIN->value, statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
     public function add(Request $request, ValidatorInterface $validator): Response
     {
         if ('POST' !== $request->getMethod()) {
@@ -75,6 +79,7 @@ class OrganizationAdminController extends AbstractAdminController
         return $this->redirectToRoute('admin_organization_list');
     }
 
+    #[IsGranted(UserRolesEnum::ROLE_ADMIN->value, statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
     public function remove(?Uuid $id): Response
     {
         $this->service->remove($id);
@@ -84,6 +89,7 @@ class OrganizationAdminController extends AbstractAdminController
         return $this->redirectToRoute('admin_organization_list');
     }
 
+    #[IsGranted(UserRolesEnum::ROLE_ADMIN->value, statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
     public function timeline(Uuid $id): Response
     {
         $events = $this->documentService->getEventsByEntityId($id);

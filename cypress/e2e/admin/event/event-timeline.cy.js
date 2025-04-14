@@ -1,14 +1,14 @@
 describe('Painel de Controle - Página de timeline dos Eventos', () => {
     it('Realiza login, acessa timeline de um evento e valida os detalhes corretamente', () => {
         cy.viewport(1920, 1080);
-        cy.login('saracamilo@example.com', 'Aurora@2024');
+        cy.login('alessandrofeitoza@example.com', 'Aurora@2024');
         cy.visit('/painel/eventos');
 
         cy.get('table', { timeout: 10000 }).should('be.visible');
 
         cy.get('tbody tr').should('have.length.greaterThan', 0);
 
-        cy.contains('Timeline', { timeout: 10000 }).should('be.visible').click({ force: true });
+        cy.get('tbody > :nth-child(4)').contains('Timeline', { timeout: 10000 }).should('be.visible').click({ force: true });
 
         cy.get('h2', { timeout: 10000 }).should(($titles) => {
             const found = Cypress._.some($titles, (el) =>

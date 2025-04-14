@@ -157,7 +157,7 @@ final class UserFixtures extends AbstractFixture
             'email' => 'paulodetarso@example.com',
             'image' => null,
             'status' => UserStatusEnum::ACTIVE->value,
-            'roles' => [UserRolesEnum::ROLE_USER->value],
+            'roles' => [UserRolesEnum::ROLE_ADMIN->value],
             'createdAt' => '2024-08-14T10:00:00+00:00',
             'updatedAt' => null,
             'deletedAt' => null,

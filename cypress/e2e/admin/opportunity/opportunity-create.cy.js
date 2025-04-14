@@ -1,7 +1,7 @@
 describe('Painel de Controle - Página de criar Oportunidades', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
-        cy.login('talysonsoares@example.com', 'Aurora@2024');
+        cy.login('alessandrofeitoza@example.com', 'Aurora@2024');
         cy.visit('/painel/oportunidades/adicionar');
 
         Cypress.on('uncaught:exception', (err) => {
@@ -62,7 +62,7 @@ describe('Painel de Controle - Página de criar Oportunidades', () => {
         cy.get('button:contains(Criar e Publicar)').should('be.disabled');
 
         cy.contains('Agente Responsável').click();
-        cy.get("[name=createdBy]").select('Talyson');
+        cy.get("[name=createdBy]").select('Alessandro');
         cy.contains('Vincule a oportunidade a uma entidade').should('be.visible');
         cy.get('button:contains(Criar e Publicar)').should('be.disabled');
 
@@ -95,7 +95,7 @@ describe('Painel de Controle - Página de criar Oportunidades', () => {
         cy.get('#opportunityTitle')
             .type('Titulo da oportunidade para o teste');
         cy.get('#opportunityCreatedBy')
-            .select('Talyson');
+            .select('Alessandro');
         cy.get('label.radioEntity:contains(Evento)').click()
             .next().click();
         cy.contains('Nordeste Literário').should('be.visible')

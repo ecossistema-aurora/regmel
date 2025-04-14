@@ -1,7 +1,7 @@
 describe('Teste para Criar Tipo de espaço', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
-        cy.login('talysonsoares@example.com', 'Aurora@2024');
+        cy.login('alessandrofeitoza@example.com', 'Aurora@2024');
         cy.visit('/painel');
         cy.get(':nth-child(8) > .nav-link').contains('Tipo de Espaço').click()
     });

@@ -1,7 +1,7 @@
 describe('Criar um agente (preenchendo campos das imagens 2 e 3) e atualizar o dashboard', () => {
     beforeEach(() => {
         cy.visit('/login');
-        cy.login('saracamilo@example.com', 'Aurora@2024');
+        cy.login('alessandrofeitoza@example.com', 'Aurora@2024');
         cy.url().should('include', '/');
     });
 
