@@ -42,6 +42,9 @@ class InscriptionPhaseApiControllerTest extends AbstractApiTestCase
             'organization' => null,
             'phase' => ['id' => PhaseFixtures::PHASE_ID_10],
             'status' => 'active',
+            'extraFields' => [
+                'keyTest' => 'valueTest',
+            ],
             'createdAt' => $inscriptionPhase->getCreatedAt()->format(DateTimeInterface::ATOM),
             'updatedAt' => null,
             'deletedAt' => null,

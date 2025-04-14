@@ -41,6 +41,10 @@ class InscriptionPhase
     #[Groups(['inscription-phase.get'])]
     private ?int $status = null;
 
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    #[Groups(['inscription-phase.get'])]
+    private ?array $extraFields = null;
+
     #[ORM\Column]
     #[Groups('inscription-phase.get')]
     private DateTimeImmutable $createdAt;
@@ -138,6 +142,16 @@ class InscriptionPhase
         $this->organization = $organization;
     }
 
+    public function getExtraFields(): ?array
+    {
+        return $this->extraFields;
+    }
+
+    public function setExtraFields(?array $extraFields): void
+    {
+        $this->extraFields = $extraFields;
+    }
+
     public function toArray(): array
     {
         return [
@@ -146,6 +160,7 @@ class InscriptionPhase
             'organization' => $this->organization?->getId(),
             'phase' => $this->getPhase()->getId(),
             'status' => $this->status,
+            'extraFields' => $this->extraFields,
             'createdAt' => $this->createdAt->format(DateFormatHelper::DEFAULT_FORMAT),
             'updatedAt' => $this->updatedAt?->format(DateFormatHelper::DEFAULT_FORMAT),
             'deletedAt' => $this->deletedAt?->format(DateFormatHelper::DEFAULT_FORMAT),
