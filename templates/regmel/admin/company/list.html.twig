@@ -4,7 +4,6 @@
 
 {% block content %}
     {% include '_components/modal-confirm-remove.html.twig' %}
-
     {% include 'regmel/admin/company/_partials/modal-edit.html.twig' %}
 
     <section class="d-flex">
@@ -15,7 +14,9 @@
                 <div class="col-12">
                     <div class="card card-body shadow">
                         <div class="d-flex justify-content-between">
-                            <h2>{{ 'companies'|trans }}/OSC</h2>
+                            <h2>
+                                {{ 'companies'|trans }}/OSCs
+                            </h2>
                         </div>
 
                         <hr>
@@ -29,6 +30,7 @@
                                 <th>{{ 'cnpj'|trans }}</th>
                                 <th>{{ 'phone'|trans }}</th>
                                 <th>{{ 'site'|trans }}</th>
+                                <th>{{ 'created_by'|trans }}</th>
                                 <th>{{ 'created_at'|trans }}</th>
                                 <th>{{ 'actions'|trans }}</th>
                             </tr>
@@ -47,18 +49,28 @@
                                     <td>{{ company.description ?? '-' }}</td>
                                     <td>{{ company.extraFields.cnpj ?? '-' }}</td>
                                     <td>{{ company.extraFields.telefone ?? '-' }}</td>
-                                    <td><a href="{{ company.extraFields.site }}" target="_blank">{{ company.extraFields.site ?? '-' }}</a></td>
+                                    <td>
+                                        {% if company.extraFields.site %}
+                                            <a href="{{ company.extraFields.site }}" target="_blank">{{ company.extraFields.site }}</a>
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ company.createdBy.name ?? '-' }}</td>
                                     <td>{{ company.createdAt|date('d/m/Y H:i:s') }}</td>
                                     <td>
-                                        <button class="btn btn-outline-warning btn-sm edit-company" data-bs-toggle="modal" data-bs-target="#modalEditCompany" data-id="{{ company.id }}" data-token="{{ token }}">
+                                        <button class="btn btn-outline-warning btn-sm edit-company"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalEditCompany"
+                                                data-id="{{ company.id }}"
+                                                data-token="{{ token }}">
                                             {{ 'edit'|trans }}
                                         </button>
-
                                     </td>
                                 </tr>
                             {% else %}
                                 <tr>
-                                    <td colspan="7" class="text-center">{{ 'no_data_found'|trans }}</td>
+                                    <td colspan="9" class="text-center">{{ 'no_data_found'|trans }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
