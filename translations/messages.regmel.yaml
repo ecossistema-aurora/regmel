@@ -250,6 +250,7 @@ lgpd_modal: Política de Privacidade e Proteção de Dados (LGPD)
 
 map: Mapa
 management: Gerenciamento de Entidades
+manager_name: Administrador SNP
 mandatory_fields: Campos marcados com asterisco são de preenchimento obrigatório.
 masculine: Masculino
 maroons: Quilombola
@@ -397,6 +398,7 @@ responsible_agent: Agente Responsável
 reset: Redefinir
 reset_password: Redefinir Senha
 read_notifications: Notificações Lidas
+new_registration_notification: Uma nova organização foi credenciada
 
 selection: Seleção
 

@@ -16,6 +16,7 @@ use App\Enum\InscriptionPhaseStatusEnum;
 use App\Enum\OrganizationTypeEnum;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Repository\Interface\OrganizationRepositoryInterface;
+use App\Service\Interface\AccountEventServiceInterface;
 use App\Service\Interface\FileServiceInterface;
 use App\Service\OpportunityService;
 use App\Service\OrganizationService;
@@ -40,6 +41,7 @@ class RegisterService implements RegisterServiceInterface
         private readonly FileServiceInterface $fileService,
         private readonly EntityManagerInterface $entityManager,
         private readonly PhaseService $phaseService,
+        private readonly AccountEventServiceInterface $accountEventService,
         protected TokenStorageInterface $tokenStorage,
     ) {
     }
@@ -89,6 +91,13 @@ class RegisterService implements RegisterServiceInterface
         } catch (Exception $exception) {
             throw $exception;
         }
+
+        $this->accountEventService->notifyManagerOfNewRegistration(
+            $userObj->getName(),
+            $organizationObj->getName(),
+            $organizationObj->getType(),
+            $organizationObj->getCreatedAt(),
+        );
 
         return $organizationObj;
     }
