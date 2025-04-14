@@ -109,36 +109,42 @@ dropdown:
 
 dashboard:
   cards:
-    agents:
-      title: Agentes Promotores
-      icon: group
+    municipalities:
+      acl: ['ROLE_MUNICIPALITY', 'ROLE_ADMIN', 'ROLE_MANAGER']
+      title: Municípios
+      icon: place
       color: "#F59E00"
-      route_create: "admin_agent_create"
-      total_key: totalAgents
+      action:
+        text: search
+        route: admin_regmel_municipality_list
+      total_key: totalCities
     opportunities:
-      title: Credenciamento
+      acl: ['ROLE_ADMIN', 'ROLE_MANAGER']
+      title: Credenciamentos
       icon: lightbulb
       color: "#E70DCB"
-      route_create: "admin_opportunity_create"
+      action:
+        text: search
+        route: admin_opportunity_list
       total_key: totalOpportunities
-    organizations:
-      title: Municípios
+    companies:
+      acl: ['ROLE_COMPANY', 'ROLE_ADMIN', 'ROLE_MANAGER']
+      title: Empresas/OSCs
       icon: corporate_fare
       color: "#6A5ACD"
-      route_create: "admin_organization_add"
-      total_key: totalOrganizations
-    Teste1:
-      title: Teste 1
-      icon: corporate_fare
-      color: "#6A5ACD"
-      route_create: "admin_organization_add"
-      total_key: totalOrganizations
-    Test2:
-      title: Teste 2
-      icon: corporate_fare
-      color: "#6A5ACD"
-      route_create: "admin_organization_add"
-      total_key: totalOrganizations
+      action:
+        text: search
+        route: admin_regmel_company_list
+      total_key: totalCompanies
+    users:
+      acl: ['ROLE_ADMIN', 'ROLE_MANAGER']
+      title: Usuários
+      icon: person
+      color: "#ff3300"
+      action:
+        text: search
+        route: admin_user_list
+      total_key: totalUsers
   inscriptions_area: false
 
 sidebar:
@@ -146,6 +152,8 @@ sidebar:
     title: menu
     items:
       admin_dashboard:
+        acl:
+          - ROLE_USER
         icon: dashboard
         text: control_panel
         color: text-info
@@ -154,6 +162,7 @@ sidebar:
     title: Anuencia
     items:
       admin_registration_list:
+        acl: []
         icon: app_registration
         text: my_subscriptions
 #      admin_accountability_list:
@@ -164,9 +173,11 @@ sidebar:
     title: footer.notices_opportunities
     items:
       admin_opportunity_list:
+        acl: []
         icon: diversity_2
         text: Credenciamento
       admin_review_list:
+        acl: []
         icon: manage_search
         text: my_reviews
 
@@ -174,6 +185,7 @@ sidebar:
     title: management
     items:
       admin_agent_list:
+        acl: []
         icon: people
         text: Agentes Promotores
 #      admin_event_list:
@@ -183,8 +195,17 @@ sidebar:
 #        icon: apartment
 #        text: my_spaces
       admin_initiative_list:
+        acl: []
         icon: article
         text: Propostas
+      admin_regmel_company_list:
+        acl: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_COMPANY']
+        icon: business
+        text: Empresas/OSC
+      admin_regmel_municipality_list:
+        acl: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_MUNICIPALITY']
+        icon: location_city
+        text: Municípios
 #      admin_organization_list:
 #        icon: place
 #        text: Municipios
@@ -199,20 +220,17 @@ sidebar:
 #        icon: account_tree
 #        text: subsites
       admin_user_list:
+        acl: ['ROLE_ADMIN']
         icon: manage_accounts
         text: users
       admin_faq_list:
+        acl: ['ROLE_ADMIN']
         icon: quiz
         text: faq
-      admin_role_list:
-        icon: newspaper
-        text: functions
-      admin_regmel_company_list:
-        icon: business
-        text: Empresas/OSC
-      admin_regmel_municipality_list:
-        icon: location_city
-        text: Municípios
+#      admin_role_list:
+#        acl: ['ROLE_ADMIN']
+#        icon: newspaper
+#        text: functions
 
 homepage:
   sections:

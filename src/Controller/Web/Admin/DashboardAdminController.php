@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Web\Admin;
 
+use App\Enum\OrganizationTypeEnum;
 use App\Service\Interface\AgentServiceInterface;
 use App\Service\Interface\EventServiceInterface;
 use App\Service\Interface\InitiativeServiceInterface;
@@ -33,18 +34,28 @@ class DashboardAdminController extends AbstractAdminController
         $createdBy = $this->agentService->getAgentsFromLoggedUser()[0];
 
         $totalAgents = $this->agentService->count($user);
+        $totalUsers = $this->agentService->count();
         $totalOpportunities = $this->opportunityService->count($createdBy);
         $totalEvents = $this->eventService->count($createdBy);
         $totalSpaces = $this->spaceService->count($createdBy);
-        $totalInitiatives = $this->initiativeService->count($createdBy);
         $totalOrganizations = $this->organizationService->count($createdBy);
+        $totalInitiatives = $this->initiativeService->count($createdBy);
+        $totalCities = count($this->organizationService->findBy([
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
+        ]));
+        $totalCompanies = count($this->organizationService->findBy([
+            'type' => OrganizationTypeEnum::EMPRESA->value,
+        ]));
 
         $totals = [
+            'totalUsers' => $totalUsers,
             'totalAgents' => $totalAgents,
             'totalOpportunities' => $totalOpportunities,
             'totalEvents' => $totalEvents,
             'totalSpaces' => $totalSpaces,
             'totalInitiatives' => $totalInitiatives,
+            'totalCities' => $totalCities,
+            'totalCompanies' => $totalCompanies,
             'totalOrganizations' => $totalOrganizations,
         ];
 

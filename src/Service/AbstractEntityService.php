@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Enum\UserRolesEnum;
 use App\Exception\EntityManagerAndEntityClassNotSetException;
 use App\Exception\ValidatorException;
 use App\Service\Interface\FileServiceInterface;
@@ -39,6 +40,10 @@ abstract readonly class AbstractEntityService
 
     public function getUserParams(): array
     {
+        if (null !== $this->security->getUser() && $this->security->getUser()->isRole(UserRolesEnum::ROLE_ADMIN)) {
+            return [];
+        }
+
         $params = self::DEFAULT_FILTERS;
 
         if (null !== $this->security->getUser()) {

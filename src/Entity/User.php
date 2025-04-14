@@ -190,6 +190,15 @@ class User extends AbstractEntity implements UserInterface, PasswordAuthenticate
         return array_unique($roles);
     }
 
+    public function isRole(UserRolesEnum $role): bool
+    {
+        if (in_array($role->value, $this->getRoles(), true)) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;

@@ -67,6 +67,8 @@ class RegisterService implements RegisterServiceInterface
 
         try {
             $userObj = $this->userService->create($user);
+            $userObj->setRoles($data['user']['roles']);
+
             $this->manualLogin($userObj);
 
             $agent = $userObj->getAgents()->first();

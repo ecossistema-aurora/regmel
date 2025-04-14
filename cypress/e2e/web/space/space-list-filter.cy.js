@@ -1,6 +1,6 @@
 describe('Página de Lista de Espaços', () => {
     beforeEach(() => {
-        cy.login('saracamilo@example.com', 'Aurora@2024');
+        cy.login('henriquelopeslima@example.com', 'Aurora@2024');
         cy.viewport(1920, 1080);
         cy.visit('/espacos');
     });
