@@ -7,11 +7,13 @@ namespace App\Controller\Web\Admin;
 use App\Document\UserTimeline;
 use App\DocumentService\AuthTimelineDocumentService;
 use App\DocumentService\UserTimelineDocumentService;
+use App\Enum\UserRolesEnum;
 use App\Security\PasswordHasher;
 use App\Service\Interface\AgentServiceInterface;
 use App\Service\Interface\UserServiceInterface;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -32,7 +34,11 @@ class UserAdminController extends AbstractAdminController
     ) {
     }
 
-    #[IsGranted('list', statusCode: 404)]
+    #[IsGranted(new Expression(
+        'is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or '.
+        'is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")'
+    ), statusCode: 404)]
+    #[IsGranted('ROLE_ADMIN', statusCode: 404)]
     public function list(): Response
     {
         $users = $this->service->findAll();

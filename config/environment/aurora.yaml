@@ -278,4 +278,5 @@ homepage:
       discover: false
       control_panel: false
       help: true
+      social_network: true
 

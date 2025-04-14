@@ -70,18 +70,18 @@ modules:
   initiatives:
 
 navbar:
-  web_home_homepage:
-    text: home
-    icon: home
-    color: "#224638"
-  web_opportunity_list:
-    text: Adesão e Proposta
-    icon: description
-    color: "#F59E00"
-  web_faq_faq:
-    text: Perguntas Frequentes
-    icon: quiz
-    color: "#E70DCB"
+#  web_home_homepage:
+#    text: home
+#    icon: home
+#    color: "#224638"
+#  web_opportunity_list:
+#    text: Adesão e Proposta
+#    icon: description
+#    color: "#F59E00"
+#  web_faq_faq:
+#    text: Perguntas Frequentes
+#    icon: quiz
+#    color: "#E70DCB"
 
 dropdown:
   control_panel:
@@ -113,6 +113,24 @@ dashboard:
       acl: ['ROLE_MUNICIPALITY', 'ROLE_ADMIN', 'ROLE_MANAGER']
       title: Municípios
       icon: place
+      color: "#F59E00"
+      action:
+        text: search
+        route: admin_regmel_municipality_list
+      total_key: totalCities
+    documents:
+      acl: ['ROLE_MUNICIPALITY', 'ROLE_ADMIN', 'ROLE_MANAGER']
+      title: Ofícios
+      icon: description
+      color: "#8e7cc3"
+      action:
+        text: search
+        route: admin_regmel_municipality_list
+      total_key: totalCities
+    proposals:
+      acl: ['ROLE_MUNICIPALITY']
+      title: Propostas
+      icon: check_circle
       color: "#F59E00"
       action:
         text: search
@@ -158,79 +176,45 @@ sidebar:
         text: control_panel
         color: text-info
 
-  my_opportunities:
-    title: Anuencia
-    items:
       admin_registration_list:
         acl: []
         icon: app_registration
         text: my_subscriptions
-#      admin_accountability_list:
-#        icon: payments
-#        text: accountability
 
-  notice_opportunity:
-    title: footer.notices_opportunities
-    items:
       admin_opportunity_list:
         acl: [ROLE_ADMIN, ROLE_MANAGER]
         icon: diversity_2
         text: Credenciamentos
+
       admin_review_list:
         acl: []
         icon: manage_search
         text: my_reviews
 
-  entity:
-    title: management
-    items:
       admin_agent_list:
         acl: []
         icon: people
         text: Agentes Promotores
-#      admin_event_list:
-#        icon: event
-#        text: my_events
-#      admin_space_list:
-#        icon: apartment
-#        text: my_spaces
+
       admin_initiative_list:
         acl: []
         icon: article
         text: Propostas
+
       admin_regmel_company_list:
         acl: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_COMPANY']
         icon: business
         text: Empresas/OSC
+
       admin_regmel_municipality_list:
         acl: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_MUNICIPALITY']
         icon: location_city
         text: Municípios
-#      admin_organization_list:
-#        icon: place
-#        text: Municipios
 
-  admin:
-    title: admin_options
-    items:
-#      admin_seal_list:
-#        icon: bookmark
-#        text: seals
-#      admin_subsite_list:
-#        icon: account_tree
-#        text: subsites
       admin_user_list:
         acl: ['ROLE_ADMIN']
         icon: manage_accounts
         text: users
-      admin_faq_list:
-        acl: ['ROLE_ADMIN']
-        icon: quiz
-        text: faq
-#      admin_role_list:
-#        acl: ['ROLE_ADMIN']
-#        icon: newspaper
-#        text: functions
 
 homepage:
   sections:
@@ -273,4 +257,5 @@ homepage:
     footer:
       discover: false
       control_panel: false
-      help: true
+      help: false
+      social_network: false
