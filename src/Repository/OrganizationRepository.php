@@ -31,4 +31,27 @@ class OrganizationRepository extends AbstractRepository implements OrganizationR
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function isOrganizationDuplicate(string $name, string $cityId): bool
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $sql = <<<SQL
+            SELECT COUNT(*) AS total
+            FROM organization
+            WHERE name = :name
+              AND extra_fields->>'cityId' = :cityId
+            SQL;
+
+        $statement = $connection->prepare($sql);
+
+        $result = $statement->executeQuery([
+            'name' => $name,
+            'cityId' => $cityId,
+        ]);
+
+        $count = (int) $result->fetchOne();
+
+        return $count > 0;
+    }
 }

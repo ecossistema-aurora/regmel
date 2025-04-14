@@ -50,6 +50,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
                 'tipo' => 'OSC',
                 'companyName' => 'Razão Social Fortaleza',
                 'site' => 'https://www.fortaleza.ce.gov.br',
+                'cityId' => '97847c18-ac1c-4a00-93d4-b4a3e72a262c',
             ],
             'socialNetworks' => [
                 SocialNetworkEnum::INSTAGRAM->value => 'fortaleza_ce',
@@ -79,6 +80,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
                 'tipo' => 'OSC',
                 'companyName' => 'Razão Social SGA',
                 'site' => 'https://www.sga.ce.gov.br',
+                'cityId' => '52b2be97-63ce-4887-bb6f-cf84186de797',
             ],
             'socialNetworks' => [
                 SocialNetworkEnum::INSTAGRAM->value => 'saogonacalo_amarante_ce',
@@ -104,6 +106,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
                 'tipo' => 'OSC',
                 'companyName' => 'Razão Social Alto Santo',
                 'site' => 'https://www.altosanto.ce.gov.br',
+                'cityId' => 'b2ba1218-d357-4152-8621-45d629436ce1',
             ],
             'socialNetworks' => [
                 SocialNetworkEnum::INSTAGRAM->value => 'devsdosertao',
@@ -129,6 +132,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
                 'tipo' => 'OSC',
                 'companyName' => 'Razão Social Recife',
                 'site' => 'https://www.recife.pe.gov.br',
+                'cityId' => 'a97c7beb-9476-4347-ad2a-b60aaa58abd5',
             ],
             'socialNetworks' => [
                 SocialNetworkEnum::INSTAGRAM->value => 'sertaodev',
@@ -154,6 +158,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
                 'tipo' => 'OSC',
                 'companyName' => 'Razão Social Parambu',
                 'site' => 'https://www.parambu.ce.gov.br',
+                'cityId' => 'a0c15b26-a166-4edc-b16a-62df904a51ad',
             ],
             'socialNetworks' => [
                 SocialNetworkEnum::INSTAGRAM->value => 'grupoderapente',
@@ -179,6 +184,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
                 'tipo' => 'OSC',
                 'companyName' => 'Razão Social Russas',
                 'site' => 'https://www.russas.ce.gov.br',
+                'cityId' => '7b5eec8d-1f95-44a5-93a9-2fbac8c2c16c',
             ],
             'socialNetworks' => [
                 SocialNetworkEnum::INSTAGRAM->value => 'comunidadevidacomcristo',
@@ -204,6 +210,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
                 'tipo' => 'OSC',
                 'companyName' => 'Razão Social Mamanguape',
                 'site' => 'https://www.mamanguape.pb.gov.br',
+                'cityId' => '7a68955d-5aa3-4c44-9f43-8328562f4e75',
             ],
             'socialNetworks' => [
                 SocialNetworkEnum::INSTAGRAM->value => 'candombleraizesdobrasil',
@@ -229,6 +236,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
                 'tipo' => 'OSC',
                 'companyName' => 'Razão Social Maranguape',
                 'site' => 'https://www.maranguape.ce.gov.br',
+                'cityId' => '705e1340-8bf8-47db-ba51-4584c7cd9662',
             ],
             'socialNetworks' => [
                 SocialNetworkEnum::INSTAGRAM->value => 'baiaodedev',
@@ -254,6 +262,7 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
                 'tipo' => 'OSC',
                 'companyName' => 'Razão Social Arneiroz',
                 'site' => 'https://www.arneiroz.ce.gov.br',
+                'cityId' => '984ef221-73f4-422e-8aaa-28e290559e15',
             ],
             'socialNetworks' => [
                 SocialNetworkEnum::INSTAGRAM->value => 'phpeste',
@@ -264,21 +273,22 @@ final class OrganizationFixtures extends AbstractFixture implements DependentFix
         ],
         [
             'id' => self::ORGANIZATION_ID_10,
-            'name' => 'Indanhatuba',
+            'name' => 'Indaiatuba',
             'image' => null,
             'type' => OrganizationTypeEnum::MUNICIPIO->value,
-            'description' => 'Municipio de Indanhatuba-SP',
+            'description' => 'Municipio de Indaiatuba-SP',
             'createdBy' => AgentFixtures::AGENT_ID_1,
             'owner' => AgentFixtures::AGENT_ID_1,
             'parent' => self::ORGANIZATION_ID_9,
             'space' => null,
             'extraFields' => [
                 'cnpj' => '00.000.000/0001-10',
-                'email' => 'indanhatuba@example.com',
+                'email' => 'indaiatuba@example.com',
                 'phone' => '(85) 99999-0010',
                 'tipo' => 'OSC',
-                'companyName' => 'Razão Social Indanhatuba',
-                'site' => 'https://www.indanhatuba.sp.gov.br',
+                'companyName' => 'Razão Social Indaiatuba',
+                'site' => 'https://www.indaiatuba.sp.gov.br',
+                'cityId' => 'ee246666-c1a9-4880-872a-3299b094bc06',
             ],
             'socialNetworks' => [
                 SocialNetworkEnum::INSTAGRAM->value => 'forrotonemveno',

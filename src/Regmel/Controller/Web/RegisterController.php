@@ -195,4 +195,15 @@ class RegisterController extends AbstractWebController
             'opportunity' => $request->get('opportunity'),
         ];
     }
+
+    #[Route('/organizations/check-duplicate', name: 'organization_check_duplicate', methods: ['GET'])]
+    public function checkDuplicateOrganization(Request $request): Response
+    {
+        $name = $request->query->get('name');
+        $cityId = $request->query->get('cityId');
+
+        $exists = $this->registerService->isDuplicateOrganization($name, $cityId);
+
+        return $this->json(['exists' => $exists]);
+    }
 }
