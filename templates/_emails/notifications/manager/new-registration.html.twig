@@ -1,0 +1,14 @@
+{% block content %}
+    <p>Uma nova organização do tipo {{ organization_type }} foi credenciada ✅</p>
+
+    <p>Aqui estão os detalhes:</p>
+
+    <ul>
+        <li><strong>Por quem:</strong> {{ user_name }}</li>
+        <li><strong>Nome:</strong> {{ organization_name }} </li>
+        <li><strong>Quando:</strong> {{ organization_created_at }}</li>
+    </ul>
+
+    <p>Você pode acessar o sistema para visualizar mais informações.</p>
+
+{% endblock %}

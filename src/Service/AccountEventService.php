@@ -7,11 +7,13 @@ namespace App\Service;
 use App\Entity\AccountEvent;
 use App\Entity\User;
 use App\Enum\AccountEventTypeEnum;
+use App\Enum\UserRolesEnum;
 use App\Enum\UserStatusEnum;
 use App\Exception\AccountEvent\ExpiredTokenException;
 use App\Exception\AccountEvent\InvalidTokenException;
 use App\Exception\User\UserResourceNotFoundException;
 use App\Repository\Interface\AccountEventRepositoryInterface;
+use App\Repository\Interface\UserRepositoryInterface;
 use App\Service\Interface\AccountEventServiceInterface;
 use App\Service\Interface\EmailServiceInterface;
 use DateTimeImmutable;
@@ -33,6 +35,7 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
         private UrlGeneratorInterface $urlGenerator,
         private TranslatorInterface $translator,
         private PasswordHasherFactoryInterface $passwordHasherFactory,
+        private UserRepositoryInterface $userRepository,
         private Security $security,
     ) {
         parent::__construct($this->security);
@@ -158,5 +161,38 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
         $this->accountEventRepository->save($accountEvent);
 
         return $accountEvent;
+    }
+
+    private function getManagerEmail(): string
+    {
+        $user = $this->userRepository->findOneByRole(UserRolesEnum::ROLE_MANAGER->value);
+
+        if (!$user) {
+            throw new UserResourceNotFoundException();
+        }
+
+        return $user->getEmail();
+    }
+
+    public function notifyManagerOfNewRegistration(
+        string $userName,
+        string $organizationName,
+        string $organizationType,
+        DateTimeImmutable $organizationCreatedAt
+    ): void {
+        $managerEmail = $this->getManagerEmail();
+
+        $this->emailService->sendTemplatedEmail(
+            [$managerEmail],
+            $this->translator->trans('new_registration_notification'),
+            '_emails/notifications/manager/new-registration.html.twig',
+            [
+                'manager_name' => $this->translator->trans('manager_name'),
+                'user_name' => $userName,
+                'organization_name' => $organizationName,
+                'organization_type' => $organizationType,
+                'organization_created_at' => $organizationCreatedAt->format('Y/m/d \à\s H:i:s'),
+            ]
+        );
     }
 }
