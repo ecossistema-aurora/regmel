@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Security\Voter;
 
+use App\Enum\UserRolesEnum;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class AbstractVoter extends Voter
+abstract class AbstractVoter extends Voter
 {
     protected array $actions = [];
 
@@ -29,5 +31,10 @@ class AbstractVoter extends Voter
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         return true;
+    }
+
+    protected function isUserAdmin(UserInterface $user): bool
+    {
+        return in_array(UserRolesEnum::ROLE_ADMIN->value, $user->getRoles());
     }
 }

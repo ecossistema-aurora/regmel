@@ -37,8 +37,7 @@ class UserAdminController extends AbstractAdminController
     #[IsGranted(new Expression(
         'is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or '.
         'is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")'
-    ), statusCode: 404)]
-    #[IsGranted('ROLE_ADMIN', statusCode: 404)]
+    ), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
     public function list(): Response
     {
         $users = $this->service->findAll();
@@ -50,12 +49,16 @@ class UserAdminController extends AbstractAdminController
 
     public function timeline(Uuid $id): Response
     {
+        $user = $this->service->get($id);
+
+        $this->denyAccessUnlessGranted('get', $user);
+
         $events = $this->documentService->getEventsByEntityId($id);
 
         $authEvents = $this->authDocumentService->getTimelineLoginByUserId($id);
 
         return $this->render('user/timeline.html.twig', [
-            'user' => $this->service->get($id),
+            'user' => $user,
             'events' => $events,
             'authEvents' => $authEvents,
         ]);
@@ -64,6 +67,8 @@ class UserAdminController extends AbstractAdminController
     public function accountPrivacy(Uuid $id): Response
     {
         $user = $this->service->get($id);
+
+        $this->denyAccessUnlessGranted('get', $user);
 
         if (!$user) {
             return $this->redirectToRoute('login');
@@ -125,6 +130,8 @@ class UserAdminController extends AbstractAdminController
     public function editUserProfile(Uuid $id, Request $request): Response
     {
         $user = $this->service->get($id);
+
+        $this->denyAccessUnlessGranted('edit', $user);
 
         if (!$user) {
             return $this->redirectToRoute('login');

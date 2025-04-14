@@ -6,12 +6,12 @@ describe('Teste de navegação e validação da página de Minhas FAQs', () => {
 
         cy.url().should('include', '/login');
 
-        cy.login('saracamilo@example.com', 'Aurora@2024');
+        cy.login('alessandrofeitoza@example.com', 'Aurora@2024');
 
         cy.url().should('include', '/');
 
-        cy.get('.navbar').contains('Sara').should('be.visible');
-        cy.get('.navbar').contains('Sara').click();
+        cy.get('.navbar').contains('Francisco').should('be.visible');
+        cy.get('.navbar').contains('Francisco').click();
 
         cy.contains('Minhas Oportunidades', { timeout: 10000 }).should('be.visible').click();
 

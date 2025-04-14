@@ -1,7 +1,7 @@
 describe('Painel de Controle - Página de criar Oportunidades', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
-        cy.login('saracamilo@example.com', 'Aurora@2024');
+        cy.login('alessandrofeitoza@example.com', 'Aurora@2024');
         cy.visit('/oportunidades');
 
         Cypress.on('uncaught:exception', (err) => {
@@ -38,7 +38,7 @@ describe('Painel de Controle - Página de criar Oportunidades', () => {
         cy.get('form').should('be.visible');
         cy.get('#opportunityType').select('Curso');
         cy.get('#opportunityTitle').type('Titulo da oportunidade para o teste');
-        cy.get('#opportunityCreatedBy').select('Sara Jennifer');
+        cy.get('#opportunityCreatedBy').select('Alessandro');
 
         cy.get('label.radioEntity:contains(Evento)').click().next().click();
         cy.contains('Festival da Rapadura').should('be.visible').click();

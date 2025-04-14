@@ -12,9 +12,11 @@ use App\Service\Interface\OrganizationServiceInterface;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use TypeError;
@@ -38,6 +40,11 @@ class CompanyAdminController extends AbstractAdminController
         ], parentPath: '');
     }
 
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or 
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'") or 
+        is_granted("'.UserRolesEnum::ROLE_COMPANY->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
     #[Route('/painel/admin/empresas', name: 'admin_regmel_company_list', methods: ['GET'])]
     public function list(): Response
     {
@@ -76,6 +83,8 @@ class CompanyAdminController extends AbstractAdminController
             'type' => OrganizationTypeEnum::EMPRESA->value,
         ]);
 
+        $this->denyAccessUnlessGranted('get', $company);
+
         $timeline = $this->documentService->getEventsByEntityId($id);
 
         $createdById = $company->getCreatedBy()->getId()->toRfc4122();
@@ -92,6 +101,8 @@ class CompanyAdminController extends AbstractAdminController
     {
         try {
             $company = $this->organizationService->get($id);
+
+            $this->denyAccessUnlessGranted('edit', $company);
         } catch (Exception $exception) {
             $this->addFlash('error', $exception->getMessage());
 

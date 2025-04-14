@@ -1,7 +1,7 @@
 describe('Painel de Controle - Página de listar Organizações', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
-        cy.login('kellymoura@example.com', 'Aurora@2024');
+        cy.login('alessandrofeitoza@example.com', 'Aurora@2024');
         cy.visit('/painel/organizacoes');
     });
 
