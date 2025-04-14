@@ -106,6 +106,8 @@ export declare const CREATE: Message<{ 'messages': { parameters: NoParametersTyp
 export declare const CREATE_AND_PUBLISH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CREATE_IN_DRAFT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CREATE_ACCOUNT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const CREATE_COMPANY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const CREATE_MUNICIPALITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const CREATED_AT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CREATED_BY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CREATED_IN: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -243,9 +245,11 @@ export declare const MAROONS: Message<{ 'messages': { parameters: NoParametersTy
 export declare const MAXIMUM_CAPACITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MAX_CAPACITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MAX_CAPACITY_1: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const MARK_AS_READ: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const MEI: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MENU: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MEDIUM: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const MESSAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const MONTHS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MOST_RECENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MUNICIPALITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -376,6 +380,7 @@ export declare const REPORT: Message<{ 'messages': { parameters: NoParametersTyp
 export declare const RESPONSIBLE_AGENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const RESET: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const RESET_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const READ_NOTIFICATIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const SELECTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const TAGS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TERM: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -407,6 +412,7 @@ export declare const USER_PASSWORD: Message<{ 'messages': { parameters: NoParame
 export declare const USER_POSITION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const USER_INFORMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const USER_EDIT_DATA: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const UNREAD_NOTIFICATIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_ALL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIDEO: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;

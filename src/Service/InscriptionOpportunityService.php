@@ -9,6 +9,7 @@ use App\Entity\InscriptionOpportunity;
 use App\Entity\InscriptionPhase;
 use App\Entity\Phase;
 use App\Enum\InscriptionPhaseStatusEnum;
+use App\Environment\ConfigEnvironment;
 use App\Exception\InscriptionOpportunity\AlreadyInscriptionOpportunityException;
 use App\Exception\InscriptionOpportunity\InscriptionOpportunityResourceNotFoundException;
 use App\Exception\UnauthorizedException;
@@ -22,6 +23,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Twig\Environment;
 
 readonly class InscriptionOpportunityService extends AbstractEntityService implements InscriptionOpportunityServiceInterface
 {
@@ -177,7 +179,9 @@ readonly class InscriptionOpportunityService extends AbstractEntityService imple
 
     public function findInscriptionWithDetails(Uuid $identifier): array
     {
-        $inscription = $this->repository->findInscriptionWithDetails($identifier, $this->security->getUser()->getAgents()->getValues());
+        $inscription = $this->repository->findInscriptionWithDetailsByOrganizations(
+            $identifier
+        );
 
         if (null === $inscription) {
             throw new InscriptionOpportunityResourceNotFoundException();

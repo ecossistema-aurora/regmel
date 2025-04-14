@@ -78,7 +78,7 @@ class InscriptionOpportunity
         $this->status = $status;
     }
 
-    public function getAgent(): Agent
+    public function getAgent(): ?Agent
     {
         return $this->agent;
     }

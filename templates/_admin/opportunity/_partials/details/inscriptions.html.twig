@@ -15,12 +15,12 @@
                 <tr>
                     <td>
                         <img
-                                src="{{ asset(item.agent.image ?? 'img/allan.png') }}"
+                                src="{{ asset(item.agent.image ?? item.organization.image ?? 'img/allan.png') }}"
                                 alt="{{ 'agent-picture'|trans }}"
                                 class="profile-picture"
                         >
                     </td>
-                    <td>{{ item.agent.name }}</td>
+                    <td>{{ item.agent.name ?? item.organization.name }}</td>
                     <td>{{ item.createdAt.format('d/m/Y H:i:s') }}</td>
                     <td>
                         {% if item.status %}
@@ -35,8 +35,8 @@
                     </td>
                     <td>
                         <a
-                                href="{{ path('admin_registration_get', {id: item.id}) }}"
-                                class="btn btn-outline-info btn-sm"
+                            href="{{ path('admin_registration_get', {id: item.id}) }}"
+                            class="btn btn-outline-info btn-sm"
                         >
                             {{ 'view.opportunity_admin.inscriptions.see_inscription' | trans }}
                         </a>

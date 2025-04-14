@@ -6,12 +6,14 @@ namespace App\Regmel\Command;
 
 use App\Entity\Agent;
 use App\Entity\Opportunity;
+use App\Entity\Phase;
 use App\Entity\User;
 use App\Enum\OrganizationTypeEnum;
 use App\Enum\UserRolesEnum;
 use App\Enum\UserStatusEnum;
 use App\Repository\Interface\UserRepositoryInterface;
 use App\Security\PasswordHasher;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -37,6 +39,56 @@ class CreateDemoForRegmelCommand extends Command
 
         $output->writeln('------------------------------------');
 
+        $this->createOpportunities($output, $io);
+
+        $this->createUsers($output, $io);
+
+        $output->writeln('------------------------------------'.PHP_EOL);
+
+        return Command::SUCCESS;
+    }
+
+    private function manualLogin(User $user): void
+    {
+        $token = new UsernamePasswordToken($user, 'web');
+        $this->tokenStorage->setToken($token);
+    }
+
+    protected function configure(): void
+    {
+        $this
+            ->setName('app:demo-regmel')
+            ->setDescription('Run command that prepare data for regmel 2025.');
+    }
+
+    private function createUsers(OutputInterface $output, SymfonyStyle $io): void
+    {
+        $user = new User();
+        $user->setFirstName('Manager');
+        $user->setLastName('SNP');
+        $user->setEmail('admin@snp.email');
+        $user->setPassword(PasswordHasher::hash('Aurora@2024'));
+        $user->setStatus(UserStatusEnum::ACTIVE->value);
+        $user->addRole(UserRolesEnum::ROLE_MANAGER->value);
+        $user->setId(Uuid::fromString('2dcc70ff-717b-4b32-8bca-396ef956e196'));
+
+        $agent = new Agent();
+        $agent->setId(Uuid::fromString('2dcc70ff-717b-4b32-8bca-396ef956e196'));
+        $agent->createFromUser($user);
+
+        $user->addAgent($agent);
+
+        $this->entityManager->persist($user);
+        $this->entityManager->persist($agent);
+        $this->entityManager->flush();
+
+        $io->title('Manager User created');
+        $output->writeln('User: admin@snp.email');
+        $output->writeln('Pass: Aurora@2024');
+    }
+
+    private function createOpportunities(OutputInterface $output, SymfonyStyle $io): void
+    {
         $user = $this->userRepository->findOneBy(['email' => 'admin@regmel.com']);
         $agent = $user->getAgents()->first();
 
@@ -72,43 +124,26 @@ class CreateDemoForRegmelCommand extends Command
         $output->writeln('Name: '.$opportunityForCompany->getName());
         $output->writeln('------------------------------------');
 
-        $user = new User();
-        $user->setFirstName('Manager');
-        $user->setLastName('SNP');
-        $user->setEmail('admin@snp.email');
-        $user->setPassword(PasswordHasher::hash('Aurora@2024'));
-        $user->setStatus(UserStatusEnum::ACTIVE->value);
-        $user->addRole(UserRolesEnum::ROLE_MANAGER->value);
-        $user->setId(Uuid::fromString('2dcc70ff-717b-4b32-8bca-396ef956e196'));
+        $this->createPhases($opportunityForMunicipality);
+    }
 
-        $agent = new Agent();
-        $agent->setId(Uuid::fromString('2dcc70ff-717b-4b32-8bca-396ef956e196'));
-        $agent->createFromUser($user);
+    private function createPhases(Opportunity $opportunityForMunicipality): void
+    {
+        $phase1Municipality = new Phase();
+        $phase1Municipality->setOpportunity($opportunityForMunicipality);
+        $phase1Municipality->setCreatedBy($opportunityForMunicipality->getCreatedBy());
+        $phase1Municipality->setId(Uuid::fromString('ef62e816-00a4-43cf-930f-796edb7c6175'));
+        $phase1Municipality->setStatus(true);
+        $phase1Municipality->setName('Ofício');
+        $phase1Municipality->setDescription('Envio e Validação do Oficio pelo Município');
+        $phase1Municipality->setSequence(1);
+        $phase1Municipality->setStartDate(new DateTime('2025-04-22'));
+        $phase1Municipality->setEndDate(new DateTime('2025-05-31'));
+        $phase1Municipality->setCriteria([
+            'oficio' => true,
+        ]);
 
-        $user->addAgent($agent);
-
-        $this->entityManager->persist($user);
-        $this->entityManager->persist($agent);
+        $this->entityManager->persist($phase1Municipality);
         $this->entityManager->flush();
-
-        $io->title('Manager User created');
-        $output->writeln('User: admin@snp.email');
-        $output->writeln('Pass: Aurora@2024');
-        $output->writeln('------------------------------------'.PHP_EOL);
-
-        return Command::SUCCESS;
-    }
-
-    private function manualLogin(User $user): void
-    {
-        $token = new UsernamePasswordToken($user, 'web');
-        $this->tokenStorage->setToken($token);
-    }
-
-    protected function configure(): void
-    {
-        $this
-            ->setName('app:demo-regmel')
-            ->setDescription('Run command that prepare data for regmel 2025.');
     }
 }
