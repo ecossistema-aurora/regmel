@@ -173,9 +173,9 @@ sidebar:
     title: footer.notices_opportunities
     items:
       admin_opportunity_list:
-        acl: []
+        acl: [ROLE_ADMIN, ROLE_MANAGER]
         icon: diversity_2
-        text: Credenciamento
+        text: Credenciamentos
       admin_review_list:
         acl: []
         icon: manage_search

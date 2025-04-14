@@ -7,16 +7,19 @@ namespace App\Regmel\Service;
 use App\DTO\OrganizationDto;
 use App\DTO\UserDto;
 use App\Entity\InscriptionOpportunity;
+use App\Entity\InscriptionPhase;
 use App\Entity\Opportunity;
 use App\Entity\Organization;
 use App\Entity\User;
 use App\Enum\InscriptionOpportunityStatusEnum;
+use App\Enum\InscriptionPhaseStatusEnum;
 use App\Enum\OrganizationTypeEnum;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Repository\Interface\OrganizationRepositoryInterface;
 use App\Service\Interface\FileServiceInterface;
 use App\Service\OpportunityService;
 use App\Service\OrganizationService;
+use App\Service\PhaseService;
 use App\Service\UserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -36,6 +39,7 @@ class RegisterService implements RegisterServiceInterface
         private readonly OpportunityService $opportunityService,
         private readonly FileServiceInterface $fileService,
         private readonly EntityManagerInterface $entityManager,
+        private readonly PhaseService $phaseService,
         protected TokenStorageInterface $tokenStorage,
     ) {
     }
@@ -77,9 +81,10 @@ class RegisterService implements RegisterServiceInterface
             $organizationObj->setCreatedBy($agent);
             $organizationObj->addAgent($agent);
 
+            $this->organizationRepository->save($organizationObj);
+
             $this->createInscriptionForOrganization($data['opportunity'], $organizationObj);
 
-            $this->organizationRepository->save($organizationObj);
             $this->manualLogout();
         } catch (Exception $exception) {
             throw $exception;
@@ -100,8 +105,10 @@ class RegisterService implements RegisterServiceInterface
 
     private function createInscriptionForOrganization(string $opportunityId, Organization $organization): void
     {
+        $opportunityId = Uuid::fromString($opportunityId);
+
         $opportunity = $this->opportunityService->get(
-            Uuid::fromString($opportunityId)
+            $opportunityId
         );
 
         $inscription = new InscriptionOpportunity();
@@ -110,7 +117,20 @@ class RegisterService implements RegisterServiceInterface
         $inscription->setId(Uuid::v4());
         $inscription->setStatus(InscriptionOpportunityStatusEnum::ACTIVE->value);
 
+        $firstPhase = current($this->phaseService->list($opportunityId, 1));
+
+        if (false !== $firstPhase) {
+            $inscriptionPhase = new InscriptionPhase();
+            $inscriptionPhase->setId(Uuid::v4());
+            $inscriptionPhase->setOrganization($inscription->getOrganization());
+            $inscriptionPhase->setPhase($firstPhase);
+            $inscriptionPhase->setStatus(InscriptionPhaseStatusEnum::ACTIVE->value);
+
+            $this->entityManager->persist($inscriptionPhase);
+        }
+
         $this->entityManager->persist($inscription);
+        $this->entityManager->flush();
     }
 
     private function uploadFile(UploadedFile $uploadedFile): string
