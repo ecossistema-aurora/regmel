@@ -21,6 +21,9 @@ security:
             pattern: ^/api/states
             methods: [GET]
             security: false
+        api_users_email-exists:
+            pattern: ^/api/users/exists
+            security: false
         api:
             pattern: ^/api
             stateless: true

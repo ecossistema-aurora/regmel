@@ -10,6 +10,7 @@ import {
     VIEW_AUTHENTICATION_ERROR_PASSWORD_MISMATCH,
     VIEW_AUTHENTICATION_ERROR_CPF_INVALID,
     VIEW_AUTHENTICATION_ERROR_PHONE_INVALID,
+    VIEW_AUTHENTICATION_ERROR_EMAIL_IN_USE
 } from "../../translator.js";
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const userEmail = document.querySelector('input[name="userEmail"]');
     const userPhone = document.querySelector('input[name="userPhone"]');
+
     if (userEmail) {
         inputs.userEmail = userEmail;
     }
@@ -36,6 +38,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const progressBar = document.querySelector('#passwordStrength .progress-bar');
+
+    async function checkEmailExists(email) {
+        try {
+            const response = await fetch(`/api/users/exists?email=${encodeURIComponent(email)}`);
+            const data = await response.json();
+            return data.exists;
+        } catch (error) {
+            console.error('erro ao verificar o email:', error);
+            return false;
+        }
+    }
 
     async function validateFields() {
         const firstName = inputs.firstName.value.trim();
@@ -98,14 +111,6 @@ document.addEventListener('DOMContentLoaded', function () {
             },
         ];
 
-        if (inputs.userEmail) {
-            validations.push({
-                valid: () => validateEmail(userEmail),
-                input: inputs.userEmail,
-                message: trans(VIEW_AUTHENTICATION_ERROR_INVALID_EMAIL)
-            });
-        }
-
         if (inputs.userPhone) {
             validations.push({
                 valid: () => validatePhone(userPhone),
@@ -115,7 +120,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         for (const rule of validations) {
-            if (!rule.valid()) {
+            const isValid = await rule.valid();
+            if (!isValid) {
                 errorMessage = rule.message;
                 if (rule.input) {
                     rule.input.classList.add('border-danger');
@@ -134,8 +140,34 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    Object.values(inputs).forEach(input => {
-        if (input) {
+    async function validateEmailAvailability() {
+        const email = inputs.userEmail.value.trim();
+        if (!validateEmail(email)) {
+            inputs.userEmail.classList.add('border-danger');
+            ERROR_MESSAGE_ELEMENT.textContent = trans(VIEW_AUTHENTICATION_ERROR_INVALID_EMAIL);
+            ERROR_MESSAGE_ELEMENT.classList.remove('d-none');
+            return false;
+        }
+
+        const exists = await checkEmailExists(email);
+        if (exists) {
+            inputs.userEmail.classList.add('border-danger');
+            ERROR_MESSAGE_ELEMENT.textContent = trans(VIEW_AUTHENTICATION_ERROR_EMAIL_IN_USE);
+            ERROR_MESSAGE_ELEMENT.classList.remove('d-none');
+            return false;
+        }
+
+        inputs.userEmail.classList.remove('border-danger');
+        ERROR_MESSAGE_ELEMENT.classList.add('d-none');
+        return true;
+    }
+
+    Object.entries(inputs).forEach(([key, input]) => {
+        if (!input) return;
+
+        if (key === 'userEmail') {
+            input.addEventListener('blur', validateEmailAvailability);
+        } else {
             input.addEventListener('input', validateFields);
         }
     });
@@ -145,12 +177,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     FORM.addEventListener('submit', async function (event) {
-        const isValid = await validateFields();
+        const isFieldsValid = await validateFields();
+        const isEmailAvailable = inputs.userEmail ? await validateEmailAvailability() : true;
+        const isValid = isFieldsValid && isEmailAvailable;
         if (!isValid) {
             event.preventDefault();
         }
     });
-
 
     function updatePasswordStrength(password) {
         const progressBar = document.getElementById('progressBar');
@@ -184,7 +217,6 @@ document.addEventListener('DOMContentLoaded', function () {
             strengthMessage.textContent = 'Senha forte';
         }
     }
-
 });
 
 function calculatePasswordStrength(password) {
