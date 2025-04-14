@@ -1,5 +1,14 @@
 <section class="row">
     {% for key, item in env.aurora.dashboard.cards %}
+        {% set hasAccess = false %}
+
+        {% for role in app.user.roles %}
+            {% if role in item.acl %}
+                {% set hasAccess = true %}
+            {% endif %}
+        {% endfor %}
+
+        {% if hasAccess == true %}
         <div class="col-md-3">
             <div class="card-dashboard" data-cy="{{ key }}-card-dashboard">
                 <div class="d-flex align-items-center">
@@ -12,11 +21,12 @@
                     <span class="fw-bold fs-1">{{ totals[item.total_key] }}</span>
                     <span class="fw-bold">{{ item.title | trans }}</span>
                 </div>
-                <a role="button" href="{{ path(item.route_create) }}" class="d-flex align-items-center justify-content-center">
-                    <i class="material-icons">add</i>
-                    <span class="fs-5 fw-bold">{{ "create" | trans }}</span>
+                <a role="button" href="{{ path(item.action.route) }}" class="d-flex align-items-center justify-content-center">
+                    <i class="material-icons">{{ item.action.text }}</i>
+                    <span class="fs-5 fw-bold">{{ item.action.text | trans }}</span>
                 </a>
             </div>
         </div>
+        {% endif %}
     {% endfor %}
 </section>

@@ -78,6 +78,7 @@ class RegisterController extends AbstractWebController
                 'errors' => $errors,
                 'form_id' => self::FORM_CITY,
                 'states' => $states,
+                'opportunities' => $this->registerService->findOpportunitiesBy(OrganizationTypeEnum::MUNICIPIO),
             ]);
         }
 
@@ -121,6 +122,7 @@ class RegisterController extends AbstractWebController
             return $this->render(self::VIEW_COMPANY, [
                 'errors' => $errors,
                 'form_id' => self::FORM_COMPANY,
+                'opportunities' => $this->registerService->findOpportunitiesBy(OrganizationTypeEnum::EMPRESA),
             ]);
         }
 
@@ -153,7 +155,7 @@ class RegisterController extends AbstractWebController
                 'lastname' => $request->get('lastname'),
                 'email' => $request->get('userEmail'),
                 'password' => $request->get('password'),
-                'role' => UserRolesEnum::ROLE_COMPANY->value,
+                'roles' => [UserRolesEnum::ROLE_COMPANY->value],
                 'extraFields' => [
                     'telefone' => $request->get('userPhone'),
                     'cpf' => $request->get('cpf'),
@@ -186,7 +188,7 @@ class RegisterController extends AbstractWebController
                 'lastname' => $request->get('lastname'),
                 'email' => $request->get('userEmail'),
                 'password' => $request->get('password'),
-                'role' => UserRolesEnum::ROLE_MUNICIPALITY->value,
+                'roles' => [UserRolesEnum::ROLE_MUNICIPALITY->value],
                 'extraFields' => [
                     'cpf' => $request->get('cpf'),
                     'cargo' => $request->get('position'),
