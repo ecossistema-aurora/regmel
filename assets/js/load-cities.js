@@ -8,13 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const showError = (msg) => {
-        error.textContent = msg;
-        error.classList.remove("d-none");
+        if (error) {
+            error.textContent = msg;
+            error.classList.remove("d-none");
+        }
     };
 
     const hideError = () => {
-        error.textContent = "";
-        error.classList.add("d-none");
+        if (error) {
+            error.textContent = "";
+            error.classList.add("d-none");
+        }
     };
 
     const fetchData = (url) =>
@@ -28,6 +32,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     city.addEventListener("change", async () => {
+        if (!error) {
+            return;
+        }
+
         hideError();
         const id = city.value;
         const name = city.options[city.selectedIndex]?.text?.trim();
