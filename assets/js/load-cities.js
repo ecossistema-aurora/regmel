@@ -1,20 +1,42 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const stateSelect = document.getElementById("state");
-    const citySelect = document.getElementById("city");
+document.addEventListener("DOMContentLoaded", () => {
+    const state = document.getElementById("state");
+    const city = document.getElementById("city");
+    const error = document.getElementById("error-message");
 
-    stateSelect.addEventListener("change", function () {
-        const stateId = this.value;
-        citySelect.innerHTML = `<option value="">${citySelect.getAttribute("data-placeholder") || "Selecione"}</option>`;
+    const clearCities = () => {
+        city.innerHTML = `<option value="">${city.dataset.placeholder || "Selecione"}</option>`;
+    };
 
-        if (!stateId) return;
+    const showError = (msg) => {
+        error.textContent = msg;
+        error.classList.remove("d-none");
+    };
 
-        fetch(`/api/states/${stateId}/cities`)
-            .then(res => res.json())
-            .then(cities => {
-                cities.forEach(city => {
-                    citySelect.innerHTML += `<option value="${city.id}">${city.name}</option>`;
-                });
-            })
-            .catch(error => console.error('Error fetching cities:', error));
+    const hideError = () => {
+        error.textContent = "";
+        error.classList.add("d-none");
+    };
+
+    const fetchData = (url) =>
+        fetch(url).then(res => res.ok ? res.json() : []).catch(() => []);
+
+    state.addEventListener("change", async () => {
+        clearCities();
+        if (!state.value) return;
+        const cities = await fetchData(`/api/states/${state.value}/cities`);
+        cities.forEach(c => city.innerHTML += `<option value="${c.id}">${c.name}</option>`);
+    });
+
+    city.addEventListener("change", async () => {
+        hideError();
+        const id = city.value;
+        const name = city.options[city.selectedIndex]?.text?.trim();
+        if (!id || !name) return;
+
+        const { exists } = await fetchData(`/organizations/check-duplicate?name=${encodeURIComponent(name)}&cityId=${encodeURIComponent(id)}`);
+        if (exists) {
+            showError("Este município já foi credenciado.");
+            state.dispatchEvent(new Event("change"));
+        }
     });
 });

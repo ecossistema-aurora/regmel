@@ -128,4 +128,9 @@ class RegisterService implements RegisterServiceInterface
     {
         $this->tokenStorage->setToken(null);
     }
+
+    public function isDuplicateOrganization(string $name, string $cityId): bool
+    {
+        return $this->organizationRepository->isOrganizationDuplicate($name, $cityId);
+    }
 }

@@ -22,6 +22,8 @@
                         <form method="POST" action="" enctype="multipart/form-data">
                             <input type="hidden" name="token" value="{{ csrf_token(form_id) }}">
 
+                            <div class="alert alert-danger d-none" id="error-message"></div>
+
                             <label for="opportunity">{{ 'view.authentication.register.opportunity_type'|trans }}</label>
                             <select name="opportunity" id="opportunity" required class="form-select mt-1 mb-3">
                                 {% for opportunity in opportunities %}
@@ -37,8 +39,6 @@
                             {% include "regmel/register/_partials/organization-data.html.twig" %}
 
                             {% include "regmel/register/_partials/accept-terms.html.twig" %}
-
-                            <div class="alert alert-danger d-none" id="error-message"></div>
 
                             <div class="btn-form-group">
                                 <button class="btn btn-primary w-100 btn-lg" type="submit">
