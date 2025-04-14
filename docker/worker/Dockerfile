@@ -34,6 +34,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 FROM base as worker
 
 RUN apt-get update && apt-get install -y supervisor \
+    && mkdir -p /var/run/supervisor \
+    && chown www-data:www-data /var/run/supervisor \
+    && chmod 775 /var/run/supervisor \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY docker/worker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
