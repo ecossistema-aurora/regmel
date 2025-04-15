@@ -6,19 +6,19 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="edit-organization" method="POST" action="">
+        <form id="edit-organization" method="POST" action="" enctype="multipart/form-data">
           <input type="hidden" name="token" value="{{ csrf_token('edit-organization') }}">
-          <div class="mb-3">
-            <label for="organization-name" class="form-label">{{ 'name'| trans }}</label>
-            <input type="text" class="form-control" id="organization-name" name="name" value="" required>
+          <div id="image-error"></div>
+          <div class="mb-5">
+            {{ 'photo'| trans }}
+            <label for="profile-input" class="profile-label">
+              <img id="profile-img" alt="{{ 'photo' | trans }}" class="rounded-circle img-fluid" style="width: 150px; height: 150px"  src=""/>
+              <input id="profile-input" type="file" accept="image/*" name="profileImage" />
+            </label>
           </div>
           <div class="mb-3">
             <label for="organization-description" class="form-label">{{ 'description'| trans }}</label>
             <textarea class="form-control" id="organization-description" name="description" rows="3" required></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="organization-cnpj" class="form-label">{{ 'cnpj'| trans }}</label>
-            <input type="text" class="form-control" id="organization-cnpj" name="cnpj" value="">
           </div>
           <div class="mb-3">
             <label for="organization-site" class="form-label">{{ 'site'| trans }}</label>
@@ -32,14 +32,6 @@
             <label for="organization-email" class="form-label">{{ 'email'| trans }}</label>
             <input type="email" class="form-control" id="organization-email" name="email" value="">
           </div>
-          <div class="mb-3">
-            <label for="organization-tipo" class="form-label">{{ 'tipo'| trans }}</label>
-            <input type="text" class="form-control" id="organization-tipo" name="tipo" value="">
-          </div>
-          <div class="mb-3">
-            <label for="organization-company-name" class="form-label">{{ 'company_name'| trans }}</label>
-            <input type="text" class="form-control" id="organization-company-name" name="companyName" value="">
-          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -52,4 +44,5 @@
 
 {% block extra_javascripts %}
   <script src="{{ asset('js/organization/load-organization-infos.js') }}"></script>
+  <script src="{{ asset('js/image-validation.js') }}"></script>
 {% endblock %}
