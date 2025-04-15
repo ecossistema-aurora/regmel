@@ -15,7 +15,13 @@
                 <div class="col-12">
                     <div class="card card-body shadow">
                         <div class="d-flex justify-content-between">
-                            <h2>{{ 'organizations'|trans }}</h2>
+                            <h2>
+                                {% if context_title == 'my_municipalities' %}
+                                    {{ 'my_municipalities'|trans }}
+                                {% else %}
+                                    {{ 'organizations'|trans }}
+                                {% endif %}
+                            </h2>
                         </div>
 
                         <hr>
@@ -28,6 +34,7 @@
                                 <th>{{ 'cnpj'|trans }}</th>
                                 <th>{{ 'email'|trans }}</th>
                                 <th>{{ 'site'|trans }}</th>
+                                <th>{{ 'created_by'|trans }}</th>
                                 <th>{{ 'created_at'|trans }}</th>
                                 <th>{{ 'actions'|trans }}</th>
                             </tr>
@@ -40,6 +47,7 @@
                                     <td>{{ municipality.extraFields.cnpj ?? '' }}</td>
                                     <td>{{ municipality.extraFields.email ?? '' }}</td>
                                     <td>{{ municipality.extraFields.site ?? '' }}</td>
+                                    <td>{{ municipality.createdBy is defined and municipality.createdBy is not null ? municipality.createdBy.name : '-' }}</td>
                                     <td>{{ municipality.createdAt|date('d/m/Y H:i:s') }}</td>
                                     <td>
                                         <button class="btn btn-outline-warning btn-sm edit-organization" data-bs-toggle="modal" data-bs-target="#modalEditOrganization" data-id="{{ municipality.id }}" data-token="{{ token }}">{{ 'edit'|trans }}</button>

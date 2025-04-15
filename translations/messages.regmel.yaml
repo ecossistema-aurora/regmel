@@ -277,6 +277,7 @@ my_profile: Meu Perfil
 my_spaces: Meus Espaços
 my_subscriptions: Minhas Inscrições
 my_reviews: Minhas Avaliações
+my_municipalities: Meus Municípios
 modified_by: Modificado por
 
 name: Nome
@@ -434,6 +435,8 @@ user_position: Cargo do Usuário
 user_information: Informações do Usuário
 user_edit_data: Edição de dados do usuário
 unread_notifications: Notificações Não Lidas
+user_associated: Usuário sem agente associado
+
 
 view_all: Ver todas
 view_file: ver arquivo

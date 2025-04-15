@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Organization;
+use App\Enum\OrganizationTypeEnum;
 use App\Repository\Interface\OrganizationRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -30,6 +31,22 @@ class OrganizationRepository extends AbstractRepository implements OrganizationR
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function findMunicipalitiesByAgents(iterable $agents): array
+    {
+        if (empty($agents)) {
+            return [];
+        }
+
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.agents', 'a')
+            ->where('a IN (:agents)')
+            ->andWhere('o.type = :type')
+            ->setParameter('agents', is_array($agents) ? $agents : iterator_to_array($agents))
+            ->setParameter('type', OrganizationTypeEnum::MUNICIPIO->value)
+            ->getQuery()
+            ->getResult();
     }
 
     public function isOrganizationDuplicate(string $name, string $cityId): bool

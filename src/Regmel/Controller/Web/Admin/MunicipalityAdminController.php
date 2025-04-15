@@ -80,11 +80,23 @@ class MunicipalityAdminController extends AbstractAdminController
     #[Route('/painel/admin/municipios', name: 'admin_regmel_municipality_list', methods: ['GET'])]
     public function list(): Response
     {
-        $municipalities = $this->organizationService->findBy([
-            'type' => OrganizationTypeEnum::MUNICIPIO->value,
-        ]);
+        $user = $this->security->getUser();
 
-        return $this->renderOrganizationList($municipalities);
+        $agents = $user->getAgents();
+
+        if ($agents->isEmpty()) {
+            $this->addFlash('error', $this->translator->trans('user_associated'));
+
+            return $this->redirectToRoute('admin_dashboard');
+        }
+
+        $municipalities = $this->organizationService->getMunicipalitiesByAgents($agents);
+
+        return $this->render('regmel/admin/municipality/list.html.twig', [
+            'municipalities' => $municipalities,
+            'token' => $this->jwtManager->create($user),
+            'context_title' => 'my_municipalities',
+        ], parentPath: '');
     }
 
     #[Route('/painel/admin/municipios/{id}', name: 'admin_regmel_municipality_details', methods: ['GET'])]
