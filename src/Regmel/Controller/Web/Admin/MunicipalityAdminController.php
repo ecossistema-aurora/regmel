@@ -82,20 +82,19 @@ class MunicipalityAdminController extends AbstractAdminController
     {
         $user = $this->security->getUser();
 
-//        $agents = $user->getAgents();
-//
-//        if ($agents->isEmpty()) {
-//            $this->addFlash('error', $this->translator->trans('user_associated'));
-//
-//            return $this->redirectToRoute('admin_dashboard');
-//        }
-//
-//        $municipalities = $this->organizationService->getMunicipalitiesByAgents($agents);
+        //        $agents = $user->getAgents();
+        //
+        //        if ($agents->isEmpty()) {
+        //            $this->addFlash('error', $this->translator->trans('user_associated'));
+        //
+        //            return $this->redirectToRoute('admin_dashboard');
+        //        }
+        //
+        //        $municipalities = $this->organizationService->getMunicipalitiesByAgents($agents);
 
         $municipalities = $this->organizationService->findBy([
             'type' => OrganizationTypeEnum::MUNICIPIO->value,
         ]);
-
 
         return $this->render('regmel/admin/municipality/list.html.twig', [
             'municipalities' => $municipalities,
@@ -286,19 +285,17 @@ class MunicipalityAdminController extends AbstractAdminController
 
         try {
             $this->organizationService->update($id, [
-                'name' => $request->get('name'),
                 'description' => $request->get('description'),
-                'extraFields' => array_intersect_key($request->request->all(), array_flip(
-                    [
-                        'cnpj',
-                        'site',
-                        'phone',
-                        'email',
-                        'tipo',
-                        'companyName',
-                    ]
-                )),
+                'extraFields' => array_intersect_key($request->request->all(), array_flip([
+                    'site',
+                    'telefone',
+                    'email',
+                ])),
             ]);
+
+            if ($uploadedImage = $request->files->get('profileImage')) {
+                $this->organizationService->updateImage($id, $uploadedImage);
+            }
 
             $this->addFlashSuccess($this->translator->trans('view.organization.message.updated'));
         } catch (TypeError|Exception $exception) {
