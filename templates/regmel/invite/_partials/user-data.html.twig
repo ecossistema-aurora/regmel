@@ -31,13 +31,20 @@
 </div>
 
 <div class="row">
-    <div class="col-6 mb-3">
+    <div class="col-6">
         <label for="password" class="form-label">{{ 'password' | trans }}</label>
         <input type="password" class="form-control" minlength="8" id="password" name="password" placeholder={{ 'password' | trans}} autocomplete="new-password" required>
     </div>
-    <div class="col-6 mb-3">
+
+    <div class="col-6">
         <label for="confirm_password" class="form-label">{{ 'confirm_password' | trans }}</label>
         <input type="password" class="form-control" minlength="8" id="confirm_password" name="confirm_password" placeholder={{ 'confirm_password' | trans}} autocomplete="new-password" required>
+    </div>
+
+    <div class="col-12">
+        <small class="form-text text-secondary fw-semibold">
+            {{ 'password_rules' | trans }}
+        </small>
     </div>
 </div>
 <div class="row mb-3">

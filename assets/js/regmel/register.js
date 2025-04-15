@@ -249,7 +249,7 @@ function validatePhone(phone) {
 }
 
 function validatePassword(password) {
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     return passwordPattern.test(password) && password.length <= 255;
 }
 
