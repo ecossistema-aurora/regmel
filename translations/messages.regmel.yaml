@@ -261,10 +261,12 @@ mark_as_read: Marcar como lida
 mei: MEI (CNPJ do MEI)
 menu: Menu do Painel de Controle
 medium: Médio
+member_details: Detalhes do membro
 message: Mensagem
 months: meses
 most_recent: Mais Recente
 municipality: Município
+municipality_found: Município não encontrado
 my_account: Minha Conta
 my_agents: Meus Agentes Promotores
 my_apps: Meus Aplicativos
