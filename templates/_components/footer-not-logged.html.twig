@@ -219,11 +219,14 @@
 
     <div class="text-center pt-3">
         <div class="container d-flex justify-content-between align-items-center">
-            <span class="font-size-14">{{ 'footer.platform_created'|trans }} <strong>aurora</strong> {{ 'footer.and_developed'|trans }} <strong>{{ env.aurora.author }}</strong></span>
-            <a href="" class=" centered-icon-text nav-link">
-                <span class="ms-3 font-size-14 me-2">{{ 'footer.visit_repository'|trans }}</span>
-                <img alt="Github" src="{{ asset('img/icone-github-ligth.png') }}">
-            </a>
+            <span class="font-size-14">{{ 'footer.platform_created'|trans }} <strong>{{ env.aurora.author }}</strong> {{ 'footer.and_developed'|trans }} <a class="fw-bold text-white" href="https://github.com/ecossistema-aurora/aurora">Aurora</a></span>
+
+            {% if (env.aurora.visit_repository == 'true') %}
+                <a href="" class=" centered-icon-text nav-link">
+                    <span class="ms-3 font-size-14 me-2">{{ 'footer.visit_repository'|trans }}</span>
+                    <img alt="Github" src="{{ asset('img/icone-github-ligth.png') }}">
+                </a>
+            {% endif %}
         </div>
     </div>
 </footer>

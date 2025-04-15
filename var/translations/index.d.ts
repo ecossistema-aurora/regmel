@@ -239,6 +239,7 @@ export declare const LONG_DESCRIPTION: Message<{ 'messages': { parameters: NoPar
 export declare const LGPD_MODAL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const MAP: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MANAGEMENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const MANAGER_NAME: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const MANDATORY_FIELDS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MASCULINE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MAROONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -382,6 +383,7 @@ export declare const RESPONSIBLE_AGENT: Message<{ 'messages': { parameters: NoPa
 export declare const RESET: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const RESET_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const READ_NOTIFICATIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const NEW_REGISTRATION_NOTIFICATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const SELECTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const TAGS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TERM: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;

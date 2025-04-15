@@ -544,13 +544,13 @@ modal_confirm_remove:
   message: Esta ação é irreversível, tem certeza que deseja continuar?
 
 footer:
-  and_developed: e desenvolvida por
+  and_developed: utilizando a tecnologia
   contact_support: ''
   control_panel: Painel de controle
   help: Precisa de ajuda?
   image_authorization: Autorização de uso de imagem
   notices_opportunities: Editais e Oportunidades
-  platform_created: plataforma criada pela comunidade
+  platform_created: Plataforma desenvolvida pela
   privacy_policy: Termos de uso e Política de privacidade
   send_email: Envie um email para
   visit_repository: visite o repositório
