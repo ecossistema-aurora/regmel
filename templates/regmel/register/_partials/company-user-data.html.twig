@@ -42,7 +42,7 @@
 </div>
 
 <div class="row">
-    <div class="col-6 mb-3">
+    <div class="col-6">
         <label for="password" class="form-label">{{ 'password' | trans }}</label>
         <input type="password"
                class="form-control"
@@ -54,7 +54,7 @@
                required
         >
     </div>
-    <div class="col-6 mb-3">
+    <div class="col-6">
         <label for="confirm_password" class="form-label">{{ 'confirm_password' | trans }}</label>
         <input type="password"
                class="form-control"
@@ -64,6 +64,11 @@
                autocomplete="new-password"
                required
         >
+    </div>
+    <div class="col-12">
+        <small class="form-text text-secondary fw-semibold">
+            {{ 'password_rules' | trans }}
+        </small>
     </div>
 </div>
 

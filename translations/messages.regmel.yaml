@@ -348,6 +348,7 @@ profile: Perfil
 provided_violates: Os dados fornecidos violam uma ou mais restrições.
 password: Senha
 password_strength: Força da senha
+password_rules:  A senha deve conter pelo menos 8 caracteres, incluindo 1 letra maiúscula, 1 minúscula, 1 número e 1 caractere especial.
 participants: Participantes
 personal_data: Dados pessoais
 person_disabled: Pessoa com Deficiência

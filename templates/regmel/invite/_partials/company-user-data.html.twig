@@ -12,13 +12,26 @@
 </div>
 
 <div class="row">
-    <div class="col-6 mb-3">
+    <div class="col-6">
         <label for="userEmail" class="form-label">{{ 'email' | trans }}</label>
         <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder={{ 'email' | trans}} required>
     </div>
-    <div class="col-6 mb-3">
+    <div class="col-6">
         <label for="password" class="form-label">{{ 'password' | trans }}</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder={{ 'password' | trans}} autocomplete="new-password" required>
+        <input type="password"
+               class="form-control"
+               minlength="8"
+               id="password"
+               name="password"
+               placeholder={{ 'password' | trans}}
+               autocomplete="new-password"
+               required
+        >
+    </div>
+    <div class="col-12">
+        <small class="form-text text-secondary fw-semibold">
+            {{ 'password_rules' | trans }}
+        </small>
     </div>
 </div>
 
