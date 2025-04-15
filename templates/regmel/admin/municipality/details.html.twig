@@ -199,7 +199,20 @@
                                     <tbody>
                                     {% for agent in municipality.agents %}
                                         <tr>
-                                            <td> {{ agent.name }}</td>
+                                            <td>
+                                                <a href="javascript:void(0);"
+                                                   class="view-member"
+                                                   data-info='{{ {
+                                                       name: agent.name,
+                                                       email: agent.extraFields.email ?? '',
+                                                       cpf: agent.extraFields.cpf ?? '',
+                                                       cargo: agent.extraFields.cargo ?? '',
+                                                       telefone: agent.extraFields.telefone ?? '',
+                                                       extraFields: agent.extraFields ?? {}
+                                                   }|json_encode|e('html_attr') }}'>
+                                                    {{ agent.name }}
+                                                </a>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -220,9 +233,27 @@
             </div>
         </div>
     </section>
+    <div class="modal fade" id="memberDetailsModal" tabindex="-1" aria-labelledby="memberDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="memberDetailsModalLabel">{{ 'member_details' | trans }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <div id="member-details-content">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'close' | trans }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block extra_javascripts %}
     {{ parent() }}
     <script type="module" src="{{ asset('js/modal-timeline.js') }}"></script>
+    <script type="module" src="{{ asset('js/regmel/modal-member-details.js') }}"></script>
 {% endblock %}

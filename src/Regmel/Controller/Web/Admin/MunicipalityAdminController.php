@@ -107,6 +107,10 @@ class MunicipalityAdminController extends AbstractAdminController
             'type' => OrganizationTypeEnum::MUNICIPIO->value,
         ]);
 
+        if (null === $municipality) {
+            throw $this->createNotFoundException($this->translator->trans('municipality_found'));
+        }
+
         $timeline = $this->documentService->getEventsByEntityId($id);
 
         return $this->render('regmel/admin/municipality/details.html.twig', [
