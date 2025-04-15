@@ -35,15 +35,15 @@
                             </thead>
                             <tbody>
                             {% for company in companies %}
-                                {% if company.extraFields.tipo == 'OSC' %}
-                                    {% set label = 'bg-primary' %}
+                                {% if company.extraFields.tipo == 'Empresa' %}
+                                    {% set label = 'bg-dark' %}
                                 {% else %}
                                     {% set label = 'bg-info' %}
                                 {% endif %}
 
                                 <tr>
                                     <td><a href="{{ path('admin_regmel_company_details', {id: company.id}) }}">{{ company.name }}</a></td>
-                                    <td><span class="badge bg-dark">{{ company.extraFields.tipo ?? '-' }}</span></td>
+                                    <td><span class="badge {{ label }}">{{ company.extraFields.tipo ?? '-' }}</span></td>
                                     <td>{{ company.description ?? '-' }}</td>
                                     <td>{{ company.extraFields.cnpj ?? '-' }}</td>
                                     <td>{{ company.extraFields.telefone ?? '-' }}</td>

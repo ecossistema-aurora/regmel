@@ -1,6 +1,6 @@
 name: Minha Casa Melhor
 author: Secretaria Nacional de Periferias
-email: snp.gb@cidades.gov.br
+email: snp.gab@cidades.gov.br
 visit_repository: false
 logo:
   horizontal:
@@ -113,6 +113,7 @@ dashboard:
     municipalities:
       acl: ['ROLE_MUNICIPALITY', 'ROLE_ADMIN', 'ROLE_MANAGER']
       title: Municípios
+      subtitle: Municípios
       icon: place
       color: "#F59E00"
       action:
@@ -121,7 +122,8 @@ dashboard:
       total_key: totalCities
     documents:
       acl: ['ROLE_MUNICIPALITY', 'ROLE_ADMIN', 'ROLE_MANAGER']
-      title: Ofícios
+      title: Documentos
+      subtitle: Termos de adesão para Aprovação
       icon: description
       color: "#8e7cc3"
       action:
@@ -131,6 +133,7 @@ dashboard:
     proposals:
       acl: ['ROLE_MUNICIPALITY']
       title: Propostas
+      subtitle: Propostas
       icon: check_circle
       color: "#F59E00"
       action:
@@ -140,6 +143,7 @@ dashboard:
     opportunities:
       acl: ['ROLE_ADMIN', 'ROLE_MANAGER']
       title: Credenciamentos
+      subtitle: Credenciamentos
       icon: lightbulb
       color: "#E70DCB"
       action:
@@ -149,6 +153,7 @@ dashboard:
     companies:
       acl: ['ROLE_COMPANY', 'ROLE_ADMIN', 'ROLE_MANAGER']
       title: Empresas/OSCs
+      subtitle: Empresas/OSCs
       icon: corporate_fare
       color: "#6A5ACD"
       action:
@@ -158,6 +163,7 @@ dashboard:
     users:
       acl: ['ROLE_ADMIN', 'ROLE_MANAGER']
       title: Usuários
+      subtitle: Usuários
       icon: person
       color: "#ff3300"
       action:

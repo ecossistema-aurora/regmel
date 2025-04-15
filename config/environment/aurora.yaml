@@ -98,6 +98,7 @@ dashboard:
     agents:
       acl: [ROLE_USER]
       title: Agentes
+      subtitle: Agentes
       icon: group
       color: "#F59E00"
       action:
@@ -107,6 +108,7 @@ dashboard:
     opportunities:
       acl: [ROLE_USER]
       title: Oportunidades
+      subtitle: Oportunidades
       icon: lightbulb
       color: "#E70DCB"
       action:
@@ -116,6 +118,7 @@ dashboard:
     organizations:
       acl: [ROLE_USER]
       title: Organizações
+      subtitle: Organizações
       icon: corporate_fare
       color: "#6A5ACD"
       action:
@@ -125,6 +128,7 @@ dashboard:
     events:
       acl: [ROLE_USER]
       title: Eventos
+      subtitle: Eventos
       icon: event
       color: "#36B39E"
       action:
@@ -134,6 +138,7 @@ dashboard:
     spaces:
       acl: [ROLE_USER]
       title: Espaços
+      subtitle: Espaços
       icon: apartment
       color: "#22A638"
       action:
@@ -143,6 +148,7 @@ dashboard:
     initiatives:
       acl: [ROLE_USER]
       title: Iniciativas
+      subtitle: Iniciativas
       icon: article
       color: "#0074C1"
       action:

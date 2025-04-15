@@ -19,7 +19,7 @@
                 </div>
                 <div class="align-self-center d-flex flex-column align-items-center gap-0">
                     <span class="fw-bold fs-1">{{ totals[item.total_key] }}</span>
-                    <span class="fw-bold">{{ item.title | trans }}</span>
+                    <span class="fw-bold">{{ item.subtitle | trans }}</span>
                 </div>
                 <a role="button" href="{{ path(item.action.route) }}" class="d-flex align-items-center justify-content-center">
                     <i class="material-icons">{{ item.action.text }}</i>
