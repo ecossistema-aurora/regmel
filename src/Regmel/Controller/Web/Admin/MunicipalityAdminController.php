@@ -82,15 +82,20 @@ class MunicipalityAdminController extends AbstractAdminController
     {
         $user = $this->security->getUser();
 
-        $agents = $user->getAgents();
+//        $agents = $user->getAgents();
+//
+//        if ($agents->isEmpty()) {
+//            $this->addFlash('error', $this->translator->trans('user_associated'));
+//
+//            return $this->redirectToRoute('admin_dashboard');
+//        }
+//
+//        $municipalities = $this->organizationService->getMunicipalitiesByAgents($agents);
 
-        if ($agents->isEmpty()) {
-            $this->addFlash('error', $this->translator->trans('user_associated'));
+        $municipalities = $this->organizationService->findBy([
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
+        ]);
 
-            return $this->redirectToRoute('admin_dashboard');
-        }
-
-        $municipalities = $this->organizationService->getMunicipalitiesByAgents($agents);
 
         return $this->render('regmel/admin/municipality/list.html.twig', [
             'municipalities' => $municipalities,

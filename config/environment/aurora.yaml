@@ -1,6 +1,7 @@
 name: Aurora
 author: SECULT Ceará
 email: suporteaurora@email.com
+visit_repository: true
 logo:
   horizontal:
     path: img/aurora-horizontal.png

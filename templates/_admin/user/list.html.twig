@@ -33,14 +33,14 @@
                                     <td>{{ item.email }}</td>
                                     <td>
                                         <a
-                                            data-src="{{ asset(item.image ?? 'img/allan.png') }}"
+                                            data-src="{{ asset(item.image ?? 'img/ada-lovelace.png') }}"
                                             data-alt="{{ item.name }} Photo"
                                             data-bs-toggle="modal"
                                             data-bs-target="#modal-photo"
                                             onclick="showPhoto(this)"
                                             href="#"
                                         >
-                                            <img src="{{ asset(item.image ?? 'img/allan.png') }}"  width="50px" alt="{{ item.name }} Photo">
+                                            <img src="{{ asset(item.image ?? 'img/ada-lovelace.png') }}" class="rounded-circle" width="50px" alt="{{ item.name }} Photo">
                                         </a>
                                     </td>
                                     <td>{{ item.createdAt.format('d/m/Y H:i:s') }}</td>
