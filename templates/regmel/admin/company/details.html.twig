@@ -29,7 +29,7 @@
                         <div class="d-flex align-items-center">
                             <a class="centered-icon-text nav-link" id="pills-list-tab" data-bs-toggle="pill" href="#pills-list" role="tab" aria-controls="pills-list" aria-selected="true">
                                 <i class="material-icons">list</i>
-                                <span class="ms-2 font-title">Anuencias</span>
+                                <span class="ms-2 font-title">Propostas</span>
                             </a>
                         </div>
                     </li>
@@ -59,7 +59,67 @@
                             </p>
                         </div>
                     </div>
-                    <div class="tab-pane fade pt-3" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab" tabindex="0">Conteúdo 1</div>
+                    <div class="tab-pane fade pt-3" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab" tabindex="0">
+
+                        <div class="alert alert-info">
+                            <i class="material-icons">warning</i>
+
+                            <strong>Atenção</strong>
+                            Consulte áreas urbanas no <a href="" target="_blank">Mapa das Periferias</a>
+                            <hr>
+                            Acesse aqui o <a href="">Guia de Consulta</a>
+                        </div>
+
+                        <table class="table table-hover table-striped mt-3">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Municipio</th>
+                                <th>Área</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Titulo da Proposta</td>
+                                <td>Municipio W</td>
+                                <td><Setor>Area Y</td>
+                                <td>
+                                    <span class="badge bg-dark">Sem Adesão do Municipio</span>
+                                </td>
+                                <td>
+                                    <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Titulo da Proposta</td>
+                                <td>Municipio Y</td>
+                                <td><Setor>Area Y</td>
+                                <td>
+                                    <span class="badge bg-danger">Não Anuído</span>
+                                </td>
+                                <td>
+                                    <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Titulo da Proposta</td>
+                                <td>Municipio Z</td>
+                                <td><Setor>Area Z</td>
+                                <td>
+                                    <span class="badge bg-success">Anuído</span>
+                                </td>
+                                <td>
+                                    <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
+                                    <a href="" class="btn btn-outline-warning btn-sm">Editar</a>
+                                    <a href="" class="btn btn-outline-success btn-sm">Reenviar</a>
+                                    <a href="" class="btn btn-outline-danger btn-sm">Excluir</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="tab-pane fade pt-3" id="pills-timeline" role="tabpanel" aria-labelledby="pills-timeline-tab" tabindex="0">
                         {% include "regmel/admin/company/timeline.html.twig" %}
                     </div>
