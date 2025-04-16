@@ -111,6 +111,8 @@ class MunicipalityAdminController extends AbstractAdminController
             'type' => OrganizationTypeEnum::MUNICIPIO->value,
         ]);
 
+        $createdById = $municipality->getCreatedBy()->getId()->toRfc4122();
+
         if (null === $municipality) {
             throw $this->createNotFoundException($this->translator->trans('municipality_found'));
         }
@@ -120,6 +122,7 @@ class MunicipalityAdminController extends AbstractAdminController
         return $this->render('regmel/admin/municipality/details.html.twig', [
             'municipality' => $municipality,
             'timeline' => $timeline,
+            'createdById' => $createdById,
         ], parentPath: '');
     }
 
