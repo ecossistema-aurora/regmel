@@ -52,8 +52,8 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <div class="d-flex align-items-center">
-                                    <a class="centered-icon-text nav-link" id="pills-map-tab" data-bs-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="false">
-                                        <i class="material-icons">map</i>
+                                    <a class="centered-icon-text nav-link" id="pills-members-tab" data-bs-toggle="pill" href="#pills-members" role="tab" aria-controls="pills-members" aria-selected="false">
+                                        <i class="material-icons">group</i>
                                         <span class="ms-2 font-title">Membros</span>
                                     </a>
                                 </div>
@@ -167,7 +167,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade pt-3" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab" tabindex="0">Conteúdo 1</div>
-                            <div class="tab-pane fade pt-3" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab" tabindex="0">
+                            <div class="tab-pane fade pt-3" id="pills-members" role="tabpanel" aria-labelledby="pills-members-tab" tabindex="0">
                                 <div class="modal fade" id="modalInvite" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -195,12 +195,19 @@
                                     </div>
                                 </div>
 
-                                <a href="" data-bs-toggle="modal" data-bs-target="#modalInvite" class="btn btn-outline-success btn-sm">Convidar</a>
+                                {% if app.user.agents.first.id == createdById %}
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#modalInvite" class="btn btn-outline-success btn-sm">Convidar</a>
+                                {% endif %}
 
                                 <table class="table table-hover table-striped mt-3">
                                     <thead class="table-dark">
                                     <tr>
                                         <th>Nome</th>
+                                        <th>
+                                        {% if app.user.agents.first.id == createdById %}
+                                            Ações
+                                        {% endif %}
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -218,12 +225,21 @@
                                                        extraFields: agent.extraFields ?? {}
                                                    }|json_encode|e('html_attr') }}'>
                                                     {{ agent.name }}
+                                                    {% if agent.id == createdById %}
+                                                        <span class="badge bg-primary ms-2">Criador</span>
+                                                    {% endif %}
                                                 </a>
+                                            </td>
+                                            <td>
+                                                {% if app.user.agents.first.id == createdById and agent.id != createdById %}
+                                                    <button type="submit" class="btn btn-danger btn-sm">Remover</button>
+                                                {% endif %}
                                             </td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
                                 </table>
+
                             </div>
                             <div class="tab-pane fade pt-3" id="pills-files" role="tabpanel" aria-labelledby="pills-files-tab" tabindex="0">
                                 <a href="{{ path('regmel_municipality_form_file', {id: municipality.id}) }}" target="_blank">
