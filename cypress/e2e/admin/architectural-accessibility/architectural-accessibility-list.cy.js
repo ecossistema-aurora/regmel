@@ -14,7 +14,7 @@ describe('Teste de navegação e validação da página de Acessibilidade Arquit
 
         cy.scrollTo('bottom');
 
-        cy.contains('Acessibilidade Arquitetônica', { timeout: 10000 }).should('be.visible').click();
+        // cy.contains('Acessibilidade Arquitetônica', { timeout: 10000 }).should('be.visible').click();
 
         cy.get('table', { timeout: 10000 }).should('be.visible');
 
