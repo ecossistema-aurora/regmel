@@ -221,8 +221,13 @@ input_search: Busque por palavras-chave
 inscriptions: Inscrições
 introduction: Apresentação
 inactive: Inativo
+invite_accept: Convite aceito, Veja no seu email o link para confirmar sua conta,
+invite_invalid: Convite invalido
 invite_sent: Convite enviado
 invite_to_municipality: Convite para município
+invite_to_company: Convite para empresa
+invite_not_belongs_to_you: Esse convite não pertence a você
+this_member_belongs_to_organization: Esse membro pertence a organização
 is_itinerant: É agente itinerante?
 is-accessible: O espaço é acessível?
 invalid_credentials: E-mail ou senha incorretos

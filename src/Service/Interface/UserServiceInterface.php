@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\Interface;
 
+use App\Entity\Agent;
 use App\Entity\User;
 use Symfony\Component\Uid\Uuid;
 
@@ -20,4 +21,6 @@ interface UserServiceInterface
     public function update(Uuid $id, array $user): User;
 
     public function authenticate(User $user, $password): bool;
+
+    public function getMainAgent(User $user): Agent;
 }

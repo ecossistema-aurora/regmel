@@ -11,7 +11,7 @@
         <div class="management-content w-100 p-4">
             <div class="card card-body shadow">
                 <div class="d-flex justify-content-between">
-                    <h2>{{ 'company'|trans }} - {{ details.name }}</h2>
+                    <h2>{{ 'company'|trans }} - {{ company.name }}</h2>
                 </div>
 
                 <hr>
@@ -27,9 +27,17 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <div class="d-flex align-items-center">
-                            <a class="centered-icon-text nav-link" id="pills-list-tab" data-bs-toggle="pill" href="#pills-list" role="tab" aria-controls="pills-list" aria-selected="true">
+                            <a class="centered-icon-text nav-link" id="pills-list-tab" data-bs-toggle="pill" href="#pills-list" role="tab" aria-controls="pills-list" aria-selected="false">
                                 <i class="material-icons">list</i>
                                 <span class="ms-2 font-title">Propostas</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <div class="d-flex align-items-center">
+                            <a class="centered-icon-text nav-link" id="pills-members-tab" data-bs-toggle="pill" href="#pills-members" role="tab" aria-controls="pills-members" aria-selected="false">
+                                <i class="material-icons">groups</i>
+                                <span class="ms-2 font-title">Membros</span>
                             </a>
                         </div>
                     </li>
@@ -46,21 +54,20 @@
                     <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab" tabindex="0">
                         <div class="bd-callout bd-callout-secondary">
                             <p>
-                                <strong>CNPJ: </strong>{{ details.extraFields.cnpj ?? '' }}
+                                <strong>CNPJ: </strong>{{ company.extraFields.cnpj ?? '' }}
                             </p>
                             <p>
-                                <strong>Email: </strong>{{ details.extraFields.email ?? '' }}
+                                <strong>Email: </strong>{{ company.extraFields.email ?? '' }}
                             </p>
                             <p>
-                                <strong>Site: </strong>{{ details.extraFields.site ?? '' }}
+                                <strong>Site: </strong>{{ company.extraFields.site ?? '' }}
                             </p>
                             <p>
-                                <strong>Telefone: </strong>{{ details.extraFields.telefone ?? '' }}
+                                <strong>Telefone: </strong>{{ company.extraFields.telefone ?? '' }}
                             </p>
                         </div>
                     </div>
                     <div class="tab-pane fade pt-3" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab" tabindex="0">
-
                         <div class="alert alert-info">
                             <i class="material-icons">warning</i>
 
@@ -84,7 +91,7 @@
                             <tr>
                                 <td>Titulo da Proposta</td>
                                 <td>Municipio W</td>
-                                <td><Setor>Area Y</td>
+                                <td>Area Y</td>
                                 <td>
                                     <span class="badge bg-dark">Sem Adesão do Municipio</span>
                                 </td>
@@ -95,7 +102,7 @@
                             <tr>
                                 <td>Titulo da Proposta</td>
                                 <td>Municipio Y</td>
-                                <td><Setor>Area Y</td>
+                                <td>Area Y</td>
                                 <td>
                                     <span class="badge bg-danger">Não Anuído</span>
                                 </td>
@@ -106,7 +113,7 @@
                             <tr>
                                 <td>Titulo da Proposta</td>
                                 <td>Municipio Z</td>
-                                <td><Setor>Area Z</td>
+                                <td>Area Z</td>
                                 <td>
                                     <span class="badge bg-success">Anuído</span>
                                 </td>
@@ -120,6 +127,76 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="tab-pane fade pt-3" id="pills-members" role="tabpanel" aria-labelledby="pills-members-tab" tabindex="0">
+                        <div class="modal fade" id="modalInvite" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Convidar agente</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{ path('admin_regmel_company_invite_agent', {id: company.id}) }}" method="post">
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="name" class="mb-1">{{ 'name'|trans }}</label>
+                                                <input type="text" class="form-control" id="name" name="name" data-cy="name" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email" class="mb-1">{{ 'email'|trans }}</label>
+                                                <input type="text" class="form-control" id="email" name="email" data-cy="email" required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-primary">Convidar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if app.user.agents.first.id == createdById %}
+                            <a href="" data-bs-toggle="modal" data-bs-target="#modalInvite" class="btn btn-outline-success btn-sm">Convidar</a>
+                        {% endif %}
+
+                        <table class="table table-hover table-striped mt-3">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>Nome</th>
+                                <th>
+                                    {% if app.user.agents.first.id == createdById %}
+                                        Ações
+                                    {% endif %}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for agent in company.agents %}
+                                <tr>
+                                    <td>
+                                        <a href="javascript:void(0);"
+                                           class="view-member"
+                                           data-info='{{ {
+                                               name: agent.name,
+                                               email: agent.extraFields.email ?? '',
+                                               cpf: agent.extraFields.cpf ?? '',
+                                               cargo: agent.extraFields.cargo ?? '',
+                                               telefone: agent.extraFields.telefone ?? '',
+                                               extraFields: agent.extraFields ?? {}
+                                           }|json_encode|e('html_attr') }}'>
+                                            {{ agent.name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {% if app.user.agents.first.id == createdById and agent.id != createdById %}
+                                            <button type="submit" class="btn btn-danger btn-sm">Remover</button>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="tab-pane fade pt-3" id="pills-timeline" role="tabpanel" aria-labelledby="pills-timeline-tab" tabindex="0">
                         {% include "regmel/admin/company/timeline.html.twig" %}
                     </div>
@@ -127,9 +204,27 @@
             </div>
         </div>
     </section>
+    <div class="modal fade" id="memberDetailsModal" tabindex="-1" aria-labelledby="memberDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="memberDetailsModalLabel">{{ 'member_details' | trans }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <div id="member-details-content">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'close' | trans }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block extra_javascripts %}
     {{ parent() }}
     <script type="module" src="{{ asset('js/modal-timeline.js') }}"></script>
+    <script type="module" src="{{ asset('js/regmel/modal-member-details.js') }}"></script>
 {% endblock %}

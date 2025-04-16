@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\DTO\UserDto;
+use App\Entity\Agent;
 use App\Entity\User;
 use App\Exception\User\UserResourceNotFoundException;
 use App\Repository\Interface\UserRepositoryInterface;
@@ -155,5 +156,10 @@ readonly class UserService extends AbstractEntityService implements UserServiceI
     public function authenticate(User $user, $password): bool
     {
         return $this->userPasswordHasher->isPasswordValid($user, $password);
+    }
+
+    public function getMainAgent(User $user): Agent
+    {
+        return $this->agentService->getMainAgentByEmail($user->getEmail());
     }
 }

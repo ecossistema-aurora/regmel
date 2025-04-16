@@ -206,6 +206,10 @@ class User extends AbstractEntity implements UserInterface, PasswordAuthenticate
 
     public function addRole(string $role): void
     {
+        if (true === in_array($role, $this->roles, true)) {
+            return;
+        }
+
         $this->roles[] = $role;
     }
 
