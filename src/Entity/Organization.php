@@ -235,6 +235,11 @@ class Organization extends AbstractEntity
         $this->deletedAt = $deletedAt;
     }
 
+    public function hasAgent(Agent $agent): bool
+    {
+        return $this->agents->contains($agent);
+    }
+
     public function toArray(): array
     {
         return [
