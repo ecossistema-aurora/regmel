@@ -200,7 +200,7 @@ class MunicipalityAdminController extends AbstractAdminController
             $this->inviteService->confirm($invite, $agent);
         }
 
-        $this->addFlashSuccess('Convite aceito');
+        $this->addFlashSuccess($this->translator->trans('invite_created'));
 
         return $this->redirectToRoute('admin_regmel_municipality_details', [
             'id' => $invite->getHost()->getId()->toRfc4122(),
