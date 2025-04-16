@@ -951,7 +951,7 @@ img.card-images__entity-details {
 }
 
 .side-navigation {
-    height: 100vh;
+    min-height: 77vh;
 }
 
 @media (min-width: 1400px) {
