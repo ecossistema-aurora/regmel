@@ -151,7 +151,21 @@ direction BT
         boolean with_organization
         boolean with_space
     }
+    class state {
+       uuid id
+       uuid capital_id
+       varchar(100) name
+       varchar(2) acronym
+       varchar(20) region
+    }
+    class city {
+       uuid id
+       uuid state_id
+       varchar(100) name
+       integer city_code
+    }
 
+    city --> state : state_id
     event  -->  agent : created_by_id
     event  -->  agent : agent_group_id
     event  -->  event : parent_id
@@ -171,6 +185,7 @@ direction BT
     organizations_agents  -->  organization : organization_id
     space  -->  agent : created_by_id
     space  -->  space : parent_id
+    state --> city : capital_id
     inscription_opportunity --> agent : agent_id
     inscription_opportunity --> opportunity : opportunity_id
     phase --> agent : created_by_id
