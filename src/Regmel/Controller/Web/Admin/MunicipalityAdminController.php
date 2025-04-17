@@ -297,7 +297,6 @@ class MunicipalityAdminController extends AbstractAdminController
 
         try {
             $this->organizationService->update($id, [
-                'name' => $request->get('name'),
                 'description' => $request->get('description'),
                 'extraFields' => array_merge(
                     $organization->getExtraFields(),
