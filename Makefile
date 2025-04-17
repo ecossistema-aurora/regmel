@@ -1,6 +1,14 @@
 # Makefile para automatizar setup do projeto PHP com Docker
 
+include .env
+
 .PHONY: up install_dependencies generate_proxies migrate_database load_fixtures install_frontend compile_frontend generate_keys
+
+# Função para bloquear comandos em produção
+guard-not-prod:
+ifeq ($(APP_ENV),prod)
+	$(error Este comando não pode ser executado em produção)
+endif
 
 # Inicia os serviços Docker em modo detached
 up:
@@ -38,7 +46,7 @@ migrate_odm:
 	docker compose exec -T php bash -c "php bin/console app:mongo:migrations:execute"
 
 # Executa as fixtures de dados
-load_fixtures:
+load_fixtures: guard-not-prod
 	docker compose exec -T php bash -c "php bin/console doctrine:fixtures:load -n --purge-exclusions=city --purge-exclusions=state"
 
 # Instala dependências do frontend
@@ -50,7 +58,7 @@ compile_frontend:
 	docker compose exec -T php bash -c "php bin/console asset-map:compile"
 
 # Executa as fixtures de dados e os testes de front-end
-tests_front:
+tests_front: guard-not-prod
 	make load_fixtures
 	mv config/environment/aurora.regmel.yaml config/environment/aurora.regmel_test.yaml
 	sed -i 's/default_locale: regmel/default_locale: pt-br/' config/packages/translation.yaml
@@ -63,14 +71,14 @@ tests_front:
 	sed -i 's/organizacoes/municipios/' config/routes/admin.yaml
 
 # Executa as fixtures de dados e os testes de back-end
-tests_back:
+tests_back:	guard-not-prod
 	if [ "$(fixtures)" != "no" ]; then \
 		make load_fixtures;\
 	fi;
 	docker compose exec -T php bash -c "php bin/paratest $(filename) --no-coverage"
 
 # Executa as fixtures de dados e os testes de back-end
-tests_back_coverage:
+tests_back_coverage: guard-not-prod
 	if [ "$(fixtures)" != "no" ]; then \
 		make load_fixtures;\
 	fi;
@@ -81,7 +89,7 @@ reset:
 	docker compose exec -T php bash -c "php bin/console cache:clear"
 
 # Limpa a cache e o banco
-reset-deep:
+reset-deep:	guard-not-prod
 	rm -rf var/storage
 	rm -rf assets/uploads
 	rm -rf assets/vendor
@@ -108,7 +116,7 @@ style:
 create-admin-user:
 	docker compose exec -T php bash -c "php bin/console app:create-admin-user"
 
-demo-regmel:
+demo-regmel: guard-not-prod
 	@echo "\n"
 	@echo ">>> Limpando dados residuais na velocidade da luz ✨"
 	@make reset-deep > /dev/null 2>&1
@@ -130,4 +138,4 @@ copy_dist:
 	cp phpunit.xml.dist phpunit.xml
 
 # Comando para rodar todos os passos juntos
-setup: up install_dependencies copy_dist reset-deep generate_proxies migrate_database load_fixtures install_frontend compile_frontend generate_keys
+setup: guard-not-prod up install_dependencies copy_dist reset-deep generate_proxies migrate_database load_fixtures install_frontend compile_frontend generate_keys
