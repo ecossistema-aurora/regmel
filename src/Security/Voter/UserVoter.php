@@ -7,35 +7,30 @@ namespace App\Security\Voter;
 use App\Entity\User;
 use App\Enum\UserRolesEnum;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 
 final class UserVoter extends AbstractVoter
 {
     protected array $actions = [
-        'list',
+        'get',
+        'edit',
     ];
 
     protected string $class = User::class;
 
     private array $allowedRoles = [
         UserRolesEnum::ROLE_ADMIN->value,
+        UserRolesEnum::ROLE_MANAGER->value,
     ];
 
-    public function __construct(
-        private readonly AccessDecisionManagerInterface $accessDecisionManager,
-    ) {
-    }
-
+    /**
+     * @param User $subject
+     */
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
-        if (true === is_object($subject) && false === $subject instanceof $this->class) {
-            return false;
-        }
+        $user = $token->getUser();
 
-        if ($this->accessDecisionManager->decide($token, $this->allowedRoles)) {
-            return true;
-        }
+        $isUserAdminOrManager = false === empty(array_intersect($user->getRoles(), $this->allowedRoles));
 
-        return false;
+        return $isUserAdminOrManager || $user == $subject;
     }
 }

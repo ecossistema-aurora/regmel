@@ -1,7 +1,7 @@
 describe('Teste de navegação, validação e edição da página de Selos', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
-        cy.login('saracamilo@example.com', 'Aurora@2024');
+        cy.login('alessandrofeitoza@example.com', 'Aurora@2024');
 
         Cypress.on('uncaught:exception', (err) => {
             if (err.message.includes('algum-erro-específico')) {

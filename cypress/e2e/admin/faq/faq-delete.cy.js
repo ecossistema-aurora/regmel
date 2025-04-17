@@ -1,7 +1,7 @@
 describe('Painel de Controle - Página de listar FAQs', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
-        cy.login('kellymoura@example.com', 'Aurora@2024');
+        cy.login('alessandrofeitoza@example.com', 'Aurora@2024');
         cy.visit('/painel/faq');
     });
 

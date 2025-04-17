@@ -1,7 +1,7 @@
 describe('Criar um espaço e atualizar o dashboard', () => {
     beforeEach(() => {
         cy.visit('/login');
-        cy.login('saracamilo@example.com', 'Aurora@2024');
+        cy.login('alessandrofeitoza@example.com', 'Aurora@2024');
         cy.url().should('include', '/');
     });
 

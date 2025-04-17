@@ -1,13 +1,13 @@
 describe('Painel de Controle - Página de timeline das Oportunidades', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
-        cy.login('kellymoura@example.com', 'Aurora@2024');
+        cy.login('alessandrofeitoza@example.com', 'Aurora@2024');
     });
 
     it('Garante que a página de timeline existe e que exibe os detalhes corretamente', () => {
         cy.visit('painel/oportunidades/');
 
-        cy.contains('Timeline').click({force: true});
+        cy.get('tbody > :nth-child(10)').contains('Timeline').click({force: true});
 
         cy.get('h2').contains('Oportunidade - Credenciamento de Quadrilhas Juninas - São João do Nordeste - Timeline').should('be.visible');
         cy.get('.d-flex > div > .btn').contains('Voltar').should('be.visible');

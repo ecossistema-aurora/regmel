@@ -1,7 +1,7 @@
 describe('Teste de navegação e validação da página de Selos', () => {
     beforeEach( () => {
         cy.viewport(1920,1080);
-        cy.login('kellymoura@example.com', 'Aurora@2024');
+        cy.login('alessandrofeitoza@example.com', 'Aurora@2024');
         cy.visit('/painel/selos');
     });
 
@@ -21,7 +21,7 @@ describe('Teste de navegação e validação da página de Selos', () => {
         cy.get('@delButton').should('be.visible');
         cy.get('@delButton').click();
         cy.contains('Confirmar').click();
-        cy.contains('Sustentabilidade').should('not.exist');
+        cy.get('tr:contains(Sustentabilidade)').contains('Inativo').should('be.visible');
         cy.contains('O selo foi excluído').should('be.visible');
     });
 });
