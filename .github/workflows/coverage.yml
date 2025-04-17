@@ -12,6 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create .env file
+        run: cp .env.example .env
+
       - name: Start the aurora
         run: docker compose up -d --build
 
@@ -44,3 +47,7 @@ jobs:
         with:
           files: coverage.xml
           token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Remove o .env file
+        run: rm .env
+          
