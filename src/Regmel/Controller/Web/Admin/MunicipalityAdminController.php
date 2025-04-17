@@ -289,11 +289,14 @@ class MunicipalityAdminController extends AbstractAdminController
         try {
             $this->organizationService->update($id, [
                 'description' => $request->get('description'),
-                'extraFields' => array_intersect_key($request->request->all(), array_flip([
-                    'site',
-                    'telefone',
-                    'email',
-                ])),
+                'extraFields' => array_merge(
+                    $organization->getExtraFields(),
+                    array_intersect_key($request->request->all(), array_flip([
+                        'site',
+                        'telefone',
+                        'email',
+                    ]))
+                ),
             ]);
 
             if ($uploadedImage = $request->files->get('profileImage')) {
