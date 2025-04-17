@@ -950,6 +950,10 @@ img.card-images__entity-details {
     --bd-callout-border: var(--bs-secondary-border-subtle)
 }
 
+.side-navigation {
+    height: 100vh;
+}
+
 @media (min-width: 1400px) {
     .name__entity-details {
         max-width: 755px;
