@@ -250,10 +250,12 @@ export declare const MARK_AS_READ: Message<{ 'messages': { parameters: NoParamet
 export declare const MEI: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MENU: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MEDIUM: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const MEMBER_DETAILS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const MESSAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const MONTHS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MOST_RECENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MUNICIPALITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const MUNICIPALITY_FOUND: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const MY_ACCOUNT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MY_AGENTS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MY_APPS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -332,6 +334,7 @@ export declare const PROFILE: Message<{ 'messages': { parameters: NoParametersTy
 export declare const PROVIDED_VIOLATES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PASSWORD_STRENGTH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const PASSWORD_RULES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const PARTICIPANTS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PERSONAL_DATA: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PERSON_DISABLED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;

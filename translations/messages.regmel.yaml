@@ -123,6 +123,7 @@ company: Empresa
 company_name: Razão Social
 company_data: Dados da Empresa/OSC
 company_register: Cadastrar uma Empresa/OSC
+company_created: Empresa/OSC criada com sucesso. Veja no seu email o link para confirmar sua conta.
 cultural_language: Linguagem cultural
 cultural_languages: Linguagens culturais
 
@@ -225,6 +226,7 @@ invite_to_municipality: Convite para município
 is_itinerant: É agente itinerante?
 is-accessible: O espaço é acessível?
 invalid_credentials: E-mail ou senha incorretos
+invite_created: Cadastro realizado com sucesso. Veja no seu email o link para confirmar sua conta.
 
 join_terms: Termos de Adesão
 
@@ -267,6 +269,7 @@ months: meses
 most_recent: Mais Recente
 municipality: Município
 municipality_found: Município não encontrado
+municipality_created: Município criado com sucesso. Veja no seu email o link para confirmar sua conta.
 my_account: Minha Conta
 my_agents: Meus Agentes Promotores
 my_apps: Meus Aplicativos
