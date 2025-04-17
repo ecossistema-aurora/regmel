@@ -71,7 +71,7 @@ class CompanyAdminController extends AbstractAdminController
     #[Route('/painel/admin/empresas/{id}', name: 'admin_regmel_company_details', methods: ['GET'])]
     public function details(Uuid $id): Response
     {
-        $details = $this->organizationService->findOneBy([
+        $company = $this->organizationService->findOneBy([
             'id' => $id,
             'type' => OrganizationTypeEnum::EMPRESA->value,
         ]);
@@ -79,7 +79,7 @@ class CompanyAdminController extends AbstractAdminController
         $timeline = $this->documentService->getEventsByEntityId($id);
 
         return $this->render('regmel/admin/company/details.html.twig', [
-            'details' => $details,
+            'company' => $company,
             'timeline' => $timeline,
         ], parentPath: '');
     }

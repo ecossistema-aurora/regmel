@@ -122,6 +122,7 @@ export declare const COMPANY: Message<{ 'messages': { parameters: NoParametersTy
 export declare const COMPANY_NAME: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const COMPANY_DATA: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const COMPANY_REGISTER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const COMPANY_CREATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const CULTURAL_LANGUAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CULTURAL_LANGUAGES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -212,11 +213,17 @@ export declare const INPUT_SEARCH: Message<{ 'messages': { parameters: NoParamet
 export declare const INSCRIPTIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const INTRODUCTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const INACTIVE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const INVITE_ACCEPT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const INVITE_INVALID: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const INVITE_SENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const INVITE_TO_MUNICIPALITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const INVITE_TO_COMPANY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const INVITE_NOT_BELONGS_TO_YOU: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const THIS_MEMBER_BELONGS_TO_ORGANIZATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const IS_ITINERANT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const IS_ACCESSIBLE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const INVALID_CREDENTIALS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const INVITE_CREATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const JOIN_TERMS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const LANGUAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const LASTNAME: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -256,6 +263,7 @@ export declare const MONTHS: Message<{ 'messages': { parameters: NoParametersTyp
 export declare const MOST_RECENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MUNICIPALITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MUNICIPALITY_FOUND: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const MUNICIPALITY_CREATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const MY_ACCOUNT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MY_AGENTS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MY_APPS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
