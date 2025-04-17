@@ -8,6 +8,7 @@ use App\Controller\Web\Admin\AbstractAdminController;
 use App\DocumentService\OrganizationTimelineDocumentService;
 use App\Entity\Agent;
 use App\Enum\OrganizationTypeEnum;
+use App\Enum\UserRolesEnum;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Service\Interface\AgentServiceInterface;
 use App\Service\Interface\EmailServiceInterface;
@@ -82,19 +83,27 @@ class MunicipalityAdminController extends AbstractAdminController
     {
         $user = $this->security->getUser();
 
-        //        $agents = $user->getAgents();
-        //
-        //        if ($agents->isEmpty()) {
-        //            $this->addFlash('error', $this->translator->trans('user_associated'));
-        //
-        //            return $this->redirectToRoute('admin_dashboard');
-        //        }
-        //
-        //        $municipalities = $this->organizationService->getMunicipalitiesByAgents($agents);
+        if (true === in_array(UserRolesEnum::ROLE_ADMIN->value, $user->getRoles())) {
+            $municipalities = $this->organizationService->findBy([
+                'type' => OrganizationTypeEnum::MUNICIPIO->value,
+            ]);
 
-        $municipalities = $this->organizationService->findBy([
-            'type' => OrganizationTypeEnum::MUNICIPIO->value,
-        ]);
+            return $this->render('regmel/admin/municipality/list.html.twig', [
+                'municipalities' => $municipalities,
+                'token' => $this->jwtManager->create($user),
+                'context_title' => 'my_municipalities',
+            ], parentPath: '');
+        }
+
+        $agents = $user->getAgents();
+
+        if ($agents->isEmpty()) {
+            $this->addFlash('error', $this->translator->trans('user_associated'));
+
+            return $this->redirectToRoute('admin_dashboard');
+        }
+
+        $municipalities = $this->organizationService->getMunicipalitiesByAgents($agents);
 
         return $this->render('regmel/admin/municipality/list.html.twig', [
             'municipalities' => $municipalities,
@@ -288,6 +297,7 @@ class MunicipalityAdminController extends AbstractAdminController
 
         try {
             $this->organizationService->update($id, [
+                'name' => $request->get('name'),
                 'description' => $request->get('description'),
                 'extraFields' => array_merge(
                     $organization->getExtraFields(),

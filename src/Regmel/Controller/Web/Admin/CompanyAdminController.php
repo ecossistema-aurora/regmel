@@ -7,6 +7,7 @@ namespace App\Regmel\Controller\Web\Admin;
 use App\Controller\Web\Admin\AbstractAdminController;
 use App\DocumentService\OrganizationTimelineDocumentService;
 use App\Enum\OrganizationTypeEnum;
+use App\Enum\UserRolesEnum;
 use App\Service\Interface\OrganizationServiceInterface;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -40,11 +41,31 @@ class CompanyAdminController extends AbstractAdminController
     #[Route('/painel/admin/empresas', name: 'admin_regmel_company_list', methods: ['GET'])]
     public function list(): Response
     {
-        $companies = $this->organizationService->findBy([
-            'type' => OrganizationTypeEnum::EMPRESA->value,
-        ]);
+        $user = $this->security->getUser();
 
-        return $this->renderCompanyList($companies);
+        if (true === in_array(UserRolesEnum::ROLE_ADMIN->value, $user->getRoles())) {
+            return $this->render('regmel/admin/company/list.html.twig', [
+                'companies' => $this->organizationService->findBy(['type' => OrganizationTypeEnum::EMPRESA->value]),
+                'token' => $this->jwtManager->create($user),
+                'context_title' => 'my_companies',
+            ], parentPath: '');
+        }
+
+        $agents = $user->getAgents();
+
+        if ($agents->isEmpty()) {
+            $this->addFlash('error', $this->translator->trans('user_associated'));
+
+            return $this->redirectToRoute('admin_dashboard');
+        }
+
+        $companies = $this->organizationService->getCompaniesByAgents($agents);
+
+        return $this->render('regmel/admin/company/list.html.twig', [
+            'companies' => $companies,
+            'token' => $this->jwtManager->create($user),
+            'context_title' => 'my_companies',
+        ], parentPath: '');
     }
 
     #[Route('/painel/admin/empresas/{id}', name: 'admin_regmel_company_details', methods: ['GET'])]
@@ -86,15 +107,13 @@ class CompanyAdminController extends AbstractAdminController
             $this->organizationService->update($id, [
                 'name' => $request->get('name'),
                 'description' => $request->get('description'),
-                'extraFields' => array_intersect_key($request->request->all(), array_flip(
-                    [
-                        'cnpj',
-                        'site',
-                        'telefone',
-                        'email',
-                        'tipo',
-                    ]
-                )),
+                'extraFields' => array_merge($company->getExtraFields(), array_intersect_key($request->request->all(), array_flip([
+                    'cnpj',
+                    'site',
+                    'telefone',
+                    'email',
+                    'tipo',
+                ]))),
             ]);
 
             $this->addFlash('success', $this->translator->trans('view.company.message.updated'));

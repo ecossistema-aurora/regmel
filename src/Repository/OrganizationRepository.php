@@ -71,4 +71,20 @@ class OrganizationRepository extends AbstractRepository implements OrganizationR
 
         return $count > 0;
     }
+
+    public function findCompaniesByAgents(iterable $agents): array
+    {
+        if (empty($agents)) {
+            return [];
+        }
+
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.agents', 'a')
+            ->where('a IN (:agents)')
+            ->andWhere('o.type = :type')
+            ->setParameter('agents', is_array($agents) ? $agents : iterator_to_array($agents))
+            ->setParameter('type', OrganizationTypeEnum::EMPRESA->value)
+            ->getQuery()
+            ->getResult();
+    }
 }
