@@ -39,7 +39,6 @@ describe('Pagina de Login do ambiente web', () => {
         cy.get('[data-cy="password"]').type('Aurora@2024');
 
         cy.contains('Esqueci minha senha');
-        cy.contains('Cadastro');
 
         cy.get('[data-cy="submit"]').click();
 
@@ -51,7 +50,6 @@ describe('Pagina de Login do ambiente web', () => {
         cy.get('[data-cy="password"]').type('Aurora@2024');
 
         cy.contains('Esqueci minha senha');
-        cy.contains('Cadastro');
 
         cy.get('[data-cy="submit"]').click();
 

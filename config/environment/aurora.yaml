@@ -12,9 +12,15 @@ logo:
 register:
   any: true
 terms:
-  lgpd: texto lgpd
-  image_authorization: texto imagem
-  privacy_policy: texto policy
+  lgpd:
+    title: title
+    text: texto lgpd
+  image_authorization:
+    title: title
+    text: texto imagem
+  privacy_policy:
+    title: title
+    text: texto policy
 modules:
   organizations: Organizações
   agents: Agentes

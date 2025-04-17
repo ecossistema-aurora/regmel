@@ -32,7 +32,6 @@
                                 <th>{{ 'photo'|trans }}</th>
                                 <th>{{ 'name'|trans }}</th>
                                 <th>{{ 'description'|trans }}</th>
-                                <th>{{ 'cnpj'|trans }}</th>
                                 <th>{{ 'email'|trans }}</th>
                                 <th>{{ 'site'|trans }}</th>
                                 <th>{{ 'created_by'|trans }}</th>
@@ -46,7 +45,6 @@
                                     <td><img id="profile-img" src="{{ municipality.image ?? asset('img/city.png') }}" width="40px" class="rounded-circle" alt=""/></td>
                                     <td><a href="{{ path('admin_regmel_municipality_details', {id: municipality.id}) }}">{{ municipality.name }}</a></td>
                                     <td>{{ municipality.description }}</td>
-                                    <td>{{ municipality.extraFields.cnpj ?? '' }}</td>
                                     <td>{{ municipality.extraFields.email ?? '' }}</td>
                                     <td>{{ municipality.extraFields.site ?? '' }}</td>
                                     <td>{{ municipality.createdBy is defined and municipality.createdBy is not null ? municipality.createdBy.name : '-' }}</td>
