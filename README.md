@@ -53,9 +53,10 @@ cd aurora
 > O jeito mais fácil é rodar o comando `make setup`, isso já vai executar todos os passos necessários e deixar a aplicação rodando em <http://localhost:8080>
 >
 ```bash
+cp .env.example .env
 make setup
 ```
-Mas se preferir, pode fazer o passo a passo abaixo
+Mas se preferir, pode fazer o passo a passo abaixo, mas o compando de copiar o `.env` é obrigatório
 
 ---
 

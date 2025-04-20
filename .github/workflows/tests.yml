@@ -15,6 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create .env file
+        run: cp .env.example .env
+
       - name: Start the aurora
         run: docker compose up -d --build
 
@@ -42,11 +45,17 @@ jobs:
       - name: Start the PHPUnit
         run: docker compose exec php bin/paratest --no-coverage
 
+      - name: Remove o .env file
+        run: rm .env
+
   cypress:
     name: Run Cypress
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: cp .env.example .env
 
       - name: Start the aurora
         run: docker compose up -d --build
@@ -90,3 +99,6 @@ jobs:
         with:
           name: cypress-screenshots
           path: ./cypress/screenshots
+
+      - name: Remove o .env file
+        run: rm .env
