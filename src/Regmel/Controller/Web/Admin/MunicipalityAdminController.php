@@ -12,10 +12,12 @@ use App\Service\Interface\OrganizationServiceInterface;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use TypeError;
@@ -36,6 +38,8 @@ class MunicipalityAdminController extends AbstractAdminController
     {
         $organization = $this->organizationService->get($id);
 
+        $this->denyAccessUnlessGranted('get_form', $organization);
+
         $path = $this->getParameter('kernel.project_dir');
 
         $filePath = "{$path}/storage/regmel/municipality/documents/".$organization->getExtraFields()['form'] ?? 'null';
@@ -55,6 +59,11 @@ class MunicipalityAdminController extends AbstractAdminController
         ], parentPath: '');
     }
 
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or 
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'") or 
+        is_granted("'.UserRolesEnum::ROLE_MUNICIPALITY->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
     #[Route('/painel/admin/municipios', name: 'admin_regmel_municipality_list', methods: ['GET'])]
     public function list(): Response
     {
@@ -97,6 +106,8 @@ class MunicipalityAdminController extends AbstractAdminController
             'type' => OrganizationTypeEnum::MUNICIPIO->value,
         ]);
 
+        $this->denyAccessUnlessGranted('get', $municipality);
+
         $createdById = $municipality->getCreatedBy()->getId()->toRfc4122();
 
         if (null === $municipality) {
@@ -117,6 +128,8 @@ class MunicipalityAdminController extends AbstractAdminController
     {
         try {
             $organization = $this->organizationService->get($id);
+
+            $this->denyAccessUnlessGranted('edit', $organization);
         } catch (Exception $exception) {
             $this->addFlashError($exception->getMessage());
 

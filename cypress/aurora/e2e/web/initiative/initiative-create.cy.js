@@ -1,7 +1,7 @@
 describe('Criar uma iniciativa e atualizar o dashboard', () => {
     beforeEach(() => {
         cy.visit('/login');
-        cy.login('saracamilo@example.com', 'Aurora@2024');
+        cy.login('alessandrofeitoza@example.com', 'Aurora@2024');
         cy.url().should('include', '/');
     });
 
@@ -39,7 +39,7 @@ describe('Criar uma iniciativa e atualizar o dashboard', () => {
         cy.get('input#nameInitiative').type('Iniciativa de Teste Cypress');
         cy.get('select[data-cy="culturalLanguage"]').select('Exposição');
         cy.get('select[data-cy="areasOfExpertise"]').select(['Artesanato', 'Cinema']);
-        cy.get('select[data-cy="createdBy"]').should('be.visible').select('Sara Jennifer');
+        cy.get('select[data-cy="createdBy"]').should('be.visible').select('Alessandro');
         cy.get('textarea[data-cy="shortDescription"]').type('Teste de iniciativa automatizada');
         cy.get('textarea[data-cy="longDescription"]').type('Descrição detalhada da iniciativa');
         cy.get('button[data-cy="submit"]').click();
