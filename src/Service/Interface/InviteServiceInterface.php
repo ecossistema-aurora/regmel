@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\Service\Interface;
 
-use App\Entity\Agent;
 use App\Entity\Invite;
+use App\Entity\Organization;
+use App\Entity\User;
 use Symfony\Component\Uid\Uuid;
 
 interface InviteServiceInterface
 {
-    public function create(array $data): Invite;
+    public function create(Organization $organization, string $name, string $email): Invite;
 
-    public function confirm(Invite $invite, Agent $agent): void;
+    public function confirm(Invite $invite, User $user): void;
 
     public function get(Uuid $id): Invite;
 

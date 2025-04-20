@@ -213,8 +213,13 @@ export declare const INPUT_SEARCH: Message<{ 'messages': { parameters: NoParamet
 export declare const INSCRIPTIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const INTRODUCTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const INACTIVE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const INVITE_ACCEPT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const INVITE_INVALID: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const INVITE_SENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const INVITE_TO_MUNICIPALITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const INVITE_TO_COMPANY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const INVITE_NOT_BELONGS_TO_YOU: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const THIS_MEMBER_BELONGS_TO_ORGANIZATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const IS_ITINERANT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const IS_ACCESSIBLE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const INVALID_CREDENTIALS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
