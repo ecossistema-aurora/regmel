@@ -95,18 +95,6 @@ modules:
   initiatives:
 
 navbar:
-#  web_home_homepage:
-#    text: home
-#    icon: home
-#    color: "#224638"
-#  web_opportunity_list:
-#    text: Adesão e Proposta
-#    icon: description
-#    color: "#F59E00"
-#  web_faq_faq:
-#    text: Perguntas Frequentes
-#    icon: quiz
-#    color: "#E70DCB"
 
 dropdown:
   control_panel:
@@ -241,6 +229,11 @@ sidebar:
         acl: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_MUNICIPALITY']
         icon: location_city
         text: Municípios
+
+      admin_regmel_municipality_document_list:
+        acl: ['ROLE_ADMIN', 'ROLE_MANAGER']
+        icon: description
+        text: Documentos
 
       admin_user_list:
         acl: ['ROLE_ADMIN']

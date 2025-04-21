@@ -13,7 +13,6 @@ use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\ExpressionLanguage\Expression;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -31,24 +30,6 @@ class MunicipalityAdminController extends AbstractAdminController
         private readonly Security $security,
         private readonly TranslatorInterface $translator,
     ) {
-    }
-
-    #[Route('/painel/admin/municipios/{id}/oficio', name: 'regmel_municipality_form_file', methods: ['GET'])]
-    public function fileForm(Uuid $id): Response
-    {
-        $organization = $this->organizationService->get($id);
-
-        $this->denyAccessUnlessGranted('get_form', $organization);
-
-        $path = $this->getParameter('kernel.project_dir');
-
-        $filePath = "{$path}/storage/regmel/municipality/documents/".$organization->getExtraFields()['form'] ?? 'null';
-
-        if (false === file_exists($filePath)) {
-            throw $this->createNotFoundException();
-        }
-
-        return new BinaryFileResponse($filePath);
     }
 
     private function renderOrganizationList(array $municipalities): Response

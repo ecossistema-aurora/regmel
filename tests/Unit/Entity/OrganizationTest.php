@@ -47,6 +47,9 @@ final class OrganizationTest extends AbstractApiTestCase
         $organization->setOwner($owner);
         $organization->setCreatedBy($createdBy);
         $organization->setExtraFields($extraFields);
+        $organization->addExtraField('teste', 'Teste');
+
+        $extraFields['teste'] = 'Teste';
 
         $organization->addAgent($agent1);
         $organization->addAgent($agent2);
