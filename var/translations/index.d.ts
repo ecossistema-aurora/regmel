@@ -650,7 +650,7 @@ export declare const VIEW_HOMEPAGE_ADD_EVENTS: Message<{ 'messages': { parameter
 export declare const VIEW_HOMEPAGE_API_INFO: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_HOMEPAGE_CHECK_OPPORTUNITIES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_HOMEPAGE_CULTURAL_SCENE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
-export declare const VIEW_HOMEPAGE_CONTRIBUTE_AURORA: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const VIEW_HOMEPAGE_CONTRIBUTE_PLATAFORMA_MINHA_CASA_MELHOR: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_HOMEPAGE_DISCOVER_PLACES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_HOMEPAGE_ENTITIES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_HOMEPAGE_FIND_INITIATIVES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -867,6 +867,7 @@ export declare const VIEW_NOT_FOUND_ERROR_TEXT_SECOND: Message<{ 'messages': { p
 export declare const VIEW_NOT_FOUND_ERROR_TEXT_THIRD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_NOT_FOUND_ERROR_HOMEPAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_NOT_FOUND_ERROR_IMAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const VIEW_HOMEPAGE_CONTRIBUTE_AURORA: Message<{ 'messages': { parameters: NoParametersType } }, 'pt-br'|'en'|'es'>;
 export declare const THIS_VALUE_SHOULD_BE_FALSE: Message<{ 'validators': { parameters: NoParametersType } }, 'en'|'es'|'af'|'ar'|'az'|'be'|'bg'|'bs'|'ca'|'cs'|'cy'|'da'|'de'|'el'|'et'|'eu'|'fa'|'fi'|'fr'|'gl'|'he'|'hr'|'hu'|'hy'|'id'|'it'|'ja'|'lb'|'lt'|'lv'|'mk'|'mn'|'my'|'nb'|'nl'|'nn'|'no'|'pl'|'pt'|'pt_BR'|'ro'|'ru'|'sk'|'sl'|'sq'|'sr_Cyrl'|'sr_Latn'|'sv'|'th'|'tl'|'tr'|'uk'|'ur'|'uz'|'vi'|'zh_CN'|'zh_TW'>;
 export declare const THIS_VALUE_SHOULD_BE_TRUE: Message<{ 'validators': { parameters: NoParametersType } }, 'en'|'es'|'af'|'ar'|'az'|'be'|'bg'|'bs'|'ca'|'cs'|'cy'|'da'|'de'|'el'|'et'|'eu'|'fa'|'fi'|'fr'|'gl'|'he'|'hr'|'hu'|'hy'|'id'|'it'|'ja'|'lb'|'lt'|'lv'|'mk'|'mn'|'my'|'nb'|'nl'|'nn'|'no'|'pl'|'pt'|'pt_BR'|'ro'|'ru'|'sk'|'sl'|'sq'|'sr_Cyrl'|'sr_Latn'|'sv'|'th'|'tl'|'tr'|'uk'|'ur'|'uz'|'vi'|'zh_CN'|'zh_TW'>;
 export declare const THIS_VALUE_SHOULD_BE_OF_TYPE_TYPE: Message<{ 'validators': { parameters: { '{{ type }}': string } } }, 'en'|'es'|'af'|'ar'|'az'|'be'|'bg'|'bs'|'ca'|'cs'|'cy'|'da'|'de'|'el'|'et'|'eu'|'fa'|'fi'|'fr'|'gl'|'he'|'hr'|'hu'|'hy'|'id'|'it'|'ja'|'lb'|'lt'|'lv'|'mk'|'mn'|'my'|'nb'|'nl'|'nn'|'no'|'pl'|'pt'|'pt_BR'|'ro'|'ru'|'sk'|'sl'|'sq'|'sr_Cyrl'|'sr_Latn'|'sv'|'th'|'tl'|'tr'|'uk'|'ur'|'uz'|'vi'|'zh_CN'|'zh_TW'>;

@@ -182,6 +182,11 @@ class Organization extends AbstractEntity
         $this->extraFields = $extraFields;
     }
 
+    public function addExtraField(string $name, mixed $value): void
+    {
+        $this->extraFields[$name] = $value;
+    }
+
     public function getSocialNetworks(): array
     {
         return $this->socialNetworks;
