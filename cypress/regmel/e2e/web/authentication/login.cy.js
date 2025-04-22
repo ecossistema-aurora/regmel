@@ -35,7 +35,7 @@ describe('Pagina de Login do ambiente web', () => {
 
 
     it('Garante que após o login ser efetuado será redirecionado para a tela home', () => {
-        cy.get('[data-cy="email"]').type('paulodetarso@example.com');
+        cy.get('[data-cy="email"]').type('admin@regmel.com');
         cy.get('[data-cy="password"]').type('Aurora@2024');
 
         cy.contains('Esqueci minha senha');
@@ -46,7 +46,7 @@ describe('Pagina de Login do ambiente web', () => {
     });
 
     it('Garante que após o login é possivel deslogar', () => {
-        cy.get('[data-cy="email"]').type('alessandrofeitoza@example.com');
+        cy.get('[data-cy="email"]').type('admin@regmel.com');
         cy.get('[data-cy="password"]').type('Aurora@2024');
 
         cy.contains('Esqueci minha senha');
@@ -54,12 +54,12 @@ describe('Pagina de Login do ambiente web', () => {
         cy.get('[data-cy="submit"]').click();
 
         cy.url().should('include', '/');
-        cy.contains('Francisco');
+        cy.contains('Admin');
 
         cy.get('#dropdownMenuButton').click();
         cy.get('a').contains('Sair').click();
         cy.get('a').contains('Entrar');
 
-        cy.contains('Alessandro Feitoza').should('not.exist');
+        cy.contains('Admin Regmel').should('not.exist');
     });
 })

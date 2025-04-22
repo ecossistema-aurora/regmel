@@ -59,13 +59,11 @@ compile_frontend:
 
 # Executa as fixtures de dados e os testes de front-end
 tests_front: guard-not-prod
-	make load_fixtures
-	mv config/environment/aurora.regmel.yaml config/environment/aurora.regmel_test.yaml
+	make demo-regmel
 	sed -i 's/default_locale: regmel/default_locale: pt-br/' config/packages/translation.yaml
 	sed -i 's/municipios/organizacoes/' config/routes/web.yaml
 	sed -i 's/municipios/organizacoes/' config/routes/admin.yaml
 	docker compose up cypress
-	mv config/environment/aurora.regmel_test.yaml config/environment/aurora.regmel.yaml
 	sed -i 's/default_locale: pt-br/default_locale: regmel/' config/packages/translation.yaml
 	sed -i 's/organizacoes/municipios/' config/routes/web.yaml
 	sed -i 's/organizacoes/municipios/' config/routes/admin.yaml
