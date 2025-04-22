@@ -7,12 +7,15 @@ namespace App\Controller\Web\Admin;
 use App\Document\UserTimeline;
 use App\DocumentService\AuthTimelineDocumentService;
 use App\DocumentService\UserTimelineDocumentService;
+use App\Enum\FlashMessageTypeEnum;
 use App\Enum\UserRolesEnum;
+use App\Exception\ValidatorException;
 use App\Security\PasswordHasher;
 use App\Service\Interface\AgentServiceInterface;
 use App\Service\Interface\UserServiceInterface;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +26,10 @@ use TypeError;
 
 class UserAdminController extends AbstractAdminController
 {
+    private const ADD = 'user/create.html.twig';
+
+    public const CREATE_FORM_ID = 'add-user';
+
     public function __construct(
         private readonly UserTimelineDocumentService $documentService,
         private readonly UserServiceInterface $service,
@@ -31,6 +38,7 @@ class UserAdminController extends AbstractAdminController
         private readonly AgentServiceInterface $agentService,
         private JWTTokenManagerInterface $jwtManager,
         private readonly TranslatorInterface $translator,
+        private readonly Security $security,
     ) {
     }
 
@@ -45,6 +53,61 @@ class UserAdminController extends AbstractAdminController
         return $this->render('user/list.html.twig', [
             'users' => $users,
         ]);
+    }
+
+    #[IsGranted(new Expression(
+        'is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or '.
+        'is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")'
+    ), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    public function create(Request $request): Response
+    {
+        if (false === $request->isMethod(Request::METHOD_POST)) {
+            return $this->render(self::ADD, [
+                'form_id' => self::CREATE_FORM_ID,
+            ]);
+        }
+
+        $this->validCsrfToken(self::CREATE_FORM_ID, $request);
+
+        $errors = [];
+
+        try {
+            $this->service->create([
+                'id' => Uuid::v4(),
+                'firstname' => $request->get('firstname'),
+                'lastname' => $request->get('lastname'),
+                'email' => $request->get('email'),
+                'password' => $request->get('password'),
+                'roles' => [UserRolesEnum::ROLE_USER->value],
+                'extraFields' => [
+                    'cpf' => $request->get('cpf'),
+                    'cargo' => $request->get('position'),
+                    'createdby' => $this->security->getUser()->getId(),
+                ],
+            ]);
+
+            $this->addFlash(FlashMessageTypeEnum::SUCCESS->value, $this->translator->trans('view.user.message.created'));
+        } catch (ValidatorException $exception) {
+            foreach ($exception->getConstraintViolationList() as $violation) {
+                $errors[] = [
+                    'propertyPath' => $violation->getPropertyPath(),
+                    'message' => $this->translator->trans($violation->getMessage()),
+                ];
+            }
+        } catch (Exception $exception) {
+            $errors[] = [
+                'message' => $exception->getMessage(),
+            ];
+        }
+
+        if (false === empty($errors)) {
+            return $this->render(self::ADD, [
+                'errors' => $errors,
+                'form_id' => self::CREATE_FORM_ID,
+            ]);
+        }
+
+        return $this->redirectToRoute('admin_user_list');
     }
 
     public function timeline(Uuid $id): Response

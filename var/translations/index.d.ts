@@ -137,6 +137,8 @@ export declare const DELETED: Message<{ 'messages': { parameters: NoParametersTy
 export declare const DESCRIPTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DEVICE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DISCOVER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const DOCUMENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const DOCUMENTS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const DOES_NOT_EXPIRE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DOWNLOADABLE_FILES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EDIT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -527,6 +529,8 @@ export declare const FOOTER_PLATFORM_CREATED: Message<{ 'messages': { parameters
 export declare const FOOTER_PRIVACY_POLICY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FOOTER_SEND_EMAIL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FOOTER_VISIT_REPOSITORY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const VIEW_USER_CREATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const VIEW_USER_MESSAGE_CREATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_USER_MESSAGE_UPDATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_FAQ_DESCRIPTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_FAQ_ANSWER1: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
