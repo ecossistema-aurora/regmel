@@ -571,7 +571,9 @@ footer:
 #pages
 view:
   user:
+    create: Criar Usuário
     message:
+      created: O usuário foi criado com sucesso
       updated: O usuário foi atualizado
 
   faq:
