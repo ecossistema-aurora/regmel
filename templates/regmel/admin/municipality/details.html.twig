@@ -106,7 +106,7 @@
                                 </div>
 
 
-                                <table class="table table-hover table-striped mt-3">
+                                <table class="js-grid table table-hover table-striped mt-3">
                                     <thead class="table-dark">
                                         <tr>
                                             <th>Titulo</th>
@@ -199,7 +199,7 @@
                                     <a href="" data-bs-toggle="modal" data-bs-target="#modalInvite" class="btn btn-outline-success btn-sm">Convidar</a>
                                 {% endif %}
 
-                                <table class="table table-hover table-striped mt-3">
+                                <table class="js-grid table table-hover table-striped mt-3">
                                     <thead class="table-dark">
                                     <tr>
                                         <th>Nome</th>
@@ -277,4 +277,5 @@
     {{ parent() }}
     <script type="module" src="{{ asset('js/modal-timeline.js') }}"></script>
     <script type="module" src="{{ asset('js/regmel/modal-member-details.js') }}"></script>
+    <script src="{{ asset('js/grid-init.js') }}"></script>
 {% endblock %}
