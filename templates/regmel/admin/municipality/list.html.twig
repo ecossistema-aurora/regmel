@@ -43,7 +43,7 @@
                             {% for municipality in municipalities %}
                                 <tr>
                                     <td><img id="profile-img" src="{{ municipality.image ?? asset('img/city.png') }}" width="40px" class="rounded-circle" alt=""/></td>
-                                    <td><a href="{{ path('admin_regmel_municipality_details', {id: municipality.id}) }}">{{ municipality.name }}</a></td>
+                                    <td><a href="{{ path('admin_regmel_municipality_details', {id: municipality.id}) }}">{{ municipality.name }}-{{ municipality.extraFields.state }}</a></td>
                                     <td>{{ municipality.description }}</td>
                                     <td>{{ municipality.extraFields.email ?? '' }}</td>
                                     <td>{{ municipality.extraFields.site ?? '' }}</td>

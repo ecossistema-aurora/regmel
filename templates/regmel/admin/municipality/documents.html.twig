@@ -32,7 +32,7 @@
                             <tbody>
                             {% for municipality in municipalities %}
                                 <tr>
-                                    <td><a href="{{ path('admin_regmel_municipality_details', {id: municipality.id}) }}">{{ municipality.name }}</a></td>
+                                    <td><a href="{{ path('admin_regmel_municipality_details', {id: municipality.id}) }}">{{ municipality.name }}-{{ municipality.extraFields.state }}</a></td>
                                     <td><a onclick="openDocumentModal('{{ municipality.name }}', '{{ municipality.id }}', '{{ municipality.extraFields.filepath }}')" data-bs-toggle="modal" data-bs-target="#modalDocument" href="#">{{ municipality.extraFields.form }}</a></td>
                                     <td>{{ municipality.updatedAt is not null ? municipality.updatedAt.format('d/m/Y H:i:s') : municipality.createdAt.format('d/m/Y H:i:s') }}</td>
                                     <td>

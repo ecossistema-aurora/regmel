@@ -177,6 +177,8 @@ class RegisterController extends AbstractWebController
                 'type' => OrganizationTypeEnum::MUNICIPIO->value,
                 'extraFields' => [
                     'cityId' => $city?->getId(),
+                    'region' => $city?->getState()->getRegion(),
+                    'state' => $city?->getState()->getAcronym(),
                     'email' => $request->get('email'),
                     'telefone' => $request->get('phone'),
                     'site' => $request->get('site'),
