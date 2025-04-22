@@ -28,6 +28,7 @@
                                 <th>{{ 'name'|trans }}</th>
                                 <th>{{ 'email'|trans }}</th>
                                 <th>{{ 'image'|trans }}</th>
+                                <th>{{ 'status' |trans }}</th>
                                 <th>{{ 'created_at'|trans }}</th>
                                 <th>{{ 'actions'|trans }}</th>
                             </tr>
@@ -49,6 +50,22 @@
                                             <img src="{{ asset(item.image ?? 'img/user.png') }}" class="rounded-circle" width="50px" alt="{{ item.name }} Photo">
                                         </a>
                                     </td>
+                                    {% set status_map = {
+                                        'active': 'active',
+                                        'blocked': 'blocked',
+                                        'awaitingconfirmation': 'awaiting_confirmation'
+                                    } %}
+                                    {% set status_class_map = {
+                                        'active': 'bg-primary',
+                                        'blocked': 'bg-danger',
+                                        'awaitingconfirmation': 'bg-secondary'
+                                    } %}
+                                    <td>
+                                    <span class="badge {{ status_class_map[item.status|lower] }}">
+                                        {{ status_map[item.status|lower]|trans }}
+                                    </span>
+                                    </td>
+
                                     <td>{{ item.createdAt.format('d/m/Y H:i:s') }}</td>
                                     <td>
                                         <a href="{{ path('admin_user_timeline', {id: item.id}) }}" class="btn btn-outline-info btn-sm">{{ 'Timeline'|trans }}</a>
