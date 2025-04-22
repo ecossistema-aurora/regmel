@@ -22,7 +22,7 @@
 
                         <hr>
 
-                        <table class="table table-hover table-striped">
+                        <table class="js-grid table table-hover table-striped">
                             <thead class="table-dark">
                             <tr>
                                 <th>{{ 'name'|trans }}</th>
@@ -68,4 +68,5 @@
 {% block extra_javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/modal-photo.js') }}"></script>
+    <script src="{{ asset('js/grid-init.js') }}"></script>
 {% endblock %}
