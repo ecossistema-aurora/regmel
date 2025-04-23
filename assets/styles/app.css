@@ -118,6 +118,7 @@ body {
     display: flex;
 }
 
+
 .lock-icon {
     position: absolute;
     top: -4px;
@@ -952,6 +953,26 @@ img.card-images__entity-details {
 
 .side-navigation {
     min-height: 77vh;
+}
+
+.btn-primary {
+    border-color: var(--bs-primary);
+    background-color: var(--bs-primary);
+    --bs-btn-active-bg: var(--bs-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--bs-primary-hover);
+}
+
+.btn-outline-primary {
+    border-color: var(--bs-primary);
+    color: var(--bs-primary);
+}
+
+.btn-outline-primary:hover {
+    border-color:  var(--bs-primary);
+    background-color: var(--bs-primary);
 }
 
 @media (min-width: 1400px) {

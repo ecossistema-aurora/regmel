@@ -101,7 +101,7 @@
 
 .dropdown-item i.material-icons {
     font-size: 1.2rem;
-    color: var(--btn-publish-custom-color);
+    color: var(--bs-primary);
 }
 
 .dropdown-item:hover {
@@ -125,7 +125,7 @@
 }
 
 .btn.dropdown-toggle {
-    color: var(--btn-publish-custom-color);
+    color: var(--bs-primary);
     display: flex;
     align-items: center;
     gap: 0.5rem;
