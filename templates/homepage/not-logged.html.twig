@@ -226,7 +226,7 @@
                     agent => include('homepage/_partials/cards/item-agent.html.twig', {
                         'icon': 'person',
                         'status_text': agent.status_text ?? 'Individual',
-                        'image_url': asset('img/ada-lovelace.png'),
+                        'image_url': asset('img/user.png'),
                         'image_alt': 'Imagem não disponível',
                         'name': agent.name ?? 'Sem nome',
                         'areas_of_expertise_count': 3,
@@ -239,7 +239,7 @@
                 {% set events_content = events|map(
                     event => include('homepage/_partials/cards/item-event.html.twig', {
                         'status_icon': 'event',
-                        'image_url': asset('img/ada-lovelace.png'),
+                        'image_url': asset('img/user.png'),
                         'image_alt': 'Imagem não disponível',
                         'title': event.name ?? 'Sem título',
                         'date': '11 de julho às 18:00',
@@ -258,7 +258,7 @@
                     initiative => include('homepage/_partials/cards/item-initiative.html.twig', {
                         'status_icon': 'check_circle',
                         'status_text': initiative.status_text ?? 'Iniciativa',
-                        'image_url': asset('img/ada-lovelace.png'),
+                        'image_url': asset('img/user.png'),
                         'image_alt': 'Imagem não disponível',
                         'title': initiative.name ?? 'Sem título',
                         'type': 'CICLO',
@@ -275,7 +275,7 @@
                     opportunity => include('homepage/_partials/cards/item-opportunity.html.twig', {
                         'status_icon': 'visibility',
                         'status_text': 'Oportunidades',
-                        'image_url': asset('img/ada-lovelace.png'),
+                        'image_url': asset('img/user.png'),
                         'image_alt': 'Imagem não disponível',
                         'title': opportunity.name ?? 'Sem título',
                         'registration_period': 'Inscrições de 10/08/2024 até 20/08/2024 às 23:59',
