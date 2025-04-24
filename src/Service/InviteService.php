@@ -9,6 +9,8 @@ use App\Entity\Organization;
 use App\Entity\User;
 use App\Enum\OrganizationTypeEnum;
 use App\Enum\UserRolesEnum;
+use App\Event\Invite\AcceptInviteEvent;
+use App\Event\Invite\SendInviteEvent;
 use App\Exception\Agent\AgentAlreadyMemberException;
 use App\Exception\Invite\InviteIsNotForYou;
 use App\Repository\Interface\InviteRepositoryInterface;
@@ -19,6 +21,7 @@ use App\Service\Interface\UserServiceInterface;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -43,6 +46,7 @@ readonly class InviteService extends AbstractEntityService implements InviteServ
         private EmailServiceInterface $emailService,
         private TranslatorInterface $translator,
         private TokenStorageInterface $tokenStorage,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
         parent::__construct(
             $this->security,
@@ -98,6 +102,8 @@ readonly class InviteService extends AbstractEntityService implements InviteServ
             ]
         );
 
+        $this->eventDispatcher->dispatch(new SendInviteEvent($invite), SendInviteEvent::class);
+
         return $this->repository->save($invite);
     }
 
@@ -124,6 +130,8 @@ readonly class InviteService extends AbstractEntityService implements InviteServ
         $this->entityManager->persist($host);
         $this->entityManager->persist($user);
         $this->entityManager->remove($invite);
+
+        $this->eventDispatcher->dispatch(new AcceptInviteEvent($invite), AcceptInviteEvent::class);
 
         $this->manualLogin($user);
         $this->entityManager->flush();
