@@ -68,9 +68,15 @@ class RegisterController extends AbstractWebController
         } catch (UniqueConstraintViolationException $exception) {
             $errors[] = ['message' => $this->translator->trans('view.authentication.error.email_in_use')];
         } catch (Exception $exception) {
-            $errors[] = [
-                'message' => $exception->getMessage(),
-            ];
+            if (str_contains($exception->getMessage(), 'Duplicate entry') || str_contains($exception->getMessage(), 'already registered')) {
+                $errors[] = [
+                    'message' => $this->translator->trans('organization_duplicate', ['%s' => $snpEmail]),
+                ];
+            } else {
+                $errors[] = [
+                    'message' => $exception->getMessage(),
+                ];
+            }
         }
 
         if (false === empty($errors)) {
@@ -79,6 +85,7 @@ class RegisterController extends AbstractWebController
                 'form_id' => self::FORM_CITY,
                 'states' => $states,
                 'opportunities' => $this->registerService->findOpportunitiesBy(OrganizationTypeEnum::MUNICIPIO),
+                'snp_email' => $snpEmail,
             ]);
         }
 
