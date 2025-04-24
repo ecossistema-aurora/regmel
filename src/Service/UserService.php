@@ -106,7 +106,7 @@ readonly class UserService extends AbstractEntityService implements UserServiceI
         return $user;
     }
 
-    public function update(Uuid $id, array $user): User
+    public function update(Uuid $id, array $user, ?string $browserUserAgent = null): User
     {
         $userObj = $this->get($id);
 
@@ -118,7 +118,13 @@ readonly class UserService extends AbstractEntityService implements UserServiceI
 
         $userObj->setUpdatedAt(new DateTime());
 
-        return $this->repository->save($userObj);
+        $userObj = $this->repository->save($userObj);
+
+        if (true === isset($user['password'])) {
+            $this->accountEventService->sendPasswordChangedEmail($userObj, $browserUserAgent);
+        }
+
+        return $userObj;
     }
 
     public function updateImage(Uuid $id, UploadedFile $uploadedFile): User

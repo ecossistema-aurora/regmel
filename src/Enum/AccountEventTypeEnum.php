@@ -12,4 +12,5 @@ enum AccountEventTypeEnum: int
 
     case ACTIVATION = 1;
     case RECOVERY = 2;
+    case PASSWORD_CHANGED = 3;
 }

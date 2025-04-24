@@ -52,7 +52,7 @@ class AccountEventWebController extends AbstractWebController
             ]);
         }
 
-        $this->accountEventService->resetPassword($token, $request->request->get('password'));
+        $this->accountEventService->resetPassword($token, $request);
 
         $this->addFlash('success', $this->translator->trans('view.authentication.forgot.success'));
 
