@@ -102,19 +102,20 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
         $user = $this->entityManager->find(User::class, $accountEvent->getUser()->getId()->toRfc4122());
 
         if ($accountEvent->getExpirationAt() < new DateTimeImmutable()) {
-            $this->sendConfirmationEmail($user);
+            $this->sendResetPasswordEmail($user->getEmail(), isNewUser: true);
 
             throw new ExpiredTokenException();
         }
 
         $password = $this->passwordHasherFactory->getPasswordHasher(User::class)->hash($password);
         $user->setPassword($password);
+        $user->setStatus(UserStatusEnum::ACTIVE->value);
 
         $this->entityManager->remove($accountEvent);
         $this->entityManager->flush();
     }
 
-    public function sendResetPasswordEmail(string $email): void
+    public function sendResetPasswordEmail(string $email, bool $isNewUser = false): void
     {
         $token = Uuid::v4();
 
@@ -128,10 +129,14 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
             throw new UserResourceNotFoundException();
         }
 
+        $template = $isNewUser
+            ? '_emails/account-event/password-reset-new-user.html.twig'
+            : '_emails/account-event/password-reset.html.twig';
+
         $this->emailService->sendTemplatedEmail(
             [$user->getEmail()],
-            $this->translator->trans('reset_password'),
-            '_emails/account-event/password-reset.html.twig',
+            $isNewUser ? $this->translator->trans('welcome_reset_password') : $this->translator->trans('reset_password'),
+            $template,
             [
                 'first_name' => $user->getFirstName(),
                 'reset_link' => $resetUrl,
