@@ -24,6 +24,7 @@ A configuração já está dockerizada, então você só precisa ter o Docker Co
 - [Enums](./help/ENUM.md)
 - [Arquitetura da Aplicação](./help/README.md)
 - [Comandos do terminal](./help/COMMANDS.md)
+- [Deploy](./help/DEPLOY.md)
 
 ## Instalação 
 <details>
