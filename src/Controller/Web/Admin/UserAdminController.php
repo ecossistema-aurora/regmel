@@ -155,12 +155,13 @@ class UserAdminController extends AbstractAdminController
             'lastname' => $request->request->get('lastname'),
             'socialName' => $request->request->get('socialName'),
             'email' => $request->request->get('email'),
-            'password' => $request->request->get('password')
-                ? PasswordHasher::hash($request->request->get('password'))
-                : $user->getPassword(),
         ];
 
-        $this->service->update($user->getId(), $userData);
+        if (null !== $request->request->get('password')) {
+            $userData['password'] = PasswordHasher::hash($request->request->get('password'));
+        }
+
+        $this->service->update($user->getId(), $userData, $request->server->get('HTTP_USER_AGENT'));
 
         if ($uploadedImage = $request->files->get('profileImage')) {
             $this->service->updateImage($user->getId(), $uploadedImage);

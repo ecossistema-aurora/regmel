@@ -84,6 +84,7 @@ cancel: Cancelar
 capacity_accessibility: Capacidade e Acessibilidade
 category: Categoria
 change_details: Detalhes das Mudanças
+changed_password: A sua senha foi alterada
 cep: CEP
 city: Cidade
 cisgender: Cisgênero
@@ -136,6 +137,7 @@ date_created: Data de criação
 dashboard: Painel de Controle
 datetime: Data e hora
 describe: Descreva
+device_description: Navegador {browser} em um dispositivo {operationalSystem}
 draft: Em rascunho
 delete: Excluir
 details: Detalhes

@@ -7,6 +7,7 @@ namespace App\Service\Interface;
 use App\Entity\AccountEvent;
 use App\Entity\User;
 use DateTimeImmutable;
+use Symfony\Component\HttpFoundation\Request;
 
 interface AccountEventServiceInterface
 {
@@ -16,7 +17,7 @@ interface AccountEventServiceInterface
 
     public function sendConfirmationEmail(User $user): void;
 
-    public function resetPassword(string $token, string $password): void;
+    public function resetPassword(string $token, Request $request): void;
 
     public function sendResetPasswordEmail(string $email): void;
 
@@ -26,4 +27,6 @@ interface AccountEventServiceInterface
         string $organizationType,
         DateTimeImmutable $organizationCreatedAt
     ): void;
+
+    public function sendPasswordChangedEmail(User $user, string $userAgent): void;
 }

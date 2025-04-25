@@ -79,6 +79,7 @@ export declare const CANCEL: Message<{ 'messages': { parameters: NoParametersTyp
 export declare const CAPACITY_ACCESSIBILITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CATEGORY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CHANGE_DETAILS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const CHANGED_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const CEP: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CISGENDER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -130,6 +131,7 @@ export declare const DATE_CREATED: Message<{ 'messages': { parameters: NoParamet
 export declare const DASHBOARD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DATETIME: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DESCRIBE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const DEVICE_DESCRIPTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const DRAFT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DELETE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DETAILS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;

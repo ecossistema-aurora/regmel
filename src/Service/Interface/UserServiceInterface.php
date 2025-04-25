@@ -18,7 +18,7 @@ interface UserServiceInterface
 
     public function findAll(): array;
 
-    public function update(Uuid $id, array $user): User;
+    public function update(Uuid $id, array $user, ?string $browserUserAgent = null): User;
 
     public function authenticate(User $user, $password): bool;
 

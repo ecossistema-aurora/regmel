@@ -19,6 +19,7 @@ use App\Service\Interface\EmailServiceInterface;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Uid\Uuid;
@@ -91,7 +92,7 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
         ]);
     }
 
-    public function resetPassword(string $token, string $password): void
+    public function resetPassword(string $token, Request $request): void
     {
         $accountEvent = $this->entityManager->getRepository(AccountEvent::class)->findOneBy(['token' => $token]);
 
@@ -107,12 +108,14 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
             throw new ExpiredTokenException();
         }
 
-        $password = $this->passwordHasherFactory->getPasswordHasher(User::class)->hash($password);
+        $password = $this->passwordHasherFactory->getPasswordHasher(User::class)->hash($request->request->get('password'));
         $user->setPassword($password);
         $user->setStatus(UserStatusEnum::ACTIVE->value);
 
         $this->entityManager->remove($accountEvent);
         $this->entityManager->flush();
+
+        $this->sendPasswordChangedEmail($user, $request->server->get('HTTP_USER_AGENT'));
     }
 
     public function sendResetPasswordEmail(string $email, bool $isNewUser = false): void
@@ -160,8 +163,8 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
         $accountEvent->setId($data['id']);
         $accountEvent->setUser($data['user']);
         $accountEvent->setType($data['type']);
-        $accountEvent->setToken($data['token']);
-        $accountEvent->setExpirationAt($data['expirationAt']);
+        $accountEvent->setToken($data['token'] ?? null);
+        $accountEvent->setExpirationAt($data['expirationAt'] ?? null);
 
         $this->accountEventRepository->save($accountEvent);
 
@@ -199,5 +202,61 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
                 'organization_created_at' => $organizationCreatedAt->format('Y/m/d \à\s H:i:s'),
             ]
         );
+    }
+
+    public function sendPasswordChangedEmail(User $user, ?string $userAgent): void
+    {
+        if (null === $user->getEmail()) {
+            throw new UserResourceNotFoundException();
+        }
+
+        $this->emailService->sendTemplatedEmail(
+            [$user->getEmail()],
+            $this->translator->trans('changed_password'),
+            '_emails/account-event/password-changed.html.twig',
+            [
+                'firstname' => $user->getFirstName(),
+                'device' => $this->getDevice($userAgent),
+                'datetime' => new DateTimeImmutable(),
+            ]
+        );
+
+        $this->create([
+            'id' => Uuid::v4(),
+            'user' => $user,
+            'type' => AccountEventTypeEnum::PASSWORD_CHANGED->value,
+        ]);
+    }
+
+    private function getDevice(?string $userAgent): string
+    {
+        if (null === $userAgent) {
+            return 'unknown';
+        }
+
+        $browser = match (1) {
+            preg_match('/msie/i', $userAgent) => 'Internet explorer',
+            preg_match('/firefox/i', $userAgent) => 'Firefox',
+            preg_match('/opr/i', $userAgent) => 'Opera',
+            preg_match('/edg/i', $userAgent) => 'Edge',
+            preg_match('/chrome/i', $userAgent) => 'Chrome',
+            preg_match('/safari/i', $userAgent) => 'Safari',
+            preg_match('/mobile/i', $userAgent) => 'Mobile browser',
+            default => 'unknown',
+        };
+
+        $operationalSystem = match (1) {
+            preg_match('/android/i', $userAgent) => 'Android',
+            preg_match('/linux/i', $userAgent) => 'Linux',
+            preg_match('/windows|win32/i', $userAgent) => 'Windows',
+            preg_match('/macintosh|mac os x/i', $userAgent) => 'MacOS',
+            preg_match('/iphone|ipad/i', $userAgent) => 'iOS',
+            default => 'unknown',
+        };
+
+        return $this->translator->trans('device_description', [
+            '{browser}' => $browser,
+            '{operationalSystem}' => $operationalSystem,
+        ]);
     }
 }

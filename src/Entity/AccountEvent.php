@@ -26,10 +26,10 @@ class AccountEvent extends AbstractEntity
     private int $type;
 
     #[ORM\Column(type: UuidType::NAME)]
-    private Uuid $token;
+    private ?Uuid $token = null;
 
     #[ORM\Column]
-    private DateTimeImmutable $expirationAt;
+    private ?DateTimeImmutable $expirationAt = null;
 
     public function getId(): ?Uuid
     {
@@ -61,22 +61,22 @@ class AccountEvent extends AbstractEntity
         $this->type = $type;
     }
 
-    public function getToken(): Uuid
+    public function getToken(): ?Uuid
     {
         return $this->token;
     }
 
-    public function setToken(Uuid $token): void
+    public function setToken(?Uuid $token): void
     {
         $this->token = $token;
     }
 
-    public function getExpirationAt(): DateTimeImmutable
+    public function getExpirationAt(): ?DateTimeImmutable
     {
         return $this->expirationAt;
     }
 
-    public function setExpirationAt(DateTimeImmutable $expirationAt): void
+    public function setExpirationAt(?DateTimeImmutable $expirationAt): void
     {
         $this->expirationAt = $expirationAt;
     }
