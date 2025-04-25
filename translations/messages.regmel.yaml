@@ -306,6 +306,7 @@ name_organization: Nome do Município
 name_initiative: Nome da iniciativa
 name_phases: Nome da fase
 neighborhood: Bairro
+next: Próximo
 new_phase: Nova Fase
 notifications: Notificações
 no: Não
@@ -329,6 +330,7 @@ notice: EDITAL
 no_records_found: Nenhum registro encontrado
 number_address: Número
 
+of: de
 offers_architectural_accessibility: Oferece acessibilidade física
 official_events: Eventos Oficiais
 official_spaces: Espaços Oficiais
@@ -359,6 +361,7 @@ people_capacity: Capacidade de pessoas
 period: Período
 permissions: Permissões
 portfolio: Portfólio
+previous: Anterior
 privacy: Privacidade
 profile: Perfil
 provided_violates: Os dados fornecidos violam uma ou mais restrições.
@@ -420,6 +423,7 @@ reset: Redefinir
 reset_password: Redefinir Senha
 read_notifications: Notificações Lidas
 new_registration_notification: Uma nova organização foi credenciada
+results: Resultados
 
 selection: Seleção
 
@@ -492,6 +496,7 @@ see_how: Visualizar como
 see_more: Ver mais
 see_phase: Ver fase
 short_description: Descrição curta
+showing: Exibindo
 site: Site
 social_media: Redes sociais
 sort_by: Ordenar por
@@ -575,6 +580,11 @@ footer:
   privacy_policy: Termos de uso e Política de privacidade
   send_email: Envie um email para
   visit_repository: visite o repositório
+
+table:
+  type_a_keyword: Digite uma palavra-chave...
+  no_records_found: Nenhum registro encontrado
+  error: Ocorreu um erro ao buscar os dados
 
 #pages
 view:
