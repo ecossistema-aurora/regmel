@@ -47,6 +47,8 @@ ages_rating:
     eighteen: 18 anos
 agent_information: Informações do Agente
 all: Tudo
+all_regions: Todas as regiões
+all_states: Todos os estados
 allow_free_linking: Permitir livre vinculação com
 allowed: Com permissão
 admin_options: Opções do Administrador
@@ -405,6 +407,7 @@ recent_registrations: Inscrições recentes
 recently_modified: Modificados recentemente
 reference_point: Complemento ou ponto de referência
 register: Cadastro
+region: Região
 registration_date: Data de inscrição
 registration_info: Informações sobre a inscrição
 related-agents: Agentes Relacionados

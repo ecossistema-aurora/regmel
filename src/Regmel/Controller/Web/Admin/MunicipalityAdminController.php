@@ -7,8 +7,10 @@ namespace App\Regmel\Controller\Web\Admin;
 use App\Controller\Web\Admin\AbstractAdminController;
 use App\DocumentService\OrganizationTimelineDocumentService;
 use App\Enum\OrganizationTypeEnum;
+use App\Enum\RegionEnum;
 use App\Enum\UserRolesEnum;
 use App\Service\Interface\OrganizationServiceInterface;
+use App\Service\Interface\StateServiceInterface;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -29,6 +31,7 @@ class MunicipalityAdminController extends AbstractAdminController
         private readonly JWTTokenManagerInterface $jwtManager,
         private readonly Security $security,
         private readonly TranslatorInterface $translator,
+        private readonly StateServiceInterface $stateService,
     ) {
     }
 
@@ -46,17 +49,31 @@ class MunicipalityAdminController extends AbstractAdminController
         is_granted("'.UserRolesEnum::ROLE_MUNICIPALITY->value.'")
     '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
     #[Route('/painel/admin/municipios', name: 'admin_regmel_municipality_list', methods: ['GET'])]
-    public function list(): Response
+    public function list(Request $request): Response
     {
         $user = $this->security->getUser();
 
+        $filterRegion = $request->query->get('region');
+        $filterState = $request->query->get('state');
+
+        $regions = RegionEnum::cases();
+        $states = $this->stateService->findBy(['region' => $filterRegion]);
+
         if (true === in_array(UserRolesEnum::ROLE_ADMIN->value, $user->getRoles())) {
-            $municipalities = $this->organizationService->findBy([
-                'type' => OrganizationTypeEnum::MUNICIPIO->value,
-            ]);
+            $criteria = ['type' => OrganizationTypeEnum::MUNICIPIO->value];
+            $allMunicipalities = $this->organizationService->findBy($criteria);
+
+            $municipalities = array_filter($allMunicipalities, function ($organization) use ($filterRegion, $filterState) {
+                $extra = $organization->getExtraFields();
+
+                return (!$filterRegion || ($extra['region'] ?? null) === $filterRegion)
+                    && (!$filterState || ($extra['state'] ?? null) === $filterState);
+            });
 
             return $this->render('regmel/admin/municipality/list.html.twig', [
                 'municipalities' => $municipalities,
+                'regions' => $regions,
+                'states' => $states,
                 'token' => $this->jwtManager->create($user),
                 'context_title' => 'my_municipalities',
             ], parentPath: '');
@@ -74,6 +91,8 @@ class MunicipalityAdminController extends AbstractAdminController
 
         return $this->render('regmel/admin/municipality/list.html.twig', [
             'municipalities' => $municipalities,
+            'regions' => $regions,
+            'states' => $states,
             'token' => $this->jwtManager->create($user),
             'context_title' => 'my_municipalities',
         ], parentPath: '');

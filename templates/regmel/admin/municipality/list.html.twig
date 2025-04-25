@@ -26,6 +26,33 @@
 
                         <hr>
 
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') %}
+                            <form method="get" class="row mb-3">
+                                <div class="col-md-3">
+                                    <label for="region-filter" class="form-label">{{ 'region'|trans }}</label>
+                                    <select id="region-filter" name="region" class="form-select" onchange="this.form.submit()">
+                                        <option value="">{{ 'all_regions'|trans }}</option>
+                                        {% for region in regions %}
+                                            <option value="{{ region.value }}" {% if region.value == app.request.get('region') %}selected{% endif %}>
+                                                {{ region.value }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="state-filter" class="form-label">{{ 'state'|trans }}</label>
+                                    <select id="state-filter" name="state" class="form-select" onchange="this.form.submit()">
+                                        <option value="">{{ 'all_states'|trans }}</option>
+                                        {% for state in states %}
+                                            <option value="{{ state.acronym }}" {% if state.name == app.request.get('state') %}selected{% endif %}>
+                                                {{ state.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </form>
+                        {% endif %}
+
                         <table class="js-grid table table-hover table-striped">
                             <thead class="table-dark">
                             <tr>
@@ -60,7 +87,6 @@
                             {% endfor %}
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
