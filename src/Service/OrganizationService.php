@@ -9,6 +9,7 @@ use App\Entity\Organization;
 use App\Exception\Organization\OrganizationResourceNotFoundException;
 use App\Exception\ValidatorException;
 use App\Repository\Interface\OrganizationRepositoryInterface;
+use App\Service\Interface\AgentServiceInterface;
 use App\Service\Interface\FileServiceInterface;
 use App\Service\Interface\OrganizationServiceInterface;
 use DateTime;
@@ -32,6 +33,7 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
         private SerializerInterface $serializer,
         private ValidatorInterface $validator,
         private EntityManagerInterface $entityManager,
+        private AgentServiceInterface $agentService,
     ) {
         parent::__construct(
             $this->security,
@@ -174,5 +176,14 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
     public function getCompaniesByAgents(iterable $agents): array
     {
         return $this->repository->findCompaniesByAgents($agents);
+    }
+
+    public function removeAgent(Uuid $agentId, Uuid $organizationId): void
+    {
+        $organization = $this->get($organizationId);
+        $agent = $this->agentService->get($agentId);
+
+        $organization->removeAgent($agent);
+        $this->repository->save($organization);
     }
 }

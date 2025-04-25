@@ -175,4 +175,18 @@ class MunicipalityAdminController extends AbstractAdminController
 
         return $this->redirectToRoute('admin_regmel_municipality_list');
     }
+
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'") or
+        is_granted("'.UserRolesEnum::ROLE_MUNICIPALITY->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    #[Route('/painel/admin/municipios/{municipalityId}/remove/{agentId}', name: 'admin_regmel_municipality_remove', methods: ['GET'])]
+    public function remove(Uuid $agentId, Uuid $municipalityId): Response
+    {
+        $this->organizationService->removeAgent($agentId, $municipalityId);
+
+        $this->addFlash('success', $this->translator->trans('view.organization.message.deleted_member'));
+
+        return $this->redirectToRoute('admin_regmel_municipality_details', ['id' => $municipalityId]);
+    }
 }
