@@ -1,3 +1,16 @@
+import {
+    trans,
+    PREVIOUS,
+    NEXT,
+    SHOWING,
+    RESULTS,
+    OF,
+    TO,
+    TABLE_TYPE_A_KEYWORD,
+    TABLE_NO_RECORDS_FOUND,
+    TABLE_ERROR
+} from "../translator.js";
+
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('table.js-grid').forEach(table => {
         const headers = Array.from(table.querySelectorAll('thead th'))
@@ -22,6 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
             pagination: { enabled: true, limit: 10 },
             className: {
                 table: 'table table-striped table-hover'
+            },
+            language: {
+                search: {
+                    placeholder: trans(TABLE_TYPE_A_KEYWORD)
+                },
+                pagination: {
+                    previous: trans(PREVIOUS),
+                    next: trans(NEXT),
+                    showing: trans(SHOWING),
+                    results: trans(RESULTS),
+                    of: trans(OF),
+                    to: trans(TO),
+                    noRecordsFound: trans(TABLE_NO_RECORDS_FOUND),
+                    error: trans(TABLE_ERROR)
+                }
             }
         });
         grid.render(wrapper);

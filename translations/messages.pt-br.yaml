@@ -268,6 +268,7 @@ name_organization: Nome da organização
 name_initiative: Nome da iniciativa
 name_phases: Nome da fase
 neighborhood: Bairro
+next: Próximo
 new_phase: Nova Fase
 notifications: Notificações
 no: Não
@@ -291,6 +292,7 @@ notice: EDITAL
 no_records_found: Nenhum registro encontrado
 number_address: Número
 
+of: de
 offers_architectural_accessibility: Oferece acessibilidade física
 official_events: Eventos Oficiais
 official_spaces: Espaços Oficiais
@@ -318,6 +320,7 @@ people_capacity: Capacidade de pessoas
 period: Período
 permissions: Permissões
 portfolio: Portfólio
+previous: Anterior
 privacy: Privacidade
 profile: Perfil
 password: Senha
@@ -371,6 +374,7 @@ related-agents: Agentes Relacionados
 required_field: Este campo é obrigatório.
 report: Denúncia
 responsible_agent: Agente Responsável
+results: Resultados
 
 tags: Tags
 term: Termo
@@ -428,6 +432,7 @@ see_how: Visualizar como
 see_more: Ver mais
 see_phase: Ver fase
 short_description: Descrição curta
+showing: Exibindo
 site: Site
 social_media: Redes sociais
 sort_by: Ordenar por
@@ -508,6 +513,11 @@ footer:
   privacy_policy: Termos de uso e Política de privacidade
   send_email: Ou envie um email para
   visit_repository: visite o repositório
+
+table:
+  type_a_keyword: Digite uma palavra-chave...
+  no_records_found: Nenhum registro encontrado
+  error: Ocorreu um erro ao buscar os dados
 
 #pages
 view:

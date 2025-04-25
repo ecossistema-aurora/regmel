@@ -269,6 +269,7 @@ name_organization: Organization name
 name_initiative: Nome gives initiative
 name_phases: Phase name
 neighborhood: Neighborhood
+next: Next
 new_phase: New phase
 notifications: Notifications
 no: No
@@ -293,6 +294,7 @@ notice: PUBLIC NOTICE
 no_records_found: No records found
 number_address: Number
 
+of: of
 offers_architectural_accessibility: Offers physical accessibility
 official_events: Official Events
 official_spaces: Official Spaces
@@ -320,6 +322,7 @@ people_capacity: People Capacity
 period: Period
 permissions: Permissions
 portfolio: Portfolio
+previous: Previous
 privacy: Privacy
 profile: Profile
 password: Password
@@ -372,6 +375,7 @@ registration_info: Information about registration
 related-agents: Related Agents
 required_field: Required Field
 report: Report
+results: Results
 
 responsible_agent: Responsible Agent
 tags: Tags
@@ -422,6 +426,7 @@ see_how: See How
 see_more: See More
 see_phase: See phase
 short_description: Short description
+showing: Showing
 select_bank: Select the bank
 select_state: Select the State
 select_municipality: Select the Municipality
@@ -510,6 +515,11 @@ footer:
   agents: My Agents
   spaces: My Spaces
   visit_repository: visit the repository
+
+table:
+  type_a_keyword: Type a keyword...
+  no_records_found: No records found
+  error: An error occurred while fetching data
 
 #pages
 view:
