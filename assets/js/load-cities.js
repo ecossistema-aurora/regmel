@@ -43,7 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const { exists } = await fetchData(`/organizations/check-duplicate?name=${encodeURIComponent(name)}&cityId=${encodeURIComponent(id)}`);
         if (exists) {
-            showError("Este município já foi credenciado.");
+            const contactEmail = window.SNP_EMAIL;
+            showError(`Este município já foi credenciado. Entre em contato com ${contactEmail} para mais informações.`);
             state.dispatchEvent(new Event("change"));
         }
     });

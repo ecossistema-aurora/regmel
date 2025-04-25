@@ -22,7 +22,15 @@
                         <form method="POST" action="" enctype="multipart/form-data">
                             <input type="hidden" name="token" value="{{ csrf_token(form_id) }}">
 
-                            <div class="alert alert-danger d-none" id="error-message"></div>
+                            {% if errors is defined and errors is not empty %}
+                                <div class="alert alert-danger">
+                                    {% for error in errors %}
+                                        <p>{{ error.message }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="alert alert-danger d-none" id="error-message"></div>
+                            {% endif %}
 
                             <label for="opportunity">{{ 'view.authentication.register.opportunity_type'|trans }}</label>
                             <select name="opportunity" id="opportunity" required class="form-select mt-1 mb-3">
@@ -54,6 +62,9 @@
 {% endblock %}
 
 {% block extra_javascripts %}
+    <script>
+        window.SNP_EMAIL = "{{ env.aurora.email }}";
+    </script>
     <script type="module" src="{{ asset('js/load-cities.js') }}"></script>
     <script type="module" src="{{ asset('js/regmel/register.js') }}"></script>
 {% endblock %}

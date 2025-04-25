@@ -145,6 +145,7 @@ export const DOCUMENT = {"id":"document","translations":{"messages":{"regmel":"D
 export const DOCUMENTS = {"id":"documents","translations":{"messages":{"regmel":"Documentos"}}};
 export const DOES_NOT_EXPIRE = {"id":"does_not_expire","translations":{"messages":{"regmel":"n\u00e3o expira","pt-br":"n\u00e3o expira","en":"does not expire","es":"no caduca"}}};
 export const DOWNLOADABLE_FILES = {"id":"downloadable-files","translations":{"messages":{"regmel":"Arquivos para download","pt-br":"Arquivos para download","en":"Downloadable Files","es":"Archivos Descargables"}}};
+export const ORGANIZATION_DUPLICATE = {"id":"organization_duplicate","translations":{"messages":{"regmel":"Este munic\u00edpio j\u00e1 foi credenciado. Entre em contato com %s para mais informa\u00e7\u00f5es."}}};
 export const EDIT = {"id":"edit","translations":{"messages":{"regmel":"Editar","pt-br":"Editar","en":"Edit","es":"Editar evento"}}};
 export const EDIT_EVENT = {"id":"edit_event","translations":{"messages":{"regmel":"Editar Evento","pt-br":"Editar Evento","en":"Edit Event","es":"Editar"}}};
 export const EDIT_FAQ = {"id":"edit_faq","translations":{"messages":{"regmel":"Editar FAQ","pt-br":"Editar FAQ","en":"Edit FAQ","es":"Editar preguntas frecuentes"}}};

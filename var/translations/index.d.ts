@@ -147,6 +147,7 @@ export declare const DOCUMENT: Message<{ 'messages': { parameters: NoParametersT
 export declare const DOCUMENTS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const DOES_NOT_EXPIRE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DOWNLOADABLE_FILES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const ORGANIZATION_DUPLICATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const EDIT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EDIT_EVENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EDIT_FAQ: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;

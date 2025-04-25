@@ -149,6 +149,7 @@ document: Documento
 documents: Documentos
 does_not_expire: não expira
 downloadable-files: Arquivos para download
+organization_duplicate: Este município já foi credenciado. Entre em contato com %s para mais informações.
 
 edit: Editar
 edit_event: Editar Evento
