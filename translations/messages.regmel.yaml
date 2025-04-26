@@ -425,6 +425,12 @@ reset_password: Redefinir Senha
 read_notifications: Notificações Lidas
 new_registration_notification: Uma nova organização foi credenciada
 results: Resultados
+roles: Perfis
+ROLE_USER: Usuário Padrão
+ROLE_COMPANY: Administrador de Empresa
+ROLE_MUNICIPALITY: Administrador de Município
+ROLE_ADMIN: Administrador Geral
+ROLE_SNP: Administrador SNP
 
 selection: Seleção
 
