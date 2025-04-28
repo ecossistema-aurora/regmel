@@ -78,7 +78,8 @@ make demo-regmel
 Após a instalação precisamos configurar o arquivo `.env`:
 
 - **linha 18:** Alterar para `APP_ENV=prod`
-- **linha 55:** Configurar de acordo com o serviço de email
+- **linha 55:** Configurar conforme o serviço de email
+- **linha 59:** Configurar o endereço de email
 
 </details>
 
