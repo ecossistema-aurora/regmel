@@ -98,6 +98,11 @@ class MunicipalityAdminController extends AbstractAdminController
         ], parentPath: '');
     }
 
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'") or
+        is_granted("'.UserRolesEnum::ROLE_MUNICIPALITY->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
     #[Route('/painel/admin/municipios/{id}', name: 'admin_regmel_municipality_details', methods: ['GET'])]
     public function details(Uuid $id): Response
     {
@@ -106,7 +111,7 @@ class MunicipalityAdminController extends AbstractAdminController
             'type' => OrganizationTypeEnum::MUNICIPIO->value,
         ]);
 
-        $this->denyAccessUnlessGranted('get', $municipality);
+        // $this->denyAccessUnlessGranted('get', $municipality);
 
         $createdById = $municipality->getCreatedBy()->getId()->toRfc4122();
 
@@ -165,7 +170,7 @@ class MunicipalityAdminController extends AbstractAdminController
         } catch (TypeError|Exception $exception) {
             $this->addFlashError($exception->getMessage());
 
-            return $this->list();
+            return $this->list($request);
         }
 
         return $this->redirectToRoute('admin_regmel_municipality_list');
