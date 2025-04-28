@@ -30,10 +30,19 @@
                                 <th>{{ 'image'|trans }}</th>
                                 <th>{{ 'status' |trans }}</th>
                                 <th>{{ 'created_at'|trans }}</th>
+                                <th>{{ 'roles' |trans }}</th>
                                 <th>{{ 'actions'|trans }}</th>
                             </tr>
                             </thead>
                             <tbody>
+
+                            {% set role_color_map = {
+                                'ROLE_ADMIN': 'bg-danger',
+                                'ROLE_MANAGER': 'bg-primary',
+                                'ROLE_USER': 'bg-success',
+                                'ROLE_SUPPORT': 'bg-warning'
+                            } %}
+
                             {% for item in users %}
                                 <tr>
                                     <td><a href="#">{{ item.name }}</a></td>
@@ -67,6 +76,15 @@
                                     </td>
 
                                     <td>{{ item.createdAt.format('d/m/Y H:i:s') }}</td>
+
+                                    <td>
+                                        {% for role in item.roles %}
+                                            <span class="badge {{ role_color_map[role]|default('bg-secondary') }} me-1">
+                                                {{ role|trans }}
+                                            </span>
+                                        {% endfor %}
+                                    </td>
+
                                     <td>
                                         <a href="{{ path('admin_user_timeline', {id: item.id}) }}" class="btn btn-outline-info btn-sm">{{ 'Timeline'|trans }}</a>
                                         <a href="#" class="btn btn-outline-warning btn-sm">{{ 'edit'|trans }}</a>
