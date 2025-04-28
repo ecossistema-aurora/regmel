@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             language: {
                 search: {
-                    placeholder: trans(TABLE_TYPE_A_KEYWORD)
+                    placeholder: trans(TABLE_TYPE_A_KEYWORD),
                 },
                 pagination: {
                     previous: trans(PREVIOUS),
@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     results: trans(RESULTS),
                     of: trans(OF),
                     to: trans(TO),
-                    noRecordsFound: trans(TABLE_NO_RECORDS_FOUND),
-                    error: trans(TABLE_ERROR)
-                }
+                },
+                noRecordsFound: trans(TABLE_NO_RECORDS_FOUND),
+                error: trans(TABLE_ERROR),
             }
         });
         grid.render(wrapper);
