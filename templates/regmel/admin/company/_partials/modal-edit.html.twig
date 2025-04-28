@@ -22,7 +22,7 @@
           </div>
           <div class="mb-3">
             <label for="company-phone" class="form-label">{{ 'phone'| trans }}</label>
-            <input type="tel" class="form-control" id="company-phone" name="phone" data-mask="phone" value="">
+            <input type="tel" maxlength="16" class="form-control" id="company-phone" name="phone" data-mask="phone" value="">
           </div>
           <div class="mb-3">
             <label for="company-email" class="form-label">{{ 'email'| trans }}</label>
@@ -30,7 +30,7 @@
           </div>
           <div class="mb-3">
             <label for="company-cnpj" class="form-label">{{ 'cnpj'| trans }}</label>
-            <input type="text" class="form-control" id="company-cnpj" name="cnpj" data-mask="cnpj" value="">
+            <input type="text" maxlength="18" class="form-control" id="company-cnpj" name="cnpj" data-mask="cnpj" value="">
           </div>
           <div class="mb-3">
             <label class="form-label">{{ 'type'| trans }}</label>
