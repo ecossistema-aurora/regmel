@@ -34,7 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
             search: true,
             pagination: { enabled: true, limit: 10 },
             className: {
-                table: 'table table-striped table-hover'
+                table: 'table table-striped table-hover',
+                th: 'bg-dark text-white',
+                td: 'bg-light'
             },
             language: {
                 search: {
@@ -52,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 error: trans(TABLE_ERROR),
             }
         });
+
         grid.render(wrapper);
         table.remove();
     });

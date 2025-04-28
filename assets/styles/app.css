@@ -1187,3 +1187,7 @@ img.card-images__entity-details {
         line-height: 25px;
     }
 }
+
+button.gridjs-sort {
+    filter: invert(1);
+}
