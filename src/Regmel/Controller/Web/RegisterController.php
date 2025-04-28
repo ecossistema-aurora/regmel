@@ -14,6 +14,7 @@ use App\Service\Interface\CityServiceInterface;
 use App\Service\Interface\StateServiceInterface;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Exception;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -33,12 +34,15 @@ class RegisterController extends AbstractWebController
         private readonly StateServiceInterface $stateService,
         private readonly CityServiceInterface $cityService,
         private readonly TranslatorInterface $translator,
+        private readonly ParameterBagInterface $parameterBag,
     ) {
     }
 
     #[Route('/cadastro/municipio', name: 'regmel_register_city', methods: ['GET', 'POST'])]
     public function registerCity(Request $request): Response
     {
+        $snpEmail = $this->parameterBag->get('app.email.address');
+
         $states = $this->stateService->list();
 
         if (Request::METHOD_POST !== $request->getMethod()) {
