@@ -10,7 +10,6 @@
                         <th>{{ 'title'|trans }}</th>
                         <th>{{ 'created_at'|trans }}</th>
                         <th>{{ 'device'|trans }}</th>
-                        <th></th>
                         <th>{{ 'actions'|trans }}</th>
                     </tr>
                     </thead>
@@ -20,7 +19,6 @@
                             <td><a href="#">{{ item.title | trans }}</a></td>
                             <td>{{ item.datetime.format('d/m/Y H:i:s') }}</td>
                             <td>{{ item.device }}</td>
-                            <td></td>
                             <td>
                                 {% include '_components/button-modal.html.twig' with {
                                     item: item
