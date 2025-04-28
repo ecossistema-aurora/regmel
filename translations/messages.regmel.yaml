@@ -429,6 +429,7 @@ roles: Perfis
 ROLE_USER: Usuário Padrão
 ROLE_COMPANY: Administrador de Empresa
 ROLE_MUNICIPALITY: Administrador de Município
+ROLE_MANAGER: Gestor
 ROLE_ADMIN: Administrador Geral
 ROLE_SNP: Administrador SNP
 
