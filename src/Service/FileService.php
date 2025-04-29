@@ -94,6 +94,40 @@ readonly class FileService implements FileServiceInterface
     /**
      * @throws FilesystemException
      */
+    public function uploadMixedFile(UploadedFile $uploadedFile, string $extraPath = '', ?string $optionalName = null): File
+    {
+        if (null === $optionalName) {
+            $fileName = uniqid('', true).'.'.$uploadedFile->guessExtension();
+        } else {
+            $fileName = $optionalName.'.'.$uploadedFile->guessExtension();
+        }
+
+        $filePath = rtrim($this->storageDir, '/').$extraPath;
+
+        $newFile = $uploadedFile->move($filePath, $fileName);
+
+        $stream = fopen($newFile->getRealPath(), 'r');
+
+        $this->validateMimeType($newFile->getRealPath(), $stream, [
+            'application/pdf',
+            'application/jpg',
+            'image/jpeg',
+            'image/png',
+            'image/jpg',
+            'application/xml',
+            'application/vnd.google-earth.kmz',
+            'application/octet-stream',
+        ]);
+        $this->validateExtension($uploadedFile, ['pdf', 'jpeg', 'jpg', 'png', 'kml', 'kmz', 'shp']);
+
+        fclose($stream);
+
+        return $newFile;
+    }
+
+    /**
+     * @throws FilesystemException
+     */
     public function uploadImage(string $path, UploadedFile $uploadedFile): File
     {
         $fileName = uniqid('', true).'.'.$uploadedFile->guessExtension();

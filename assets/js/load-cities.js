@@ -1,10 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById('region')) {
+        const region = document.getElementById("region");
+
+        region.addEventListener("change", async () => {
+            clearStates();
+            clearCities();
+            if (!region.value) return;
+            const states = await fetchData(`/api/regions/${region.value}/states`);
+            states.forEach(s => state.innerHTML += `<option value="${s.id}">${s.name}</option>`);
+        });
+    }
+
     const state = document.getElementById("state");
     const city = document.getElementById("city");
     const error = document.getElementById("error-message");
 
     const clearCities = () => {
         city.innerHTML = `<option value="">${city.dataset.placeholder || "Selecione"}</option>`;
+    };
+
+    const clearStates = () => {
+        state.innerHTML = `<option value="">${state.dataset.placeholder || "Selecione"}</option>`;
     };
 
     const showError = (msg) => {
