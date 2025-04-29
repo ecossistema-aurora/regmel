@@ -44,7 +44,7 @@
                                     <select id="state-filter" name="state" class="form-select" onchange="this.form.submit()">
                                         <option value="">{{ 'all_states'|trans }}</option>
                                         {% for state in states %}
-                                            <option value="{{ state.acronym }}" {% if state.name == app.request.get('state') %}selected{% endif %}>
+                                            <option value="{{ state.acronym }}" {% if state.acronym == app.request.get('state') %}selected{% endif %}>
                                                 {{ state.name }}
                                             </option>
                                         {% endfor %}
