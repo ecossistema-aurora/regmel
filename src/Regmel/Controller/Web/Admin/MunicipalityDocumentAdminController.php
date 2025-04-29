@@ -80,4 +80,27 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
 
         return "{$path}/storage/regmel/municipality/documents/{$file}";
     }
+
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    #[Route('/painel/admin/municipios-documentos', name: 'admin_regmel_municipality_document_review', methods: ['POST'])]
+    public function reviewDocument(): Response
+    {
+        $municipalities = $this->organizationService->findBy([
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
+        ]);
+
+        $municipalities = array_map(function (Organization $organization) {
+            $organization->addExtraField(
+                'filepath',
+                $this->getDocumentPath($organization->getExtraFields()['form'] ?? 'null')
+            );
+
+            return $organization;
+        }, $municipalities);
+
+        return $this->renderOrganizationList($municipalities);
+    }
 }
