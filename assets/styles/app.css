@@ -1191,3 +1191,46 @@ img.card-images__entity-details {
 button.gridjs-sort {
     filter: invert(1);
 }
+
+.ts-wrapper {
+    height: 38px !important;
+    padding: 0 !important;
+    border: 1px solid var(--input-border) !important;
+    border-radius: 0.375rem !important;
+    background-color: var(--bg-color-f) !important;
+    font-size: 1rem !important;
+    color: var(--main-font-color) !important;
+    box-shadow: none !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+
+.ts-wrapper.single .ts-control {
+    height: 100% !important;
+    padding: 0 12px !important;
+    border: none !important;
+    background: transparent !important;
+    display: flex !important;
+    align-items: center !important;
+    box-shadow: none !important;
+    line-height: 1.5 !important;
+}
+
+.ts-wrapper .ts-control input {
+    font-size: 1rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: var(--soft-gray) !important;
+    height: 100% !important;
+}
+
+.ts-wrapper .ts-control::after {
+    content: "";
+    margin-left: auto;
+    width: 0;
+    height: 0;
+    border-left: 0.3em solid transparent;
+    border-right: 0.3em solid transparent;
+    border-top: 0.3em solid var(--soft-gray);
+}

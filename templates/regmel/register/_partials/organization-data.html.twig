@@ -2,18 +2,19 @@
 
 <div class="row">
     <div class="col-6 mb-3">
-        <label for="state" class="form-label">{{ 'state' | trans }}</label>
-        <select class="form-select" id="state">
-            <option value="">{{ 'select' | trans }}</option>
+        <label for="state" class="form-label required">{{ 'state' | trans }}</label>
+        <select id="state" name="state" class="form-select">
+        <option value="">{{ 'select' | trans }}</option>
             {% for state in states %}
                 <option value="{{ state.id }}">{{ state.name }}</option>
             {% endfor %}
         </select>
     </div>
     <div class="col-6 mb-3">
-        <label for="city" class="form-label">{{ 'city' | trans }}</label>
-        <select class="form-select" id="city" name="city" required>
-            <option value="">{{ 'select' | trans }}</option>
+        <label for="city" class="form-label required">{{ 'city'| trans }}</label>
+        <select id="city" name="city" class="form-select"
+                data-placeholder="{{ 'select'|trans }}">
+            <option value="">{{ 'select'|trans }}</option>
         </select>
     </div>
 </div>

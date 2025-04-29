@@ -411,6 +411,7 @@ export const ROLES = {"id":"roles","translations":{"messages":{"regmel":"Perfis"
 export const ROLEUSER = {"id":"ROLE_USER","translations":{"messages":{"regmel":"Usu\u00e1rio Padr\u00e3o"}}};
 export const ROLECOMPANY = {"id":"ROLE_COMPANY","translations":{"messages":{"regmel":"Administrador de Empresa"}}};
 export const ROLEMUNICIPALITY = {"id":"ROLE_MUNICIPALITY","translations":{"messages":{"regmel":"Administrador de Munic\u00edpio"}}};
+export const ROLEMANAGER = {"id":"ROLE_MANAGER","translations":{"messages":{"regmel":"Gestor"}}};
 export const ROLEADMIN = {"id":"ROLE_ADMIN","translations":{"messages":{"regmel":"Administrador Geral"}}};
 export const ROLESNP = {"id":"ROLE_SNP","translations":{"messages":{"regmel":"Administrador SNP"}}};
 export const SELECTION = {"id":"selection","translations":{"messages":{"regmel":"Sele\u00e7\u00e3o"}}};

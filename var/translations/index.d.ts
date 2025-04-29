@@ -413,6 +413,7 @@ export declare const ROLES: Message<{ 'messages': { parameters: NoParametersType
 export declare const ROLEUSER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ROLECOMPANY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ROLEMUNICIPALITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const ROLEMANAGER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ROLEADMIN: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ROLESNP: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const SELECTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
