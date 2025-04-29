@@ -81,8 +81,6 @@
             </div>
         </div>
     </div>
-
-
 {% endblock %}
 
 {% block extra_javascripts %}
@@ -93,8 +91,8 @@
         function openDocumentModal (organizationName, organizationId, filePath) {
             document.getElementById('modalDocumentTitle').innerHTML = 'Documento - ' + organizationName;
             document.getElementById('modalDocumentBody').innerHTML = `
-                <object style="min-height: 600px;" data="http://localhost:8080/painel/admin/municipios/72653c2d-146f-4eeb-86fb-3217cb241692/oficio" type="application/pdf" width="100%" height="100%">
-                  <p>Alternative text - include a link <a href="${filePath}">to the PDF!</a></p>
+                <object style="min-height: 600px;" data="/painel/admin/municipios/${organizationId}/oficio" type="application/pdf" width="100%" height="100%">
+                  <p>Caso o documento não esteja visivel <a href="/painel/admin/municipios/${organizationId}/oficio">Clique aqui para acesso o PDF!</a></p>
                 </object>
             `;
         }

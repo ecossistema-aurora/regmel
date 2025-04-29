@@ -20,6 +20,12 @@ logo:
     width: 200px
 register:
   any: false
+proposals:
+  area_characteristics:
+    option_1: Núcleo urbano regularizado ou em processo de regularização fundiária, desde que predominantemente de baixa renda, assim declarado pelo Município ou Distrito Federal;
+    option_2: Núcleo urbano informal classificados como área de Regularização Fundiária Urbana de Interesse Social - Reurb-S;
+    option_3: Zona especial de interesse social, conforme o art. 4º, inciso V, alínea "f", da Lei nº 10.257, de 10 de julho de 2001.
+    option_4: 'Se enquadra na excepcionalidade: casos de execução de melhorias destinadas a garantir segurança ou salubridade para preservação de vidas, logo, não há necessidade de que se tenha dado início ao processo de regularização fundiária nem que se caracterize como zona especial de interesse social. Aprovação da proposta condicionada ao ateste do Município ou Distrito Federal de que os potenciais beneficiários são de baixa renda.'
 terms:
   lgpd:
     title: Termo de Consentimento para Tratamento de Dados Pessoais (LGPD)

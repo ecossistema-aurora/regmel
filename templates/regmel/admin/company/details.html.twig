@@ -68,6 +68,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade pt-3" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab" tabindex="0">
+                        {% if is_granted('ROLE_COMPANY') %}
                         <div class="row">
                             <div class="col">
                                 <div class="alert alert-info">
@@ -80,11 +81,12 @@
                                 </div>
                             </div>
                             <div class="col text-end">
-                                <a href="{{ path('admin_regmel_company_proposals_add', {
+                                <a href="{{ path('admin_regmel_proposal_add', {
                                     id: company.id
                                 }) }}" class="btn btn-outline-primary">Nova Proposta</a>
                             </div>
                         </div>
+                        {% endif %}
 
                         <table class="js-grid table table-hover table-striped mt-3">
                             <thead class="table-dark">
@@ -97,42 +99,19 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {% for proposal in proposals %}
                             <tr>
-                                <td>Titulo da Proposta</td>
-                                <td>Municipio W</td>
-                                <td>Area Y</td>
+                                <td>{{ proposal.name }}</td>
+                                <td>{{ proposal.extraFields.city_name ?? proposal.organizationTo.name }} </td>
+                                <td>{{ proposal.extraFields.area_size }}m2</td>
                                 <td>
-                                    <span class="badge bg-dark">Sem Adesão do Municipio</span>
+                                    <span class="badge bg-dark">{{ proposal.extraFields.status ?? 'Enviada' }}</span>
                                 </td>
                                 <td>
                                     <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Titulo da Proposta</td>
-                                <td>Municipio Y</td>
-                                <td>Area Y</td>
-                                <td>
-                                    <span class="badge bg-danger">Não Anuído</span>
-                                </td>
-                                <td>
-                                    <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Titulo da Proposta</td>
-                                <td>Municipio Z</td>
-                                <td>Area Z</td>
-                                <td>
-                                    <span class="badge bg-success">Anuído</span>
-                                </td>
-                                <td>
-                                    <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
-                                    <a href="" class="btn btn-outline-warning btn-sm">Editar</a>
-                                    <a href="" class="btn btn-outline-success btn-sm">Reenviar</a>
-                                    <a href="" class="btn btn-outline-danger btn-sm">Excluir</a>
-                                </td>
-                            </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -195,6 +174,9 @@
                                            }|json_encode|e('html_attr') }}'>
                                             {{ agent.name }}
                                         </a>
+                                        {% if agent.id == createdById %}
+                                            <span class="badge bg-primary ms-2">Criador</span>
+                                        {% endif %}
                                     </td>
                                     <td>
                                         {% if app.user.agents.first.id == createdById and agent.id != createdById %}

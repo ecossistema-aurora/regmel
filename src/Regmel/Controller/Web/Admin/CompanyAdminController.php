@@ -8,9 +8,8 @@ use App\Controller\Web\Admin\AbstractAdminController;
 use App\DocumentService\OrganizationTimelineDocumentService;
 use App\Enum\OrganizationTypeEnum;
 use App\Enum\UserRolesEnum;
-use App\Service\Interface\CityServiceInterface;
+use App\Repository\Interface\InitiativeRepositoryInterface;
 use App\Service\Interface\OrganizationServiceInterface;
-use App\Service\Interface\StateServiceInterface;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -28,8 +27,7 @@ class CompanyAdminController extends AbstractAdminController
     public function __construct(
         private readonly OrganizationServiceInterface $organizationService,
         private readonly OrganizationTimelineDocumentService $documentService,
-        private readonly StateServiceInterface $stateService,
-        private readonly CityServiceInterface $cityService,
+        private readonly InitiativeRepositoryInterface $initiativeRepository,
         private readonly JWTTokenManagerInterface $jwtManager,
         private readonly Security $security,
         private readonly TranslatorInterface $translator,
@@ -79,26 +77,6 @@ class CompanyAdminController extends AbstractAdminController
         ], parentPath: '');
     }
 
-    #[IsGranted(new Expression('
-        is_granted("'.UserRolesEnum::ROLE_COMPANY->value.'")
-    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
-    #[Route('/painel/admin/empresas/{id}/nova-proposta', name: 'admin_regmel_company_proposals_add', methods: ['GET'])]
-    public function add(Uuid $id): Response
-    {
-        $states = $this->stateService->list();
-        $cities = $this->cityService->findByState('CE');
-        $user = $this->security->getUser();
-
-        $company = $this->organizationService->get($id);
-
-        return $this->render('regmel/admin/company/add.html.twig', [
-            'states' => $states,
-            'cities' => $cities,
-            'token' => $this->jwtManager->create($user),
-            'company' => $company,
-        ], parentPath: '');
-    }
-
     #[Route('/painel/admin/empresas/{id}', name: 'admin_regmel_company_details', methods: ['GET'])]
     public function details(Uuid $id): Response
     {
@@ -113,8 +91,13 @@ class CompanyAdminController extends AbstractAdminController
 
         $createdById = $company->getCreatedBy()->getId()->toRfc4122();
 
+        $proposals = $this->initiativeRepository->findBy([
+            'organizationFrom' => $id->toRfc4122(),
+        ]);
+
         return $this->render('regmel/admin/company/details.html.twig', [
             'company' => $company,
+            'proposals' => $proposals,
             'timeline' => $timeline,
             'createdById' => $createdById,
         ], parentPath: '');
