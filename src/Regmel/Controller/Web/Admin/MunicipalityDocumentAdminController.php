@@ -8,15 +8,18 @@ use App\Controller\Web\Admin\AbstractAdminController;
 use App\Entity\Organization;
 use App\Enum\OrganizationTypeEnum;
 use App\Enum\UserRolesEnum;
+use App\Exception\UnableCreateFileException;
 use App\Service\Interface\OrganizationServiceInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Uid\Uuid;
+use ZipArchive;
 
 class MunicipalityDocumentAdminController extends AbstractAdminController
 {
@@ -102,5 +105,42 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
         }, $municipalities);
 
         return $this->renderOrganizationList($municipalities);
+    }
+
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    #[Route('/painel/admin/municipios-documentos/download', name: 'admin_regmel_municipality_document_download', methods: ['GET'])]
+    public function downloadDocuments(): Response
+    {
+        $zipFileName = sprintf('municipality_documents_%s.zip', date('Y-m-d_H-i-s'));
+        $zipFilePath = sprintf('%s/storage/regmel/municipality/documents/%s', $this->getParameter('kernel.project_dir'), $zipFileName);
+
+        $zip = new ZipArchive();
+
+        if (true !== $zip->open($zipFilePath, ZipArchive::CREATE)) {
+            throw new UnableCreateFileException();
+        }
+
+        $municipalities = $this->organizationService->findBy([
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
+        ]);
+
+        foreach ($municipalities as $municipality) {
+            $filePath = $this->getDocumentPath($municipality->getExtraFields()['form'] ?? '');
+
+            if (true === file_exists($filePath)) {
+                $zip->addFile($filePath, basename($filePath));
+            }
+        }
+
+        $zip->close();
+
+        $response = new BinaryFileResponse($zipFilePath, headers: ['Content-Type' => 'application/zip']);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $zipFileName);
+        $response->deleteFileAfterSend(true);
+
+        return $response;
     }
 }

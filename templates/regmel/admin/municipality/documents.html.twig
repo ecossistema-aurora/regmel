@@ -12,10 +12,15 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-body shadow">
-                        <div class="d-flex justify-content-between">
-                            <h2>
-                                {{ 'organizations'|trans }} - {{ 'documents'|trans }}
-                            </h2>
+                        <div class="row justify-content-between">
+                            <div class="col">
+                                <h2>
+                                    {{ 'organizations'|trans }} - {{ 'documents'|trans }}
+                                </h2>
+                            </div>
+                            <div class="col text-end">
+                                <a href="{{ path('admin_regmel_municipality_document_download') }}" class="btn btn-secondary">{{ 'download_all_terms'|trans }}</a>
+                            </div>
                         </div>
 
                         <hr>
@@ -46,7 +51,6 @@
                             {% endfor %}
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>

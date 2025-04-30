@@ -146,6 +146,7 @@ export declare const DISCOVER: Message<{ 'messages': { parameters: NoParametersT
 export declare const DOCUMENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const DOCUMENTS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const DOES_NOT_EXPIRE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const DOWNLOAD_ALL_TERMS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const DOWNLOADABLE_FILES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ORGANIZATION_DUPLICATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const EDIT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -413,6 +414,7 @@ export declare const ROLES: Message<{ 'messages': { parameters: NoParametersType
 export declare const ROLEUSER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ROLECOMPANY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ROLEMUNICIPALITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const ROLEMANAGER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ROLEADMIN: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ROLESNP: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const SELECTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
@@ -781,6 +783,7 @@ export declare const VIEW_ORGANIZATION_DATE: Message<{ 'messages': { parameters:
 export declare const VIEW_ORGANIZATION_MESSAGE_UPDATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_ORGANIZATION_MESSAGE_DELETED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_ORGANIZATION_MESSAGE_CREATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const VIEW_ORGANIZATION_MESSAGE_DELETED_MEMBER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_ORGANIZATION_QUANTITY_TOTAL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_ORGANIZATION_QUANTITY_CULTURE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_ORGANIZATION_QUANTITY_INACTIVE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
