@@ -234,6 +234,8 @@ export declare const IS_ITINERANT: Message<{ 'messages': { parameters: NoParamet
 export declare const IS_ACCESSIBLE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const INVALID_CREDENTIALS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const INVITE_CREATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const INVITE_WAS_ACCEPTED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const INVITE_WAS_SENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const JOIN_TERMS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const LANGUAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const LASTNAME: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;

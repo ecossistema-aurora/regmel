@@ -45,30 +45,43 @@ class AuditInviteListener extends AbstractAuditListener
 
     public function acceptInviteEvent(AcceptInviteEvent $event): void
     {
-        $this->createInvite($event->invite, AcceptInviteEvent::TITLE);
+        $data = [];
+
+        $data['user'] = $event->user->getEmail();
+
+        $this->createInvite($event, $event->invite, AcceptInviteEvent::TITLE, $data);
     }
 
     private function sendInviteEvent(SendInviteEvent $event): void
     {
-        $this->createInvite($event->invite, SendInviteEvent::TITLE);
+        $invite = $event->invite;
+
+        $data['user'] = $invite->getGuest()?->getUser()->getEmail() ?? $event->email;
+
+        $this->createInvite($event, $invite, SendInviteEvent::TITLE, $data);
     }
 
     private function removeInviteEvent(RemoveInviteEvent $event): void
     {
-        $this->createInvite($event->invite, RemoveInviteEvent::TITLE);
+        $this->createInvite($event, $event->invite, RemoveInviteEvent::TITLE);
     }
 
-    private function createInvite(Invite $invite, string $title): void
+    private function createInvite(Event $event, Invite $invite, string $title, array $data = []): void
     {
         $document = new InviteTimeline();
+
+        if (null !== $event->user) {
+            $document->setUserId($event->user->getId()->toRfc4122());
+        }
+
+        $document->setOrganizationId($invite->getHost()->getId()->toRfc4122());
         $document->setTitle($title);
         $document->setResourceId($invite->getId()->toRfc4122());
         $document->setPriority(0);
         $document->setDatetime(new DateTime());
         $document->setDevice($this->getDevice());
         $document->setPlatform($this->getPlatform());
-        $document->setFrom([]);
-        $document->setTo([]);
+        $document->setData($data);
 
         $this->documentManager->persist($document);
         $this->documentManager->flush();

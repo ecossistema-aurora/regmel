@@ -3,10 +3,15 @@ import {
     THE_RESOURCE_WAS_CREATED,
     THE_RESOURCE_WAS_UPDATED,
     THE_RESOURCE_WAS_DELETED,
+    INVITE_WAS_ACCEPTED,
+    INVITE_WAS_SENT,
 } from "../translator.js";
 
 const MODAL_BODY = document.getElementById('modal-timeline-table-body');
 const EXTRA_INFO = document.getElementById('modal-timeline-extra-info');
+const DATA = document.getElementById('modal-timeline-data');
+const TIMELINE_TABLE = document.getElementById('modal-timeline-table');
+
 const FIELDS = {
     authorName: document.getElementById('author-name'),
     authorEmail: document.getElementById('author-email'),
@@ -18,7 +23,7 @@ const FIELDS = {
 };
 
 function openModal(item) {
-    const {from, to, author } = item;
+    const {from, to, author, data} = item;
 
     MODAL_BODY.innerHTML = '';
 
@@ -31,7 +36,26 @@ function openModal(item) {
         EXTRA_INFO.style.display = 'block';
     }
 
-    Object.keys(to).forEach(field => {
+    if (data) {
+        DATA.innerHTML = '';
+
+        const ul = document.createElement('ul');
+
+        Object.entries(data).forEach(([key, value]) => {
+            const li = document.createElement('li');
+            li.textContent = `${key}: ${value}`;
+            ul.appendChild(li);
+        });
+
+        DATA.append(ul);
+    }
+
+
+    if (undefined === from && undefined === to) {
+        TIMELINE_TABLE.style.display = 'none';
+    }
+
+    Object.keys(to ?? {}).forEach(field => {
         const row = createRow(field, from[field], to[field]);
         MODAL_BODY.appendChild(row);
     });
@@ -86,6 +110,8 @@ function populateExtraInfo(item) {
         "The resource was created": trans(THE_RESOURCE_WAS_CREATED),
         "The resource was updated": trans(THE_RESOURCE_WAS_UPDATED),
         "The resource was deleted": trans(THE_RESOURCE_WAS_DELETED),
+        "Invite was accepted": trans(INVITE_WAS_ACCEPTED),
+        "Invite was sent": trans(INVITE_WAS_SENT),
     };
 
     FIELDS.authorName.textContent = name;

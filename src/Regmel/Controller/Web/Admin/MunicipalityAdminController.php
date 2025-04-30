@@ -119,7 +119,7 @@ class MunicipalityAdminController extends AbstractAdminController
             throw $this->createNotFoundException($this->translator->trans('municipality_found'));
         }
 
-        $timeline = $this->documentService->getEventsByEntityId($id);
+        $timeline = $this->documentService->getAllEventsByOrganizationId($id);
 
         return $this->render('regmel/admin/municipality/details.html.twig', [
             'municipality' => $municipality,

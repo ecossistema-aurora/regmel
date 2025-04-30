@@ -102,7 +102,7 @@ readonly class InviteService extends AbstractEntityService implements InviteServ
             ]
         );
 
-        $this->eventDispatcher->dispatch(new SendInviteEvent($invite), SendInviteEvent::class);
+        $this->eventDispatcher->dispatch(new SendInviteEvent($invite, $this->security->getUser()), SendInviteEvent::class);
 
         return $this->repository->save($invite);
     }
@@ -131,9 +131,8 @@ readonly class InviteService extends AbstractEntityService implements InviteServ
         $this->entityManager->persist($user);
         $this->entityManager->remove($invite);
 
-        $this->eventDispatcher->dispatch(new AcceptInviteEvent($invite), AcceptInviteEvent::class);
-
         $this->manualLogin($user);
+        $this->eventDispatcher->dispatch(new AcceptInviteEvent($invite, $this->security->getUser()), AcceptInviteEvent::class);
         $this->entityManager->flush();
         $this->manualLogout();
     }
