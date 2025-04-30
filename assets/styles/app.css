@@ -1191,3 +1191,14 @@ img.card-images__entity-details {
 button.gridjs-sort {
     filter: invert(1);
 }
+
+.ts-control {
+    background-image: none !important;
+    font-size: 3rem;
+}
+
+.ts-wrapper.focus {
+    border-color: #86b7fe !important;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* padrão Bootstrap 5 */
+}

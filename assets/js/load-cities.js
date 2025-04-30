@@ -1,67 +1,84 @@
-document.addEventListener("DOMContentLoaded", () => {
-    if (document.getElementById('region')) {
-        const region = document.getElementById("region");
+import TomSelect from 'tom-select';
+import 'tom-select/dist/css/tom-select.default.min.css';
 
-        region.addEventListener("change", async () => {
-            clearStates();
-            clearCities();
-            if (!region.value) return;
-            const states = await fetchData(`/api/regions/${region.value}/states`);
-            states.forEach(s => state.innerHTML += `<option value="${s.id}">${s.name}</option>`);
-        });
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    const stateElement  = document.getElementById('state');
+    const cityElement   = document.getElementById('city');
+    const errorElement  = document.getElementById('error-message');
 
-    const state = document.getElementById("state");
-    const city = document.getElementById("city");
-    const error = document.getElementById("error-message");
+    stateElement.classList.remove('form-select');
+    cityElement .classList.remove('form-select');
+
+    const stateSelect = new TomSelect(stateElement, {
+        create: false,
+        sortField: { field: 'text', direction: 'asc' },
+        placeholder: stateElement.dataset.placeholder || 'Selecione',
+        allowEmptyOption: false,
+    });
+
+    const citySelect = new TomSelect(cityElement, {
+        create: false,
+        sortField: { field: 'text', direction: 'asc' },
+        placeholder: cityElement.dataset.placeholder || 'Selecione',
+        allowEmptyOption: false,
+    });
+
+    const fetchData = url =>
+        fetch(url)
+            .then(res => res.ok ? res.json() : [])
+            .catch(() => []);
+
+    const showError = msg => {
+        if (!errorElement) return;
+        errorElement.textContent = msg;
+        errorElement.classList.remove('d-none');
+    };
+    const hideError = () => {
+        if (!errorElement) return;
+        errorElement.textContent = '';
+        errorElement.classList.add('d-none');
+    };
 
     const clearCities = () => {
-        city.innerHTML = `<option value="">${city.dataset.placeholder || "Selecione"}</option>`;
+        citySelect.clearOptions();
+        citySelect.clear(true);
     };
 
-    const clearStates = () => {
-        state.innerHTML = `<option value="">${state.dataset.placeholder || "Selecione"}</option>`;
-    };
-
-    const showError = (msg) => {
-        if (error) {
-            error.textContent = msg;
-            error.classList.remove("d-none");
-        }
-    };
-
-    const hideError = () => {
-        if (error) {
-            error.textContent = "";
-            error.classList.add("d-none");
-        }
-    };
-
-    const fetchData = (url) =>
-        fetch(url).then(res => res.ok ? res.json() : []).catch(() => []);
-
-    state.addEventListener("change", async () => {
+    stateSelect.on('change', async value => {
         clearCities();
-        if (!state.value) return;
-        const cities = await fetchData(`/api/states/${state.value}/cities`);
-        cities.forEach(c => city.innerHTML += `<option value="${c.id}">${c.name}</option>`);
+        if (!value) return;
+
+        const cities = await fetchData(
+            `/api/states/${encodeURIComponent(value)}/cities`
+        );
+
+        cities.forEach(c => {
+            citySelect.addOption({ value: c.id, text: c.name });
+        });
+        citySelect.refreshOptions(false);
     });
 
-    city.addEventListener("change", async () => {
-        if (!error) {
-            return;
-        }
-
+    citySelect.on('change', async value => {
         hideError();
-        const id = city.value;
-        const name = city.options[city.selectedIndex]?.text?.trim();
-        if (!id || !name) return;
+        if (!value) return;
 
-        const { exists } = await fetchData(`/organizations/check-duplicate?name=${encodeURIComponent(name)}&cityId=${encodeURIComponent(id)}`);
+        const name = citySelect.options[value]?.text?.trim();
+        if (!name) return;
+
+        const { exists } = await fetchData(
+            `/organizations/check-duplicate?name=${encodeURIComponent(name)}&cityId=${encodeURIComponent(value)}`
+        );
+
         if (exists) {
-            const contactEmail = window.SNP_EMAIL;
-            showError(`Este município já foi credenciado. Entre em contato com ${contactEmail} para mais informações.`);
-            state.dispatchEvent(new Event("change"));
+            showError(
+                `Este município já foi credenciado. Entre em contato com ${window.SNP_EMAIL} para mais informações.`
+            );
+            citySelect.clear(true);
         }
     });
+
+    const initialState = stateSelect.getValue();
+    if (initialState) {
+        stateSelect.fire('change', initialState);
+    }
 });
