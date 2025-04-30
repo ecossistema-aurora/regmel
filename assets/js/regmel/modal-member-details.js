@@ -1,13 +1,9 @@
-console.log("modal-member-details.js loaded");
-
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.view-member').forEach(function(link) {
         link.addEventListener('click', function() {
             try {
                 const dataInfo = this.getAttribute('data-info');
                 const agentData = JSON.parse(dataInfo);
-
-                console.log("Parsed agent data:", agentData);
 
                 let contentHtml = '<div class="container-fluid">';
                 contentHtml += '<div class="row mb-2">';
@@ -42,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 modalInstance.show();
 
             } catch (err) {
-                console.error("Erro ao abrir modal de membro:", err);
                 alert("Erro ao carregar dados do membro. Verifique o console.");
             }
         });

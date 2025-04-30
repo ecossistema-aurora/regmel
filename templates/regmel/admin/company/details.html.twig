@@ -151,11 +151,9 @@
                             <thead class="table-dark">
                             <tr>
                                 <th>Nome</th>
-                                <th>
-                                    {% if app.user.agents.first.id == createdById %}
-                                        Ações
-                                    {% endif %}
-                                </th>
+                                {% if app.user.agents.first.id == createdById %}
+                                <th> Ações </th>
+                                {% endif %}
                             </tr>
                             </thead>
                             <tbody>
