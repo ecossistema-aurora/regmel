@@ -14,7 +14,9 @@ import {
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('table.js-grid').forEach(table => {
         const headers = Array.from(table.querySelectorAll('thead th'))
-            .map(th => th.textContent.trim());
+            .map(th => th.textContent.trim())
+            .filter(name => name);
+
         const data = Array.from(table.querySelectorAll('tbody tr'))
             .map(tr =>
                 Array.from(tr.querySelectorAll('td'))
