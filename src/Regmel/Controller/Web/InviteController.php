@@ -143,7 +143,7 @@ class InviteController extends AbstractWebController
             $email = $request->get('email');
             $password = $request->get('password');
 
-            $user = $this->userService->findOneBy(['id' => $invite->getGuest()->getId(), 'email' => $email]);
+            $user = $this->userService->findOneBy(['id' => $invite->getGuest()->getUser()->getId(), 'email' => $email]);
 
             if (false === $this->userService->authenticate($user, $password)) {
                 $this->addFlash(FlashMessageTypeEnum::ERROR->value, $this->translator->trans('invalid_credentials'));
