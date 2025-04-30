@@ -901,6 +901,7 @@ view:
       updated: O Município foi atualizado
       deleted: O Município foi excluído
       created: O município foi criado com sucesso
+      deleted_member: O membro foi excluído
     quantity:
       total: Municípios Encontrados
       culture: Municípios Ativos

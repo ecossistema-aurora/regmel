@@ -152,6 +152,11 @@ class Organization extends AbstractEntity
         $this->agents->add($agent);
     }
 
+    public function removeAgent(Agent $agent): void
+    {
+        $this->agents->removeElement($agent);
+    }
+
     public function getOwner(): Agent
     {
         return $this->owner;
