@@ -260,6 +260,7 @@ class Organization extends AbstractEntity
             'agents' => $this->agents->map(fn ($agent) => $agent->getId()->toRfc4122()),
             'owner' => $this->owner->toArray(),
             'createdBy' => $this->createdBy->toArray(),
+            'extraFields' => $this->extraFields,
             'socialNetworks' => $this->socialNetworks,
             'createdAt' => $this->createdAt->format(DateFormatHelper::DEFAULT_FORMAT),
             'updatedAt' => $this->updatedAt?->format(DateFormatHelper::DEFAULT_FORMAT),
