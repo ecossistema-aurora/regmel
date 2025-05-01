@@ -56,6 +56,7 @@
             </div>
         </div>
     </section>
+
     <div class="modal fade" id="modalDocument" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -80,6 +81,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="modal fade" id="confirmDocDecision" data-bs-backdrop="static">
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
@@ -92,7 +94,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                    <button id="confirmDecisionButton" type="submit" class="btn btn-primary">Recusar</button>
+
+                                    <button id="confirmDecisionButton" type="button" class="btn btn-primary">Aprovar</button>
                                 </div>
                             </div>
                         </div>
@@ -109,13 +112,36 @@
     <script src="{{ asset('js/modal-confirm-documentation.js') }}"></script>
 
     <script>
-        function openDocumentModal (organizationName, organizationId, filePath) {
+        function openDocumentModal(organizationName, organizationId, filePath) {
             document.getElementById('modalDocumentTitle').innerHTML = 'Documento - ' + organizationName;
             document.getElementById('modalDocumentBody').innerHTML = `
                 <object style="min-height: 600px;" data="/painel/admin/municipios/${organizationId}/oficio" type="application/pdf" width="100%" height="100%">
-                  <p>Caso o documento não esteja visivel <a href="/painel/admin/municipios/${organizationId}/oficio">Clique aqui para acesso o PDF!</a></p>
+                    <p>Caso o documento não esteja visível, <a href="/painel/admin/municipios/${organizationId}/oficio">clique aqui para acessar o PDF!</a></p>
                 </object>
             `;
+        }
+
+        function confirmDecision(button, isApprove = true) {
+            const confirmDecisionTitle = document.getElementById('confirmDecisionTitle');
+            const confirmDecisionButton = document.getElementById('confirmDecisionButton');
+            const modalBody = document.getElementById('confirmDecisionQuestion');
+
+            if (isApprove) {
+                confirmDecisionTitle.textContent = 'Confirmar Aprovação';
+                confirmDecisionButton.textContent = 'Aprovar';
+                confirmDecisionButton.classList.remove('btn-danger');
+                confirmDecisionButton.classList.add('btn-primary');
+                modalBody.textContent = 'Você tem certeza que deseja aprovar o documento?';
+            } else {
+                confirmDecisionTitle.textContent = 'Confirmar Recusa';
+                confirmDecisionButton.textContent = 'Recusar';
+                confirmDecisionButton.classList.remove('btn-primary');
+                confirmDecisionButton.classList.add('btn-danger');
+                modalBody.textContent = 'Você tem certeza que deseja recusar o documento?';
+            }
+
+            const modal = new bootstrap.Modal(document.getElementById('confirmDocDecision'));
+            modal.show();
         }
     </script>
 {% endblock %}
