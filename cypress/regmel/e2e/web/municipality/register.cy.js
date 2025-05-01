@@ -25,7 +25,7 @@ describe('Cadastro de Município', () => {
         cy.get('input[name="confirm_password"]').type('Aurora@2024');
 
         cy.get('select#state').select('Ceará');
-        cy.get('select#city', { timeout: 5000 }).select('Abaiara');
+        cy.get('select#city', { timeout: 5000 }).select('Santana do Acaraú');
 
         cy.get('input[name="site"]').type('https://municipio.ce.gov.br');
         cy.get('input[name="phone"]').first().type('11999999999');
@@ -57,6 +57,25 @@ describe('Cadastro de Município', () => {
 
         cy.contains('Municípios').click();
         cy.url().should('include', '/painel/admin/municipios');
-        cy.contains('Abaiara').should('be.visible');
+        cy.contains('Santana do Acaraú').should('be.visible');
+    });
+
+    it('valida se o documento aparece na listagem com o nome correto', () => {
+        cy.request('/').then(resp => {
+            expect(resp.status).to.eq(200);
+        });
+
+        cy.visit('/');
+        cy.contains('Entrar').click();
+
+        cy.get('input[name="email"]').type('admin@regmel.com');
+        cy.get('input[name="password"]').type('Aurora@2024');
+        cy.contains('button', 'Entrar').click();
+
+        cy.wait(5000);
+
+        cy.contains('Documentos').click();
+        cy.url().should('include', '/painel/admin/municipios-documentos');
+        cy.contains('Termo-SantanaDoAcarau-CE-1.pdf').should('be.visible');
     });
 });

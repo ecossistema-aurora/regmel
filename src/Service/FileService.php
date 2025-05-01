@@ -74,9 +74,10 @@ readonly class FileService implements FileServiceInterface
     /**
      * @throws FilesystemException
      */
-    public function uploadPDF(UploadedFile $uploadedFile, string $extraPath = ''): File
+    public function uploadPDF(UploadedFile $uploadedFile, ?string $fileName = null, string $extraPath = ''): File
     {
-        $fileName = uniqid('', true).'.'.$uploadedFile->guessExtension();
+        $fileName ??= uniqid('', true);
+        $fileName = $fileName.'.'.$uploadedFile->guessExtension();
         $filePath = rtrim($this->storageDir, '/').$extraPath;
 
         $newFile = $uploadedFile->move($filePath, $fileName);
