@@ -15,7 +15,7 @@ interface FileServiceInterface
 
     public function uploadImage(string $path, UploadedFile $uploadedFile): File;
 
-    public function uploadPDF(UploadedFile $uploadedFile, string $extraPath = ''): File;
+    public function uploadPDF(UploadedFile $uploadedFile, ?string $fileName = null, string $extraPath = ''): File;
 
     public function readFile(string $filename): string;
 

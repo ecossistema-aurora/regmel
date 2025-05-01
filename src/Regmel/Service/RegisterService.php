@@ -62,7 +62,12 @@ class RegisterService implements RegisterServiceInterface
     public function saveOrganization(array $data, ?UploadedFile $uploadedFile = null): Organization
     {
         if (null !== $uploadedFile) {
-            $data['organization']['extraFields']['form'] = $this->uploadFile($uploadedFile);
+            $fileName = $this->getTermFileName(
+                $data['organization']['name'] ?? '',
+                $data['organization']['extraFields']['state'] ?? '',
+                $data['organization']['extraFields']['termo_versao'] ?? 0
+            );
+            $data['organization']['extraFields']['form'] = $this->uploadFile($uploadedFile, $fileName);
         }
 
         $organization = $this->organizationService->validateInput($data['organization'], OrganizationDto::class, OrganizationDto::CREATE);
@@ -142,9 +147,9 @@ class RegisterService implements RegisterServiceInterface
         $this->entityManager->flush();
     }
 
-    private function uploadFile(UploadedFile $uploadedFile): string
+    private function uploadFile(UploadedFile $uploadedFile, ?string $fileName = null): string
     {
-        $pdf = $this->fileService->uploadPDF($uploadedFile, extraPath: '/regmel/municipality/documents');
+        $pdf = $this->fileService->uploadPDF($uploadedFile, $fileName, extraPath: '/regmel/municipality/documents');
 
         return $pdf->getFilename();
     }
@@ -163,5 +168,13 @@ class RegisterService implements RegisterServiceInterface
     public function isDuplicateOrganization(string $name, string $cityId): bool
     {
         return $this->organizationRepository->isOrganizationDuplicate($name, $cityId);
+    }
+
+    private function getTermFileName(string $municipality, string $state, int $version): string
+    {
+        $municipality = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $municipality);
+        $municipality = str_replace(' ', '', ucwords($municipality));
+
+        return sprintf('Termo-%s-%s-%d', $municipality, $state, $version);
     }
 }
