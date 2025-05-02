@@ -39,8 +39,8 @@
                             {% set role_color_map = {
                                 'ROLE_ADMIN': 'bg-danger',
                                 'ROLE_MANAGER': 'bg-primary',
-                                'ROLE_USER': 'bg-success',
-                                'ROLE_SUPPORT': 'bg-warning'
+                                'ROLE_SUPPORT': 'bg-success',
+                                'ROLE_MUNICIPAL_ADMIN': 'bg-info'
                             } %}
 
                             {% for item in users %}
@@ -49,16 +49,17 @@
                                     <td>{{ item.email }}</td>
                                     <td>
                                         <a
-                                            data-src="{{ asset(item.image ?? 'img/user.png') }}"
-                                            data-alt="{{ item.name }} Photo"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#modal-photo"
-                                            onclick="showPhoto(this)"
-                                            href="#"
+                                                data-src="{{ asset(item.image ?? 'img/user.png') }}"
+                                                data-alt="{{ item.name }} Photo"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modal-photo"
+                                                onclick="showPhoto(this)"
+                                                href="#"
                                         >
                                             <img src="{{ asset(item.image ?? 'img/user.png') }}" class="rounded-circle" width="50px" alt="{{ item.name }} Photo">
                                         </a>
                                     </td>
+
                                     {% set status_map = {
                                         'active': 'active',
                                         'blocked': 'blocked',
@@ -69,19 +70,22 @@
                                         'blocked': 'bg-danger',
                                         'awaitingconfirmation': 'bg-secondary'
                                     } %}
+
                                     <td>
-                                    <span class="badge {{ status_class_map[item.status|lower] }}">
-                                        {{ status_map[item.status|lower]|trans }}
-                                    </span>
+                                        <span class="badge {{ status_class_map[item.status|lower] }}">
+                                            {{ status_map[item.status|lower]|trans }}
+                                        </span>
                                     </td>
 
                                     <td>{{ item.createdAt.format('d/m/Y H:i:s') }}</td>
 
                                     <td>
                                         {% for role in item.roles %}
-                                            <span class="badge {{ role_color_map[role]|default('bg-secondary') }} me-1">
-                                                {{ role|trans }}
-                                            </span>
+                                            {% if role != 'ROLE_USER' %}
+                                                <span class="badge {{ role_color_map[role]|default('bg-secondary') }} me-1">
+                                                    {{ role|trans }}
+                                                </span>
+                                            {% endif %}
                                         {% endfor %}
                                     </td>
 
