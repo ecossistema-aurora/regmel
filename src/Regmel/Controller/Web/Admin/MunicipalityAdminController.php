@@ -189,4 +189,19 @@ class MunicipalityAdminController extends AbstractAdminController
 
         return $this->redirectToRoute('admin_regmel_municipality_details', ['id' => $municipalityId]);
     }
+
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    #[Route('/painel/admin/municipios/list/download', name: 'admin_regmel_municipality_list_download', methods: ['GET'])]
+    public function exportMunicipalitiesCsv(Request $request): Response
+    {
+        $region = $request->query->get('region');
+        $state = $request->query->get('state') ?: null;
+
+        $municipalities = $this->organizationService->findByRegionAndState($region, $state);
+
+        return $this->organizationService->generateCsv($municipalities, 'municipios.csv');
+    }
 }

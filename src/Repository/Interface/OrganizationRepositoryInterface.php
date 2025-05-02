@@ -11,4 +11,6 @@ interface OrganizationRepositoryInterface
     public function save(Organization $organization): Organization;
 
     public function findMunicipalitiesByAgents(iterable $agents): array;
+
+    public function findOrganizationByRegionAndState(string $region, string $state): array;
 }

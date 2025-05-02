@@ -24,9 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const fetchStatesByRegion = regionValue => {
-        return fetch(
-            `/api/regions/${encodeURIComponent(regionValue)}/states`
-        )
+        return fetch(`/api/regions/${encodeURIComponent(regionValue)}/states`)
             .then(res => res.ok ? res.json() : [])
             .catch(() => []);
     };
@@ -34,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     regionSelect.on('change', async value => {
         stateSelect.clearOptions();
         stateSelect.clear(true);
+
         if (!value) return;
 
         const states = await fetchStatesByRegion(value);
@@ -41,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
             stateSelect.addOption({ value: state.acronym, text: state.name });
         });
         stateSelect.refreshOptions(false);
+
+        regionElement.form.submit();
     });
 
     stateSelect.on('change', () => {

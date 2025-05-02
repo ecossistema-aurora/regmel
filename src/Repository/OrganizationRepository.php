@@ -105,4 +105,29 @@ class OrganizationRepository extends AbstractRepository implements OrganizationR
             ->getQuery()
             ->getResult();
     }
+
+    public function findOrganizationByRegionAndState(string $region, ?string $state): array
+    {
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata(Organization::class, 'o');
+
+        $sql = <<<SQL
+                SELECT *
+                FROM organization o
+                WHERE o.extra_fields->>'region' = :region
+            SQL;
+
+        if (null !== $state) {
+            $sql .= " AND o.extra_fields->>'state' = :state";
+        }
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        $query->setParameter('region', $region);
+
+        if (null !== $state) {
+            $query->setParameter('state', $state);
+        }
+
+        return $query->getResult();
+    }
 }
