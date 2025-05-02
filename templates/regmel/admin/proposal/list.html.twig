@@ -28,6 +28,7 @@
                             <th>{{ 'status' | trans }}</th>
                             <th>Qtd. Domicílios</th>
                             <th>Área Total</th>
+                            <th>Valor Global da Proposta</th>
                             <th>{{ 'actions' | trans }}</th>
                         </tr>
                         </thead>
@@ -41,6 +42,7 @@
                                 </td>
                                 <td>{{ proposal.housesQuantity }}</td>
                                 <td>{{ proposal.totalArea }}</td>
+                                <td>R$ {{ (proposal.housesQuantity * env.aurora.variables.price_per_household)|number_format(2, ',', '.') }}</td>
                                 <td>
                                     <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
                                 </td>

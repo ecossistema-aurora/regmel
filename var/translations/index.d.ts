@@ -180,6 +180,7 @@ export declare const EVIDENCES: Message<{ 'messages': { parameters: NoParameters
 export declare const ELDERLY_PERSON: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EXECUTION_PERIOD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EXPLORE_REPOSITORY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const EXPORT_CSV: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ELEVATOR: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FAQ: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -316,6 +317,7 @@ export declare const NO_AREAS: Message<{ 'messages': { parameters: NoParametersT
 export declare const NO_ACCESSIBILITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const NO_SEALS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const NONE_AREA_SPECIFIED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const NO_DATA_FOUND: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const NOT_INFORMED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const NOT_SENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const NOTICE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;

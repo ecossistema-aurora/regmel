@@ -91,9 +91,10 @@
                         <table class="js-grid table table-hover table-striped mt-3">
                             <thead class="table-dark">
                             <tr>
-                                <th>Titulo</th>
+                                <th>Área de Intervenção</th>
                                 <th>Municipio</th>
-                                <th>Área</th>
+                                <th>Num. de Domicílios</th>
+                                <th>Valor Global da Proposta</th>
                                 <th>Status</th>
                                 <th>Ações</th>
                             </tr>
@@ -103,12 +104,14 @@
                             <tr>
                                 <td>{{ proposal.name }}</td>
                                 <td>{{ proposal.extraFields.city_name ?? proposal.organizationTo.name }} </td>
-                                <td>{{ proposal.extraFields.area_size }}m2</td>
+                                <td>{{ proposal.extraFields.quantity_houses }}</td>
+                                <td>R$ {{ (proposal.extraFields.quantity_houses * env.aurora.variables.price_per_household)|number_format(2, ',', '.') }}</td>
                                 <td>
                                     <span class="badge bg-dark">{{ proposal.extraFields.status ?? 'Enviada' }}</span>
                                 </td>
                                 <td>
                                     <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
+
                                 </td>
                             </tr>
                             {% endfor %}
