@@ -55,6 +55,12 @@ cp .env.example .env
 
 ### `setup`
 
+O primeiro a se fazer em um ambiente de deploy é garantir algumas permissões, para isso basta executar:
+
+```shell
+make permissions
+```
+
 Precisamos agora criar os bancos de dados, tabelas, dados, instalar dependências e tudo o mais, para isso basta executar:
 
 ```shell
