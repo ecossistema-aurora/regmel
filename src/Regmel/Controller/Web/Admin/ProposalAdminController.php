@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Regmel\Controller\Web\Admin;
 
 use App\Controller\Web\Admin\AbstractAdminController;
-use App\Enum\OrganizationTypeEnum;
+use App\Entity\Initiative;
 use App\Enum\RegionEnum;
 use App\Enum\UserRolesEnum;
 use App\Regmel\Service\Interface\ProposalServiceInterface;
-use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Service\Interface\CityServiceInterface;
+use App\Service\Interface\InitiativeServiceInterface;
 use App\Service\Interface\OrganizationServiceInterface;
 use App\Service\Interface\StateServiceInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Uid\Uuid;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProposalAdminController extends AbstractAdminController
 {
@@ -30,10 +29,9 @@ class ProposalAdminController extends AbstractAdminController
         private readonly ProposalServiceInterface $proposalService,
         private readonly StateServiceInterface $stateService,
         private readonly CityServiceInterface $cityService,
-        private readonly RegisterServiceInterface $registerService,
         private readonly JWTTokenManagerInterface $jwtManager,
         private readonly Security $security,
-        private readonly TranslatorInterface $translator,
+        private readonly InitiativeServiceInterface $initiativeService,
     ) {
     }
 
@@ -46,37 +44,29 @@ class ProposalAdminController extends AbstractAdminController
     }
 
     #[IsGranted(new Expression('
-        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or 
-        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'") or 
-        is_granted("'.UserRolesEnum::ROLE_COMPANY->value.'")
-    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
-    #[Route('/painel/admin/empresas', name: 'admin_regmel_proposal_list', methods: ['GET'])]
+    is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or 
+    is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'") 
+'), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    #[Route('/painel/admin/propostas', name: 'admin_regmel_proposal_list', methods: ['GET'])]
     public function list(): Response
     {
-        $user = $this->security->getUser();
+        $initiatives = $this->initiativeService->list();
 
-        if (true === in_array(UserRolesEnum::ROLE_ADMIN->value, $user->getRoles())) {
-            return $this->render('regmel/admin/company/list.html.twig', [
-                'companies' => $this->organizationService->findBy(['type' => OrganizationTypeEnum::EMPRESA->value]),
-                'token' => $this->jwtManager->create($user),
-                'context_title' => 'my_companies',
-            ], parentPath: '');
-        }
+        $proposals = array_map(function (Initiative $initiative) {
+            $organization = $initiative->getOrganizationFrom();
+            $extraFields = $initiative->getExtraFields();
 
-        $agents = $user->getAgents();
+            return [
+                'companyName' => $organization->getName(),
+                'cityName' => $extraFields['city_name'],
+                'status' => $extraFields['status'],
+                'housesQuantity' => $extraFields['quantity_houses'],
+                'totalArea' => $extraFields['area_size'],
+            ];
+        }, $initiatives);
 
-        if ($agents->isEmpty()) {
-            $this->addFlash('error', $this->translator->trans('user_associated'));
-
-            return $this->redirectToRoute('admin_dashboard');
-        }
-
-        $companies = $this->organizationService->getCompaniesByAgents($agents);
-
-        return $this->render('regmel/admin/company/list.html.twig', [
-            'companies' => $companies,
-            'token' => $this->jwtManager->create($user),
-            'context_title' => 'my_companies',
+        return $this->render('regmel/admin/proposal/list.html.twig', [
+            'proposals' => $proposals,
         ], parentPath: '');
     }
 
