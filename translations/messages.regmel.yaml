@@ -49,6 +49,7 @@ agent_information: Informações do Agente
 all: Tudo
 all_regions: Todas as regiões
 all_states: Todos os estados
+all_types: Todos os tipos
 allow_free_linking: Permitir livre vinculação com
 allowed: Com permissão
 admin_options: Opções do Administrador

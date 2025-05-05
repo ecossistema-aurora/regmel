@@ -200,8 +200,12 @@ class MunicipalityAdminController extends AbstractAdminController
         $region = $request->query->get('region');
         $state = $request->query->get('state') ?: null;
 
-        $municipalities = $this->organizationService->findByRegionAndState($region, $state);
+        $type = OrganizationTypeEnum::MUNICIPIO->value;
 
-        return $this->organizationService->generateCsv($municipalities, 'municipios.csv');
+        $municipalities = $region
+            ? $this->organizationService->findByMunicipalityFilters($region, $state)
+            : $this->organizationService->findBy(['type' => $type]);
+
+        return $this->organizationService->generateCsv($municipalities, 'municipios.csv', $type);
     }
 }

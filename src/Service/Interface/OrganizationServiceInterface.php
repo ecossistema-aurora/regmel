@@ -28,9 +28,11 @@ interface OrganizationServiceInterface
 
     public function updateImage(Uuid $id, UploadedFile $uploadedFile): Organization;
 
-    public function findByRegionAndState(?string $region, ?string $state): array;
+    public function findByMunicipalityFilters(string $region, ?string $state): array;
 
-    public function getCsvHeaders(): array;
+    public function findByCompanyFilters(string $tipo): array;
 
-    public function getCsvRow(object $entity): array;
+    public function getCsvHeaders(?string $type): array;
+
+    public function getCsvRow(object $entity, ?string $type): array;
 }
