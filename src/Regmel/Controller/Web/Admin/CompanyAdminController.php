@@ -48,13 +48,28 @@ class CompanyAdminController extends AbstractAdminController
         is_granted("'.UserRolesEnum::ROLE_COMPANY->value.'")
     '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
     #[Route('/painel/admin/empresas', name: 'admin_regmel_company_list', methods: ['GET'])]
-    public function list(): Response
+    public function list(Request $request): Response
     {
         $user = $this->security->getUser();
+        $filterType = $request->query->get('tipo');
 
         if (true === in_array(UserRolesEnum::ROLE_ADMIN->value, $user->getRoles())) {
+            $criteria = ['type' => OrganizationTypeEnum::EMPRESA->value];
+            $allCompanies = $this->organizationService->findBy($criteria);
+
+            $companies = array_filter($allCompanies, function ($organization) use ($filterType) {
+                $extra = $organization->getExtraFields();
+
+                return !$filterType || ($extra['tipo'] ?? null) === $filterType;
+            });
+
+            $types = array_unique(array_filter(array_map(function ($organization) {
+                return $organization->getExtraFields()['tipo'] ?? null;
+            }, $allCompanies)));
+
             return $this->render('regmel/admin/company/list.html.twig', [
-                'companies' => $this->organizationService->findBy(['type' => OrganizationTypeEnum::EMPRESA->value]),
+                'companies' => $companies,
+                'types' => $types,
                 'token' => $this->jwtManager->create($user),
                 'context_title' => 'my_companies',
             ], parentPath: '');
@@ -72,6 +87,7 @@ class CompanyAdminController extends AbstractAdminController
 
         return $this->render('regmel/admin/company/list.html.twig', [
             'companies' => $companies,
+            'types' => [],
             'token' => $this->jwtManager->create($user),
             'context_title' => 'my_companies',
         ], parentPath: '');
@@ -145,5 +161,23 @@ class CompanyAdminController extends AbstractAdminController
         }
 
         return $this->redirectToRoute('admin_regmel_company_list');
+    }
+
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    #[Route('/painel/admin/empresas/list/download', name: 'admin_regmel_company_list_download', methods: ['GET'])]
+    public function exportCompaniesCsv(Request $request): Response
+    {
+        $tipo = $request->query->get('tipo');
+
+        $type = OrganizationTypeEnum::EMPRESA->value;
+
+        $companies = $tipo
+            ? $this->organizationService->findByCompanyFilters($tipo)
+            : $this->organizationService->findBy(['type' => $type]);
+
+        return $this->organizationService->generateCsv($companies, 'empresas.csv', $type);
     }
 }

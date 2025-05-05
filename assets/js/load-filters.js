@@ -3,53 +3,64 @@ import 'tom-select/dist/css/tom-select.default.min.css';
 
 document.addEventListener('DOMContentLoaded', () => {
     const regionElement = document.getElementById('region-filter');
-    const stateElement  = document.getElementById('state-filter');
-    if (!regionElement || !stateElement) return;
+    const stateElement = document.getElementById('state-filter');
+    const typeElement = document.getElementById('type-filter');
 
-    regionElement.classList.remove('form-select');
-    stateElement .classList.remove('form-select');
+    let stateSelect;
 
-    const regionSelect = new TomSelect(regionElement, {
-        create: false,
-        placeholder: regionElement.dataset.placeholder || 'Selecione',
-        allowEmptyOption: true,
-        sortField: { field: 'text', direction: 'asc' },
-    });
-
-    const stateSelect = new TomSelect(stateElement, {
-        create: false,
-        placeholder: stateElement.dataset.placeholder || 'Selecione',
-        allowEmptyOption: true,
-        sortField: { field: 'text', direction: 'asc' },
-    });
-
-    const fetchStatesByRegion = regionValue => {
-        return fetch(`/api/regions/${encodeURIComponent(regionValue)}/states`)
-            .then(res => res.ok ? res.json() : [])
-            .catch(() => []);
-    };
-
-    regionSelect.on('change', async value => {
-        stateSelect.clearOptions();
-        stateSelect.clear(true);
-
-        if (!value) return;
-
-        const states = await fetchStatesByRegion(value);
-        states.forEach(state => {
-            stateSelect.addOption({ value: state.acronym, text: state.name });
+    if (regionElement) {
+        regionElement.classList.remove('form-select');
+        const regionSelect = new TomSelect(regionElement, {
+            create: false,
+            placeholder: regionElement.dataset.placeholder || 'Selecione',
+            allowEmptyOption: true,
+            sortField: { field: 'text', direction: 'asc' },
         });
-        stateSelect.refreshOptions(false);
 
-        regionElement.form.submit();
-    });
+        regionSelect.on('change', async value => {
+            if (!stateElement) return;
 
-    stateSelect.on('change', () => {
-        regionElement.form.submit();
-    });
+            stateSelect.clearOptions();
+            stateSelect.clear(true);
 
-    const initialRegion = regionSelect.getValue();
-    if (initialRegion) {
-        regionSelect.fire('change', initialRegion);
+            if (!value) return;
+
+            const states = await fetch(`/api/regions/${encodeURIComponent(value)}/states`)
+                .then(res => res.ok ? res.json() : [])
+                .catch(() => []);
+
+            states.forEach(state => {
+                stateSelect.addOption({ value: state.acronym, text: state.name });
+            });
+            stateSelect.refreshOptions(false);
+
+            regionElement.form.submit();
+        });
+    }
+
+    if (stateElement) {
+        stateElement.classList.remove('form-select');
+        stateSelect = new TomSelect(stateElement, {
+            create: false,
+            placeholder: stateElement.dataset.placeholder || 'Selecione',
+            allowEmptyOption: true,
+            sortField: { field: 'text', direction: 'asc' },
+        });
+
+        stateSelect.on('change', () => {
+            stateElement.form.submit();
+        });
+    }
+
+    if (typeElement) {
+        typeElement.classList.remove('form-select');
+        new TomSelect(typeElement, {
+            create: false,
+            placeholder: typeElement.dataset.placeholder || 'Selecione',
+            allowEmptyOption: true,
+            sortField: { field: 'text', direction: 'asc' },
+        }).on('change', () => {
+            typeElement.form.submit();
+        });
     }
 });

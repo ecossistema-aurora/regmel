@@ -115,19 +115,19 @@ abstract readonly class AbstractEntityService
         return $data;
     }
 
-    public function generateCsv(array $entities, string $filename): StreamedResponse
+    public function generateCsv(array $entities, string $filename, ?string $type): StreamedResponse
     {
         if (empty($entities)) {
             throw new NoEntitiesProvidedForExportException();
         }
 
-        $response = new StreamedResponse(function () use ($entities): void {
+        $response = new StreamedResponse(function () use ($entities, $type): void {
             $handle = fopen('php://output', 'w+');
 
-            fputcsv($handle, $this->getCsvHeaders());
+            fputcsv($handle, $this->getCsvHeaders($type));
 
             foreach ($entities as $entity) {
-                fputcsv($handle, $this->getCsvRow($entity));
+                fputcsv($handle, $this->getCsvRow($entity, $type));
             }
 
             fclose($handle);

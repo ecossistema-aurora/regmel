@@ -13,4 +13,6 @@ interface OrganizationRepositoryInterface
     public function findMunicipalitiesByAgents(iterable $agents): array;
 
     public function findOrganizationByRegionAndState(string $region, string $state): array;
+
+    public function findOrganizationByCompanyFilters(string $tipo): array;
 }
