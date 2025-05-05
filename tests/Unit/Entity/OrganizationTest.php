@@ -78,6 +78,7 @@ final class OrganizationTest extends AbstractApiTestCase
             'agents' => $agents->map(fn ($agent) => $agent->getId()->toRfc4122()),
             'owner' => $owner->toArray(),
             'createdBy' => $createdBy->toArray(),
+            'extraFields' => $extraFields,
             'socialNetworks' => [],
             'createdAt' => $createdAt->format(DateFormatHelper::DEFAULT_FORMAT),
             'updatedAt' => $updatedAt?->format(DateFormatHelper::DEFAULT_FORMAT),
