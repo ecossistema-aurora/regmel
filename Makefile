@@ -142,4 +142,4 @@ permissions:
 	chmod -R 775 assets/ config/jwt var/ vendor/ public/
 
 # Comando para rodar todos os passos juntos
-setup: guard-not-prod permissions up install_dependencies copy_dist reset-deep generate_proxies migrate_database load_fixtures install_frontend compile_frontend generate_keys
+setup: guard-not-prod up install_dependencies copy_dist reset-deep generate_proxies migrate_database load_fixtures install_frontend compile_frontend generate_keys
