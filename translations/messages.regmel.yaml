@@ -242,6 +242,8 @@ is_itinerant: É agente itinerante?
 is-accessible: O espaço é acessível?
 invalid_credentials: E-mail ou senha incorretos
 invite_created: Cadastro realizado com sucesso. Veja no seu email o link para confirmar sua conta.
+Invite was accepted: Convite foi aceito
+Invite was sent: Convite foi enviado
 
 join_terms: Termos de Adesão
 

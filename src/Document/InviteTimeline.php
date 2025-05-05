@@ -15,7 +15,10 @@ class InviteTimeline extends AbstractDocument
     private ?string $id = null;
 
     #[ODM\Field]
-    private string $userId;
+    private ?string $userId = null;
+
+    #[ODM\Field]
+    private string $organizationId;
 
     #[ODM\Field]
     private string $resourceId;
@@ -36,10 +39,7 @@ class InviteTimeline extends AbstractDocument
     private string $platform;
 
     #[ODM\Field(type: Type::HASH)]
-    private array $from;
-
-    #[ODM\Field(type: Type::HASH)]
-    private array $to;
+    private array $data;
 
     public function getId(): ?string
     {
@@ -51,7 +51,7 @@ class InviteTimeline extends AbstractDocument
         $this->id = $id;
     }
 
-    public function getUserId(): string
+    public function getUserId(): ?string
     {
         return $this->userId;
     }
@@ -59,6 +59,16 @@ class InviteTimeline extends AbstractDocument
     public function setUserId(string $userId): void
     {
         $this->userId = $userId;
+    }
+
+    public function getOrganizationId(): string
+    {
+        return $this->organizationId;
+    }
+
+    public function setOrganizationId(string $organizationId): void
+    {
+        $this->organizationId = $organizationId;
     }
 
     public function getResourceId(): string
@@ -121,23 +131,30 @@ class InviteTimeline extends AbstractDocument
         $this->platform = $platform;
     }
 
-    public function getFrom(): array
+    public function getData(): array
     {
-        return $this->from;
+        return $this->data;
     }
 
-    public function setFrom(array $from): void
+    public function setData(array $data): void
     {
-        $this->from = $from;
+        $this->data = $data;
     }
 
-    public function getTo(): array
+    public function toArray(): array
     {
-        return $this->to;
-    }
-
-    public function setTo(array $to): void
-    {
-        $this->to = $to;
+        return [
+            'author' => $this->author?->toArray() ?? null,
+            'id' => $this->getId(),
+            'userId' => $this->getUserId(),
+            'organizationId' => $this->getOrganizationId(),
+            'resourceId' => $this->getResourceId(),
+            'title' => $this->getTitle(),
+            'priority' => $this->getPriority(),
+            'datetime' => $this->getDatetime(),
+            'device' => $this->getDevice(),
+            'platform' => $this->getPlatform(),
+            'data' => $this->getData(),
+        ];
     }
 }
