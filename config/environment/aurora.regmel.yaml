@@ -250,6 +250,11 @@ sidebar:
         icon: description
         text: Documentos
 
+      admin_regmel_proposal_list:
+        acl: ['ROLE_ADMIN', 'ROLE_MANAGER']
+        icon: cases
+        text: Propostas
+
       admin_user_list:
         acl: ['ROLE_ADMIN']
         icon: manage_accounts

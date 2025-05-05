@@ -1,0 +1,65 @@
+{% extends "_layouts/blank.html.twig" %}
+
+{% block title %}
+    {{ 'control_panel'|trans }} - {{ 'cities'|trans }}
+{% endblock %}
+
+{% block content %}
+<section class="d-flex">
+    {% include "_components/side-bar.html.twig" %}
+
+    <div class="management-content w-100 p-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-body shadow">
+                    <div class="row justify-content-between">
+                        <div class="col">
+                            <h2> Empresas - Propostas </h2>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <table class="js-grid table table-hover table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>Empresa</th>
+                            <th>{{ 'municipality' | trans}}</th>
+                            <th>{{ 'status' | trans }}</th>
+                            <th>Qtd. Domicílios</th>
+                            <th>Área Total</th>
+                            <th>{{ 'actions' | trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for proposal in proposals %}
+                            <tr>
+                                <td>{{ proposal.companyName }}</td>
+                                <td>{{ proposal.cityName }}</td>
+                                <td>
+                                    <span class="badge bg-dark">{{ proposal.status }}</span>
+                                </td>
+                                <td>{{ proposal.housesQuantity }}</td>
+                                <td>{{ proposal.totalArea }}</td>
+                                <td>
+                                    <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7" class="text-center">{{ 'table.no_records_found'|trans }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_javascripts %}
+    {{ parent() }}
+    <script type="module" src="{{ asset('js/grid-init.js') }}"></script>
+{% endblock %}
