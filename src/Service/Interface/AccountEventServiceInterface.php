@@ -28,5 +28,7 @@ interface AccountEventServiceInterface
         DateTimeImmutable $organizationCreatedAt
     ): void;
 
+    public function notifyManagerOfNewMunicipalityDocument(string $organizationName);
+
     public function sendPasswordChangedEmail(User $user, string $userAgent): void;
 }

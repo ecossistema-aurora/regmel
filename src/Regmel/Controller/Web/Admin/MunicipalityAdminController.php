@@ -9,6 +9,7 @@ use App\DocumentService\OrganizationTimelineDocumentService;
 use App\Enum\OrganizationTypeEnum;
 use App\Enum\RegionEnum;
 use App\Enum\UserRolesEnum;
+use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Service\Interface\OrganizationServiceInterface;
 use App\Service\Interface\StateServiceInterface;
 use Exception;
@@ -32,6 +33,7 @@ class MunicipalityAdminController extends AbstractAdminController
         private readonly Security $security,
         private readonly TranslatorInterface $translator,
         private readonly StateServiceInterface $stateService,
+        private readonly RegisterServiceInterface $registerService,
     ) {
     }
 
@@ -171,6 +173,25 @@ class MunicipalityAdminController extends AbstractAdminController
             $this->addFlashError($exception->getMessage());
 
             return $this->list($request);
+        }
+
+        return $this->redirectToRoute('admin_regmel_municipality_list');
+    }
+
+    #[Route('/painel/admin/municipios/{id}/upload-term', name: 'admin_regmel_municipality_upload_term', methods: ['GET', 'POST'])]
+    public function uploadTerm(Uuid $id, Request $request): Response
+    {
+        $uploadedFile = $request->files->get('joinForm');
+
+        if ($uploadedFile) {
+            try {
+                $this->registerService->resendTerm($id->toRfc4122(), $uploadedFile);
+                $this->addFlash('success', 'Termo enviado com sucesso!');
+            } catch (Exception $e) {
+                $this->addFlash('error', 'Erro ao enviar o termo');
+            }
+        } else {
+            $this->addFlash('error', 'Erro ao enviar o termo');
         }
 
         return $this->redirectToRoute('admin_regmel_municipality_list');
