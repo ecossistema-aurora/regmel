@@ -6,6 +6,7 @@ namespace App\Service;
 
 use App\DTO\OrganizationDto;
 use App\Entity\Organization;
+use App\Enum\OrganizationTypeEnum;
 use App\Exception\Organization\OrganizationResourceNotFoundException;
 use App\Exception\ValidatorException;
 use App\Repository\Interface\OrganizationRepositoryInterface;
@@ -14,6 +15,7 @@ use App\Service\Interface\FileServiceInterface;
 use App\Service\Interface\OrganizationServiceInterface;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use InvalidArgumentException;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -185,5 +187,44 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
 
         $organization->removeAgent($agent);
         $this->repository->save($organization);
+    }
+
+    public function findByRegionAndState(?string $region, ?string $state): array
+    {
+        if ($region) {
+            return $this->repository->findOrganizationByRegionAndState($region, $state);
+        }
+
+        return $this->repository->findBy(['type' => OrganizationTypeEnum::MUNICIPIO->value]);
+    }
+
+    public function getCsvHeaders(): array
+    {
+        return [
+            'ID',
+            'Nome',
+            'Descrição',
+            'Email',
+            'Site',
+            'Criado Por',
+            'Criado Em',
+        ];
+    }
+
+    public function getCsvRow(object $entity): array
+    {
+        if (!$entity instanceof Organization) {
+            throw new InvalidArgumentException('Expected Organization entity.');
+        }
+
+        return [
+            $entity->getId(),
+            $entity->getName(),
+            $entity->getDescription(),
+            $entity->getExtraFields()['email'] ?? '',
+            $entity->getExtraFields()['site'] ?? '',
+            $entity->getCreatedBy() ? $entity->getCreatedBy()->getName() : '-',
+            $entity->getCreatedAt()->format('d/m/Y H:i:s'),
+        ];
     }
 }

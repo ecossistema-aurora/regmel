@@ -27,4 +27,10 @@ interface OrganizationServiceInterface
     public function update(Uuid $identifier, array $organization): Organization;
 
     public function updateImage(Uuid $id, UploadedFile $uploadedFile): Organization;
+
+    public function findByRegionAndState(?string $region, ?string $state): array;
+
+    public function getCsvHeaders(): array;
+
+    public function getCsvRow(object $entity): array;
 }

@@ -6,11 +6,13 @@ namespace App\Service;
 
 use App\Enum\UserRolesEnum;
 use App\Exception\EntityManagerAndEntityClassNotSetException;
+use App\Exception\NoEntitiesProvidedForExportException;
 use App\Exception\ValidatorException;
 use App\Service\Interface\FileServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -111,5 +113,29 @@ abstract readonly class AbstractEntityService
         }
 
         return $data;
+    }
+
+    public function generateCsv(array $entities, string $filename): StreamedResponse
+    {
+        if (empty($entities)) {
+            throw new NoEntitiesProvidedForExportException();
+        }
+
+        $response = new StreamedResponse(function () use ($entities): void {
+            $handle = fopen('php://output', 'w+');
+
+            fputcsv($handle, $this->getCsvHeaders());
+
+            foreach ($entities as $entity) {
+                fputcsv($handle, $this->getCsvRow($entity));
+            }
+
+            fclose($handle);
+        });
+
+        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
+        $response->headers->set('Content-Disposition', "attachment; filename=\"$filename\"");
+
+        return $response;
     }
 }
