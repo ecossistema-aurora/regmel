@@ -23,9 +23,6 @@
         </select>
     </div>
     <div class="col-md-3 d-flex align-items-end">
-        <a href="{{ path('admin_regmel_municipality_list_download', app.request.query.all) }}" class="btn btn-outline-info btn-sm me-2">
-            {{ 'export_csv'|trans }}
-        </a>
         <button class="btn btn-outline-dark btn-sm" onclick="resetForm(this.form); this.form.submit();">{{ 'reset'|trans }}</button>
     </div>
 </form>
