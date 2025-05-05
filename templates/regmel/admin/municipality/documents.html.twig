@@ -25,6 +25,10 @@
 
                         <hr>
 
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') %}
+                            {% include 'regmel/admin/municipality/_partials/list-filters.html.twig' %}
+                        {% endif %}
+
                         <table class="js-grid table table-hover table-striped">
                             <thead class="table-dark">
                             <tr>
@@ -110,6 +114,8 @@
     {{ parent() }}
     <script type="module" src="{{ asset('js/grid-init.js') }}"></script>
     <script src="{{ asset('js/modal-confirm-documentation.js') }}"></script>
+    <script src="{{ asset('js/form-utils.js') }}"></script>
+    <script type="module" src="{{ asset('js/load-filters.js') }}"></script>
 
     <script>
         function openDocumentModal(organizationName, organizationId, filePath) {
