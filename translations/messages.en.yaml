@@ -84,6 +84,8 @@ change_details: Change Details
 cep: CEP
 cisgender: Cisgender
 city: City
+city_id: City ID
+city_code: City Code
 check: Check
 claim-ownership: Claim Ownership
 clean_filter: Clean Filter
@@ -165,6 +167,7 @@ evidences: Evidences
 elderly_person: Elderly Person
 execution_period: Execution Period
 explore_repository: Explore Repository
+extra_fields: Extra Fields
 elevator: Elevator
 
 faq: FaQ
@@ -179,6 +182,7 @@ functions: Manage functions
 fundamental: Elementary
 future_registration: Future registrations
 full_name: Full Name
+form: Form
 from: From
 from_to: To
 from_to_date: To
@@ -318,6 +322,7 @@ organization_register: Create an Organization
 orientation: Select the Sexual Orientation
 other_files: Other files
 other_information: Other information
+owner: Owner
 
 pardo: Mixed Race
 paid: Paid
@@ -376,6 +381,7 @@ reference_point: Complement or reference point
 register: Register
 registration_date: Registration Date
 registration_info: Information about registration
+region: Region
 related-agents: Related Agents
 required_field: Required Field
 report: Report
@@ -386,6 +392,9 @@ responsible_agent: Responsible Agent
 tags: Tags
 term: Term
 terms: Terms
+term_form: Terms of Use
+term_version: Terms of Use Version
+term_status: Terms of Use Status
 transsexual: Transsexual
 transvestite: Transvestite
 title: Title
@@ -406,7 +415,7 @@ total_value: Total Value
 user: User
 user_name: User Name
 users: Users
-unknown: Unknown
+updated_at: Updated at
 
 view_all: View All
 view_file: view file

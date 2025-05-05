@@ -93,6 +93,8 @@ change_details: Detalhes das Mudanças
 changed_password: A sua senha foi alterada
 cep: CEP
 city: Cidade
+city_id: ID da cidade
+city_code: Código da cidade
 cisgender: Cisgênero
 check: Conferir
 claim-ownership: Reivindicar Propriedade
@@ -193,6 +195,7 @@ elderly_person: Pessoa idosa
 execution_period: Período de execução
 explore_repository: Conheça o repositório
 export_csv: Exportar CSV
+extra_fields: Campos extras
 export_project_file: Baixar Arquivos Geográficos
 export_map_file: Baixar Áreas Poligonais
 elevator: Elevador
@@ -211,6 +214,7 @@ fundamental: Fundamental
 future_registration: Inscrições futuras
 full_name: Nome completo
 free: Grátis
+form: Formulário
 from: De
 from_to: Para
 from_to_date: Até
@@ -375,6 +379,7 @@ other_files: Outros arquivos
 other_information: Outras informações
 organization_with_profit: Organização com fins lucrativos
 organization_without_profit: Organização sem fins lucrativos
+owner: Proprietário
 
 pardo: Pardo
 paid: Pago
@@ -461,6 +466,9 @@ selection: Seleção
 tags: Tags
 term: Termo
 terms: Termos
+term_form: Termo de Adesão
+term_version: Versão dos Termos
+term_status: Status dos Termos
 title: Titulo
 transsexual: Transexual
 transvestite: Travesti
@@ -492,8 +500,6 @@ user_edit_data: Edição de dados do usuário
 unread_notifications: Notificações Não Lidas
 user_associated: Usuário sem agente associado
 updated_at: Atualizado em
-unknown: Desconhecido
-
 
 view_all: Ver todas
 view_file: ver arquivo
