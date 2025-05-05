@@ -11,7 +11,7 @@
                         data-bs-target="#panelsStayOpen-collapseOne"
                         aria-expanded="true"
                         aria-controls="panelsStayOpen-collapseOne">
-                    Identificação do Proponente
+                    Identificação da Proposta
                 </button>
             </h2>
             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
@@ -55,7 +55,7 @@
                     <hr>
 
                     <div class="mt-4 mb-2 text-primary fw-bold">
-                        <label for="name">Nome da área de Intervenção</label>
+                        <label for="name">Nome da Área de Intervenção</label>
                     </div>
                     <input id="name" name="name" placeholder="Digite aqui" type="text" class="form-control">
 
@@ -109,14 +109,27 @@
                     </div>
 
                     <div class="row">
-                        <div class="col">
-                            <label for="area_size" class="form-label">Área estimada da Poligonal (m2)</label>
-                            <input type="text" min="0" id="area_size" placeholder="0" name="area_size" class="form-control"/>
-                        </div>
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="area_size" class="form-label">Área estimada da Poligonal (m2)</label>
+                                    <input type="text" min="0" id="area_size" placeholder="0" name="area_size" class="form-control"/>
+                                </div>
 
-                        <div class="col">
-                            <label for="quantity_houses" class="form-label">Número de Domicílios</label>
-                            <input placeholder="0" type="number" min="0" id="quantity_houses" name="quantity_houses" class="form-control"/>
+                                <div class="col">
+                                    <label for="quantity_houses" class="form-label">Número de Domicílios (<span>min 20 / max 120</span>)</label>
+                                    <input oninput="atualizarValor()" placeholder="0" max="120" type="number" min="20" id="quantity_houses" name="quantity_houses" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <div class="alert alert-success">
+                                        <strong>Valor Global da Proposta: </strong>R$ <span id="x">0</span>
+                                        <hr>
+                                        <small><strong>Número de Domicilios</strong> * <strong>R$ {{ env.aurora.variables.price_per_household|number_format(2, ',', '.') }}</strong> (custo médio por domicílio)</small>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col">
@@ -136,5 +149,18 @@
             </div>
         </div>
     </div>
-
 </form>
+
+<script>
+    function atualizarValor() {
+        let value = parseInt(document.getElementById('quantity_houses').value)
+
+        if (true !== isNaN(value)) {
+            document.getElementById('x').innerHTML = (
+                parseInt(document.getElementById('quantity_houses').value) * {{ env.aurora.variables.price_per_household }}
+            ).toLocaleString('pt-BR') + ',00';
+        } else {
+            document.getElementById('x').innerHTML = 0;
+        }
+    }
+</script>

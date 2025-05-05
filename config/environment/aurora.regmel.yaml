@@ -10,6 +10,9 @@ email:
     <br>
     Este é um email automático, por favor, não responda.
 
+variables:
+  price_per_household: 35000
+
 visit_repository: false
 logo:
   horizontal:
