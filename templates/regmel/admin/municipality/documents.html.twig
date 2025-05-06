@@ -18,8 +18,11 @@
                                     {{ 'organizations'|trans }} - {{ 'documents'|trans }}
                                 </h2>
                             </div>
+
                             <div class="col text-end">
-                                <a href="{{ path('admin_regmel_municipality_document_download') }}" class="btn btn-secondary">{{ 'download_all_terms'|trans }}</a>
+                                {% if env.aurora.dashboard.cards.documents.download == true %}
+                                    <a href="{{ path('admin_regmel_municipality_document_download') }}" class="btn btn-secondary">{{ 'download_all_terms'|trans }}</a>
+                                {% endif %}
                             </div>
                         </div>
 
@@ -66,7 +69,7 @@
                                         {% set badgeClass = {
                                             'awaiting': 'bg-warning',
                                             'accepted': 'bg-success',
-                                            'approved': 'bg-danger text-white',
+                                            'approved': 'bg-success text-white',
                                             'rejected': 'bg-danger text-white'
                                         }[status] %}
 
@@ -168,7 +171,7 @@
             const form = document.getElementById('documentDecisionForm');
             form.action = `/painel/admin/municipios/${organizationId}/document/decision`;
 
-            document.getElementById('modalDocumentTitle').innerHTML = 'Documento - ' + organizationName;
+            document.getElementById('modalDocumentTitle').innerHTML = 'Termo de Adesão - ' + organizationName;
             document.getElementById('modalDocumentBody').innerHTML = `
                 <object style="min-height: 600px;" data="/painel/admin/municipios/${organizationId}/oficio" type="application/pdf" width="100%" height="100%">
                     <p>Caso o documento não esteja visível, <a href="/painel/admin/municipios/${organizationId}/oficio">clique aqui para acessar o PDF!</a></p>
@@ -202,13 +205,13 @@
                 confirmDecisionButton.textContent = 'Aprovar';
                 confirmDecisionButton.classList.remove('btn-danger');
                 confirmDecisionButton.classList.add('btn-primary');
-                modalBody.textContent = 'Você tem certeza que deseja aprovar o documento?';
+                modalBody.textContent = 'Você tem certeza que deseja aprovar o termo de adesão?';
             } else {
                 confirmDecisionTitle.textContent = 'Confirmar Recusa';
                 confirmDecisionButton.textContent = 'Recusar';
                 confirmDecisionButton.classList.remove('btn-primary');
                 confirmDecisionButton.classList.add('btn-danger');
-                modalBody.textContent = 'Você tem certeza que deseja recusar o documento?';
+                modalBody.textContent = 'Você tem certeza que deseja recusar o termo de adesão?';
             }
 
             const modal = new bootstrap.Modal(document.getElementById('confirmDocDecision'));

@@ -62,11 +62,12 @@ export declare const ARCHITECTURAL: Message<{ 'messages': { parameters: NoParame
 export declare const ARCHITECTURAL_ACCESSIBILITY_OFFERS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ARCHIVES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ARCHIVED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const ARCHIVE_PROJECT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const AREAS_OF_EXPERTISE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const AREAS_OF_INTEREST: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const AREAS_INFORMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const AREAS_INTERVENTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
-export declare const AREA_POLYGON: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const AREAS_POLYGON: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ANALYSIS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const AUDITORY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const AUTH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -114,7 +115,6 @@ export declare const COMPLETED: Message<{ 'messages': { parameters: NoParameters
 export declare const COMING_SOON: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const COVER_IMAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const COPY_ID: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
-export declare const COST_HOUSEHOLD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const CPF: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CNPJ: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CONFIGURE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -139,6 +139,7 @@ export declare const COMPANY_NAME: Message<{ 'messages': { parameters: NoParamet
 export declare const COMPANY_DATA: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const COMPANY_REGISTER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const COMPANY_CREATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const COST_HOUSEHOLD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const CULTURAL_LANGUAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CULTURAL_LANGUAGES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -159,6 +160,7 @@ export declare const DOCUMENTS: Message<{ 'messages': { parameters: NoParameters
 export declare const DOES_NOT_EXPIRE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DOWNLOAD_ALL_TERMS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const DOWNLOADABLE_FILES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const DOWNLOAD_ARCHIVE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ORGANIZATION_DUPLICATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const EDIT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EDIT_EVENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -254,7 +256,6 @@ export declare const INVALID_CREDENTIALS: Message<{ 'messages': { parameters: No
 export declare const INVITE_CREATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const INVITE_WAS_ACCEPTED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const INVITE_WAS_SENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
-export declare const INFORMATION_PROPONENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const INFORMATION_LOCATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const JOIN_TERMS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const LANGUAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -410,6 +411,7 @@ export declare const PROJECT_VALUE: Message<{ 'messages': { parameters: NoParame
 export declare const PROJECT_INFORMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PROMOTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PROMOTION_STRATEGY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const PROPONENT_INFORMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const PUBLIC: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PUBLIC_DATA_NOTICE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PUBLIC_EMAIL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -483,8 +485,7 @@ export declare const USER_INFORMATION: Message<{ 'messages': { parameters: NoPar
 export declare const USER_EDIT_DATA: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const UNREAD_NOTIFICATIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const USER_ASSOCIATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
-export declare const UPDATED_AT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
-export declare const UNKNOWN: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const UPDATED_AT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_ALL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIDEO: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -935,6 +936,8 @@ export declare const VIEW_NOT_FOUND_ERROR_TEXT_SECOND: Message<{ 'messages': { p
 export declare const VIEW_NOT_FOUND_ERROR_TEXT_THIRD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_NOT_FOUND_ERROR_HOMEPAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_NOT_FOUND_ERROR_IMAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const VIEW_PHASE_OUT_OF_PERIOD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const VIEW_PHASE_TEXT_OUT_OF_PERIOD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const PROPOSAL_STATUS_SENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const PROPOSAL_STATUS_NO_MUNICIPALITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const CSV_HEADER_REGION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
