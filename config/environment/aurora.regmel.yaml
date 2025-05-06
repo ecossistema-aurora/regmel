@@ -11,7 +11,7 @@ email:
     Este é um email automático, por favor, não responda.
 
 variables:
-  price_per_household: 35000
+  price_per_household: 45000
 
 visit_repository: false
 logo:
@@ -141,6 +141,7 @@ dropdown:
 dashboard:
   cards:
     municipalities:
+      csv: false
       acl: ['ROLE_MUNICIPALITY', 'ROLE_ADMIN', 'ROLE_MANAGER']
       title: Municípios
       subtitle: Municípios
@@ -151,6 +152,7 @@ dashboard:
         route: admin_regmel_municipality_list
       total_key: totalCities
     documents:
+      download: false
       acl: ['ROLE_MUNICIPALITY', 'ROLE_ADMIN', 'ROLE_MANAGER']
       title: Documentos
       subtitle: Termos de adesão para Aprovação
@@ -161,6 +163,7 @@ dashboard:
         route: admin_regmel_municipality_list
       total_key: totalCities
     proposals:
+      csv: false
       acl: ['ROLE_MUNICIPALITY']
       title: Propostas
       subtitle: Propostas
@@ -181,6 +184,7 @@ dashboard:
         route: admin_opportunity_list
       total_key: totalOpportunities
     companies:
+      csv: false
       acl: ['ROLE_COMPANY', 'ROLE_ADMIN', 'ROLE_MANAGER']
       title: Empresas/OSCs
       subtitle: Empresas/OSCs
