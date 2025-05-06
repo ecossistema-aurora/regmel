@@ -98,9 +98,9 @@ readonly class FileService implements FileServiceInterface
     public function uploadMixedFile(UploadedFile $uploadedFile, string $extraPath = '', ?string $optionalName = null): File
     {
         if (null === $optionalName) {
-            $fileName = uniqid('', true).'.'.$uploadedFile->guessExtension();
+            $fileName = uniqid('', true).'.'.$uploadedFile->getClientOriginalExtension();
         } else {
-            $fileName = $optionalName.'.'.$uploadedFile->guessExtension();
+            $fileName = $optionalName.'.'.$uploadedFile->getClientOriginalExtension();
         }
 
         $filePath = rtrim($this->storageDir, '/').$extraPath;
@@ -116,6 +116,7 @@ readonly class FileService implements FileServiceInterface
             'image/png',
             'image/jpg',
             'application/xml',
+            'application/vnd.google-earth.kml+xml',
             'application/vnd.google-earth.kmz',
             'application/octet-stream',
         ]);
