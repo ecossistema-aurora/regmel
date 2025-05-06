@@ -65,7 +65,7 @@ class RegisterService implements RegisterServiceInterface
             $fileName = $this->getTermFileName(
                 $data['organization']['name'] ?? '',
                 $data['organization']['extraFields']['state'] ?? '',
-                $data['organization']['extraFields']['termo_version'] ?? 0
+                $data['organization']['extraFields']['term_version'] ?? 0
             );
             $data['organization']['extraFields']['form'] = $this->uploadFile($uploadedFile, $fileName);
         }
@@ -114,7 +114,7 @@ class RegisterService implements RegisterServiceInterface
         if (null !== $uploadedFile) {
             $extraFields = $organization->getExtraFields();
 
-            $termoVersion = $extraFields['termo_version'] + 1;
+            $termoVersion = $extraFields['term_version'] + 1;
 
             $fileName = $this->getTermFileName(
                 $organization->getName(),
@@ -122,7 +122,7 @@ class RegisterService implements RegisterServiceInterface
                 $termoVersion
             );
 
-            $extraFields = array_merge($extraFields, ['termo_version' => $termoVersion, 'form' => $this->uploadFile($uploadedFile, $fileName)]);
+            $extraFields = array_merge($extraFields, ['term_version' => $termoVersion, 'term_status' => 'awaiting', 'form' => $this->uploadFile($uploadedFile, $fileName)]);
 
             $organization->setExtraFields($extraFields);
 

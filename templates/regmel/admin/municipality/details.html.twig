@@ -18,10 +18,19 @@
                         </div>
 
                         <hr>
-                        {% if municipality.extraFields['term_status'] == 'approved' %}
+                        {% if municipality.extraFields['term_status'] == 'rejected' %}
+                            <div class="alert alert-danger">
+                                <strong>Status do Termo de Adesão:</strong>
+                                RECUSADO
+                                <hr>
+                                <em>Motivo: {{ municipality.extraFields.term_reason }}</em>
+                            </div>
+                        {% elseif municipality.extraFields['term_status'] == 'approved' %}
                             <div class="alert alert-success">
                                 <strong>Status do Termo de Adesão:</strong>
                                 ACEITO
+                                <hr>
+                                <em>Motivo: {{ municipality.extraFields.term_reason }}</em>
                             </div>
                         {% else %}
                             <div class="alert alert-warning">
@@ -283,8 +292,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    {% if app.user.agents.first.id == createdById %}
+                                    {% if app.user.agents.first.id == createdById and municipality.extraFields['term_status'] != 'approved' %}
                                         <a href="" data-bs-toggle="modal" data-bs-target="#modalResendTerm" class="btn btn-outline-success btn-sm">Reenviar</a>
                                     {% endif %}
                                 </div>
