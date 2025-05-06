@@ -10,8 +10,10 @@ use App\Enum\OrganizationTypeEnum;
 use App\Enum\RegionEnum;
 use App\Enum\UserRolesEnum;
 use App\Exception\UnableCreateFileException;
+use App\Regmel\Service\Interface\MunicipalityDocumentServiceInterface;
 use App\Service\Interface\OrganizationServiceInterface;
 use App\Service\Interface\StateServiceInterface;
+use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\ExpressionLanguage\Expression;
@@ -31,6 +33,7 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
         private readonly JWTTokenManagerInterface $jwtManager,
         private readonly Security $security,
         private readonly StateServiceInterface $stateService,
+        private readonly MunicipalityDocumentServiceInterface $municipalityDocumentService,
     ) {
     }
 
@@ -122,6 +125,33 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
         }, $municipalities);
 
         return $this->renderOrganizationList($municipalities);
+    }
+
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    #[Route('/painel/admin/municipios/{id}/document/decision', name: 'admin_municipality_document_decision', methods: ['POST'])]
+    public function handleDocumentDecision(Uuid $id, Request $request): Response
+    {
+        $approved = $request->request->getBoolean('approved');
+        $reason = $request->request->get('reason');
+
+        try {
+            if (true === empty(trim($reason))) {
+                $this->addFlash('error', 'O motivo é obrigatório');
+
+                return $this->redirectToRoute('admin_regmel_municipality_document_review');
+            }
+
+            $this->municipalityDocumentService->decision($id, $approved, $reason);
+
+            return $this->redirectToRoute('admin_regmel_municipality_document_review');
+        } catch (Exception $e) {
+            $this->addFlash('error', 'Erro ao submeter revisão do termo');
+        }
+
+        return $this->redirectToRoute('admin_regmel_municipality_document_review');
     }
 
     #[IsGranted(new Expression('
