@@ -70,11 +70,15 @@ class ProposalService implements ProposalServiceInterface
             $status = 'Sem Adesão do Municipio';
 
             $municipality = $this->cityService->get($data['city']);
+            $state = $municipality->getState()->getAcronym();
             $cityCode = $municipality->getCityCode();
-            $cityName = $municipality->getName().'-'.$municipality->getState()->getAcronym();
+            $cityName = $municipality->getName().'-'.$state;
+            $region = $municipality->getState()->getRegion();
         } else {
+            $state = $municipality->getExtraFields()['state'];
             $cityCode = $municipality->getExtraFields()['cityCode'] ?? '';
-            $cityName = $municipality->getName().'-'.$municipality->getExtraFields()['state'];
+            $cityName = $municipality->getName().'-'.$state;
+            $region = $municipality->getExtraFields()['region'];
         }
 
         $initiative->setExtraFields([
@@ -85,6 +89,8 @@ class ProposalService implements ProposalServiceInterface
             'map_file' => $this->uploadFile($map, $cityCode),
             'project_file' => $this->uploadFile($project, $cityCode),
             'city_name' => $cityName,
+            'state' => $state,
+            'region' => $region,
         ]);
 
         $this->initiativeRepository->save($initiative);

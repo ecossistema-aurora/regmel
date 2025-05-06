@@ -35,16 +35,22 @@
                         <tbody>
                         {% for proposal in proposals %}
                             <tr>
-                                <td>{{ proposal.companyName }}</td>
-                                <td>{{ proposal.cityName }}</td>
+                                <td>{{ proposal.company }}</td>
+                                <td>{{ proposal.city_name }}</td>
                                 <td>
                                     <span class="badge bg-dark">{{ proposal.status }}</span>
                                 </td>
-                                <td>{{ proposal.housesQuantity }}</td>
-                                <td>{{ proposal.totalArea }}</td>
-                                <td>R$ {{ (proposal.housesQuantity * env.aurora.variables.price_per_household)|number_format(2, ',', '.') }}</td>
+                                <td>{{ proposal.quantity_houses }}</td>
+                                <td>{{ proposal.area_size }}</td>
+                                <td>R$ {{ (proposal.quantity_houses * env.aurora.variables.price_per_household)|number_format(2, ',', '.') }}</td>
                                 <td>
-                                    <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
+                                    <button 
+                                        class="btn btn-outline-info btn-sm"
+                                        data-proposal="{{ proposal|json_encode }}"
+                                        onClick="modalProposalDetails(this)"
+                                    >
+                                        Ver Proposta
+                                    </button>
                                 </td>
                             </tr>
                         {% else %}
@@ -59,9 +65,12 @@
         </div>
     </div>
 </section>
+
+{% include "regmel/_components/modal-proposal.html.twig" %}
 {% endblock %}
 
 {% block extra_javascripts %}
     {{ parent() }}
     <script type="module" src="{{ asset('js/grid-init.js') }}"></script>
+    <script src="{{ asset('js/modal-proposal-details.js') }}"></script>
 {% endblock %}
