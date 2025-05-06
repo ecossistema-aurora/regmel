@@ -18,12 +18,17 @@
                         </div>
 
                         <hr>
-
-                        <div class="alert alert-warning">
-                            <strong>Status do Termo de Adesão:</strong>
-                            AGUARDANDO
-                        </div>
-
+                        {% if municipality.extraFields['term_status'] == 'approved' %}
+                            <div class="alert alert-success">
+                                <strong>Status do Termo de Adesão:</strong>
+                                ACEITO
+                            </div>
+                        {% else %}
+                            <div class="alert alert-warning">
+                                <strong>Status do Termo de Adesão:</strong>
+                                AGUARDANDO
+                            </div>
+                        {% endif %}
                         <hr>
 
                         <ul class="nav nav-tabs" id="pills-tab" role="tablist">
