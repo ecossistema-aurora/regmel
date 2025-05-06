@@ -194,7 +194,7 @@ class RegisterController extends AbstractWebController
                     'email' => $request->get('email'),
                     'telefone' => $request->get('phone'),
                     'site' => $request->get('site'),
-                    'termo_versao' => 1,
+                    'termo_version' => 1,
                 ],
             ],
             'user' => [

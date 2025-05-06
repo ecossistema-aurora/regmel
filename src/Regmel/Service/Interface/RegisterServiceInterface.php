@@ -16,4 +16,6 @@ interface RegisterServiceInterface
     public function findOpportunitiesBy(OrganizationTypeEnum $enum): array;
 
     public function saveUser(array $data): User;
+
+    public function resendTerm(string $organizationId, ?UploadedFile $uploadedFile);
 }

@@ -65,7 +65,7 @@ class RegisterService implements RegisterServiceInterface
             $fileName = $this->getTermFileName(
                 $data['organization']['name'] ?? '',
                 $data['organization']['extraFields']['state'] ?? '',
-                $data['organization']['extraFields']['termo_versao'] ?? 0
+                $data['organization']['extraFields']['termo_version'] ?? 0
             );
             $data['organization']['extraFields']['form'] = $this->uploadFile($uploadedFile, $fileName);
         }
@@ -105,6 +105,31 @@ class RegisterService implements RegisterServiceInterface
         );
 
         return $organizationObj;
+    }
+
+    public function resendTerm(string $organizationId, ?UploadedFile $uploadedFile): void
+    {
+        $organization = $this->organizationService->get(Uuid::fromString($organizationId));
+
+        if (null !== $uploadedFile) {
+            $extraFields = $organization->getExtraFields();
+
+            $termoVersion = $extraFields['termo_version'] + 1;
+
+            $fileName = $this->getTermFileName(
+                $organization->getName(),
+                $extraFields['state'],
+                $termoVersion
+            );
+
+            $extraFields = array_merge($extraFields, ['termo_version' => $termoVersion, 'form' => $this->uploadFile($uploadedFile, $fileName)]);
+
+            $organization->setExtraFields($extraFields);
+
+            $this->organizationRepository->save($organization);
+
+            $this->accountEventService->notifyManagerOfNewMunicipalityDocument($organization->getName());
+        }
     }
 
     public function findOpportunitiesBy(OrganizationTypeEnum $enum): array

@@ -430,6 +430,7 @@ reset: Redefinir
 reset_password: Redefinir Senha
 read_notifications: Notificações Lidas
 new_registration_notification: Uma nova organização foi credenciada
+resend_term_notification: Um novo termo de adesão foi enviado
 results: Resultados
 roles: Perfis
 ROLE_USER: Usuário Padrão

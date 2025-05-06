@@ -204,6 +204,21 @@ readonly class AccountEventService extends AbstractEntityService implements Acco
         );
     }
 
+    public function notifyManagerOfNewMunicipalityDocument(
+        string $organizationName,
+    ): void {
+        $managerEmail = $this->getManagerEmail();
+
+        $this->emailService->sendTemplatedEmail(
+            [$managerEmail],
+            $this->translator->trans('resend_term_notification'),
+            '_emails/notifications/manager/new-municipality-document.html.twig',
+            [
+                'organization_name' => $organizationName,
+            ]
+        );
+    }
+
     public function sendPasswordChangedEmail(User $user, ?string $userAgent): void
     {
         if (null === $user->getEmail()) {
