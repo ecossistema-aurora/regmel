@@ -11,6 +11,7 @@ final class InitiativeVoter extends AbstractVoter
 {
     protected array $actions = [
         'get',
+        'get-file',
         'edit',
         'remove',
     ];
