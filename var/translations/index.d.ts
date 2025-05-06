@@ -50,6 +50,7 @@ export declare const AGENT_INFORMATION: Message<{ 'messages': { parameters: NoPa
 export declare const ALL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ALL_REGIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ALL_STATES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const ALL_TYPES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ALLOW_FREE_LINKING: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ALLOWED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ADMIN_OPTIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -413,6 +414,7 @@ export declare const RESET: Message<{ 'messages': { parameters: NoParametersType
 export declare const RESET_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const READ_NOTIFICATIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const NEW_REGISTRATION_NOTIFICATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const RESEND_TERM_NOTIFICATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const RESULTS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ROLES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ROLEUSER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
