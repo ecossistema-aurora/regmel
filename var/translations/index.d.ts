@@ -183,6 +183,7 @@ export declare const ELDERLY_PERSON: Message<{ 'messages': { parameters: NoParam
 export declare const EXECUTION_PERIOD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EXPLORE_REPOSITORY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EXPORT_CSV: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const EXPORT_PROJECT_FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ELEVATOR: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FAQ: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;

@@ -13,6 +13,7 @@ use App\Enum\InscriptionOpportunityStatusEnum;
 use App\Enum\InscriptionPhaseStatusEnum;
 use App\Enum\OrganizationTypeEnum;
 use App\Environment\ConfigEnvironment;
+use App\Exception\UnableCreateFileException;
 use App\Regmel\Service\Interface\ProposalServiceInterface;
 use App\Repository\Interface\InitiativeRepositoryInterface;
 use App\Repository\OrganizationRepository;
@@ -35,6 +36,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use ZipArchive;
 
 readonly class ProposalService extends AbstractEntityService implements ProposalServiceInterface
 {
@@ -99,13 +101,24 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
             $region = $municipality->getExtraFields()['region'];
         }
 
+        $mapFileName = null;
+        $projectFileName = null;
+
+        if (null !== $map) {
+            $mapFileName = $this->uploadFile($map, $cityCode);
+        }
+
+        if (null !== $project) {
+            $projectFileName = $this->uploadFile($project, $cityCode);
+        }
+
         $initiative->setExtraFields([
             'status' => $status,
             'area_size' => (float) $data['area_size'],
             'quantity_houses' => (float) $data['quantity_houses'],
             'area_characteristic' => $data['area_characteristic'],
-            'map_file' => $this->uploadFile($map, $cityCode),
-            'project_file' => $this->uploadFile($project, $cityCode),
+            'map_file' => $mapFileName,
+            'project_file' => $projectFileName,
             'city_name' => $cityName,
             'state' => $state,
             'region' => $region,
@@ -244,5 +257,39 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
             $extraFields['area_characteristic'] ?? '',
             $entity->getCreatedAt()->format('d/m/Y H:i:s'),
         ];
+    }
+
+    public function exportProjectFiles(array $proposals): string
+    {
+        $zipFilePath = sprintf('%s/storage/regmel/company/documents/export.zip', $this->parameterBag->get('kernel.project_dir'));
+
+        $zip = new ZipArchive();
+
+        if (true !== $zip->open($zipFilePath, ZipArchive::CREATE)) {
+            throw new UnableCreateFileException();
+        }
+
+        foreach ($proposals as $proposal) {
+            if (true === empty($proposal->getExtraFields()['project_file'])) {
+                continue;
+            }
+
+            $filePath = $this->getDocumentPath($proposal->getExtraFields()['project_file']);
+
+            if (true === file_exists($filePath)) {
+                $zip->addFile($filePath, basename($filePath));
+            }
+        }
+
+        $zip->close();
+
+        return $zipFilePath;
+    }
+
+    private function getDocumentPath(string $file): string
+    {
+        $path = $this->parameterBag->get('kernel.project_dir');
+
+        return "{$path}/storage/regmel/company/documents/{$file}";
     }
 }
