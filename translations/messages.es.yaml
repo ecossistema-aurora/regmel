@@ -19,6 +19,7 @@ access_main_agent: Acceder al Agente Principal
 access_ramp: Rampas de acceso
 accountability: Rendición de Cuentas
 accompany: Acompañar
+accepted: Aceptado
 action: Acción
 actions: Acciones
 activity: Actividad
@@ -69,6 +70,7 @@ apply_filter: Aplicar filtros
 attachments_and_links: Archivos adjuntos y enlaces
 attitudinal_accessibility: Accesibilidad Actitudinal
 audio_description: Audiodescripción
+awaiting: Esperando
 
 back: Volver
 birth_date: Fecha de Nacimiento
@@ -378,6 +380,7 @@ required_field: Campo obligatorio
 report: Reportar
 responsible_agent: Agente Responsable
 results: Resultados
+rejected: Rechazado
 
 tags: Etiquetas
 term: Término
@@ -402,6 +405,7 @@ total_value: Valor total
 user: Usuario
 user_name: Nombre de usuario
 users: Usuarios
+unknown: Desconocido
 
 view_all: Ver Todas
 view_file: ver archivo

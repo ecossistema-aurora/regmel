@@ -35,17 +35,61 @@
                                 <th>{{ 'name'|trans }}</th>
                                 <th>{{ 'document'|trans }}</th>
                                 <th>{{ 'updated_at'|trans }}</th>
+                                <th>{{ 'status'|trans }}</th>
                                 <th>{{ 'actions'|trans }}</th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for municipality in municipalities %}
                                 <tr>
-                                    <td><a href="{{ path('admin_regmel_municipality_details', {id: municipality.id}) }}">{{ municipality.name }}-{{ municipality.extraFields.state }}</a></td>
-                                    <td><a onclick="openDocumentModal('{{ municipality.name }}', '{{ municipality.id }}', '{{ municipality.extraFields.filepath }}')" data-bs-toggle="modal" data-bs-target="#modalDocument" href="#">{{ municipality.extraFields.form }}</a></td>
-                                    <td>{{ municipality.updatedAt is not null ? municipality.updatedAt.format('d/m/Y H:i:s') : municipality.createdAt.format('d/m/Y H:i:s') }}</td>
                                     <td>
-                                        <button class="btn btn-outline-warning btn-sm edit-organization" data-bs-toggle="modal" data-bs-target="#modalEditOrganization" data-id="{{ municipality.id }}" data-token="{{ token }}">{{ 'edit'|trans }}</button>
+                                        <a href="{{ path('admin_regmel_municipality_details', {id: municipality.id}) }}">
+                                            {{ municipality.name }} - {{ municipality.extraFields.state }}
+                                        </a>
+                                    </td>
+
+                                    <td>
+                                        <a onclick="openDocumentModal('{{ municipality.name }}', '{{ municipality.id }}', '{{ municipality.extraFields.filepath }}')"
+                                           data-bs-toggle="modal" data-bs-target="#modalDocument" href="#">
+                                            {{ municipality.extraFields.form }}
+                                        </a>
+                                    </td>
+
+                                    <td>
+                                        {{ municipality.updatedAt is not null
+                                        ? municipality.updatedAt.format('d/m/Y H:i:s')
+                                        : municipality.createdAt.format('d/m/Y H:i:s') }}
+                                    </td>
+
+                                    <td>
+                                        {% set status = municipality.extraFields.term_status ?? 'awaiting' %}
+                                        {% set badgeClass = {
+                                            'awaiting': 'bg-warning',
+                                            'accepted': 'bg-success',
+                                            'rejected': 'bg-danger'
+                                        }[status] %}
+
+                                        <span class="badge {{ badgeClass }} text-dark text-uppercase">
+                                        {% if status == 'awaiting' %}
+                                            {{ 'awaiting' | trans }}
+                                        {% elseif status == 'accepted' %}
+                                            {{ 'accepted' | trans }}
+                                        {% elseif status == 'rejected' %}
+                                            {{ 'rejected' | trans }}
+                                        {% else %}
+                                            {{ 'unknown' | trans }}
+                                        {% endif %}
+                                    </span>
+                                    </td>
+
+                                    <td>
+                                        <button class="btn btn-outline-warning btn-sm edit-organization"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalEditOrganization"
+                                                data-id="{{ municipality.id }}"
+                                                data-token="{{ token }}">
+                                            {{ 'edit'|trans }}
+                                        </button>
                                     </td>
                                 </tr>
                             {% else %}

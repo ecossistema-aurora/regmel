@@ -49,12 +49,11 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
     public function fileForm(Uuid $id): Response
     {
         $organization = $this->organizationService->get($id);
-
         $this->denyAccessUnlessGranted('get_form', $organization);
 
         $filePath = $this->getDocumentPath($organization->getExtraFields()['form'] ?? 'null');
 
-        if (false === file_exists($filePath)) {
+        if (!file_exists($filePath)) {
             throw $this->createNotFoundException();
         }
 
@@ -74,20 +73,23 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
         $regions = RegionEnum::cases();
         $states = $this->stateService->findBy(['region' => $filterRegion]);
 
-        $criteria = ['type' => OrganizationTypeEnum::MUNICIPIO->value];
-        $allMunicipalities = $this->organizationService->findBy($criteria);
+        $municipalities = array_map(function (Organization $organization) {
+            $extraFields = $organization->getExtraFields();
 
-        $municipalities = array_filter($allMunicipalities, function (Organization $organization) use ($filterRegion, $filterState) {
             $organization->addExtraField(
                 'filepath',
-                $this->getDocumentPath($organization->getExtraFields()['form'] ?? 'null')
+                $this->getDocumentPath($extraFields['form'] ?? 'null')
             );
 
-            $extra = $organization->getExtraFields();
+            $organization->addExtraField(
+                'status',
+                $extraFields['status'] ?? 'awaiting'
+            );
 
-            return (!$filterRegion || ($extra['region'] ?? null) === $filterRegion)
-                && (!$filterState || ($extra['state'] ?? null) === $filterState);
-        });
+            return $organization;
+        }, $this->organizationService->findBy([
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
+        ]));
 
         return $this->render('regmel/admin/municipality/documents.html.twig', [
             'municipalities' => $municipalities,
@@ -111,18 +113,23 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
     #[Route('/painel/admin/municipios-documentos', name: 'admin_regmel_municipality_document_review', methods: ['POST'])]
     public function reviewDocument(): Response
     {
-        $municipalities = $this->organizationService->findBy([
-            'type' => OrganizationTypeEnum::MUNICIPIO->value,
-        ]);
-
         $municipalities = array_map(function (Organization $organization) {
+            $extraFields = $organization->getExtraFields();
+
             $organization->addExtraField(
                 'filepath',
-                $this->getDocumentPath($organization->getExtraFields()['form'] ?? 'null')
+                $this->getDocumentPath($extraFields['form'] ?? 'null')
+            );
+
+            $organization->addExtraField(
+                'status',
+                $extraFields['status'] ?? 'awaiting'
             );
 
             return $organization;
-        }, $municipalities);
+        }, $this->organizationService->findBy([
+            'type' => OrganizationTypeEnum::MUNICIPIO->value,
+        ]));
 
         return $this->renderOrganizationList($municipalities);
     }
