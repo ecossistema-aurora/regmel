@@ -181,6 +181,7 @@ export const ELDERLY_PERSON = {"id":"elderly_person","translations":{"messages":
 export const EXECUTION_PERIOD = {"id":"execution_period","translations":{"messages":{"regmel":"Per\u00edodo de execu\u00e7\u00e3o","pt-br":"Per\u00edodo de execu\u00e7\u00e3o","en":"Execution Period","es":"Per\u00edodo de ejecuci\u00f3n"}}};
 export const EXPLORE_REPOSITORY = {"id":"explore_repository","translations":{"messages":{"regmel":"Conhe\u00e7a o reposit\u00f3rio","pt-br":"Conhe\u00e7a o reposit\u00f3rio","en":"Explore Repository","es":"Explorar Repositorio"}}};
 export const EXPORT_CSV = {"id":"export_csv","translations":{"messages":{"regmel":"Exportar CSV"}}};
+export const EXPORT_PROJECT_FILE = {"id":"export_project_file","translations":{"messages":{"regmel":"Baixar Arquivos Geogr\u00e1ficos"}}};
 export const ELEVATOR = {"id":"elevator","translations":{"messages":{"regmel":"Elevador","pt-br":"Elevador","en":"Elevator","es":"Ascensor"}}};
 export const FAQ = {"id":"faq","translations":{"messages":{"regmel":"FaQ","pt-br":"FaQ","en":"FaQ","es":"FaQ"}}};
 export const FILE = {"id":"file","translations":{"messages":{"regmel":"Anexar arquivo","pt-br":"Anexar arquivo","en":"Attach file","es":"Adjuntar archivo"}}};

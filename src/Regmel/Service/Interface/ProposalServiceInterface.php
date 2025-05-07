@@ -11,4 +11,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 interface ProposalServiceInterface
 {
     public function saveProposal(Organization $company, array $data, ?UploadedFile $map = null, ?UploadedFile $project): Initiative;
+
+    public function exportProjectFiles(array $proposals): string;
 }

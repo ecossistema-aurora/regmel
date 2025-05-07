@@ -168,4 +168,24 @@ class ProposalAdminController extends AbstractAdminController
 
         return $this->proposalService->generateCsv($initiatives, 'propostas.csv', null);
     }
+
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    #[Route('/painel/admin/propostas/list/download-project-files', name: 'admin_regmel_proposal_project_file_download', methods: ['GET'])]
+    public function exportProjectFiles(): Response
+    {
+        $initiatives = $this->initiativeService->list();
+
+        $zipFileName = sprintf('arquivos_geográficos_%s.zip', date('Y-m-d_H-i-s'));
+
+        $filePath = $this->proposalService->exportProjectFiles($initiatives);
+
+        $response = new BinaryFileResponse($filePath, headers: ['Content-Type' => 'application/zip']);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $zipFileName);
+        $response->deleteFileAfterSend(true);
+
+        return $response;
+    }
 }
