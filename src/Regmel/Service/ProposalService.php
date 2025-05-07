@@ -91,11 +91,13 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
 
             $municipality = $this->cityService->get($data['city']);
             $state = $municipality->getState()->getAcronym();
+            $cityId = $municipality->getId();
             $cityCode = $municipality->getCityCode();
             $cityName = $municipality->getName().'-'.$state;
             $region = $municipality->getState()->getRegion();
         } else {
             $state = $municipality->getExtraFields()['state'];
+            $cityId = $municipality->getId();
             $cityCode = $municipality->getExtraFields()['cityCode'] ?? '';
             $cityName = $municipality->getName().'-'.$state;
             $region = $municipality->getExtraFields()['region'];
@@ -120,6 +122,7 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
             'map_file' => $mapFileName,
             'project_file' => $projectFileName,
             'city_name' => $cityName,
+            'city_id' => $cityId,
             'state' => $state,
             'region' => $region,
         ]);

@@ -49,6 +49,7 @@ export declare const AGES_RATING_SIXTEEN: Message<{ 'messages': { parameters: No
 export declare const AGES_RATING_EIGHTEEN: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const AGENT_INFORMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ALL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const ALL_CITIES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ALL_REGIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ALL_STATES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ALL_TYPES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
