@@ -34,7 +34,7 @@
                         <hr>
 
                         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') %}
-                            {% include 'regmel/admin/municipality/_partials/list-filters.html.twig' %}
+                            {% include 'regmel/_components/list-filters.html.twig' %}
                         {% endif %}
 
                         <table class="js-grid table table-hover table-striped">

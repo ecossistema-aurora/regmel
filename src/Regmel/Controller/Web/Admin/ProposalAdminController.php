@@ -44,9 +44,24 @@ class ProposalAdminController extends AbstractAdminController
         is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'") 
     '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
     #[Route('/painel/admin/propostas', name: 'admin_regmel_proposal_list', methods: ['GET'])]
-    public function list(): Response
+    public function list(Request $request): Response
     {
-        $initiatives = $this->initiativeService->list();
+        $regions = RegionEnum::cases();
+        $region = $request->query->get('region');
+        $state = $request->query->get('state');
+        $city = $request->query->get('city');
+        $cities = [];
+        $states = [];
+
+        if ($region) {
+            $states = $this->stateService->findBy(['region' => $region]);
+        }
+
+        if ($state) {
+            $cities = $this->cityService->findByState($state);
+        }
+
+        $filtered = $this->initiativeService->listFiltered($region, $state, $city);
 
         $env = $this->configEnvironment->aurora();
 
@@ -71,10 +86,13 @@ class ProposalAdminController extends AbstractAdminController
                 'map_file' => $extraFields['map_file'] ?? '',
                 'project_file' => $extraFields['project_file'] ?? '',
             ];
-        }, $initiatives);
+        }, $filtered);
 
         return $this->render('regmel/admin/proposal/list.html.twig', [
             'proposals' => $proposals,
+            'regions' => $regions,
+            'states' => $states,
+            'cities' => $cities,
         ], parentPath: '');
     }
 
