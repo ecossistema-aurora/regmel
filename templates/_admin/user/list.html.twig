@@ -75,6 +75,10 @@
                                         <span class="badge {{ status_class_map[item.status|lower] }}">
                                             {{ status_map[item.status|lower]|trans }}
                                         </span>
+
+                                        {% if 'awaitingconfirmation' == item.status|lower and is_granted('ROLE_ADMIN') %}
+                                            <button onclick="modalConfirmUser('{{item.id}}', '{{item.name}}', '{{item.email}}')" class="btn btn-outline-success btn-sm mt-2">{{ 'confirm_user'|trans }}</button>
+                                        {% endif %}
                                     </td>
 
                                     <td>{{ item.createdAt.format('d/m/Y H:i:s') }}</td>
@@ -102,10 +106,13 @@
             </div>
         </div>
     </section>
+
+    {% include '_components/modal-confirm-user.html.twig' %}
 {% endblock %}
 
 {% block extra_javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/modal-photo.js') }}"></script>
+    <script src="{{ asset('js/modal-confirm-user.js') }}"></script>
     <script type="module" src="{{ asset('js/grid-init.js') }}"></script>
 {% endblock %}

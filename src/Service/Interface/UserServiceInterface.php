@@ -23,4 +23,6 @@ interface UserServiceInterface
     public function authenticate(User $user, $password): bool;
 
     public function getMainAgent(User $user): Agent;
+
+    public function confirmAccount(Uuid $id): void;
 }
