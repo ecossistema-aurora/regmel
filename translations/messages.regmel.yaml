@@ -1058,3 +1058,27 @@ view:
     error-homepage: Voltar para a página inicial
     error-image: Imagem de dúvida
 
+proposal:
+  status:
+    sent: Enviada
+    no_municipality: Sem Adesão do Município
+
+csv:
+  header:
+    region: Região
+    state: Estado
+    city: Município
+    company_name: Nome da Empresa
+    company_cnpj: CNPJ da Empresa
+    map_file: Arquivo da Área Poligonal
+    project_file: Arquivo do Projeto
+    houses_quantity: Quantidade de Domicílios
+    total_area: Área Total
+    total_value: Valor Global da Proposta
+    proposal_status: Status da Proposta
+    intervention_area_name: Nome da Área de Intervenção
+    proposal_type: Tipo de Proposta
+    proposal_date: Data da Proposta
+
+error:
+  invalid_entity: Entidade inválida. Esperado uma instância de Initiative.

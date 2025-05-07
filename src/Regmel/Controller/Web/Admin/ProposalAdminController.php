@@ -156,4 +156,16 @@ class ProposalAdminController extends AbstractAdminController
 
         return "{$path}/storage/regmel/company/documents/{$file}";
     }
+
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    #[Route('/painel/admin/propostas/list/download', name: 'admin_regmel_proposal_list_download', methods: ['GET'])]
+    public function exportProposalsCsv(Request $request): Response
+    {
+        $initiatives = $this->initiativeService->list();
+
+        return $this->proposalService->generateCsv($initiatives, 'propostas.csv', null);
+    }
 }

@@ -16,6 +16,11 @@
                         <div class="col">
                             <h2> Empresas - Propostas </h2>
                         </div>
+                        <div class="col text-end">
+                            <a href="{{ path('admin_regmel_proposal_list_download', app.request.query.all) }}" class="btn btn-secondary">
+                                {{ 'export_csv'|trans }}
+                            </a>
+                        </div>
                     </div>
 
                     <hr>
