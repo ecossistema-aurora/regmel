@@ -8,6 +8,7 @@ use App\DTO\UserDto;
 use App\Entity\Agent;
 use App\Entity\User;
 use App\Enum\UserRolesEnum;
+use App\Enum\UserStatusEnum;
 use App\Exception\User\UserResourceNotFoundException;
 use App\Repository\Interface\UserRepositoryInterface;
 use App\Service\Interface\AgentServiceInterface;
@@ -172,5 +173,19 @@ readonly class UserService extends AbstractEntityService implements UserServiceI
     public function getMainAgent(User $user): Agent
     {
         return $this->agentService->getMainAgentByEmail($user->getEmail());
+    }
+
+    public function confirmAccount(Uuid $id): void
+    {
+        $user = $this->get($id);
+
+        if (null === $user) {
+            throw new UserResourceNotFoundException();
+        }
+
+        $user->setStatus(UserStatusEnum::ACTIVE->value);
+        $user->setUpdatedAt(new DateTime());
+
+        $this->repository->save($user);
     }
 }

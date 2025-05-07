@@ -99,6 +99,7 @@ click_here: Clique aqui
 connections: Conexões
 confirm: Confirmar
 confirm_password: Confirmar senha
+confirm_user: Confirmar Usuário
 continue: Continuar
 contribute: Contribua
 control_panel: Painel de Controle
@@ -609,6 +610,9 @@ view:
     message:
       created: O usuário foi criado com sucesso
       updated: O usuário foi atualizado
+      confirmed: O usuário foi confirmado
+      not_confirmed: Não foi possível confirmar o usuário
+      confirm_question: Deseja confirmar este usuário?
 
   faq:
     description: Perguntas Frequentes

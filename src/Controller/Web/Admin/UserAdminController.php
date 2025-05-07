@@ -9,6 +9,7 @@ use App\DocumentService\AuthTimelineDocumentService;
 use App\DocumentService\UserTimelineDocumentService;
 use App\Enum\FlashMessageTypeEnum;
 use App\Enum\UserRolesEnum;
+use App\Exception\User\UserResourceNotFoundException;
 use App\Exception\ValidatorException;
 use App\Security\PasswordHasher;
 use App\Service\Interface\AgentServiceInterface;
@@ -247,5 +248,19 @@ class UserAdminController extends AbstractAdminController
             'token' => $token,
             'error' => $error,
         ]);
+    }
+
+    #[IsGranted(UserRolesEnum::ROLE_ADMIN->value, statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    public function confirmAccount(Uuid $id): Response
+    {
+        try {
+            $this->service->confirmAccount($id);
+
+            $this->addFlashSuccess($this->translator->trans('view.user.message.confirmed'));
+        } catch (UserResourceNotFoundException $exception) {
+            $this->addFlashError($this->translator->trans('view.user.message.not_confirmed'));
+        }
+
+        return $this->redirectToRoute('admin_user_list');
     }
 }
