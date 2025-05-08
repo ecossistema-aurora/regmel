@@ -56,7 +56,7 @@
     border-radius: 50%;
 }
 
-.dropdown-menu {
+.navbar .dropdown-menu {
     display: none;
     width: 32rem;
     padding: 1rem;
@@ -124,7 +124,7 @@
     font-size: 0.8rem;
 }
 
-.btn.dropdown-toggle {
+.navbar .btn.dropdown-toggle {
     color: var(--bs-primary);
     display: flex;
     align-items: center;
