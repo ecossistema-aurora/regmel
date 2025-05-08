@@ -17,11 +17,15 @@
                             <h2> Empresas - Propostas </h2>
                         </div>
                         <div class="col gap-1 text-end">
-                            <a href="{{ path('admin_regmel_proposal_project_file_download') }}" class="btn btn-outline-secondary">
+                            <a href="{{ path('admin_regmel_proposal_map_file_download') }}" class="btn btn-sm btn-success">
+                                {{ 'export_map_file'|trans }}
+                            </a>
+
+                            <a href="{{ path('admin_regmel_proposal_project_file_download') }}" class="btn btn-sm btn-info">
                                 {{ 'export_project_file'|trans }}
                             </a>
 
-                            <a href="{{ path('admin_regmel_proposal_list_download', app.request.query.all) }}" class="btn btn-secondary">
+                            <a href="{{ path('admin_regmel_proposal_list_download', app.request.query.all) }}" class="btn btn-sm btn-secondary">
                                 {{ 'export_csv'|trans }}
                             </a>
                         </div>
