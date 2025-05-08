@@ -182,6 +182,7 @@ export const EXECUTION_PERIOD = {"id":"execution_period","translations":{"messag
 export const EXPLORE_REPOSITORY = {"id":"explore_repository","translations":{"messages":{"regmel":"Conhe\u00e7a o reposit\u00f3rio","pt-br":"Conhe\u00e7a o reposit\u00f3rio","en":"Explore Repository","es":"Explorar Repositorio"}}};
 export const EXPORT_CSV = {"id":"export_csv","translations":{"messages":{"regmel":"Exportar CSV"}}};
 export const EXPORT_PROJECT_FILE = {"id":"export_project_file","translations":{"messages":{"regmel":"Baixar Arquivos Geogr\u00e1ficos"}}};
+export const EXPORT_MAP_FILE = {"id":"export_map_file","translations":{"messages":{"regmel":"Baixar \u00c1reas Poligonais"}}};
 export const ELEVATOR = {"id":"elevator","translations":{"messages":{"regmel":"Elevador","pt-br":"Elevador","en":"Elevator","es":"Ascensor"}}};
 export const FAQ = {"id":"faq","translations":{"messages":{"regmel":"FaQ","pt-br":"FaQ","en":"FaQ","es":"FaQ"}}};
 export const FILE = {"id":"file","translations":{"messages":{"regmel":"Anexar arquivo","pt-br":"Anexar arquivo","en":"Attach file","es":"Adjuntar archivo"}}};

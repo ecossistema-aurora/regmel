@@ -13,4 +13,6 @@ interface ProposalServiceInterface
     public function saveProposal(Organization $company, array $data, ?UploadedFile $map = null, ?UploadedFile $project): Initiative;
 
     public function exportProjectFiles(array $proposals): string;
+
+    public function exportMapFiles(array $proposals): string;
 }

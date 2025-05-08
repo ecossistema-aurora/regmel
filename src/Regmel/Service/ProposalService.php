@@ -286,6 +286,33 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         return $zipFilePath;
     }
 
+    public function exportMapFiles(array $proposals): string
+    {
+        $zipFilePath = sprintf('%s/storage/regmel/company/documents/export.zip', $this->parameterBag->get('kernel.project_dir'));
+
+        $zip = new ZipArchive();
+
+        if (true !== $zip->open($zipFilePath, ZipArchive::CREATE)) {
+            throw new UnableCreateFileException();
+        }
+
+        foreach ($proposals as $proposal) {
+            if (true === empty($proposal->getExtraFields()['map_file'])) {
+                continue;
+            }
+
+            $filePath = $this->getDocumentPath($proposal->getExtraFields()['map_file']);
+
+            if (true === file_exists($filePath)) {
+                $zip->addFile($filePath, basename($filePath));
+            }
+        }
+
+        $zip->close();
+
+        return $zipFilePath;
+    }
+
     private function getDocumentPath(string $file): string
     {
         $path = $this->parameterBag->get('kernel.project_dir');

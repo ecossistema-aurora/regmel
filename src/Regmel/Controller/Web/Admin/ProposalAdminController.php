@@ -188,4 +188,24 @@ class ProposalAdminController extends AbstractAdminController
 
         return $response;
     }
+
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    #[Route('/painel/admin/propostas/list/download-map-files', name: 'admin_regmel_proposal_map_file_download', methods: ['GET'])]
+    public function exportMapFiles(): Response
+    {
+        $initiatives = $this->initiativeService->list();
+
+        $zipFileName = sprintf('mapas_poligonais_%s.zip', date('Y-m-d_H-i-s'));
+
+        $filePath = $this->proposalService->exportMapFiles($initiatives);
+
+        $response = new BinaryFileResponse($filePath, headers: ['Content-Type' => 'application/zip']);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $zipFileName);
+        $response->deleteFileAfterSend(true);
+
+        return $response;
+    }
 }
