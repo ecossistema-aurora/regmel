@@ -84,6 +84,8 @@ change_details: Cambiar Detalles
 cep: CEP
 cisgender: Cisgénero
 city: ciudad
+city_id: ID de la ciudad
+city_code: Código de la ciudad
 check: Comprobar
 claim-ownership: Reclamar Propiedad
 clean_filter: Limpiar todos los filtros
@@ -165,6 +167,7 @@ evidences: Evidencias
 elderly_person: Persona mayor
 execution_period: Período de ejecución
 explore_repository: Explorar Repositorio
+extra_fields: Campos adicionales
 elevator: Ascensor
 
 faq: FaQ
@@ -179,6 +182,7 @@ functions: Gerenciar funciones
 fundamental: Primaria
 future_registration: Inscripciones futuras
 full_name: Nombre Completo
+form: Formulario
 from: de
 from_to: A
 from_to_date: A
@@ -317,6 +321,7 @@ organization_register: Create an Organization
 orientation: Seleccione la Orientación Sexual
 other_files: Otros archivos
 other_information: Otra información
+owner: Dueño
 
 pardo: Pardo
 paid: Pagado
@@ -375,6 +380,7 @@ reference_point: Complemento o punto de referencia
 register: Registro
 registration_date: Fecha de Inscripción
 registration_info: Información sobre la inscripción
+region: Región
 related-agents: Agentes Relacionados
 required_field: Campo obligatorio
 report: Reportar
@@ -385,6 +391,9 @@ rejected: Rechazado
 tags: Etiquetas
 term: Término
 terms: Términos
+term_form: Término de Uso
+term_version: Versión de los Términos
+term_status: Estado de los Términos
 title: Título
 transsexual: Transexual
 transvestite: Travesti
@@ -405,7 +414,7 @@ total_value: Valor total
 user: Usuario
 user_name: Nombre de usuario
 users: Usuarios
-unknown: Desconocido
+updated_at: Actualizado en
 
 view_all: Ver Todas
 view_file: ver archivo
