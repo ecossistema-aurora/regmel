@@ -19,6 +19,7 @@ access_main_agent: Acesse agente principal
 access_ramp: Rampas de acesso
 accountability: Prestações de Conta
 accompany: Acompanhar
+accepted: Aceito
 action: Ação
 actions: Ações
 activity: Atividade
@@ -73,6 +74,7 @@ apply_filter: Aplicar Filtros
 attachments_and_links: Anexos e links
 attitudinal_accessibility: Acessibilidade atitudinal
 audio_description: Áudio descrição
+awaiting: Aguardando
 awaiting_confirmation: Aguardando Confirmar Conta
 
 back: Voltar
@@ -442,6 +444,7 @@ ROLE_MUNICIPALITY: Administrador de Município
 ROLE_MANAGER: Gestor
 ROLE_ADMIN: Administrador Geral
 ROLE_SNP: Administrador SNP
+rejected: Rejeitado
 
 selection: Seleção
 
@@ -479,6 +482,7 @@ user_edit_data: Edição de dados do usuário
 unread_notifications: Notificações Não Lidas
 user_associated: Usuário sem agente associado
 updated_at: Atualizado em
+unknown: Desconhecido
 
 
 view_all: Ver todas

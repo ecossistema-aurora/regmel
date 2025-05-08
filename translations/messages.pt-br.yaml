@@ -19,6 +19,7 @@ access_main_agent: Acesse agente principal
 access_ramp: Rampas de acesso
 accountability: Prestações de Conta
 accompany: Acompanhar
+accepted: Aceito
 action: Ação
 actions: Ações
 activity: Atividade
@@ -68,6 +69,7 @@ asian: Amarelo
 apply_filter: Aplicar Filtros
 attachments_and_links: Anexos e links
 attitudinal_accessibility: Acessibilidade atitudinal
+awaiting: Aguardando
 audio_description: Áudio descrição
 
 back: Voltar
@@ -377,6 +379,7 @@ required_field: Este campo é obrigatório.
 report: Denúncia
 responsible_agent: Agente Responsável
 results: Resultados
+rejected: Rejeitados
 
 tags: Tags
 term: Termo
@@ -401,6 +404,7 @@ total_value: Valor total
 user: Usuário
 user_name: Nome do Usuário
 users: Usuários
+unknown: Desconhecido
 
 view_all: Ver todas
 view_file: ver arquivo
