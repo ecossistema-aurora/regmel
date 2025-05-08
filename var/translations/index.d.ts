@@ -21,6 +21,7 @@ export declare const ACCESS_MAIN_AGENT: Message<{ 'messages': { parameters: NoPa
 export declare const ACCESS_RAMP: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ACCOUNTABILITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ACCOMPANY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const ACCEPTED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ACTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ACTIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ACTIVITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -62,6 +63,9 @@ export declare const ARCHIVES: Message<{ 'messages': { parameters: NoParametersT
 export declare const ARCHIVED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const AREAS_OF_EXPERTISE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const AREAS_OF_INTEREST: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const AREAS_INFORMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const AREAS_INTERVENTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const AREA_POLYGON: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ANALYSIS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const AUDITORY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const AUTH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -74,6 +78,7 @@ export declare const APPLY_FILTER: Message<{ 'messages': { parameters: NoParamet
 export declare const ATTACHMENTS_AND_LINKS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ATTITUDINAL_ACCESSIBILITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const AUDIO_DESCRIPTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const AWAITING: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const AWAITING_CONFIRMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const BACK: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const BIRTH_DATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -87,6 +92,8 @@ export declare const CHANGE_DETAILS: Message<{ 'messages': { parameters: NoParam
 export declare const CHANGED_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const CEP: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const CITY_ID: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const CITY_CODE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CISGENDER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CHECK: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CLAIM_OWNERSHIP: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -106,6 +113,7 @@ export declare const COMPLETED: Message<{ 'messages': { parameters: NoParameters
 export declare const COMING_SOON: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const COVER_IMAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const COPY_ID: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const COST_HOUSEHOLD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const CPF: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CNPJ: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const CONFIGURE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -183,9 +191,11 @@ export declare const ELDERLY_PERSON: Message<{ 'messages': { parameters: NoParam
 export declare const EXECUTION_PERIOD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EXPLORE_REPOSITORY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EXPORT_CSV: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const EXTRA_FIELDS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EXPORT_PROJECT_FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const EXPORT_MAP_FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ELEVATOR: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const ESTIMATED_POLYGON: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const FAQ: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FILTER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -199,6 +209,7 @@ export declare const FUNDAMENTAL: Message<{ 'messages': { parameters: NoParamete
 export declare const FUTURE_REGISTRATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FULL_NAME: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FREE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const FORM: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FROM: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FROM_TO: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const FROM_TO_DATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -208,6 +219,7 @@ export declare const GENERAL_DATA: Message<{ 'messages': { parameters: NoParamet
 export declare const GENERAL_INFORMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const GENERAL_OBJECTIVE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const GENERAL_OBJECTIVE_DESCRIPTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const GLOBAL_PROPOSAL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const HAPPENING_NOW: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const HELP: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const HELP_PRIVACY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -241,6 +253,8 @@ export declare const INVALID_CREDENTIALS: Message<{ 'messages': { parameters: No
 export declare const INVITE_CREATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const INVITE_WAS_ACCEPTED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const INVITE_WAS_SENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const INFORMATION_PROPONENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const INFORMATION_LOCATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const JOIN_TERMS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const LANGUAGE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const LASTNAME: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -261,6 +275,7 @@ export declare const LOGO: Message<{ 'messages': { parameters: NoParametersType 
 export declare const LOGOUT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const LONG_DESCRIPTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const LGPD_MODAL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const LEGAL_INFORMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const MAP: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MANAGEMENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const MANAGER_NAME: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
@@ -327,6 +342,7 @@ export declare const NOT_SENT: Message<{ 'messages': { parameters: NoParametersT
 export declare const NOTICE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const NO_RECORDS_FOUND: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const NUMBER_ADDRESS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const NUMBER_HOUSEHOLDS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const OF: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const OFFERS_ARCHITECTURAL_ACCESSIBILITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const OFFICIAL_EVENTS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -350,6 +366,7 @@ export declare const OTHER_FILES: Message<{ 'messages': { parameters: NoParamete
 export declare const OTHER_INFORMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ORGANIZATION_WITH_PROFIT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ORGANIZATION_WITHOUT_PROFIT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const OWNER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PARDO: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PAID: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PEOPLE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -406,7 +423,7 @@ export declare const RECENT_REGISTRATIONS: Message<{ 'messages': { parameters: N
 export declare const RECENTLY_MODIFIED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const REFERENCE_POINT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const REGISTER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
-export declare const REGION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const REGION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const REGISTRATION_DATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const REGISTRATION_INFO: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const RELATED_AGENTS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -426,10 +443,16 @@ export declare const ROLEMUNICIPALITY: Message<{ 'messages': { parameters: NoPar
 export declare const ROLEMANAGER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ROLEADMIN: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ROLESNP: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const REJECTED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const SELECTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const TAGS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TERM: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TERMS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const TERM_FORM: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const TERM_VERSION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const TERM_STATUS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const TERM_APPROVED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const TERM_REJECTED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const TITLE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TRANSSEXUAL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TRANSVESTITE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -459,7 +482,7 @@ export declare const USER_INFORMATION: Message<{ 'messages': { parameters: NoPar
 export declare const USER_EDIT_DATA: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const UNREAD_NOTIFICATIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const USER_ASSOCIATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
-export declare const UPDATED_AT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const UPDATED_AT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_ALL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIDEO: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
