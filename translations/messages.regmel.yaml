@@ -62,6 +62,9 @@ archives: Arquivos
 archived: Arquivados
 areas_of_expertise: Áreas de Atuação
 areas_of_interest: Áreas de interesse
+areas_information: Informações da Área
+areas_intervention: Áreas de intervenção
+area_polygon: Área Poligonal
 analysis: Período de Análise
 auditory: Auditiva
 auth: Autenticação
@@ -109,6 +112,7 @@ completed: Finalizados
 coming_soon: Em breve
 cover_image: Imagem de capa
 copy_id: Copiar ID
+cost_household: Custo médio por domicílio
 cpf: CPF
 cnpj: CNPJ
 configure: Configurar
@@ -192,6 +196,7 @@ export_csv: Exportar CSV
 export_project_file: Baixar Arquivos Geográficos
 export_map_file: Baixar Áreas Poligonais
 elevator: Elevador
+estimated_polygon: Área estimada da poligonal
 
 faq: FaQ
 file: Anexar arquivo
@@ -216,6 +221,7 @@ general_data: Dados gerais
 general_information: Informações gerais
 general_objective: Objetivo Geral
 general_objective_description: Descrição do Objetivo Geral
+global_proposal: Valor Global da Proposta
 
 happening_now: Acontecendo agora
 help: Ajuda
@@ -251,6 +257,8 @@ invalid_credentials: E-mail ou senha incorretos
 invite_created: Cadastro realizado com sucesso. Veja no seu email o link para confirmar sua conta.
 Invite was accepted: Convite foi aceito
 Invite was sent: Convite foi enviado
+information_proponent: Informações do Proponente
+information_location: Informações do Local
 
 join_terms: Termos de Adesão
 
@@ -273,6 +281,7 @@ logo: Logo
 logout: Sair
 long_description: Descrição longa
 lgpd_modal: Política de Privacidade e Proteção de Dados (LGPD)
+legal_information: Informações legais
 
 map: Mapa
 management: Gerenciamento de Entidades
@@ -341,6 +350,7 @@ not_sent: Não enviadas
 notice: EDITAL
 no_records_found: Nenhum registro encontrado
 number_address: Número
+number_households: Número de domicílios
 
 of: de
 offers_architectural_accessibility: Oferece acessibilidade física

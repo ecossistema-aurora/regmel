@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h5 class="text-primary"> Informações de Localização</h5>
+                <h5 class="text-primary"> {{ 'information_location' | trans }}</h5>
 
                 <div class="row">
                     <div class="col-md-4">
@@ -31,7 +31,7 @@
 
                 <hr>
 
-                <h5 class="text-primary"> Informações do Proponente</h5>
+                <h5 class="text-primary"> {{ 'information_proponent' | trans }}</h5>
 
                 <div class="row">
                     <div class="col-md-4">
@@ -56,12 +56,12 @@
 
                 <hr>
 
-                <h5 class="text-primary"> Informações Legais </h5>
+                <h5 class="text-primary"> {{ 'legal_information' | trans}} </h5>
 
                 <div class="row">
                     <div class="col-md-4">
                         <div class="mt-4 mb-2">
-                            <strong>Área de Intervenção</strong>
+                            <strong>{{ 'areas_intervention' | trans }}</strong>
                         </div>
                         <p id="proposal-name"></p>
                     </div>
@@ -75,30 +75,30 @@
 
                 <hr>
 
-                <h5 class="text-primary"> Informações da Área </h5>
+                <h5 class="text-primary"> {{ 'areas_information' | trans}} </h5>
 
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mt-4 mb-2">
-                            <strong>Área estimada da poligonal</strong>
+                            <strong>{{ 'estimated_polygon' | trans }}</strong>
                         </div>
                         <p><span id="area-size"></span>  m²</p>
                     </div>
                     <div class="col-md-6">
                         <div class="mt-4 mb-2">
-                            <strong>Área total da proposta</strong>
+                            <strong>{{ 'number_households' | trans}}</strong>
                         </div>
                         <p id="quantity-houses"></p>
                     </div>
                     <div class="col-md-6">
                         <div class="mt-4 mb-2">
-                            <strong>Custo médio por domicílio</strong>
+                            <strong>{{ 'cost_household' | trans }}</strong>
                         </div>
                         <p id="price-per-household"></p>
                     </div>
                     <div class="col-md-6 align-items-end">
                         <div class="mt-4 mb-2">
-                            <strong>Valor Global da Proposta</strong>
+                            <strong>{{ 'global_proposal' | trans }}</strong>
                         </div>
                         <p id="total-price"></p>
                     </div>
@@ -106,12 +106,12 @@
 
                 <hr>
 
-                <h5 class="text-primary"> Arquivos </h5>
+                <h5 class="text-primary"> {{ 'archives' | trans }} </h5>
 
                 <div class="row">
                     <div class="col">
                         <div class="mt-4 mb-2">
-                            <strong>Arquivo do Projeto</strong>
+                            <strong>{{ 'csv.header.project_file' | trans }}</strong>
                         </div>
                         <div id="project-file">
                         </div>
@@ -121,7 +121,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="mt-4 mb-2">
-                            <strong>Mapa poligonal</strong>
+                            <strong>{{ 'area_polygon' | trans }}</strong>
                         </div>
                         <div id="map-file">
                         </div>
