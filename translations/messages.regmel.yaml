@@ -60,11 +60,12 @@ architectural: Arquitetônica
 architectural_accessibility_offers: Oferece acessibilidade física
 archives: Arquivos
 archived: Arquivados
+archive_project: Arquivo do Projeto
 areas_of_expertise: Áreas de Atuação
 areas_of_interest: Áreas de interesse
 areas_information: Informações da Área
 areas_intervention: Áreas de intervenção
-area_polygon: Área Poligonal
+areas_polygon: Área estimada da poligonal
 analysis: Período de Análise
 auditory: Auditiva
 auth: Autenticação
@@ -114,7 +115,6 @@ completed: Finalizados
 coming_soon: Em breve
 cover_image: Imagem de capa
 copy_id: Copiar ID
-cost_household: Custo médio por domicílio
 cpf: CPF
 cnpj: CNPJ
 configure: Configurar
@@ -139,6 +139,7 @@ company_name: Razão Social
 company_data: Dados da Empresa/OSC
 company_register: Cadastrar uma Empresa/OSC
 company_created: Empresa/OSC criada com sucesso. Veja no seu email o link para confirmar sua conta.
+cost_household: Custo médio por domicílio
 cultural_language: Linguagem cultural
 cultural_languages: Linguagens culturais
 
@@ -160,6 +161,7 @@ documents: Documentos
 does_not_expire: não expira
 download_all_terms: Baixar todos os termos
 downloadable-files: Arquivos para download
+download_archive: Baixar arquivo KML/KMZ/SHP
 organization_duplicate: Este município já foi credenciado. Entre em contato com %s para mais informações.
 
 edit: Editar
@@ -261,8 +263,7 @@ invalid_credentials: E-mail ou senha incorretos
 invite_created: Cadastro realizado com sucesso. Veja no seu email o link para confirmar sua conta.
 Invite was accepted: Convite foi aceito
 Invite was sent: Convite foi enviado
-information_proponent: Informações do Proponente
-information_location: Informações do Local
+information_location: Informações de localização
 
 join_terms: Termos de Adesão
 
@@ -423,6 +424,7 @@ project_value: Valor do projeto
 project_information: Informações do Projeto
 promotion: Divulgação
 promotion_strategy: Estratégia de divulgação
+proponent_information: Informações do proponente
 public: Público
 public_data_notice: Os dados inseridos abaixo serão exibidos para todos os usuários da plataforma.
 public_email: Email público
