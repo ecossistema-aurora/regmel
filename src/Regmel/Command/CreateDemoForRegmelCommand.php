@@ -6,6 +6,7 @@ namespace App\Regmel\Command;
 
 use App\Entity\Agent;
 use App\Entity\Opportunity;
+use App\Entity\Organization;
 use App\Entity\Phase;
 use App\Entity\User;
 use App\Enum\OrganizationTypeEnum;
@@ -42,6 +43,8 @@ class CreateDemoForRegmelCommand extends Command
         $this->createOpportunities($output, $io);
 
         $this->createUsers($output, $io);
+
+        $this->createCompany($output, $io);
 
         $output->writeln('------------------------------------'.PHP_EOL);
 
@@ -85,6 +88,7 @@ class CreateDemoForRegmelCommand extends Command
         $io->title('Manager User created');
         $output->writeln('User: admin@snp.email');
         $output->writeln('Pass: Aurora@2024');
+        $output->writeln('------------------------------------'.PHP_EOL);
     }
 
     private function createOpportunities(OutputInterface $output, SymfonyStyle $io): void
@@ -145,5 +149,54 @@ class CreateDemoForRegmelCommand extends Command
 
         $this->entityManager->persist($phase1Municipality);
         $this->entityManager->flush();
+    }
+
+    private function createCompany(OutputInterface $output, SymfonyStyle $io): void
+    {
+        $user = new User();
+        $user->setFirstName('CEO');
+        $user->setLastName('Company');
+        $user->setEmail('ceo@testcompany.com');
+        $user->setPassword(PasswordHasher::hash('Aurora@2024'));
+        $user->setStatus(UserStatusEnum::ACTIVE->value);
+        $user->addRole(UserRolesEnum::ROLE_COMPANY->value);
+        $user->setId(Uuid::fromString('d3331f2b-a6b9-4b6d-bb51-379869226876'));
+
+        $agent = new Agent();
+        $agent->setId(Uuid::fromString('d3331f2b-a6b9-4b6d-bb51-379869226876'));
+        $agent->createFromUser($user);
+
+        $user->addAgent($agent);
+
+        $this->entityManager->persist($user);
+        $this->entityManager->persist($agent);
+
+        $io->title('Company User created');
+        $output->writeln('User: ceo@testcompany.com');
+        $output->writeln('Pass: Aurora@2024');
+        $output->writeln('------------------------------------'.PHP_EOL);
+
+        $company = new Organization();
+        $company->setId(Uuid::fromString('edd41aa7-1e09-4e5f-a91a-6a1affad875e'));
+        $company->setName('Test Company');
+        $company->setType(OrganizationTypeEnum::EMPRESA->value);
+        $company->setExtraFields([
+            'tipo' => 'empresa',
+            'email' => 'company@testcompany.com',
+            'telefone' => '11999999999',
+            'cnpj' => '12345678000195',
+            'site' => 'https://www.testcompany.com.br',
+            'framework' => 'profit',
+        ]);
+        $company->setOwner($agent);
+        $company->setCreatedBy($agent);
+        $company->addAgent($agent);
+
+        $this->entityManager->persist($company);
+        $this->entityManager->flush();
+
+        $io->title('Created Company: ');
+        $output->writeln('Name: '.$company->getName());
+        $output->writeln('------------------------------------');
     }
 }
