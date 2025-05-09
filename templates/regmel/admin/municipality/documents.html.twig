@@ -26,7 +26,7 @@
                         <hr>
 
                         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') %}
-                            {% include 'regmel/admin/municipality/_partials/list-filters.html.twig' %}
+                            {% include 'regmel/_components/list-filters.html.twig' %}
                         {% endif %}
 
                         <table class="js-grid table table-hover table-striped">
@@ -66,7 +66,8 @@
                                         {% set badgeClass = {
                                             'awaiting': 'bg-warning',
                                             'accepted': 'bg-success',
-                                            'rejected': 'bg-danger'
+                                            'approved': 'bg-danger text-white',
+                                            'rejected': 'bg-danger text-white',
                                         }[status] %}
 
                                         <span class="badge {{ badgeClass }} text-dark text-uppercase">

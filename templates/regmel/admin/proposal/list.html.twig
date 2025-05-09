@@ -33,6 +33,8 @@
 
                     <hr>
 
+                    {% include 'regmel/_components/list-filters.html.twig' %}
+
                     <table class="js-grid table table-hover table-striped">
                         <thead class="table-dark">
                         <tr>
@@ -57,7 +59,7 @@
                                 <td>{{ proposal.area_size }}</td>
                                 <td>R$ {{ (proposal.quantity_houses * env.aurora.variables.price_per_household)|number_format(2, ',', '.') }}</td>
                                 <td>
-                                    <button 
+                                    <button
                                         class="btn btn-outline-info btn-sm"
                                         data-proposal="{{ proposal|json_encode }}"
                                         onClick="modalProposalDetails(this)"
@@ -86,4 +88,5 @@
     {{ parent() }}
     <script type="module" src="{{ asset('js/grid-init.js') }}"></script>
     <script src="{{ asset('js/modal-proposal-details.js') }}"></script>
+    <script type="module" src="{{ asset('js/load-filters.js') }}"></script>
 {% endblock %}
