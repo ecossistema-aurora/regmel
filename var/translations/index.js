@@ -47,6 +47,7 @@ export const AGES_RATING_SIXTEEN = {"id":"ages_rating.sixteen","translations":{"
 export const AGES_RATING_EIGHTEEN = {"id":"ages_rating.eighteen","translations":{"messages":{"regmel":"18 anos","pt-br":"18 anos","en":"18 years","es":"18 a\u00f1os"}}};
 export const AGENT_INFORMATION = {"id":"agent_information","translations":{"messages":{"regmel":"Informa\u00e7\u00f5es do Agente"}}};
 export const ALL = {"id":"all","translations":{"messages":{"regmel":"Tudo","pt-br":"Tudo","en":"All","es":"Todo"}}};
+export const ALL_CITIES = {"id":"all_cities","translations":{"messages":{"regmel":"Todas as cidades"}}};
 export const ALL_REGIONS = {"id":"all_regions","translations":{"messages":{"regmel":"Todas as regi\u00f5es"}}};
 export const ALL_STATES = {"id":"all_states","translations":{"messages":{"regmel":"Todos os estados"}}};
 export const ALL_TYPES = {"id":"all_types","translations":{"messages":{"regmel":"Todos os tipos"}}};

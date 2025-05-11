@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const regionElement = document.getElementById('region-filter');
     const stateElement = document.getElementById('state-filter');
     const typeElement = document.getElementById('type-filter');
+    const cityElement = document.getElementById('city-filter');
 
     let stateSelect;
 
@@ -44,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
             create: false,
             placeholder: stateElement.dataset.placeholder || 'Selecione',
             allowEmptyOption: true,
-            sortField: { field: 'text', direction: 'asc' },
         });
 
         stateSelect.on('change', () => {
@@ -61,6 +61,22 @@ document.addEventListener('DOMContentLoaded', () => {
             sortField: { field: 'text', direction: 'asc' },
         }).on('change', () => {
             typeElement.form.submit();
+        });
+    }
+
+    if (cityElement) {
+        cityElement.classList.remove('form-select');
+        const citySelect = new TomSelect(cityElement, {
+            create: false,
+            allowEmptyOption: true,
+            placeholder: cityElement.dataset.placeholder,
+            persist: false,
+            selectOnTab: true,
+            maxOptions: null,
+        });
+
+        citySelect.on('change', () => {
+            cityElement.form.submit();
         });
     }
 });
