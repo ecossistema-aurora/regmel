@@ -11,6 +11,7 @@ use App\Enum\UserRolesEnum;
 use App\Exception\ValidatorException;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Service\Interface\CityServiceInterface;
+use App\Service\Interface\PhaseServiceInterface;
 use App\Service\Interface\StateServiceInterface;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Exception;
@@ -35,6 +36,7 @@ class RegisterController extends AbstractWebController
         private readonly CityServiceInterface $cityService,
         private readonly TranslatorInterface $translator,
         private readonly ParameterBagInterface $parameterBag,
+        private readonly PhaseServiceInterface $phaseService,
     ) {
     }
 
@@ -44,6 +46,10 @@ class RegisterController extends AbstractWebController
         $snpEmail = $this->parameterBag->get('app.email.address');
 
         $states = $this->stateService->list();
+
+        if (false === $this->phaseService->isCurrentPhaseActive()) {
+            return $this->render('regmel/register/phase-not-active.html.twig');
+        }
 
         if (Request::METHOD_POST !== $request->getMethod()) {
             return $this->render(self::VIEW_CITY, [
