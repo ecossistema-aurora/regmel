@@ -78,7 +78,7 @@
                                         {% elseif status == 'rejected' %}
                                             {{ 'rejected' | trans }}
                                         {% else %}
-                                            {{ 'unknown' | trans }}
+                                            {{ status | trans }}
                                         {% endif %}
                                     </span>
                                     </td>
@@ -131,7 +131,8 @@
                         </div>
                     </div>
 
-                    <div class="modal fade" id="confirmDocDecision" data-bs-backdrop="static">
+                    <div class="modal fade" id="confirmDocDecision" data-bs-backdrop="false">
+                        <div class="modal-backdrop show"></div>
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -143,7 +144,6 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-
                                     <button id="confirmDecisionButton" type="submit" class="btn btn-primary">Aprovar</button>
                                 </div>
                             </div>

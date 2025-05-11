@@ -975,6 +975,11 @@ img.card-images__entity-details {
     background-color: var(--bs-primary);
 }
 
+#confirmDocDecision .modal-dialog {
+    position: relative;
+    z-index: 1060;
+}
+
 @media (min-width: 1400px) {
     .name__entity-details {
         max-width: 755px;
