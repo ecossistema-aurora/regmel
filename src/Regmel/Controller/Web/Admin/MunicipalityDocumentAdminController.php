@@ -49,11 +49,12 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
     public function fileForm(Uuid $id): Response
     {
         $organization = $this->organizationService->get($id);
+
         $this->denyAccessUnlessGranted('get_form', $organization);
 
         $filePath = $this->getDocumentPath($organization->getExtraFields()['form'] ?? 'null');
 
-        if (!file_exists($filePath)) {
+        if (false === file_exists($filePath)) {
             throw $this->createNotFoundException();
         }
 
@@ -73,23 +74,20 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
         $regions = RegionEnum::cases();
         $states = $this->stateService->findBy(['region' => $filterRegion]);
 
-        $municipalities = array_map(function (Organization $organization) {
-            $extraFields = $organization->getExtraFields();
+        $criteria = ['type' => OrganizationTypeEnum::MUNICIPIO->value];
+        $allMunicipalities = $this->organizationService->findBy($criteria);
 
+        $municipalities = array_filter($allMunicipalities, function (Organization $organization) use ($filterRegion, $filterState) {
             $organization->addExtraField(
                 'filepath',
-                $this->getDocumentPath($extraFields['form'] ?? 'null')
+                $this->getDocumentPath($organization->getExtraFields()['form'] ?? 'null')
             );
 
-            $organization->addExtraField(
-                'status',
-                $extraFields['status'] ?? 'awaiting'
-            );
+            $extra = $organization->getExtraFields();
 
-            return $organization;
-        }, $this->organizationService->findBy([
-            'type' => OrganizationTypeEnum::MUNICIPIO->value,
-        ]));
+            return (!$filterRegion || ($extra['region'] ?? null) === $filterRegion)
+                && (!$filterState || ($extra['state'] ?? null) === $filterState);
+        });
 
         return $this->render('regmel/admin/municipality/documents.html.twig', [
             'municipalities' => $municipalities,
@@ -110,55 +108,27 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
         is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or
         is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")
     '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
-    #[Route('/painel/admin/municipios-documentos', name: 'admin_regmel_municipality_document_review', methods: ['POST'])]
-    public function reviewDocument(): Response
-    {
-        $municipalities = array_map(function (Organization $organization) {
-            $extraFields = $organization->getExtraFields();
-
-            $organization->addExtraField(
-                'filepath',
-                $this->getDocumentPath($extraFields['form'] ?? 'null')
-            );
-
-            $organization->addExtraField(
-                'status',
-                $extraFields['status'] ?? 'awaiting'
-            );
-
-            return $organization;
-        }, $this->organizationService->findBy([
-            'type' => OrganizationTypeEnum::MUNICIPIO->value,
-        ]));
-
-        return $this->renderOrganizationList($municipalities);
-    }
-
-    #[IsGranted(new Expression('
-        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or
-        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")
-    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
     #[Route('/painel/admin/municipios/{id}/document/decision', name: 'admin_municipality_document_decision', methods: ['POST'])]
     public function handleDocumentDecision(Uuid $id, Request $request): Response
     {
         $approved = $request->request->getBoolean('approved');
         $reason = $request->request->get('reason');
 
+        if (true === empty(trim($reason))) {
+            $this->addFlash('error', 'O motivo é obrigatório');
+
+            return $this->redirectToRoute('admin_regmel_municipality_document_list');
+        }
+
         try {
-            if (true === empty(trim($reason))) {
-                $this->addFlash('error', 'O motivo é obrigatório');
-
-                return $this->redirectToRoute('admin_regmel_municipality_document_review');
-            }
-
             $this->municipalityDocumentService->decision($id, $approved, $reason);
-
-            return $this->redirectToRoute('admin_regmel_municipality_document_review');
         } catch (Exception $e) {
             $this->addFlash('error', 'Erro ao submeter revisão do termo');
         }
 
-        return $this->redirectToRoute('admin_regmel_municipality_document_review');
+        $this->municipalityDocumentService->sendEmailDecision($id, $approved, $reason);
+
+        return $this->redirectToRoute('admin_regmel_municipality_document_list');
     }
 
     #[IsGranted(new Expression('
