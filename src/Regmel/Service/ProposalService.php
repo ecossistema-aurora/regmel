@@ -105,11 +105,11 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         $projectFileName = null;
 
         if (null !== $map) {
-            $mapFileName = $this->uploadFile($map, $cityCode);
+            $mapFileName = $this->uploadFile($map, $company->getName(), $cityName, $cityCode, extraName: 'area-poligonal');
         }
 
         if (null !== $project) {
-            $projectFileName = $this->uploadFile($project, $cityCode);
+            $projectFileName = $this->uploadFile($project, $company->getName(), $cityName, $cityCode, extraName: 'projeto');
         }
 
         $initiative->setExtraFields([
@@ -169,12 +169,18 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         $this->entityManager->flush();
     }
 
-    private function uploadFile(UploadedFile $uploadedFile, string|int $cityCode): string
-    {
+    private function uploadFile(
+        UploadedFile $uploadedFile,
+        string $company,
+        string $municipality,
+        string|int $cityCode,
+        string $version = '01',
+        string $extraName = '',
+    ): string {
         $pdf = $this->fileService->uploadMixedFile(
             $uploadedFile,
             extraPath: '/regmel/company/documents',
-            optionalName: 'proposta-01-'.$cityCode,
+            optionalName: "Proposta-{$company}-{$extraName}-{$municipality}-{$cityCode}-{$version}",
         );
 
         return $pdf->getFilename();

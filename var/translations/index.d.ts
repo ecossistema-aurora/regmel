@@ -482,7 +482,8 @@ export declare const USER_INFORMATION: Message<{ 'messages': { parameters: NoPar
 export declare const USER_EDIT_DATA: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const UNREAD_NOTIFICATIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const USER_ASSOCIATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
-export declare const UPDATED_AT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const UPDATED_AT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const UNKNOWN: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_ALL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_FILE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIDEO: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
