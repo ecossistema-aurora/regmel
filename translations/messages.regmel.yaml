@@ -1089,6 +1089,10 @@ view:
     error-homepage: Voltar para a página inicial
     error-image: Imagem de dúvida
 
+  phase:
+    out_of_period: "Fora do prazo de inscrição"
+    text_out_of_period: "Infelizmente, o período de inscrição não está disponível no momento. Por favor, aguarde o próximo oficio."
+
 proposal:
   status:
     sent: Enviada

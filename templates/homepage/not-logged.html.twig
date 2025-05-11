@@ -48,19 +48,32 @@
                 <div class="col-md-12">
                     <h1 class="fw-bold mt-4">{{ 'create_account'|trans }}</h1>
                     <p class="lead mt-3">{{ 'view.homepage.registration_info'|trans }}</p>
-                    {% for option in env.aurora.homepage.sections.register.options ?? [] %}
-                        <div>
-                            <a href="{{ path(option.route) }}" class="col-sm-4 mx-auto btn btn-light btn-lg text-secondary icon-link justify-content-between mt-5">
-                                <h4 class="fw-bold mt-2 text-uppercase">{{ option.title|trans }}</h4>
-                                <span class="material-icons fs-2">arrow_forward</span>
-                            </a>
-                        </div>
-                    {% else %}
-                        <a href="{{ path('web_auth_register') }}" class="col-sm-3 mx-auto btn btn-light btn-lg text-secondary icon-link justify-content-between mt-5">
-                            <h4 class="fw-bold mt-2 text-uppercase">{{ 'register'|trans }}</h4>
-                            <span class="material-icons fs-2">arrow_forward</span>
-                        </a>
-                    {% endfor %}
+                    <div>
+                        {% if not phase_active %}
+                            {% for option in env.aurora.homepage.sections.register.options ?? [] %}
+                                {% if option.route == 'regmel_register_company' %}
+                                    <a href="{{ path(option.route) }}" class="col-sm-4 mx-auto btn btn-light btn-lg text-secondary icon-link justify-content-between mt-5">
+                                        <h4 class="fw-bold mt-2 text-uppercase">{{ option.title|trans }}</h4>
+                                        <span class="material-icons fs-2">arrow_forward</span>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {% for option in env.aurora.homepage.sections.register.options ?? [] %}
+                                <div>
+                                    <a href="{{ path(option.route) }}" class="col-sm-4 mx-auto btn btn-light btn-lg text-secondary icon-link justify-content-between mt-5">
+                                        <h4 class="fw-bold mt-2 text-uppercase">{{ option.title|trans }}</h4>
+                                        <span class="material-icons fs-2">arrow_forward</span>
+                                    </a>
+                                </div>
+                            {% else %}
+                                <a href="{{ path('web_auth_register') }}" class="col-sm-3 mx-auto btn btn-light btn-lg text-secondary icon-link justify-content-between mt-5">
+                                    <h4 class="fw-bold mt-2 text-uppercase">{{ 'register'|trans }}</h4>
+                                    <span class="material-icons fs-2">arrow_forward</span>
+                                </a>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

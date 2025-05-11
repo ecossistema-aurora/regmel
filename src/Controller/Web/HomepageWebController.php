@@ -8,6 +8,7 @@ use App\Service\Interface\AgentServiceInterface;
 use App\Service\Interface\EventServiceInterface;
 use App\Service\Interface\InitiativeServiceInterface;
 use App\Service\Interface\OpportunityServiceInterface;
+use App\Service\Interface\PhaseServiceInterface;
 use App\Service\Interface\SpaceServiceInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,6 +20,7 @@ class HomepageWebController extends AbstractWebController
         private readonly InitiativeServiceInterface $initiativeService,
         private readonly OpportunityServiceInterface $opportunityService,
         private readonly SpaceServiceInterface $spaceService,
+        private readonly PhaseServiceInterface $phaseService,
     ) {
     }
 
@@ -30,6 +32,7 @@ class HomepageWebController extends AbstractWebController
             'initiatives' => $this->initiativeService->list(limit: 4),
             'opportunities' => $this->opportunityService->list(limit: 4),
             'spaces' => $this->spaceService->list(limit: 4),
+            'phase_active' => $this->phaseService->isCurrentPhaseActive(),
         ]);
     }
 }
