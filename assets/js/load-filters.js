@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const stateElement = document.getElementById('state-filter');
     const typeElement = document.getElementById('type-filter');
     const cityElement = document.getElementById('city-filter');
+    const statusesElement = document.getElementById('status-filter');
 
     let stateSelect;
 
@@ -61,6 +62,18 @@ document.addEventListener('DOMContentLoaded', () => {
             sortField: { field: 'text', direction: 'asc' },
         }).on('change', () => {
             typeElement.form.submit();
+        });
+    }
+
+    if (statusesElement) {
+        statusesElement.classList.remove('form-select');
+        new TomSelect(statusesElement, {
+            create: false,
+            placeholder: statusesElement.dataset.placeholder || 'Selecione',
+            allowEmptyOption: true,
+            sortField: { field: 'text', direction: 'asc' },
+        }).on('change', () => {
+            statusesElement.form.submit();
         });
     }
 
