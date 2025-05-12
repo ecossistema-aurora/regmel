@@ -53,7 +53,19 @@
                                 <td>{{ proposal.company }}</td>
                                 <td>{{ proposal.city_name }}</td>
                                 <td>
-                                    <span class="badge bg-dark">{{ proposal.status }}</span>
+                                    {% set status = proposal.status ?? '' %}
+                                    {% set badgeClass = ({
+                                        'Sem Adesão do Município': 'bg-dark text-white',
+                                        'Enviada':                 'bg-warning',
+                                        'Recebida':                'bg-info',
+                                        'Anuída':                  'bg-success',
+                                        'Não Anuída':              'bg-danger text-white',
+                                        'Selecionada':             'bg-success',
+                                        'Não Selecionada':         'bg-danger text-white',
+                                    }[status] ?? 'bg-dark') %}
+                                    <span class="badge {{ badgeClass }} text-dark">
+                                        {{ status }}
+                                    </span>
                                 </td>
                                 <td>{{ proposal.quantity_houses }}</td>
                                 <td>{{ proposal.area_size }}</td>
