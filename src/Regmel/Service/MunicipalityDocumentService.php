@@ -8,6 +8,7 @@ use App\Regmel\Service\Interface\MunicipalityDocumentServiceInterface;
 use App\Repository\Interface\OrganizationRepositoryInterface;
 use App\Service\Interface\EmailServiceInterface;
 use App\Service\Interface\OrganizationServiceInterface;
+use DateTimeImmutable;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -29,6 +30,7 @@ readonly class MunicipalityDocumentService implements MunicipalityDocumentServic
         $extraFields = $municipality->getExtraFields();
         $extraFields['term_status'] = $approved ? 'approved' : 'rejected';
         $extraFields['term_reason'] = $reason;
+        $extraFields['term_updated_at'] = (new DateTimeImmutable())->format('d/m/Y H:i:s');
 
         $municipality->setExtraFields($extraFields);
         $this->organizationRepository->save($municipality);
