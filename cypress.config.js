@@ -11,6 +11,8 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
     },
     specPattern: [
+      'cypress/regmel/e2e/web/register/*.cy.js',
+      'cypress/regmel/e2e/web/user/*.cy.js',
       'cypress/regmel/e2e/**/*.cy.js',
     ],
   },

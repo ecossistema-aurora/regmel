@@ -1,10 +1,9 @@
 describe('Cadastro de Empresa/OSC', () => {
-    let timestamp, randomEmailEmpresa, randomEmailUsuario, randomCPF;
+    let timestamp, randomEmailEmpresa, randomCPF;
 
     beforeEach(() => {
         timestamp = Date.now();
         randomEmailEmpresa = `empresa${timestamp}@teste.com`;
-        randomEmailUsuario = `joao${timestamp}@empresa.com`;
         randomCPF = `${Math.floor(10000000000 + Math.random() * 89999999999)}`;
         cy.visit('/cadastro/empresa');
     });
@@ -28,7 +27,7 @@ describe('Cadastro de Empresa/OSC', () => {
         cy.get('input[name="userPhone"]').type('11988888888');
         cy.get('input[name="position"]').type('Diretor');
         cy.get('input[name="cpf"]').type(randomCPF);
-        cy.get('input[name="userEmail"]').type(randomEmailUsuario);
+        cy.get('input[name="userEmail"]').type('joao@empresa.com');
         cy.get('input[name="password"]').type('Aurora@2024');
         cy.get('input[name="confirm_password"]').type('Aurora@2024');
 
