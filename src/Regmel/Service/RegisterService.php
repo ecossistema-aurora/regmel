@@ -14,6 +14,7 @@ use App\Entity\User;
 use App\Enum\InscriptionOpportunityStatusEnum;
 use App\Enum\InscriptionPhaseStatusEnum;
 use App\Enum\OrganizationTypeEnum;
+use App\Regmel\Service\Interface\MunicipalityServiceInterface;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Repository\Interface\OrganizationRepositoryInterface;
 use App\Service\Interface\AccountEventServiceInterface;
@@ -42,6 +43,7 @@ class RegisterService implements RegisterServiceInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly PhaseService $phaseService,
         private readonly AccountEventServiceInterface $accountEventService,
+        private readonly MunicipalityServiceInterface $municipalityService,
         protected TokenStorageInterface $tokenStorage,
     ) {
     }
@@ -89,6 +91,10 @@ class RegisterService implements RegisterServiceInterface
             $organizationObj->addAgent($agent);
 
             $this->organizationRepository->save($organizationObj);
+
+            if (OrganizationTypeEnum::MUNICIPIO->value === $organizationObj->getType()) {
+                $this->municipalityService->updateProposals($organizationObj);
+            }
 
             $this->createInscriptionForOrganization($data['opportunity'], $organizationObj);
 
