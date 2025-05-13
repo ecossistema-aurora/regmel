@@ -456,6 +456,7 @@ export declare const TERM_VERSION: Message<{ 'messages': { parameters: NoParamet
 export declare const TERM_STATUS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TERM_APPROVED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const TERM_REJECTED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const TERM_UPDATED_AT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const TITLE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TRANSSEXUAL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const TRANSVESTITE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;

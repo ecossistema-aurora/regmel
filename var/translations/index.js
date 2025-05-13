@@ -454,6 +454,7 @@ export const TERM_VERSION = {"id":"term_version","translations":{"messages":{"re
 export const TERM_STATUS = {"id":"term_status","translations":{"messages":{"regmel":"Status dos Termos","pt-br":"Status dos Termos","en":"Terms of Use Status","es":"Estado de los T\u00e9rminos"}}};
 export const TERM_APPROVED = {"id":"term_approved","translations":{"messages":{"regmel":"Termo de ades\u00e3o aprovado"}}};
 export const TERM_REJECTED = {"id":"term_rejected","translations":{"messages":{"regmel":"Termo de ades\u00e3o reprovado"}}};
+export const TERM_UPDATED_AT = {"id":"term_updated_at","translations":{"messages":{"regmel":"\u00daltima atualiza\u00e7\u00e3o do termo de ades\u00e3o"}}};
 export const TITLE = {"id":"title","translations":{"messages":{"regmel":"Titulo","pt-br":"Titulo","en":"Title","es":"T\u00edtulo"}}};
 export const TRANSSEXUAL = {"id":"transsexual","translations":{"messages":{"regmel":"Transexual","pt-br":"Transexual","en":"Transsexual","es":"Transexual"}}};
 export const TRANSVESTITE = {"id":"transvestite","translations":{"messages":{"regmel":"Travesti","pt-br":"Travesti","en":"Transvestite","es":"Travesti"}}};

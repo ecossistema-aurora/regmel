@@ -474,6 +474,7 @@ term_version: Versão dos Termos
 term_status: Status dos Termos
 term_approved: Termo de adesão aprovado
 term_rejected: Termo de adesão reprovado
+term_updated_at: Última atualização do termo de adesão
 title: Titulo
 transsexual: Transexual
 transvestite: Travesti
