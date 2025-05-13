@@ -240,7 +240,39 @@ function validateEmail(email) {
 
 function validateCpf(cpf) {
     const cpfPattern = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-    return cpfPattern.test(cpf) && cpf.length === 14;
+
+    const invalidCpfs = [
+        '000.000.000-00',
+        '111.111.111-11',
+        '222.222.222-22',
+        '333.333.333-33',
+        '444.444.444-44',
+        '555.555.555-55',
+        '666.666.666-66',
+        '777.777.777-77',
+        '888.888.888-88',
+        '999.999.999-99'
+    ];
+
+    if (!cpfPattern.test(cpf) || 14 !== cpf.length || invalidCpfs.includes(cpf)) {
+        return false;
+    }
+
+    const digits = cpf.replace(/\D/g, '');
+
+    const firstSum = Array.from(digits.slice(0, 9)).reduce((acc, digit, index) => acc + digit * (10 - index), 0);
+
+    const firstCheckDigit = ((firstSum * 10) % 11) % 10;
+
+    if (firstCheckDigit !== parseInt(digits[9], 10)) {
+        return false;
+    }
+
+    const secondSum = Array.from(digits.slice(0, 10)).reduce((acc, digit, index) => acc + digit * (11 - index), 0);
+
+    const secondCheckDigit = ((secondSum * 10) % 11) % 10;
+
+    return secondCheckDigit === parseInt(digits[10], 10);
 }
 
 function validatePhone(phone) {
