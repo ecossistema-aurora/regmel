@@ -23,7 +23,7 @@ class InitiativeRepository extends AbstractRepository implements InitiativeRepos
         return $initiative;
     }
 
-    public function findByFilters(?string $region, ?string $state, ?string $cityName): array
+    public function findByFilters(?string $region, ?string $state, ?string $cityName, ?string $status): array
     {
         $connection = $this->getEntityManager()->getConnection();
         $queryBuilder = $connection->createQueryBuilder()
@@ -44,6 +44,11 @@ class InitiativeRepository extends AbstractRepository implements InitiativeRepos
         if ($cityName) {
             $queryBuilder->andWhere("i.extra_fields->>'city_name' = :cityName")
                 ->setParameter('cityName', $cityName);
+        }
+
+        if ($status) {
+            $queryBuilder->andWhere("i.extra_fields->>'status' = :status")
+                ->setParameter('status', $status);
         }
 
         $ids = $queryBuilder->executeQuery()->fetchFirstColumn();

@@ -7,6 +7,7 @@ namespace App\Regmel\Controller\Web\Admin;
 use App\Controller\Web\Admin\AbstractAdminController;
 use App\Entity\Initiative;
 use App\Enum\RegionEnum;
+use App\Enum\StatusProposalEnum;
 use App\Enum\UserRolesEnum;
 use App\Environment\ConfigEnvironment;
 use App\Regmel\Service\Interface\ProposalServiceInterface;
@@ -46,6 +47,8 @@ class ProposalAdminController extends AbstractAdminController
     #[Route('/painel/admin/propostas', name: 'admin_regmel_proposal_list', methods: ['GET'])]
     public function list(Request $request): Response
     {
+        $statuses = StatusProposalEnum::cases();
+        $status = $request->query->get('status');
         $regions = RegionEnum::cases();
         $region = $request->query->get('region');
         $state = $request->query->get('state');
@@ -61,7 +64,7 @@ class ProposalAdminController extends AbstractAdminController
             $cities = $this->cityService->findByState($state);
         }
 
-        $filtered = $this->initiativeService->listFiltered($region, $state, $city);
+        $filtered = $this->initiativeService->listFiltered($region, $state, $city, $status);
 
         $env = $this->configEnvironment->aurora();
 
@@ -91,6 +94,7 @@ class ProposalAdminController extends AbstractAdminController
         return $this->render('regmel/admin/proposal/list.html.twig', [
             'proposals' => $proposals,
             'regions' => $regions,
+            'statuses' => $statuses,
             'states' => $states,
             'cities' => $cities,
         ], parentPath: '');

@@ -65,6 +65,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    if (statusesElement) {
+        statusesElement.classList.remove('form-select');
+        new TomSelect(statusesElement, {
+            create: false,
+            placeholder: statusesElement.dataset.placeholder || 'Selecione',
+            allowEmptyOption: true,
+            sortField: { field: 'text', direction: 'asc' },
+        }).on('change', () => {
+            statusesElement.form.submit();
+        });
+    }
+
     if (cityElement) {
         cityElement.classList.remove('form-select');
         const citySelect = new TomSelect(cityElement, {

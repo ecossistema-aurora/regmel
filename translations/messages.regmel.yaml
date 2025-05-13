@@ -426,6 +426,7 @@ project_information: Informações do Projeto
 promotion: Divulgação
 promotion_strategy: Estratégia de divulgação
 proponent_information: Informações do proponente
+proposals: Propostas
 public: Público
 public_data_notice: Os dados inseridos abaixo serão exibidos para todos os usuários da plataforma.
 public_email: Email público
@@ -557,6 +558,7 @@ start_now: Comece agora
 start_date: Data de início
 state: Estado
 status: Status
+statuses: Todos os status
 street: Logradouro
 subscribe: Inscreva-se
 subsites: Subsites
