@@ -157,8 +157,8 @@ deleted: Excluídos
 description: Descrição
 device: Dispositivo
 discover: Descubra
-document: Documento
-documents: Documentos
+document: Termo de Adesão
+documents: Termos de Adesão
 does_not_expire: não expira
 download_all_terms: Baixar todos os termos
 downloadable-files: Arquivos para download
@@ -880,8 +880,8 @@ view:
           label: Propostas selecionadas por agente
           description: Informe o máximo de propostas que poderão ser selecionadas por agente nessa oportunidade.
       attachments:
-        description: Anexe abaixo documento oficial do Edital preenchido, analisado e validado pelo setor jurídico local e os seus respectivos anexos. Após publicada a oportunidade esses documentos ficarão públicos e disponíveis para download.
-        label: Documentos da Oportunidade
+        description: Anexe abaixo termo de adesão do Edital preenchido, analisado e validado pelo setor jurídico local e os seus respectivos anexos. Após publicada a oportunidade esses documentos ficarão públicos e disponíveis para download.
+        label: Termos de Adesão da Oportunidade
       grant_amount:
         title: Valor do Edital
         description: Essa oportunidade irá trabalhar com recursos financeiros?

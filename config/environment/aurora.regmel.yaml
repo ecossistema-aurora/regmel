@@ -11,7 +11,7 @@ email:
     Este é um email automático, por favor, não responda.
 
 variables:
-  price_per_household: 35000
+  price_per_household: 45000
 
 visit_repository: false
 logo:
@@ -141,6 +141,7 @@ dropdown:
 dashboard:
   cards:
     municipalities:
+      csv: true
       acl: ['ROLE_MUNICIPALITY', 'ROLE_ADMIN', 'ROLE_MANAGER']
       title: Municípios
       subtitle: Municípios
@@ -151,8 +152,9 @@ dashboard:
         route: admin_regmel_municipality_list
       total_key: totalCities
     documents:
+      download: true
       acl: ['ROLE_MUNICIPALITY', 'ROLE_ADMIN', 'ROLE_MANAGER']
-      title: Documentos
+      title: Termos de Adesão
       subtitle: Termos de adesão para Aprovação
       icon: description
       color: "#8e7cc3"
@@ -161,6 +163,7 @@ dashboard:
         route: admin_regmel_municipality_list
       total_key: totalCities
     proposals:
+      csv: true
       acl: ['ROLE_MUNICIPALITY']
       title: Propostas
       subtitle: Propostas
@@ -181,6 +184,7 @@ dashboard:
         route: admin_opportunity_list
       total_key: totalOpportunities
     companies:
+      csv: true
       acl: ['ROLE_COMPANY', 'ROLE_ADMIN', 'ROLE_MANAGER']
       title: Empresas/OSCs
       subtitle: Empresas/OSCs
@@ -251,7 +255,7 @@ sidebar:
       admin_regmel_municipality_document_list:
         acl: ['ROLE_ADMIN', 'ROLE_MANAGER']
         icon: description
-        text: Documentos
+        text: Termos de Adesão
 
       admin_regmel_proposal_list:
         acl: ['ROLE_ADMIN', 'ROLE_MANAGER']

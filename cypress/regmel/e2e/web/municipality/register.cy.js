@@ -93,7 +93,7 @@ describe('Cadastro de Município', () => {
 
         cy.wait(3000);
 
-        cy.contains('Documentos').click();
+        cy.contains('Termos de Adesão').click();
         cy.url().should('include', '/painel/admin/municipios-documentos');
         cy.contains('Termo-SantanaDoAcarau-CE-1.pdf').should('be.visible');
     });

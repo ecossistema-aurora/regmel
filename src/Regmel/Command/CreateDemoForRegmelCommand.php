@@ -128,18 +128,19 @@ class CreateDemoForRegmelCommand extends Command
         $output->writeln('Name: '.$opportunityForCompany->getName());
         $output->writeln('------------------------------------');
 
-        $this->createPhases($opportunityForMunicipality);
+        $this->createPhasesForMunicipality($opportunityForMunicipality);
+        $this->createPhasesForCompany($opportunityForCompany);
     }
 
-    private function createPhases(Opportunity $opportunityForMunicipality): void
+    private function createPhasesForMunicipality(Opportunity $opportunityForMunicipality): void
     {
         $phase1Municipality = new Phase();
         $phase1Municipality->setOpportunity($opportunityForMunicipality);
         $phase1Municipality->setCreatedBy($opportunityForMunicipality->getCreatedBy());
         $phase1Municipality->setId(Uuid::fromString('ef62e816-00a4-43cf-930f-796edb7c6175'));
         $phase1Municipality->setStatus(true);
-        $phase1Municipality->setName('Ofício');
-        $phase1Municipality->setDescription('Envio e Validação do Oficio pelo Município');
+        $phase1Municipality->setName('Credenciamento e Termo de Adesão');
+        $phase1Municipality->setDescription('Cadastro e Validação do Termo de Adesão do Município');
         $phase1Municipality->setSequence(1);
         $phase1Municipality->setStartDate(new DateTime('2025-04-22'));
         $phase1Municipality->setEndDate(new DateTime('2025-05-31'));
@@ -148,6 +149,26 @@ class CreateDemoForRegmelCommand extends Command
         ]);
 
         $this->entityManager->persist($phase1Municipality);
+        $this->entityManager->flush();
+    }
+
+    private function createPhasesForCompany(Opportunity $opportunity): void
+    {
+        $phase1 = new Phase();
+        $phase1->setOpportunity($opportunity);
+        $phase1->setCreatedBy($opportunity->getCreatedBy());
+        $phase1->setId(Uuid::fromString('e9075d53-abd6-4568-b531-4f3bb90fb734'));
+        $phase1->setStatus(true);
+        $phase1->setName('Cadastro e Envio de Propostas');
+        $phase1->setDescription('Envio de Propostas aos Municipios');
+        $phase1->setSequence(1);
+        $phase1->setStartDate(new DateTime('2025-04-22'));
+        $phase1->setEndDate(new DateTime('2025-05-31'));
+        $phase1->setCriteria([
+            'oficio' => true,
+        ]);
+
+        $this->entityManager->persist($phase1);
         $this->entityManager->flush();
     }
 

@@ -41,17 +41,9 @@
                         <hr>
 
                         <ul class="nav nav-tabs" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation" style="display: none;">
-                                <div class="d-flex align-items-center">
-                                    <a class="centered-icon-text nav-link active" id="pills-proposal-tab" data-bs-toggle="pill" href="#pills-proposal" role="tab" aria-controls="pills-info" aria-selected="true">
-                                        <i class="material-icons">description</i>
-                                        <span class="ms-2 font-title">Propostas</span>
-                                    </a>
-                                </div>
-                            </li>
                             <li class="nav-item" role="presentation">
                                 <div class="d-flex align-items-center">
-                                    <a class="centered-icon-text nav-link" id="pills-info-tab" data-bs-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-info" aria-selected="true">
+                                    <a class="centered-icon-text nav-link active" id="pills-info-tab" data-bs-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-info" aria-selected="true">
                                         <i class="material-icons">description</i>
                                         <span class="ms-2 font-title">Informações</span>
                                     </a>
@@ -59,9 +51,9 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <div class="d-flex align-items-center">
-                                    <a class="centered-icon-text nav-link" id="pills-list-tab" data-bs-toggle="pill" href="#pills-list" role="tab" aria-controls="pills-list" aria-selected="true">
+                                    <a class="centered-icon-text nav-link" id="pills-proposal-tab" data-bs-toggle="pill" href="#pills-proposal" role="tab" aria-controls="pills-info" aria-selected="true">
                                         <i class="material-icons">list</i>
-                                        <span class="ms-2 font-title">Anuencias</span>
+                                        <span class="ms-2 font-title">Propostas</span>
                                     </a>
                                 </div>
                             </li>
@@ -77,7 +69,7 @@
                                 <div class="d-flex align-items-center">
                                     <a class="centered-icon-text nav-link" id="pills-files-tab" data-bs-toggle="pill" href="#pills-files" role="tab" aria-controls="pills-map" aria-selected="false">
                                         <i class="material-icons">picture_as_pdf</i>
-                                        <span class="ms-2 font-title">Documentos</span>
+                                        <span class="ms-2 font-title">Termo de Adesão</span>
                                     </a>
                                 </div>
                             </li>
@@ -91,8 +83,25 @@
                             </li>
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
-                            <div style="display: none;" class="tab-pane fade show active" id="pills-proposal" role="tabpanel" aria-labelledby="pills-proposal-tab" tabindex="0">
 
+                            <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab" tabindex="0">
+                                <div class="bd-callout bd-callout-secondary">
+                                    <p>
+                                        <strong>CNPJ: </strong>{{ municipality.extraFields.cnpj ?? '' }}
+                                    </p>
+                                    <p>
+                                        <strong>Email: </strong>{{ municipality.extraFields.email ?? '' }}
+                                    </p>
+                                    <p>
+                                        <strong>Site: </strong>{{ municipality.extraFields.site ?? '' }}
+                                    </p>
+                                    <p>
+                                        <strong>Telefone: </strong>{{ municipality.extraFields.telefone ?? '' }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div style="" class="tab-pane" id="pills-proposal" role="tabpanel" aria-labelledby="pills-proposal-tab" tabindex="0">
                                 <div class="modal fade" id="modalConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -119,7 +128,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <table class="js-grid table table-hover table-striped mt-3">
                                     <thead class="table-dark">
@@ -165,23 +173,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="tab-pane fade" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab" tabindex="0">
-                                <div class="bd-callout bd-callout-secondary">
-                                    <p>
-                                        <strong>CNPJ: </strong>{{ municipality.extraFields.cnpj ?? '' }}
-                                    </p>
-                                    <p>
-                                        <strong>Email: </strong>{{ municipality.extraFields.email ?? '' }}
-                                    </p>
-                                    <p>
-                                        <strong>Site: </strong>{{ municipality.extraFields.site ?? '' }}
-                                    </p>
-                                    <p>
-                                        <strong>Telefone: </strong>{{ municipality.extraFields.telefone ?? '' }}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade pt-3" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab" tabindex="0">Conteúdo 1</div>
                             <div class="tab-pane fade pt-3" id="pills-members" role="tabpanel" aria-labelledby="pills-members-tab" tabindex="0">
                                 <div class="modal fade" id="modalInvite" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -292,7 +283,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {% if app.user.agents.first.id == createdById and municipality.extraFields['term_status'] != 'approved' %}
+                                    {% if  municipality.extraFields['term_status'] != 'approved' %}
                                         <a href="" data-bs-toggle="modal" data-bs-target="#modalResendTerm" class="btn btn-outline-success btn-sm">Reenviar</a>
                                     {% endif %}
                                 </div>
