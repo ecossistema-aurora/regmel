@@ -92,16 +92,4 @@ document.addEventListener('DOMContentLoaded', () => {
             cityElement.form.submit();
         });
     }
-
-    if (statusesElement) {
-        statusesElement.classList.remove('form-select');
-        new TomSelect(statusesElement, {
-            create: false,
-            placeholder: statusesElement.dataset.placeholder || 'Selecione',
-            allowEmptyOption: true,
-            sortField: { field: 'text', direction: 'asc' },
-        }).on('change', () => {
-            statusesElement.form.submit();
-        });
-    }
 });
