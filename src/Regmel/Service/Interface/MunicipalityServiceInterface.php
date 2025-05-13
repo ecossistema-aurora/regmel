@@ -8,5 +8,7 @@ use App\Entity\Organization;
 
 interface MunicipalityServiceInterface
 {
+    public function getProposals(Organization $municipality): array;
+
     public function updateProposals(Organization $municipality): void;
 }
