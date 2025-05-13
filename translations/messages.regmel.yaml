@@ -52,6 +52,7 @@ all_cities: Todas as cidades
 all_regions: Todas as regiões
 all_states: Todos os estados
 all_types: Todos os tipos
+all_status: Todos os status
 allow_free_linking: Permitir livre vinculação com
 allowed: Com permissão
 admin_options: Opções do Administrador
@@ -157,7 +158,6 @@ deleted: Excluídos
 description: Descrição
 device: Dispositivo
 discover: Descubra
-document: Termo de Adesão
 documents: Termos de Adesão
 does_not_expire: não expira
 download_all_terms: Baixar todos os termos
@@ -1098,6 +1098,13 @@ proposal:
   status:
     sent: Enviada
     no_municipality: Sem Adesão do Município
+
+document:
+  title: Termo de Adesão
+  status:
+    approved: Aprovado
+    rejected: Reprovado
+    awaiting: Aguardando
 
 csv:
   header:

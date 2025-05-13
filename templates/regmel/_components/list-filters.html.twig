@@ -24,6 +24,24 @@
         </select>
     </div>
 
+    {% if app.request.attributes.get('_route') == 'admin_regmel_municipality_document_list' %}
+        <div class="col-md-3">
+            <label for="status-filter" class="form-label">{{ 'status'|trans }}</label>
+            <select id="status-filter" name="status" class="form-select" data-placeholder="{{ 'all_cities'|trans }}">
+                <option value="">
+                    {{ 'all_status'|trans }}
+                </option>
+
+                {% for status in status %}
+                    <option value="{{ status }}" {% if status == app.request.get('status') %}selected{% endif %}>
+                        {{ ('document.status.' ~ status)|trans }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    {% endif %}
+
+
     {% if app.request.attributes.get('_route') == 'admin_regmel_proposal_list' %}
         <div class="col-md-3">
             <label for="city-filter" class="form-label">{{ 'city'|trans }}</label>

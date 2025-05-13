@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use ZipArchive;
 
 class MunicipalityDocumentAdminController extends AbstractAdminController
@@ -34,6 +35,7 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
         private readonly Security $security,
         private readonly StateServiceInterface $stateService,
         private readonly MunicipalityDocumentServiceInterface $municipalityDocumentService,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -70,14 +72,20 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
     {
         $filterRegion = $request->query->get('region');
         $filterState = $request->query->get('state');
+        $filterStatus = $request->query->get('status');
 
         $regions = RegionEnum::cases();
         $states = $this->stateService->findBy(['region' => $filterRegion]);
+        $status = [
+            'approved',
+            'rejected',
+            'awaiting',
+        ];
 
         $criteria = ['type' => OrganizationTypeEnum::MUNICIPIO->value];
         $allMunicipalities = $this->organizationService->findBy($criteria);
 
-        $municipalities = array_filter($allMunicipalities, function (Organization $organization) use ($filterRegion, $filterState) {
+        $municipalities = array_filter($allMunicipalities, function (Organization $organization) use ($filterRegion, $filterState, $filterStatus) {
             $organization->addExtraField(
                 'filepath',
                 $this->getDocumentPath($organization->getExtraFields()['form'] ?? 'null')
@@ -86,13 +94,15 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
             $extra = $organization->getExtraFields();
 
             return (!$filterRegion || ($extra['region'] ?? null) === $filterRegion)
-                && (!$filterState || ($extra['state'] ?? null) === $filterState);
+                && (!$filterState || ($extra['state'] ?? null) === $filterState)
+                && (!$filterStatus || ($extra['term_status'] ?? null) === $filterStatus);
         });
 
         return $this->render('regmel/admin/municipality/documents.html.twig', [
             'municipalities' => $municipalities,
             'regions' => $regions,
             'states' => $states,
+            'status' => $status,
             'token' => $this->security->getUser() ? $this->jwtManager->create($this->security->getUser()) : null,
         ], parentPath: '');
     }

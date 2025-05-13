@@ -36,7 +36,7 @@
                             <thead class="table-dark">
                             <tr>
                                 <th>{{ 'name'|trans }}</th>
-                                <th>{{ 'document'|trans }}</th>
+                                <th>{{ 'document.title'|trans }}</th>
                                 <th>{{ 'updated_at'|trans }}</th>
                                 <th>{{ 'status'|trans }}</th>
                                 <th>{{ 'actions'|trans }}</th>
@@ -68,18 +68,17 @@
                                         {% set status = municipality.extraFields.term_status ?? 'awaiting' %}
                                         {% set badgeClass = {
                                             'awaiting': 'bg-warning',
-                                            'accepted': 'bg-success',
                                             'approved': 'bg-success text-white',
                                             'rejected': 'bg-danger text-white'
                                         }[status] %}
 
                                         <span class="badge {{ badgeClass }} text-dark text-uppercase">
                                         {% if status == 'awaiting' %}
-                                            {{ 'awaiting' | trans }}
-                                        {% elseif status == 'accepted' %}
-                                            {{ 'accepted' | trans }}
+                                            {{ 'document.status.awaiting' | trans }}
+                                        {% elseif status == 'approved' %}
+                                            {{ 'document.status.approved' | trans }}
                                         {% elseif status == 'rejected' %}
-                                            {{ 'rejected' | trans }}
+                                            {{ 'document.status.rejected' | trans }}
                                         {% else %}
                                             {{ status | trans }}
                                         {% endif %}
