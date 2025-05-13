@@ -107,7 +107,19 @@
                                 <td>{{ proposal.extraFields.quantity_houses }}</td>
                                 <td>R$ {{ (proposal.extraFields.quantity_houses * env.aurora.variables.price_per_household)|number_format(2, ',', '.') }}</td>
                                 <td>
-                                    <span class="badge bg-dark">{{ proposal.extraFields.status ?? 'Enviada' }}</span>
+                                    {% set status = proposal.extraFields.status ?? 'Enviada'  %}
+                                    {% set badgeClass = ({
+                                        'Sem Adesão do Município': 'bg-dark text-white',
+                                        'Enviada':                 'bg-warning',
+                                        'Recebida':                'bg-info',
+                                        'Anuída':                  'bg-success',
+                                        'Não Anuída':              'bg-danger text-white',
+                                        'Selecionada':             'bg-success',
+                                        'Não Selecionada':         'bg-danger text-white',
+                                    }[status] ?? 'bg-dark') %}
+                                    <span class="badge {{ badgeClass }} text-dark">
+                                        {{ status }}
+                                    </span>
                                 </td>
                                 <td>
                                     <button 
