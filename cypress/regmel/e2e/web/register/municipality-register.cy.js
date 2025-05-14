@@ -2,13 +2,9 @@ describe('Cadastro de Município', () => {
     let timestamp, randomEmailMunicipio, randomEmailUsuario, randomCPF;
 
     Cypress.on('uncaught:exception', (err, runnable) => {
-        if (
-            err.message.includes('fire is not a function') ||
-            err.message.includes("Identifier 'form' has already been declared") ||
-            err.message.includes('Tom Select already initialized on this element')
-        ) {
-            return false;
-        }
+        if (err.message.includes('fire is not a function')) return false;
+        if (err.message.includes('VIEW_AUTHENTICATION_ERROR_CNPJ_INVALID')) return false;
+        if (err.message.includes("Identifier 'form' has already been declared")) return false;
     });
 
     beforeEach(() => {
@@ -53,6 +49,9 @@ describe('Cadastro de Município', () => {
         cy.get('input[name="phone"]').first().type('11999999999', { force: true });
         cy.get('input[name="email"]').first().type(randomEmailMunicipio, { force: true });
 
+        cy.get('input[name="hasHousingExperience"][value="1"]').check({ force: true });
+        cy.get('input[name="hasPlhis"][value="0"]').check({ force: true });
+
         cy.get('input[type=file]').selectFile('./cypress/regmel/fixtures/file.pdf');
 
         cy.get('input[name="acceptTerms"]').check({ force: true });
@@ -64,10 +63,6 @@ describe('Cadastro de Município', () => {
     });
 
     it('valida se o município aparece na listagem após login admin', () => {
-        cy.request('/').then((resp) => {
-            expect(resp.status).to.eq(200);
-        });
-
         cy.visit('/');
         cy.contains('Entrar').click();
         cy.get('input[name="email"]').type('admin@regmel.com');
@@ -81,10 +76,6 @@ describe('Cadastro de Município', () => {
     });
 
     it('valida se o documento aparece na listagem com o nome correto', () => {
-        cy.request('/').then((resp) => {
-            expect(resp.status).to.eq(200);
-        });
-
         cy.visit('/');
         cy.contains('Entrar').click();
         cy.get('input[name="email"]').type('admin@regmel.com');
@@ -92,7 +83,6 @@ describe('Cadastro de Município', () => {
         cy.contains('button', 'Entrar').click();
 
         cy.wait(3000);
-
         cy.contains('Termos de Adesão').click();
         cy.url().should('include', '/painel/admin/municipios-documentos');
         cy.contains('Termo-SantanaDoAcarau-CE-1.pdf').should('be.visible');

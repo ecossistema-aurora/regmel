@@ -208,6 +208,8 @@ class RegisterController extends AbstractWebController
                     'site' => $request->get('site'),
                     'term_version' => 1,
                     'term_status' => 'awaiting',
+                    'hasHousingExperience' => (bool) $request->get('hasHousingExperience'),
+                    'hasPlhis' => (bool) $request->get('hasPlhis'),
                 ],
             ],
             'user' => [

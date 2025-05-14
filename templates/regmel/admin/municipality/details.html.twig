@@ -98,6 +98,19 @@
                                     <p>
                                         <strong>Telefone: </strong>{{ municipality.extraFields.telefone ?? '' }}
                                     </p>
+
+                                    <p>
+                                        <strong>Possui experiência habitacional: </strong>
+                                        {% if 'hasHousingExperience' in municipality.extraFields %}
+                                            {{ municipality.extraFields.hasHousingExperience ? 'Sim' : 'Não' }}
+                                        {% endif %}
+                                    </p>
+                                    <p>
+                                        <strong>Possui PLHIS: </strong>
+                                        {% if 'hasPlhis' in municipality.extraFields %}
+                                            {{ municipality.extraFields.hasPlhis ? 'Sim' : 'Não' }}
+                                        {% endif %}
+                                    </p>
                                 </div>
                             </div>
 
