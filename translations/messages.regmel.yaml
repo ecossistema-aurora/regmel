@@ -1120,9 +1120,11 @@ csv:
   header:
     region: Região
     state: Estado
+    created_by: Criado por
     city: Município
     company_name: Nome da Empresa
     company_cnpj: CNPJ da Empresa
+    company_phone: Telefone da Empresa
     map_file: Arquivo da Área Poligonal
     project_file: Arquivo do Projeto
     houses_quantity: Quantidade de Domicílios
@@ -1132,6 +1134,10 @@ csv:
     intervention_area_name: Nome da Área de Intervenção
     proposal_type: Tipo de Proposta
     proposal_date: Data da Proposta
+    proposal_update_date: Data de Modificação
+
+  info:
+    not_modified: Não modificado desde a criação
 
 error:
   invalid_entity: Entidade inválida. Esperado uma instância de Initiative.
