@@ -46,33 +46,38 @@
         <div class="container pb-5">
             <div class="row text-start">
                 <div class="col-md-12">
-                    <h1 class="fw-bold mt-4">{{ 'create_account'|trans }}</h1>
+                    {% set has_active_option = phase_company_active or phase_municipality_active %}
+                    {% set options = env.aurora.homepage.sections.register.options ?? [] %}
+
+                    {% if not has_active_option %}
+                        <h1 class="fw-bold mt-4">{{ 'view.phase.out_of_period'|trans }}</h1>
+                    {% else %}
+                        <h1 class="fw-bold mt-4">{{ 'create_account'|trans }}</h1>
+                    {% endif %}
+
                     <p class="lead mt-3">{{ 'view.homepage.registration_info'|trans }}</p>
+
                     <div>
-                        {% if not phase_active %}
-                            {% for option in env.aurora.homepage.sections.register.options ?? [] %}
-                                {% if option.route == 'regmel_register_company' %}
-                                    <a href="{{ path(option.route) }}" class="col-sm-4 mx-auto btn btn-light btn-lg text-secondary icon-link justify-content-between mt-5">
-                                        <h4 class="fw-bold mt-2 text-uppercase">{{ option.title|trans }}</h4>
-                                        <span class="material-icons fs-2">arrow_forward</span>
-                                    </a>
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            {% for option in env.aurora.homepage.sections.register.options ?? [] %}
+                        {% for option in options %}
+                            {% if (option.route == 'regmel_register_company' and phase_company_active)
+                                or (option.route == 'regmel_register_city' and phase_municipality_active)
+                                or (option.route != 'regmel_register_company' and option.route != 'regmel_register_city')
+                            %}
                                 <div>
-                                    <a href="{{ path(option.route) }}" class="col-sm-4 mx-auto btn btn-light btn-lg text-secondary icon-link justify-content-between mt-5">
+                                    <a href="{{ path(option.route) }}"
+                                       class="col-sm-4 mx-auto btn btn-light btn-lg text-secondary icon-link justify-content-between mt-5">
                                         <h4 class="fw-bold mt-2 text-uppercase">{{ option.title|trans }}</h4>
                                         <span class="material-icons fs-2">arrow_forward</span>
                                     </a>
                                 </div>
-                            {% else %}
-                                <a href="{{ path('web_auth_register') }}" class="col-sm-3 mx-auto btn btn-light btn-lg text-secondary icon-link justify-content-between mt-5">
-                                    <h4 class="fw-bold mt-2 text-uppercase">{{ 'register'|trans }}</h4>
-                                    <span class="material-icons fs-2">arrow_forward</span>
-                                </a>
-                            {% endfor %}
-                        {% endif %}
+                            {% endif %}
+                        {% else %}
+                            <a href="{{ path('web_auth_register') }}"
+                               class="col-sm-3 mx-auto btn btn-light btn-lg text-secondary icon-link justify-content-between mt-5">
+                                <h4 class="fw-bold mt-2 text-uppercase">{{ 'register'|trans }}</h4>
+                                <span class="material-icons fs-2">arrow_forward</span>
+                            </a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

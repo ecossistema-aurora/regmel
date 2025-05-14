@@ -17,12 +17,14 @@ use App\Enum\OrganizationTypeEnum;
 use App\Regmel\Service\Interface\MunicipalityServiceInterface;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Repository\Interface\OrganizationRepositoryInterface;
+use App\Repository\Interface\PhaseRepositoryInterface;
 use App\Service\Interface\AccountEventServiceInterface;
 use App\Service\Interface\FileServiceInterface;
 use App\Service\OpportunityService;
 use App\Service\OrganizationService;
 use App\Service\PhaseService;
 use App\Service\UserService;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -45,6 +47,7 @@ class RegisterService implements RegisterServiceInterface
         private readonly AccountEventServiceInterface $accountEventService,
         private readonly MunicipalityServiceInterface $municipalityService,
         protected TokenStorageInterface $tokenStorage,
+        private readonly PhaseRepositoryInterface $phaseRepository,
     ) {
     }
 
@@ -207,5 +210,20 @@ class RegisterService implements RegisterServiceInterface
         $municipality = str_replace(' ', '', ucwords($municipality));
 
         return sprintf('Termo-%s-%s-%d', $municipality, $state, $version);
+    }
+
+    public function findOpportunityWithActivePhase(string $organizationType): Opportunity|bool
+    {
+        $opportunities = $this->findOpportunitiesBy(OrganizationTypeEnum::from($organizationType));
+
+        foreach ($opportunities as $opportunity) {
+            $currentPhase = $this->phaseRepository->findCurrentPhase(new DateTime(), $opportunity);
+
+            if ($currentPhase && $currentPhase->getOpportunity()->getId() === $opportunity->getId()) {
+                return $opportunity;
+            }
+        }
+
+        return false;
     }
 }

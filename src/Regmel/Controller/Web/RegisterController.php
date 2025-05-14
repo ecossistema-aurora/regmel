@@ -11,7 +11,6 @@ use App\Enum\UserRolesEnum;
 use App\Exception\ValidatorException;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Service\Interface\CityServiceInterface;
-use App\Service\Interface\PhaseServiceInterface;
 use App\Service\Interface\StateServiceInterface;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Exception;
@@ -36,7 +35,6 @@ class RegisterController extends AbstractWebController
         private readonly CityServiceInterface $cityService,
         private readonly TranslatorInterface $translator,
         private readonly ParameterBagInterface $parameterBag,
-        private readonly PhaseServiceInterface $phaseService,
     ) {
     }
 
@@ -47,7 +45,9 @@ class RegisterController extends AbstractWebController
 
         $states = $this->stateService->list();
 
-        if (false === $this->phaseService->isCurrentPhaseActive()) {
+        $opportunity = $this->registerService->findOpportunityWithActivePhase(OrganizationTypeEnum::MUNICIPIO->value);
+
+        if (false === $opportunity) {
             return $this->render('regmel/register/phase-not-active.html.twig');
         }
 
@@ -107,6 +107,12 @@ class RegisterController extends AbstractWebController
     #[Route('/cadastro/empresa', name: 'regmel_register_company', methods: ['GET', 'POST'])]
     public function registerCompany(Request $request): Response
     {
+        $opportunity = $this->registerService->findOpportunityWithActivePhase(OrganizationTypeEnum::EMPRESA->value);
+
+        if (false === $opportunity) {
+            return $this->render('regmel/register/phase-not-active.html.twig');
+        }
+
         if ('POST' !== $request->getMethod()) {
             return $this->render(self::VIEW_COMPANY, [
                 'opportunities' => $this->registerService->findOpportunitiesBy(OrganizationTypeEnum::EMPRESA),
