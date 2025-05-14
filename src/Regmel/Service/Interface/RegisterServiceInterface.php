@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Regmel\Service\Interface;
 
+use App\Entity\Opportunity;
 use App\Entity\Organization;
 use App\Entity\User;
 use App\Enum\OrganizationTypeEnum;
@@ -18,4 +19,6 @@ interface RegisterServiceInterface
     public function saveUser(array $data): User;
 
     public function resendTerm(string $organizationId, ?UploadedFile $uploadedFile);
+
+    public function findOpportunityWithActivePhase(string $organizationType): Opportunity|bool;
 }
