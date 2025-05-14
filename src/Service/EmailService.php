@@ -27,25 +27,6 @@ readonly class EmailService implements EmailServiceInterface
     public function send(
         array $to,
         string $subject,
-        string $content,
-    ): void {
-        if (null === $this->mailer) {
-            throw new RuntimeException('The EmailService has not been initialized. Call the EmailService::initialize() first.');
-        }
-
-        $email = (new Email())
-            ->from($this->fromAddress)
-            ->subject($subject)
-            ->html($content);
-
-        $email->to(...$to);
-
-        $this->mailer->send($email);
-    }
-
-    public function sendTemplatedEmail(
-        array $to,
-        string $subject,
         string $htmlTemplate,
         array $context = [],
     ): void {

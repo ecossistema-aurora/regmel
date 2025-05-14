@@ -9,12 +9,6 @@ interface EmailServiceInterface
     public function send(
         array $to,
         string $subject,
-        string $content,
-    ): void;
-
-    public function sendTemplatedEmail(
-        array $to,
-        string $subject,
         string $htmlTemplate,
         array $context = [],
     ): void;
