@@ -630,6 +630,7 @@ view:
       last_name_length: El apellido debe tener entre 2 y 50 caracteres.
       password_mismatch: Las contraseñas no coinciden.
       cpf_invalid: Por favor, introduzca un CPF válido.
+      cnpj_invalid: Por favor, introduzca un CNPJ válido.
       phone_invalid: Por favor, introduzca un número de teléfono válido.
       account_not_confirmed: Cuenta no confirmada
 

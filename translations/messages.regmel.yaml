@@ -733,6 +733,7 @@ view:
       last_name_length: O sobrenome deve ter entre 2 e 50 caracteres.
       password_mismatch: As senhas não correspondem.
       cpf_invalid: Insira um CPF válido.
+      cnpj_invalid: Insira um CNPJ válido.
       phone_invalid: Insira um número de telefone válido.
       account_not_confirmed: Conta não confirmada
 
