@@ -7,12 +7,19 @@ namespace App\Regmel\Service;
 use App\Entity\Organization;
 use App\Regmel\Repository\Interface\MunicipalityRepositoryInterface;
 use App\Regmel\Service\Interface\MunicipalityServiceInterface;
+use App\Repository\InitiativeRepository;
 
 readonly class MunicipalityService implements MunicipalityServiceInterface
 {
     public function __construct(
+        private InitiativeRepository $initiativeRepository,
         private MunicipalityRepositoryInterface $municipalityRepository,
     ) {
+    }
+
+    public function getProposals(Organization $municipality): array
+    {
+        return $this->initiativeRepository->findBy(['organizationTo' => $municipality->getId()]);
     }
 
     public function updateProposals(Organization $municipality): void

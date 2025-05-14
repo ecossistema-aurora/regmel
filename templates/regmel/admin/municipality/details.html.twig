@@ -139,37 +139,48 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {% for proposal in proposals %}
                                         <tr>
-                                            <td>Titulo da Proposta</td>
-                                            <td>Empresa X</td>
+                                            <td>{{ proposal.name }}</td>
+                                            <td>{{ proposal.organizationFrom.name }}</td>
                                             <td>
-                                                <span class="badge bg-success">Anuído</span>
+                                                {% set status = proposal.extraFields.status ?? 'Enviada'  %}
+                                                {% set badgeClass = ({
+                                                    'Sem Adesão do Município': 'bg-dark text-white',
+                                                    'Enviada':                 'bg-warning',
+                                                    'Recebida':                'bg-info',
+                                                    'Anuída':                  'bg-success',
+                                                    'Não Anuída':              'bg-danger text-white',
+                                                    'Selecionada':             'bg-success',
+                                                    'Não Selecionada':         'bg-danger text-white',
+                                                }[status] ?? 'bg-dark') %}
+                                                <span class="badge {{ badgeClass }} text-dark">
+                                        {{ status }}
+                                    </span>
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
-                                                <a href="" data-bs-toggle="modal" data-bs-target="#modalConfirmation" class="btn btn-outline-success btn-sm">Avaliar</a>
+                                                <button
+                                                        class="btn btn-outline-info btn-sm"
+                                                        data-proposal='{{ {
+                                                            id: proposal.id,
+                                                            name: proposal.name,
+                                                            created_at: proposal.createdAt|date('d/m/Y'),
+                                                            created_by: proposal.createdBy.name,
+                                                            company: proposal.organizationFrom.name,
+                                                            area_option: env.aurora.proposals.area_characteristics[proposal.extraFields.area_characteristic] ?? '',
+                                                            price_per_house: env.aurora.variables.price_per_household ?? 1,
+                                                            ...proposal.extraFields
+                                                        }|json_encode|e('html_attr') }}'
+                                                        onClick="modalProposalDetails(this)"
+                                                >
+                                                    Ver Proposta
+                                                </button>
+                                                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') %}
+                                                    <a href="" data-bs-toggle="modal" data-bs-target="#modalConfirmation" class="btn btn-outline-success btn-sm">Avaliar</a>
+                                                {% endif %}
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Titulo da Proposta</td>
-                                            <td>Empresa Y</td>
-                                            <td>
-                                                <span class="badge bg-danger">Não Anuído</span>
-                                            </td>
-                                            <td>
-                                                <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Titulo da Proposta</td>
-                                            <td>Empresa Z</td>
-                                            <td>
-                                                <span class="badge bg-success">Anuído</span>
-                                            </td>
-                                            <td>
-                                                <a href="" class="btn btn-outline-info btn-sm">Ver Proposta</a>
-                                            </td>
-                                        </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
@@ -318,6 +329,8 @@
             </div>
         </div>
     </div>
+
+    {% include "regmel/_components/modal-proposal.html.twig" %}
 {% endblock %}
 
 {% block extra_javascripts %}
@@ -325,5 +338,6 @@
     <script type="module" src="{{ asset('js/modal-timeline.js') }}"></script>
     <script type="module" src="{{ asset('js/regmel/modal-member-details.js') }}"></script>
     <script src="{{ asset('js/modal-confirm-remove.js') }}"></script>
+    <script src="{{ asset('js/modal-proposal-details.js') }}"></script>
     <script type="module" src="{{ asset('js/grid-init.js') }}"></script>
 {% endblock %}

@@ -9,6 +9,7 @@ use App\DocumentService\OrganizationTimelineDocumentService;
 use App\Enum\OrganizationTypeEnum;
 use App\Enum\RegionEnum;
 use App\Enum\UserRolesEnum;
+use App\Regmel\Service\Interface\MunicipalityServiceInterface;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Service\Interface\OrganizationServiceInterface;
 use App\Service\Interface\StateServiceInterface;
@@ -29,6 +30,7 @@ class MunicipalityAdminController extends AbstractAdminController
     public function __construct(
         private readonly OrganizationServiceInterface $organizationService,
         private readonly OrganizationTimelineDocumentService $documentService,
+        private readonly MunicipalityServiceInterface $municipalityService,
         private readonly JWTTokenManagerInterface $jwtManager,
         private readonly Security $security,
         private readonly TranslatorInterface $translator,
@@ -121,11 +123,14 @@ class MunicipalityAdminController extends AbstractAdminController
             throw $this->createNotFoundException($this->translator->trans('municipality_found'));
         }
 
+        $proposals = $this->municipalityService->getProposals($municipality);
+
         $timeline = $this->documentService->getAllEventsByOrganizationId($id);
 
         return $this->render('regmel/admin/municipality/details.html.twig', [
             'municipality' => $municipality,
             'timeline' => $timeline,
+            'proposals' => $proposals,
             'createdById' => $createdById,
         ], parentPath: '');
     }
