@@ -8,7 +8,7 @@ describe('Cadastro de Município', () => {
     beforeEach(() => {
         timestamp = Date.now();
         randomEmailMunicipio = `municipio${timestamp}@teste.com`;
-        randomEmailUsuario = `joao${timestamp}@municipio.com`;
+        randomEmailUsuario = `jose${timestamp}@municipio.com`;
         randomCPF = `${Math.floor(10000000000 + Math.random() * 89999999999)}`;
         cy.visit('/cadastro/municipio');
     });
@@ -20,7 +20,7 @@ describe('Cadastro de Município', () => {
             }
         });
 
-        cy.get('input[name="firstname"]').should('be.visible').type('João', { force: true });
+        cy.get('input[name="firstname"]').should('be.visible').type('José', { force: true });
         cy.get('input[name="lastname"]').type('Silva', { force: true });
         cy.get('input[name="position"]').type('Diretor', { force: true });
         cy.get('input[name="cpf"]').type(randomCPF, { force: true });
@@ -35,9 +35,6 @@ describe('Cadastro de Município', () => {
             .click();
 
         cy.wait(2000);
-
-        // cy.get('select#state').select('Ceará', {force: true});
-        // cy.get('select#city', { timeout: 5000 }).select('Santana do Acaraú', {force: true});
 
         cy.get('#city + .ts-wrapper')
             .click()
