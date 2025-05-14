@@ -627,6 +627,7 @@ view:
       last_name_length: The last name must be between 2 and 50 characters.
       password_mismatch: The passwords do not match.
       cpf_invalid: Please enter a valid CPF.
+      cnpj_invalid: Please enter a valid CNPJ.
       phone_invalid: Please enter a valid phone number.
       account_not_confirmed: Account not confirmed
 

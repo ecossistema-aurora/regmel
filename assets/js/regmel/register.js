@@ -10,7 +10,8 @@ import {
     VIEW_AUTHENTICATION_ERROR_PASSWORD_MISMATCH,
     VIEW_AUTHENTICATION_ERROR_CPF_INVALID,
     VIEW_AUTHENTICATION_ERROR_PHONE_INVALID,
-    VIEW_AUTHENTICATION_ERROR_EMAIL_IN_USE
+    VIEW_AUTHENTICATION_ERROR_EMAIL_IN_USE,
+    VIEW_AUTHENTICATION_ERROR_CNPJ_INVALID
 } from "../../translator.js";
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -29,13 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const userEmail = document.querySelector('input[name="userEmail"]');
     const userPhone = document.querySelector('input[name="userPhone"]');
+    const cnpjInput = document.querySelector('input[name="cnpj"]');
 
-    if (userEmail) {
-        inputs.userEmail = userEmail;
-    }
-    if (userPhone) {
-        inputs.userPhone = userPhone;
-    }
+    if (userEmail) inputs.userEmail = userEmail;
+    if (userPhone) inputs.userPhone = userPhone;
+    if (cnpjInput) inputs.cnpj = cnpjInput;
 
     const progressBar = document.querySelector('#passwordStrength .progress-bar');
 
@@ -60,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const confirmPassword = inputs.confirmPassword.value.trim();
         const userEmail = inputs.userEmail ? inputs.userEmail.value.trim() : '';
         const userPhone = inputs.userPhone ? inputs.userPhone.value.trim() : '';
+        const cnpj= inputs.cnpj ? inputs.cnpj.value.trim() : '';
         let errorMessage = '';
 
         Object.values(inputs).forEach(input => {
@@ -116,6 +116,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 valid: () => validatePhone(userPhone),
                 input: inputs.userPhone,
                 message: trans(VIEW_AUTHENTICATION_ERROR_PHONE_INVALID)
+            });
+        }
+
+        if (inputs.cnpj) {
+            validations.push({
+                valid: () => validateCnpj(cnpj),
+                input: inputs.cnpj,
+                message: trans(VIEW_AUTHENTICATION_ERROR_CNPJ_INVALID)
             });
         }
 
@@ -290,6 +298,34 @@ function validateConfirmPassword(password, confirmPassword) {
 }
 
 function validateCnpj(cnpj) {
-    const cnpjPattern = /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/;
-    return cnpjPattern.test(cnpj) && cnpj.length === 18;
+    const cleaned = String(cnpj).replace(/[^\d]/g, '');
+
+    if (cleaned.length !== 14) return false;
+
+    if (/^(\d)\1{13}$/.test(cleaned)) return false;
+
+    const weight = [6,5,4,3,2,9,8,7,6,5,4,3,2];
+    let sum = 0;
+
+    for (let i = 0; i < 12; i++) {
+        sum += Number(cleaned[i]) * weight[i+1];
+    }
+
+    let remainder = sum % 11;
+    const digit1 = remainder < 2 ? 0 : 11 - remainder;
+
+    if (digit1 !== Number(cleaned[12])) return false;
+
+    sum = 0;
+
+    for (let i = 0; i < 13; i++) {
+        sum += Number(cleaned[i]) * weight[i];
+    }
+    remainder = sum % 11;
+
+    const digit2 = remainder < 2 ? 0 : 11 - remainder;
+
+    if (digit2 !== Number(cleaned[13])) return false;
+
+    return true;
 }
