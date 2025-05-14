@@ -54,7 +54,7 @@ install_frontend:
 	docker compose exec -T php bash -c "php bin/console importmap:install"
 
 # Compila os arquivos do frontend
-compile_frontend:
+compile_frontend: reset
 	docker compose exec -T php bash -c "php bin/console asset-map:compile"
 
 # Executa as fixtures de dados e os testes de front-end

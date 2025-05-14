@@ -53,6 +53,7 @@ export declare const ALL_CITIES: Message<{ 'messages': { parameters: NoParameter
 export declare const ALL_REGIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ALL_STATES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ALL_TYPES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const ALL_STATUS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ALLOW_FREE_LINKING: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ALLOWED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ADMIN_OPTIONS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -155,7 +156,6 @@ export declare const DELETED: Message<{ 'messages': { parameters: NoParametersTy
 export declare const DESCRIPTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DEVICE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DISCOVER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
-export declare const DOCUMENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const DOCUMENTS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const DOES_NOT_EXPIRE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const DOWNLOAD_ALL_TERMS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
@@ -412,6 +412,7 @@ export declare const PROJECT_INFORMATION: Message<{ 'messages': { parameters: No
 export declare const PROMOTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PROMOTION_STRATEGY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PROPONENT_INFORMATION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const PROPOSALS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const PUBLIC: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PUBLIC_DATA_NOTICE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const PUBLIC_EMAIL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -536,6 +537,7 @@ export declare const START_NOW: Message<{ 'messages': { parameters: NoParameters
 export declare const START_DATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const STATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const STATUS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const STATUSES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const STREET: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const SUBSCRIBE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const SUBSITES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -671,6 +673,7 @@ export declare const VIEW_AUTHENTICATION_ERROR_INVALID_PASSWORD: Message<{ 'mess
 export declare const VIEW_AUTHENTICATION_ERROR_LAST_NAME_LENGTH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_ERROR_PASSWORD_MISMATCH: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_ERROR_CPF_INVALID: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
+export declare const VIEW_AUTHENTICATION_ERROR_CNPJ_INVALID: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_ERROR_PHONE_INVALID: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_ERROR_ACCOUNT_NOT_CONFIRMED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const VIEW_AUTHENTICATION_FORGOT_PASSWORD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -941,6 +944,10 @@ export declare const VIEW_PHASE_OUT_OF_PERIOD: Message<{ 'messages': { parameter
 export declare const VIEW_PHASE_TEXT_OUT_OF_PERIOD: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const PROPOSAL_STATUS_SENT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const PROPOSAL_STATUS_NO_MUNICIPALITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const DOCUMENT_TITLE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const DOCUMENT_STATUS_APPROVED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const DOCUMENT_STATUS_REJECTED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const DOCUMENT_STATUS_AWAITING: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const CSV_HEADER_REGION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const CSV_HEADER_STATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const CSV_HEADER_CITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
