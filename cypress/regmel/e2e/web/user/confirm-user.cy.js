@@ -11,6 +11,7 @@ describe('Confirmação do usuário', () => {
         cy.get('a').contains('Usuários').click();
 
         cy.get('table tbody tr').contains('Aguardando Confirmar Conta').parents('tr').within(() => {
+            cy.get('[data-cy="dropdown-actions"]').click();
             cy.contains('Confirmar Usuário').click();
         });
         cy.get('.modal-body').should('be.visible');
@@ -18,6 +19,7 @@ describe('Confirmação do usuário', () => {
         cy.get('table tbody tr').contains('Ativo').should('exist');
 
         cy.contains('table tbody tr', 'jose1@municipio.com').within(() => {
+            cy.get('[data-cy="dropdown-actions"]').click();
             cy.contains('Confirmar Usuário').click();
         });
         cy.get('.modal-body').should('be.visible');
@@ -31,6 +33,7 @@ describe('Confirmação do usuário', () => {
         cy.get('.gridjs-input').type('Empresa Norte');
 
         cy.get('table tbody tr').contains('Empresa Norte').parents('tr').within(() => {
+            cy.get('[data-cy="dropdown-actions"]').click();
             cy.contains('Confirmar Usuário').click();
         });
         cy.get('.modal-body').should('be.visible');
