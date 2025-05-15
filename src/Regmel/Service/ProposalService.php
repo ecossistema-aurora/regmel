@@ -25,6 +25,7 @@ use App\Service\Interface\OrganizationServiceInterface;
 use App\Service\OpportunityService;
 use App\Service\PhaseService;
 use App\Service\UserService;
+use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
@@ -122,6 +123,7 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
             'area_characteristic' => $data['area_characteristic'],
             'map_file' => $mapFileName,
             'project_file' => $projectFileName,
+            'cityCode' => $cityCode,
             'city_name' => $cityName,
             'city_id' => $cityId,
             'state' => $state,
@@ -195,6 +197,13 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         return $this->organizationRepository->isOrganizationDuplicate($name, $cityId);
     }
 
+    public function generateProposalCode(Initiative $proposal): string
+    {
+        $extraFields = $proposal->getExtraFields();
+
+        return 'MCM-'.$extraFields['cityCode'].'-1-'.(new DateTime())->format('Y').'-'.substr($proposal->getId()->toRfc4122(), 0, 4);
+    }
+
     private function generateUrlForField(Initiative $entity, string $fieldName, string $routeName): string
     {
         $extraFields = $entity->getExtraFields();
@@ -209,6 +218,7 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
     public function getCsvHeaders(): array
     {
         return [
+            $this->translator->trans('csv.header.id'),
             $this->translator->trans('csv.header.region'),
             $this->translator->trans('csv.header.state'),
             $this->translator->trans('csv.header.city'),
@@ -254,6 +264,7 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         $phoneCompany = $organizationFrom->getExtraFields()['telefone'] ?? '';
 
         return [
+            $this->generateProposalCode($entity),
             $region,
             $state,
             $extraFields['city_name'] ?? '',
