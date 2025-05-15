@@ -216,6 +216,8 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
                 'Site',
                 'Criado Por',
                 'Criado Em',
+                'Experiência Habitacional',
+                'Possui PLHIS',
             ];
         }
 
@@ -239,7 +241,9 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
         }
 
         if ($type === OrganizationTypeEnum::MUNICIPIO->value) {
-            $formExists = isset($entity->getExtraFields()['form']);
+            $extraFields = $entity->getExtraFields();
+
+            $formExists = isset($extraFields['form']);
             $documentLink = $formExists
                 ? $this->urlGenerator->generate(
                     'regmel_municipality_document_file',
@@ -252,14 +256,20 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
                 $entity->getId(),
                 $entity->getName(),
                 $entity->getDescription(),
-                $entity->getExtraFields()['region'] ?? '',
-                $entity->getExtraFields()['state'] ?? '',
-                $entity->getExtraFields()['documentStatus'] ?? '',
+                $extraFields['region'] ?? '',
+                $extraFields['state'] ?? '',
+                $extraFields['documentStatus'] ?? '',
                 $documentLink,
-                $entity->getExtraFields()['email'] ?? '',
-                $entity->getExtraFields()['site'] ?? '',
+                $extraFields['email'] ?? '',
+                $extraFields['site'] ?? '',
                 $entity->getCreatedBy() ? $entity->getCreatedBy()->getName() : '-',
                 $entity->getCreatedAt()->format('d/m/Y H:i:s'),
+                isset($extraFields['hasHousingExperience'])
+                    ? ($extraFields['hasHousingExperience'] ? 'Sim' : 'Não')
+                    : '',
+                isset($extraFields['hasPlhis'])
+                    ? ($extraFields['hasPlhis'] ? 'Sim' : 'Não')
+                    : '',
             ];
         }
 
