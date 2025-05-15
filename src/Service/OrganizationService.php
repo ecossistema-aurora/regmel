@@ -227,11 +227,12 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
         }
 
         return [
-            'ID',
             'Nome da Organização',
             'Tipo',
+            'Equadramento',
             'CNPJ',
             'E-mail',
+            'Site',
             'Telefone',
             'Responsável',
             'Criado em',
@@ -288,11 +289,12 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
         }
 
         return [
-            $entity->getId(),
             $entity->getName(),
             $entity->getExtraFields()['tipo'] ?? '',
+            $entity->getExtraFields()['framework'] ?? '',
             $entity->getExtraFields()['cnpj'] ?? '',
             $entity->getExtraFields()['email'] ?? '',
+            $entity->getExtraFields()['site'] ?? '',
             $entity->getExtraFields()['telefone'] ?? '',
             $entity->getOwner()->getName() ?? '',
             $entity->getCreatedAt()->format('d/m/Y H:i:s'),
