@@ -26,6 +26,7 @@ readonly class PhaseService extends AbstractEntityService implements PhaseServic
         private SerializerInterface $serializer,
         private ValidatorInterface $validator,
         private ConfigEnvironment $configEnvironment,
+        private OpportunityService $opportunityService,
     ) {
         parent::__construct($this->security, $serializer, $validator);
     }
@@ -109,11 +110,18 @@ readonly class PhaseService extends AbstractEntityService implements PhaseServic
             ->getSingleScalarResult();
     }
 
-    public function isCurrentPhaseActive(): bool
+    public function isPhaseActive(Uuid $opportunityId): bool
     {
-        $currentDate = new DateTime();
-        $phase = $this->repository->findCurrentPhase($currentDate);
+        $opportunity = $this->opportunityService->get($opportunityId);
 
-        return $phase && $phase->getStartDate() <= $currentDate && $phase->getEndDate() >= $currentDate;
+        $currentPhase = $this->repository->findCurrentPhase(new DateTime(), $opportunity);
+
+        if (null === $currentPhase) {
+            return false;
+        }
+
+        $currentDate = new DateTime();
+
+        return $currentPhase->getStartDate() <= $currentDate && $currentPhase->getEndDate() >= $currentDate;
     }
 }

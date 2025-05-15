@@ -4,6 +4,7 @@
 
 {% block content %}
     {% include '_components/modal-confirm-remove.html.twig' %}
+    {% include 'regmel/admin/company/_partials/modal-add-proposal-not-active.html.twig' %}
 
     <section class="d-flex">
         {% include "_components/side-bar.html.twig" %}
@@ -80,11 +81,19 @@
                                     Acesse aqui o <a href="">Guia de Consulta</a>
                                 </div>
                             </div>
-                            <div class="col text-end">
-                                <a href="{{ path('admin_regmel_proposal_add', {
-                                    id: company.id
-                                }) }}" class="btn btn-outline-primary">Nova Proposta</a>
-                            </div>
+                            {% if phase %}
+                                <div class="col text-end">
+                                    <a href="{{ path('admin_regmel_proposal_add', {
+                                        id: company.id
+                                    }) }}" class="btn btn-outline-primary">Nova Proposta</a>
+                                </div>
+                            {% else %}
+                                <div class="col text-end">
+                                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#phaseInactiveModal">
+                                        Nova Proposta
+                                    </button>
+                                </div>
+                            {% endif %}
                         </div>
                         {% endif %}
 

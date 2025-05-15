@@ -9,7 +9,9 @@ use App\DocumentService\OrganizationTimelineDocumentService;
 use App\Enum\OrganizationTypeEnum;
 use App\Enum\UserRolesEnum;
 use App\Repository\Interface\InitiativeRepositoryInterface;
+use App\Service\Interface\InscriptionOpportunityServiceInterface;
 use App\Service\Interface\OrganizationServiceInterface;
+use App\Service\Interface\PhaseServiceInterface;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -31,6 +33,8 @@ class CompanyAdminController extends AbstractAdminController
         private readonly JWTTokenManagerInterface $jwtManager,
         private readonly Security $security,
         private readonly TranslatorInterface $translator,
+        private readonly PhaseServiceInterface $phaseService,
+        public readonly InscriptionOpportunityServiceInterface $inscriptionOpportunityService,
     ) {
     }
 
@@ -111,11 +115,16 @@ class CompanyAdminController extends AbstractAdminController
             'organizationFrom' => $id->toRfc4122(),
         ]);
 
+        $opportunity = $this->inscriptionOpportunityService->findOpportunityByOrganization($company->getId());
+
+        $isPhaseActive = $this->phaseService->isPhaseActive($opportunity->getId());
+
         return $this->render('regmel/admin/company/details.html.twig', [
             'company' => $company,
             'proposals' => $proposals,
             'timeline' => $timeline,
             'createdById' => $createdById,
+            'phase' => $isPhaseActive,
         ], parentPath: '');
     }
 
