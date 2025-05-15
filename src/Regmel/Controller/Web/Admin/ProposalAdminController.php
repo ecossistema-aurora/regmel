@@ -13,7 +13,9 @@ use App\Environment\ConfigEnvironment;
 use App\Regmel\Service\Interface\ProposalServiceInterface;
 use App\Service\Interface\CityServiceInterface;
 use App\Service\Interface\InitiativeServiceInterface;
+use App\Service\Interface\InscriptionOpportunityServiceInterface;
 use App\Service\Interface\OrganizationServiceInterface;
+use App\Service\Interface\PhaseServiceInterface;
 use App\Service\Interface\StateServiceInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -37,6 +39,8 @@ class ProposalAdminController extends AbstractAdminController
         private readonly Security $security,
         private readonly InitiativeServiceInterface $initiativeService,
         private readonly ConfigEnvironment $configEnvironment,
+        private readonly PhaseServiceInterface $phaseService,
+        public readonly InscriptionOpportunityServiceInterface $inscriptionOpportunityService,
     ) {
     }
 
@@ -106,6 +110,17 @@ class ProposalAdminController extends AbstractAdminController
     #[Route('/painel/admin/empresas/{id}/nova-proposta', name: 'admin_regmel_proposal_add', methods: ['GET', 'POST'])]
     public function add(Uuid $id, Request $request): Response
     {
+        $opportunity = $this->inscriptionOpportunityService->findOpportunityByOrganization($id);
+
+        $isPhaseActive = $this->phaseService->isPhaseActive($opportunity->getId());
+
+        if (false === $isPhaseActive) {
+            return $this->render(
+                'regmel/admin/proposal/add-proposal-not-active.html.twig',
+                parentPath: ''
+            );
+        }
+
         $user = $this->security->getUser();
         $company = $this->organizationService->get($id);
 

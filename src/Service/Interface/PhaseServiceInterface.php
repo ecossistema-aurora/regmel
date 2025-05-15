@@ -19,5 +19,5 @@ interface PhaseServiceInterface
 
     public function update(Uuid $opportunity, Uuid $identifier, array $phase): Phase;
 
-    public function isCurrentPhaseActive(): bool;
+    public function isPhaseActive(Uuid $opportunityId): bool;
 }

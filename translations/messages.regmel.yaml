@@ -354,6 +354,7 @@ no_data_found: Nenhum dado encontrado
 not_informed: Não informado
 not_sent: Não enviadas
 notice: EDITAL
+notice2: Aviso
 no_records_found: Nenhum registro encontrado
 number_address: Número
 number_households: Número de domicílios
@@ -812,6 +813,7 @@ view:
     register_access: Faça a sua inscrição e acesse os resultados de editais, oficinas, prêmios e concursos. Você também pode criar o seu próprio formulário e divulgar uma oportunidade.
     register_artists: Conheça ou cadastre artistas, pessoas gestoras e produtoras, grupos, coletivos, bandas, instituições e empresas da cena artística e cultural da região.
     registration_info: ''
+    registration_not_allowed_logged_in: Não é possível realizar o cadastro enquanto estiver logado.
     search_calendar: Pesquise o calendário de atividades culturais que estão acontecendo na sua região. Ou crie e divulgue seus eventos gratuitamente na plataforma.
     subtitle: Um novo amanhecer para a gestão e para o fomento cultural.
     header_text: Encontre cultura em cada canto da cidade e promova a sua própria cultura. Participe da produção artística do seu território com uma plataforma livre, gratuita e colaborativa.
@@ -1094,13 +1096,16 @@ view:
     error-image: Imagem de dúvida
 
   phase:
-    out_of_period: "Fora do prazo de inscrição"
-    text_out_of_period: "Infelizmente, o período de inscrição não está disponível no momento. Por favor, aguarde o próximo oficio."
+    out_of_period: Fora do prazo de inscrição
+    text_out_of_period: Infelizmente, o período de inscrição não está disponível no momento. Por favor, aguarde o próximo oficio.
 
 proposal:
   status:
     sent: Enviada
     no_municipality: Sem Adesão do Município
+  add_out_of_period: Não é possível enviar uma nova proposta, pois o prazo está fora do período permitido.
+  out_of_period: Fora do prazo para envio de propostas
+  text_out_of_period: Infelizmente, o período de envio de propostas não está disponível no momento. Por favor, aguarde o próximo oficio.
 
 document:
   title: Termo de Adesão
