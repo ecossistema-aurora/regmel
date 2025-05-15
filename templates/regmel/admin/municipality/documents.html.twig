@@ -20,9 +20,10 @@
                             </div>
 
                             <div class="col text-end">
-                                {% if env.aurora.dashboard.cards.documents.download == true %}
-                                    <a href="{{ path('admin_regmel_municipality_document_download') }}" class="btn btn-secondary">{{ 'download_all_terms'|trans }}</a>
-                                {% endif %}
+                                <a href="{{ path('admin_regmel_municipality_document_download') }}"
+                                   class="btn btn-secondary">
+                                    {{ 'download_all_terms'|trans }}
+                                </a>
                             </div>
                         </div>
 
@@ -50,20 +51,19 @@
                                             {{ municipality.name }} - {{ municipality.extraFields.state }}
                                         </a>
                                     </td>
-
                                     <td>
-                                        <a onclick="openDocumentModal('{{ municipality.name }}', '{{ municipality.id }}', '{{ municipality.extraFields.term_status }}', '{{ municipality.extraFields.term_updated_at ?? '' }}')"
-                                           data-bs-toggle="modal" data-bs-target="#modalDocument" href="#">
+                                        <a onclick="openDocumentModal('{{ municipality.name }}', '{{ municipality.id }}', '{{ municipality.extraFields.filepath }}')"
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#modalDocument"
+                                           href="#">
                                             {{ municipality.extraFields.form }}
                                         </a>
                                     </td>
-
                                     <td>
-                                        {{ municipality.updatedAt is not null
+                                        {{ municipality.updatedAt
                                         ? municipality.updatedAt.format('d/m/Y H:i:s')
                                         : municipality.createdAt.format('d/m/Y H:i:s') }}
                                     </td>
-
                                     <td>
                                         {% set status = municipality.extraFields.term_status ?? 'awaiting' %}
                                         {% set badgeClass = {
@@ -71,28 +71,49 @@
                                             'approved': 'bg-success text-white',
                                             'rejected': 'bg-danger text-white'
                                         }[status] %}
-
                                         <span class="badge {{ badgeClass }} text-dark text-uppercase">
-                                        {% if status == 'awaiting' %}
-                                            {{ 'document.status.awaiting' | trans }}
-                                        {% elseif status == 'approved' %}
-                                            {{ 'document.status.approved' | trans }}
-                                        {% elseif status == 'rejected' %}
-                                            {{ 'document.status.rejected' | trans }}
-                                        {% else %}
-                                            {{ status | trans }}
-                                        {% endif %}
-                                    </span>
+                                                {% if status == 'awaiting' %}
+                                                    {{ 'awaiting'|trans }}
+                                                {% elseif status == 'accepted' %}
+                                                    {{ 'accepted'|trans }}
+                                                {% elseif status == 'rejected' %}
+                                                    {{ 'rejected'|trans }}
+                                                {% else %}
+                                                    {{ 'unknown'|trans }}
+                                                {% endif %}
+                                            </span>
                                     </td>
-
-                                    <td>
-                                        <button class="btn btn-outline-warning btn-sm edit-organization"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalEditOrganization"
-                                                data-id="{{ municipality.id }}"
-                                                data-token="{{ token }}">
-                                            {{ 'edit'|trans }}
-                                        </button>
+                                    <td style="position: relative;">
+                                        <div class="dropdown">
+                                            <button
+                                                    class="btn btn-outline-warning btn-sm dropdown-toggle"
+                                                    type="button"
+                                                    id="dropdownMenu{{ municipality.id }}"
+                                                    data-bs-toggle="dropdown"
+                                                    aria-expanded="false"
+                                                    style="--bs-dropdown-min-width: 0; width: auto;"
+                                            >
+                                                {{ 'actions'|trans }}
+                                            </button>
+                                            <ul
+                                                    class="dropdown-menu dropdown-menu-end"
+                                                    aria-labelledby="dropdownMenu{{ municipality.id }}"
+                                                    style="--bs-dropdown-min-width: 0; width: auto;"
+                                            >
+                                                <li>
+                                                    <a
+                                                            href="#"
+                                                            class="dropdown-item edit-organization"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#modalEditOrganization"
+                                                            data-id="{{ municipality.id }}"
+                                                            data-token="{{ token }}"
+                                                    >
+                                                        {{ 'edit'|trans }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                             {% else %}
@@ -108,7 +129,76 @@
         </div>
     </section>
 
-    {% include 'regmel/admin/municipality/_partials/modal-document.html.twig' %}
+    <div class="modal fade" id="modalDocument" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalDocumentTitle"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="documentDecisionForm" action="" method="post">
+                    <div class="modal-body" style="min-height: 600px;" id="modalDocumentBody"></div>
+                    <div class="modal-footer d-block">
+                        <input type="hidden" id="docId" name="docId" value="">
+                        <input type="hidden" id="approved" name="approved" value="false">
+
+                        <div class="row">
+                            <div class="col-8">
+                                <input type="text"
+                                       name="reason"
+                                       placeholder="Informe o Motivo"
+                                       class="form-control"
+                                       required>
+                            </div>
+                            <div class="col-4 text-end">
+                                <button type="button"
+                                        class="btn btn-danger"
+                                        data-target="#confirmDocDecision"
+                                        onclick="confirmDecision(this, false)">
+                                    Recusar
+                                </button>
+                                <button type="button"
+                                        class="btn btn-primary"
+                                        data-target="#confirmDocDecision"
+                                        onclick="confirmDecision(this)">
+                                    Aprovar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="confirmDocDecision" data-bs-backdrop="false">
+                        <div class="modal-backdrop show"></div>
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="confirmDecisionTitle">Recusar</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p id="confirmDecisionQuestion">
+                                        Você tem certeza que deseja recusar o documento?
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button"
+                                            class="btn btn-secondary"
+                                            data-bs-dismiss="modal">
+                                        Fechar
+                                    </button>
+                                    <button id="confirmDecisionButton"
+                                            type="submit"
+                                            class="btn btn-primary">
+                                        Aprovar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block extra_javascripts %}
@@ -133,14 +223,61 @@
             }
 
             document.getElementById('docId').value = organizationId;
+            const form = document.getElementById('documentDecisionForm');
             form.action = `/painel/admin/municipios/${organizationId}/document/decision`;
 
-            document.getElementById('modalDocumentTitle').innerHTML = 'Termo de Adesão - ' + organizationName;
+            document.getElementById('modalDocumentTitle').innerHTML =
+                'Documento - ' + organizationName;
             document.getElementById('modalDocumentBody').innerHTML = `
-                <object style="min-height: 600px;" data="/painel/admin/municipios/${organizationId}/oficio" type="application/pdf" width="100%" height="100%">
-                    <p>Caso o documento não esteja visível, <a href="/painel/admin/municipios/${organizationId}/oficio">clique aqui para acessar o PDF!</a></p>
+                <object style="min-height: 600px;"
+                        data="/painel/admin/municipios/${organizationId}/oficio"
+                        type="application/pdf"
+                        width="100%"
+                        height="100%">
+                    <p>
+                        Caso o documento não esteja visível,
+                        <a href="/painel/admin/municipios/${organizationId}/oficio">
+                            clique aqui para acessar o PDF!
+                        </a>
+                    </p>
                 </object>
             `;
         }
+
+        function validateReason() {
+            const reasonInput = document.getElementById('rejectionReason');
+            const errorElement = document.getElementById('reasonError');
+
+            if (!reasonInput.value.trim()) {
+                reasonInput.classList.add('is-invalid');
+                errorElement.classList.remove('d-none');
+                return false;
+            }
+
+            reasonInput.classList.remove('is-invalid');
+            errorElement.classList.add('d-none');
+            return true;
+        }
+
+        function confirmDecision(button, isApprove = true) {
+            document.getElementById('approved').value = isApprove;
+            const confirmDecisionTitle = document.getElementById('confirmDecisionTitle');
+            const confirmDecisionButton = document.getElementById('confirmDecisionButton');
+            const modalBody = document.getElementById('confirmDecisionQuestion');
+
+            if (isApprove) {
+                confirmDecisionTitle.textContent = 'Confirmar Aprovação';
+                confirmDecisionButton.textContent = 'Aprovar';
+                confirmDecisionButton.classList.replace('btn-danger', 'btn-primary');
+                modalBody.textContent = 'Você tem certeza que deseja aprovar o documento?';
+            } else {
+                confirmDecisionTitle.textContent = 'Confirmar Recusa';
+                confirmDecisionButton.textContent = 'Recusar';
+                confirmDecisionButton.classList.replace('btn-primary', 'btn-danger');
+                modalBody.textContent = 'Você tem certeza que deseja recusar o documento?';
+            }
+
+            const modal = new bootstrap.Modal(document.getElementById('confirmDocDecision'));
+            modal.show();        }
     </script>
 {% endblock %}
