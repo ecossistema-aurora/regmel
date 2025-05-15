@@ -46,6 +46,7 @@ describe('Listagem de Usuários - Painel Administrativo', () => {
 
     it('Confirma usuário pendente e atualiza status', () => {
         cy.get('table tbody tr').contains('Aguardando Confirmar Conta').parents('tr').within(() => {
+            cy.get('.dropdown-toggle').click();
             cy.contains('Confirmar Usuário').click();
         });
         cy.get('.modal-body').should('be.visible');
