@@ -57,6 +57,7 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         private OrganizationServiceInterface $organizationService,
         private UrlGeneratorInterface $urlGenerator,
         private TranslatorInterface $translator,
+        private readonly ConfigEnvironment $configEnvironment,
     ) {
         parent::__construct(
             $this->security,
@@ -211,8 +212,10 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
             $this->translator->trans('csv.header.region'),
             $this->translator->trans('csv.header.state'),
             $this->translator->trans('csv.header.city'),
+            $this->translator->trans('csv.header.created_by'),
             $this->translator->trans('csv.header.company_name'),
             $this->translator->trans('csv.header.company_cnpj'),
+            $this->translator->trans('csv.header.company_phone'),
             $this->translator->trans('csv.header.map_file'),
             $this->translator->trans('csv.header.project_file'),
             $this->translator->trans('csv.header.houses_quantity'),
@@ -222,6 +225,7 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
             $this->translator->trans('csv.header.intervention_area_name'),
             $this->translator->trans('csv.header.proposal_type'),
             $this->translator->trans('csv.header.proposal_date'),
+            $this->translator->trans('csv.header.proposal_update_date'),
         ];
     }
 
@@ -242,20 +246,21 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         $mapFileLink = $this->generateUrlForField($entity, 'map_file', 'admin_regmel_proposal_mapa');
         $projectFileLink = $this->generateUrlForField($entity, 'project_file', 'admin_regmel_proposal_projeto');
 
-        $region = '';
-        $state = '';
+        $env = $this->configEnvironment->aurora();
 
-        if (null !== $entity->getOrganizationTo()) {
-            $region = $entity->getOrganizationTo()->getExtraFields()['region'] ?? '';
-            $state = $entity->getOrganizationTo()->getExtraFields()['state'] ?? '';
-        }
+        $region = $extraFields['region'];
+        $state = $extraFields['state'];
+        $modificationDate = $entity->getUpdatedAt() ?? $this->translator->trans('csv.info.not_modified');
+        $phoneCompany = $organizationFrom->getExtraFields()['telefone'] ?? '';
 
         return [
             $region,
             $state,
             $extraFields['city_name'] ?? '',
+            $entity->getCreatedBy()->getName() ?? '',
             $organizationFrom->getName(),
             $organizationFrom->getExtraFields()['cnpj'] ?? '',
+            $phoneCompany,
             $mapFileLink,
             $projectFileLink,
             $housesQuantity,
@@ -263,8 +268,9 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
             number_format($totalValue, 2, ',', '.'),
             $extraFields['status'] ?? '',
             $entity->getName() ?? '',
-            $extraFields['area_characteristic'] ?? '',
+            $env['proposals']['area_characteristics'][$extraFields['area_characteristic']] ?? '',
             $entity->getCreatedAt()->format('d/m/Y H:i:s'),
+            $modificationDate,
         ];
     }
 
