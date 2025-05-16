@@ -23,6 +23,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 readonly class OrganizationService extends AbstractEntityService implements OrganizationServiceInterface
 {
@@ -38,6 +39,7 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
         private EntityManagerInterface $entityManager,
         private AgentServiceInterface $agentService,
         private UrlGeneratorInterface $urlGenerator,
+        private TranslatorInterface $translator,
     ) {
         parent::__construct(
             $this->security,
@@ -206,18 +208,21 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
         if ($type === OrganizationTypeEnum::MUNICIPIO->value) {
             return [
                 'ID',
+                'Código da Cidade',
                 'Nome',
                 'Descrição',
                 'Região',
                 'Estado',
-                'Status',
+                'Status do Termo de Adesão',
                 'Termo de Adesão',
+                'Versão do Termo de Adesão',
                 'Email',
+                'Telefone',
                 'Site',
-                'Criado Por',
-                'Criado Em',
                 'Experiência Habitacional',
                 'Possui PLHIS',
+                'Criado Por',
+                'Criado Em',
             ];
         }
 
@@ -251,25 +256,34 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
                     UrlGeneratorInterface::ABSOLUTE_URL
                 )
                 : '';
+            $status = match ($extraFields['term_status'] ?? '') {
+                'awaiting' => $this->translator->trans('awaiting'),
+                'accepted' => $this->translator->trans('accepted'),
+                'rejected' => $this->translator->trans('rejected'),
+                default => $this->translator->trans('unknown'),
+            };
 
             return [
                 $entity->getId(),
+                $extraFields['cityCode'] ?? '',
                 $entity->getName(),
                 $entity->getDescription(),
                 $extraFields['region'] ?? '',
                 $extraFields['state'] ?? '',
-                $extraFields['documentStatus'] ?? '',
+                $status ?? '',
                 $documentLink,
+                $extraFields['term_version'] ?? '',
                 $extraFields['email'] ?? '',
+                $extraFields['telefone'] ?? '',
                 $extraFields['site'] ?? '',
-                $entity->getCreatedBy() ? $entity->getCreatedBy()->getName() : '-',
-                $entity->getCreatedAt()->format('d/m/Y H:i:s'),
                 isset($extraFields['hasHousingExperience'])
                     ? ($extraFields['hasHousingExperience'] ? 'Sim' : 'Não')
                     : '',
                 isset($extraFields['hasPlhis'])
                     ? ($extraFields['hasPlhis'] ? 'Sim' : 'Não')
                     : '',
+                $entity->getCreatedBy() ? $entity->getCreatedBy()->getName() : '-',
+                $entity->getCreatedAt()->format('d/m/Y H:i:s'),
             ];
         }
 
