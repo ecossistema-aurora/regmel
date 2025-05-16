@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace App\Regmel\Repository;
 
 use App\Entity\Organization;
+use App\Enum\StatusProposalEnum;
 use App\Regmel\Repository\Interface\MunicipalityRepositoryInterface;
 use App\Repository\OrganizationRepository;
 
 class MunicipalityRepository extends OrganizationRepository implements MunicipalityRepositoryInterface
 {
-    public function updateProposals(Organization $organization): void
+    public function updateProposals(Organization $organization, StatusProposalEnum $statusFrom, StatusProposalEnum $statusTo): void
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -20,16 +21,17 @@ class MunicipalityRepository extends OrganizationRepository implements Municipal
                 extra_fields = jsonb_set(
                     extra_fields::jsonb, 
                     '{status}', 
-                    '\"Enviada\"'::jsonb
+                    to_jsonb(:statusTo::text)
                 )
             WHERE 
                 extra_fields->>'city_id' = :cityId
-                AND organization_to_id IS NULL
-                AND extra_fields->>'status' = 'Sem Adesão do Município'";
+                AND extra_fields->>'status' = :statusFrom";
 
         $conn->executeStatement($sql, [
             'organizationId' => $organization->getId()->toRfc4122(),
             'cityId' => $organization->getExtraFields()['cityId'],
+            'statusFrom' => $statusFrom->value,
+            'statusTo' => $statusTo->value,
         ]);
     }
 }

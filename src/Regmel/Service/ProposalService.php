@@ -12,6 +12,7 @@ use App\Entity\Organization;
 use App\Enum\InscriptionOpportunityStatusEnum;
 use App\Enum\InscriptionPhaseStatusEnum;
 use App\Enum\OrganizationTypeEnum;
+use App\Enum\StatusProposalEnum;
 use App\Environment\ConfigEnvironment;
 use App\Exception\UnableCreateFileException;
 use App\Regmel\Service\Interface\ProposalServiceInterface;
@@ -75,10 +76,16 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
     {
         $user = $this->security->getUser();
 
-        $status = $this->translator->trans('proposal.status.sent');
         $municipality = $this->organizationRepository->findOrganizationByCityId(
             $data['city']
         );
+
+        $municipalityTermStatus = $municipality?->getExtraFields()['term_status'] ?? null;
+        $status = match ($municipalityTermStatus) {
+            'approved' => StatusProposalEnum::RECEBIDA->value,
+            'rejected', 'awaiting' => StatusProposalEnum::ENVIADA->value,
+            default => StatusProposalEnum::SEM_ADESAO->value,
+        };
 
         $initiative = new Initiative();
         $initiative->setId(Uuid::v4());
@@ -89,8 +96,6 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         $initiative->setOrganizationTo($municipality);
 
         if (null === $municipality) {
-            $status = $this->translator->trans('proposal.status.no_municipality');
-
             $municipality = $this->cityService->get($data['city']);
             $state = $municipality->getState()->getAcronym();
             $cityId = $municipality->getId();
@@ -99,7 +104,7 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
             $region = $municipality->getState()->getRegion();
         } else {
             $state = $municipality->getExtraFields()['state'];
-            $cityId = $municipality->getId();
+            $cityId = $municipality->getExtraFields()['cityId'];
             $cityCode = $municipality->getExtraFields()['cityCode'] ?? '';
             $cityName = $municipality->getName().'-'.$state;
             $region = $municipality->getExtraFields()['region'];
