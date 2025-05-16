@@ -5,7 +5,7 @@ module.exports = defineConfig({
   viewportWidth: 1920,
   viewportHeight: 1080,
   e2e: {
-    supportFile : false,
+    supportFile: 'cypress/regmel/support/e2e.js',
     baseUrl: process.env.CYPRESS_BASE_URL,
     chromeWebSecurity: false,
     setupNodeEvents(on, config) {

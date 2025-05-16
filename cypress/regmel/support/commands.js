@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import 'cypress-file-upload';
 
-Cypress.Commands.add('login', (email, password) => {
+Cypress.Commands.add('loginRegmel', (email, password) => {
     cy.visit('/login');
     cy.get('[data-cy="email"]').type(email);
     cy.get('[data-cy="password"]').type(password);

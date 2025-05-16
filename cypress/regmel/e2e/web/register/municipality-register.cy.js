@@ -49,8 +49,8 @@ describe('Cadastro de Município', () => {
         cy.get('input[name="phone"]').first().type('11999999999', { force: true });
         cy.get('input[name="email"]').first().type(randomEmailMunicipio, { force: true });
 
-        cy.get('input[name="hasHousingExperience"][value="1"]').check({ force: true });
-        cy.get('input[name="hasPlhis"][value="0"]').check({ force: true });
+        cy.get('input[name="hasHousingExperience"][value="true"]').check({ force: true });
+        cy.get('input[name="hasPlhis"][value="false"]').check({ force: true });
 
         cy.get('input[type=file]').selectFile('./cypress/regmel/fixtures/file.pdf');
 
