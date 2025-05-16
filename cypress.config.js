@@ -13,6 +13,8 @@ module.exports = defineConfig({
     specPattern: [
       'cypress/regmel/e2e/web/register/*.cy.js',
       'cypress/regmel/e2e/web/user/*.cy.js',
+      'cypress/regmel/e2e/web/company/company-proposal.cy.js',
+      'cypress/regmel/e2e/web/proposal/admin-proposal-list.cy.js',
       'cypress/regmel/e2e/**/*.cy.js',
     ],
   },
