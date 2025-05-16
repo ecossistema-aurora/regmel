@@ -223,7 +223,6 @@
             }
 
             document.getElementById('docId').value = organizationId;
-            const form = document.getElementById('documentDecisionForm');
             form.action = `/painel/admin/municipios/${organizationId}/document/decision`;
 
             document.getElementById('modalDocumentTitle').innerHTML =
