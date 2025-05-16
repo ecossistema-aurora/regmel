@@ -18,9 +18,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FaqAdminController extends AbstractAdminController
 {
-    public const VIEW_LIST = '_admin/faq/list.html.twig';
-    public const VIEW_ADD = '_admin/faq/add.html.twig';
-    public const VIEW_EDIT = '_admin/faq/edit.html.twig';
+    public const VIEW_LIST = 'faq/list.html.twig';
+    public const VIEW_ADD = 'faq/add.html.twig';
+    public const VIEW_EDIT = 'faq/edit.html.twig';
 
     public const CREATE_FORM_ID = 'add-faq';
     public const EDIT_FORM_ID = 'edit-faq';
