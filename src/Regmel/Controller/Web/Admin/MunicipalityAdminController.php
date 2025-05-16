@@ -165,6 +165,8 @@ class MunicipalityAdminController extends AbstractAdminController
                         'site',
                         'telefone',
                         'email',
+                        'hasHousingExperience',
+                        'hasPlhis',
                     ]))
                 ),
             ]);
