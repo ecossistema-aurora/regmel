@@ -14,6 +14,7 @@ use App\Entity\User;
 use App\Enum\InscriptionOpportunityStatusEnum;
 use App\Enum\InscriptionPhaseStatusEnum;
 use App\Enum\OrganizationTypeEnum;
+use App\Enum\StatusProposalEnum;
 use App\Regmel\Service\Interface\MunicipalityServiceInterface;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Repository\Interface\OrganizationRepositoryInterface;
@@ -96,7 +97,7 @@ class RegisterService implements RegisterServiceInterface
             $this->organizationRepository->save($organizationObj);
 
             if (OrganizationTypeEnum::MUNICIPIO->value === $organizationObj->getType()) {
-                $this->municipalityService->updateProposals($organizationObj);
+                $this->municipalityService->updateProposals($organizationObj, StatusProposalEnum::SEM_ADESAO, StatusProposalEnum::ENVIADA);
             }
 
             $this->createInscriptionForOrganization($data['opportunity'], $organizationObj);
