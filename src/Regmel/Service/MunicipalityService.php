@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Regmel\Service;
 
 use App\Entity\Organization;
+use App\Enum\StatusProposalEnum;
 use App\Regmel\Repository\Interface\MunicipalityRepositoryInterface;
 use App\Regmel\Service\Interface\MunicipalityServiceInterface;
 use App\Repository\InitiativeRepository;
@@ -22,8 +23,8 @@ readonly class MunicipalityService implements MunicipalityServiceInterface
         return $this->initiativeRepository->findBy(['organizationTo' => $municipality->getId()]);
     }
 
-    public function updateProposals(Organization $municipality): void
+    public function updateProposals(Organization $municipality, StatusProposalEnum $statusFrom, StatusProposalEnum $statusTo): void
     {
-        $this->municipalityRepository->updateProposals($municipality);
+        $this->municipalityRepository->updateProposals($municipality, $statusFrom, $statusTo);
     }
 }

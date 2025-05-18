@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Regmel\Service;
 
+use App\Enum\StatusProposalEnum;
 use App\Regmel\Service\Interface\MunicipalityDocumentServiceInterface;
+use App\Regmel\Service\Interface\MunicipalityServiceInterface;
 use App\Repository\Interface\OrganizationRepositoryInterface;
 use App\Service\Interface\EmailServiceInterface;
 use App\Service\Interface\OrganizationServiceInterface;
@@ -18,9 +20,10 @@ readonly class MunicipalityDocumentService implements MunicipalityDocumentServic
     public function __construct(
         private OrganizationServiceInterface $organizationService,
         private OrganizationRepositoryInterface $organizationRepository,
-        private readonly EmailServiceInterface $emailService,
-        private readonly UrlGeneratorInterface $urlGenerator,
-        private readonly TranslatorInterface $translator,
+        private EmailServiceInterface $emailService,
+        private UrlGeneratorInterface $urlGenerator,
+        private TranslatorInterface $translator,
+        private MunicipalityServiceInterface $municipalityService,
     ) {
     }
 
@@ -34,6 +37,8 @@ readonly class MunicipalityDocumentService implements MunicipalityDocumentServic
 
         $municipality->setExtraFields($extraFields);
         $this->organizationRepository->save($municipality);
+
+        $this->municipalityService->updateProposals($municipality, StatusProposalEnum::ENVIADA, StatusProposalEnum::RECEBIDA);
     }
 
     public function sendEmailDecision(Uuid $municipalityId, bool $approved, string $reason): void
