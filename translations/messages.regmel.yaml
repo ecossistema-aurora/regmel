@@ -68,6 +68,8 @@ areas_of_interest: Áreas de interesse
 areas_information: Informações da Área
 areas_intervention: Áreas de intervenção
 areas_polygon: Área estimada da poligonal
+area_size: Tamanho da área
+area_characteristic: Características da área
 analysis: Período de Análise
 auditory: Auditiva
 auth: Autenticação
@@ -98,6 +100,7 @@ cep: CEP
 city: Cidade
 city_id: ID da cidade
 city_code: Código da cidade
+city_name: Nome da cidade
 cisgender: Cisgênero
 check: Conferir
 claim-ownership: Reivindicar Propriedade
@@ -234,7 +237,7 @@ happening_now: Acontecendo agora
 help: Ajuda
 help_privacy: Ajuda e privacidade
 home: Início
-how_measures_will_be_implemented: Como essas medidas de acessibilidades serão implementadas ou disponibilizadas de acordo com o projeto proposto
+how_measures_will_be_implemented: Como essas medidas de acessibilidades serão implementadas ou disponibilizadas de acordo com o projeto propostoO município possui experiência com programas e/ou iniciativas de melhorias habitacionais?
 
 identification_number: Número identificador
 illustration: Ilustração
@@ -291,6 +294,7 @@ lgpd_modal: Política de Privacidade e Proteção de Dados (LGPD)
 legal_information: Informações legais
 
 map: Mapa
+map_file: Arquivo da Área Poligonal
 management: Gerenciamento de Entidades
 manager_name: Administrador SNP
 mandatory_fields: Campos marcados com asterisco são de preenchimento obrigatório.
@@ -396,6 +400,7 @@ previous: Anterior
 privacy: Privacidade
 profile: Perfil
 provided_violates: Os dados fornecidos violam uma ou mais restrições.
+project_file: Arquivo do projeto
 password: Senha
 password_strength: Força da senha
 password_rules:  A senha deve conter pelo menos 8 caracteres, incluindo 1 letra maiúscula, 1 minúscula, 1 número e 1 caractere especial.
@@ -440,6 +445,7 @@ plhis: O município possui Plano Local de Habitação de Interesse Social (PLHIS
 
 question_register: Cadastrar Pergunta
 question: Pergunta
+quantity_houses: Quantidade de casas
 
 riverside: Ribeirinha
 recent_registrations: Inscrições recentes
@@ -561,6 +567,7 @@ start_now: Comece agora
 start_date: Data de início
 state: Estado
 status: Status
+status_reason: Motivo do status
 statuses: Todos os status
 street: Logradouro
 subscribe: Inscreva-se
@@ -1126,7 +1133,6 @@ csv:
     company_name: Nome da Empresa
     company_cnpj: CNPJ da Empresa
     company_phone: Telefone da Empresa
-    map_file: Arquivo da Área Poligonal
     project_file: Arquivo do Projeto
     houses_quantity: Quantidade de Domicílios
     total_area: Área Total

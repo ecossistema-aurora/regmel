@@ -58,6 +58,8 @@ archives: Archivos
 archived: Archivados
 areas_of_expertise: Áreas de Especialización
 areas_of_interest: Áreas de Interés
+area_size: Tamaño del área
+area_characteristic: Características del área
 analysis: Periodo de análisis
 auditory: Auditiva
 auth: Autenticación
@@ -86,6 +88,7 @@ cisgender: Cisgénero
 city: ciudad
 city_id: ID de la ciudad
 city_code: Código de la ciudad
+city_name: Nombre de la ciudad
 check: Comprobar
 claim-ownership: Reclamar Propiedad
 clean_filter: Limpiar todos los filtros
@@ -220,6 +223,7 @@ is_itinerant: ¿Es agente itinerante?
 is-accessible: ¿El espacio es accesible?
 Invite was accepted: Invitación aceptada
 Invite was sent: Invitación enviada
+improvement_municipality: ¿Tiene el municipio experiencia con programas y/o iniciativas de mejoramiento de vivienda?
 
 language: Idioma
 lastname: Apellido
@@ -241,6 +245,7 @@ logout: Salir
 long_description: Descripción larga
 
 map: Mapa
+map_file: Archivo del Área Poligonal
 management: Gerenciamiento de Entidades
 mandatory_fields: Campos marcados con asterisco son obligatorios.
 masculine: Masculino
@@ -332,6 +337,7 @@ permissions: Permisos
 portfolio: Portafolio
 previous: Anterior
 privacy: Privacidad
+project_file: Archivo del Proyecto
 profile: Perfil
 password: Contraseña
 password_strength: Fuerza de la Contraseña
@@ -369,6 +375,7 @@ public_information: Información pública
 public_phone: telefono publico
 published: Publicados
 published-by: Publicado por
+plhis: ¿El municipio cuenta con un Plan Local de Vivienda Social (PLHIS)?
 
 question_register: Registrar Pregunta
 question: Pregunta
@@ -464,6 +471,7 @@ start_now: Comenzar Ahora
 start_date: Fecha de inicio
 state: Estado
 status: Status
+status_reason: Motivo del estado
 suggestions: Sugerencias
 subscribe: Suscribir
 subsites: Subsitios
@@ -473,6 +481,7 @@ higher: Superior
 
 your_name: Ingrese su nombre
 your_question: Escriba su pregunta
+quantity_houses: Cantidad de casas
 
 welcome: Bienvenido
 week_days: Días de la semana

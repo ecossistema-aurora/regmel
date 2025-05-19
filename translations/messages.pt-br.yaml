@@ -58,6 +58,8 @@ archives: Arquivos
 archived: Arquivados
 areas_of_expertise: Áreas de Atuação
 areas_of_interest: Áreas de interesse
+area_size: Tamanho da área
+area_characteristic: Características da área
 analysis: Período de Análise
 auditory: Auditiva
 auth: Autenticação
@@ -85,6 +87,7 @@ cep: CEP
 city: Cidade
 city_id: ID da cidade
 city_code: Código da cidade
+city_name: Nome da cidade
 cisgender: Cisgênero
 check: Conferir
 claim-ownership: Reivindicar Propriedade
@@ -220,6 +223,7 @@ is_itinerant: É agente itinerante?
 is-accessible: O espaço é acessível?
 Invite was accepted: Convite foi aceito
 Invite was sent: Convite foi enviado
+improvement_municipality: O município possui experiência com programas e/ou iniciativas de melhorias habitacionais?
 
 language: Idioma
 lastname: Sobrenome
@@ -241,6 +245,7 @@ logout: Sair
 long_description: Descrição longa
 
 map: Mapa
+map_file: Arquivo da Área Poligonal
 management: Gerenciamento de Entidades
 mandatory_fields: Campos marcados com asterisco são de preenchimento obrigatório.
 masculine: Masculino
@@ -331,6 +336,7 @@ permissions: Permissões
 portfolio: Portfólio
 previous: Anterior
 privacy: Privacidade
+project_file: Arquivo do projeto
 profile: Perfil
 password: Senha
 password_strength: Força da senha
@@ -368,9 +374,11 @@ public_information: Informações públicas
 public_phone: Telefone Público
 published: Publicados
 published-by: Publicado por
+plhis: O município possui Plano Local de Habitação de Interesse Social (PLHIS)?
 
 question_register: Cadastrar Pergunta
 question: Pergunta
+quantity_houses: Quantidade de casas
 
 riverside: Ribeirinha
 recent_registrations: Inscrições recentes
@@ -463,6 +471,7 @@ start_now: Comece agora
 start_date: Data de início
 state: Estado
 status: Status
+status_reason: Motivo do status
 street: Logradouro
 subscribe: Inscreva-se
 subsites: Subsites

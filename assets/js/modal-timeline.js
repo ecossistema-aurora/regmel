@@ -27,6 +27,15 @@ import {
     FORM,
     TERM_VERSION,
     TERM_STATUS,
+    IMPROVEMENT_MUNICIPALITY,
+    PLHIS,
+    MAP_FILE,
+    AREA_SIZE,
+    CITY_NAME,
+    PROJECT_FILE,
+    QUANTITY_HOUSES,
+    AREA_CHARACTERISTIC,
+    STATUS_REASON,
 } from "../translator.js";
 
 
@@ -71,6 +80,16 @@ const EXTRA_FIELD_TRANSLATIONS = {
     "form": trans(FORM),
     "term_version": trans(TERM_VERSION),
     "term_status": trans(TERM_STATUS),
+    "hasHousingExperience": trans(IMPROVEMENT_MUNICIPALITY),
+    "hasPlhis": trans(PLHIS),
+    "city_id": trans(CITY_ID),
+    "map_file": trans(MAP_FILE),
+    "area_size": trans(AREA_SIZE),
+    "city_name": trans(CITY_NAME),
+    "project_file": trans(PROJECT_FILE),
+    "quantity_houses": trans(QUANTITY_HOUSES),
+    "area_characteristic": trans(AREA_CHARACTERISTIC),
+    "status_reason": trans(STATUS_REASON),
 };
 
 function openModal(item) {
@@ -175,7 +194,7 @@ function populateExtraInfo(item) {
     FIELDS.device.textContent = device;
     FIELDS.platform.textContent = platform;
     FIELDS.datetime.textContent = formatDateTime(datetime);
-    FIELDS.title.textContent = translations[title] || title;
+    FIELDS.title.textContent = translations[title] || title
     FIELDS.alertAuthorName.textContent = name;
 }
 

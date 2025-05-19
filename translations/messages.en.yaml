@@ -58,6 +58,8 @@ archives: Archives
 archived: Archived
 areas_of_expertise: Areas of Expertise
 areas_of_interest: Areas of Interest
+area_size: Area Size
+area_characteristic: Area Characteristic
 analysis: Analysis Period
 auditory: Auditory
 auth: Authentication
@@ -86,6 +88,7 @@ cisgender: Cisgender
 city: City
 city_id: City ID
 city_code: City Code
+city_name: City Name
 check: Check
 claim-ownership: Claim Ownership
 clean_filter: Clean Filter
@@ -221,6 +224,7 @@ is_itinerant: Is it an itinerant agent?
 is-accessible: Is the space accessible?
 Invite was accepted: Invite was accepted
 Invite was sent: Invite was sent
+improvement_municipality: Does the municipality have experience with housing improvement programs and/or initiatives?
 
 language: Language
 lastname: Last Name
@@ -242,6 +246,7 @@ logout: Logout
 long_description: Long description
 
 map: Map
+map_file: Polygonal Area File
 management: Management of Entities
 mandatory_fields: Fields marked with asterisco are mandatory.
 masculine: Masculine
@@ -333,6 +338,7 @@ permissions: Permissions
 portfolio: Portfolio
 previous: Previous
 privacy: Privacy
+project_file: Project File
 profile: Profile
 password: Password
 password_strength: Password Strength
@@ -369,9 +375,11 @@ public_information: Public Information
 public_email: Public Email
 public_phone: Public Telephone
 published: Published
+plhis: Does the municipality have a Local Social Housing Plan (PLHIS)?
 
 published-by: Publicado por
 question_register: Register Question
+quantity_houses: Number of houses
 
 question: Question
 riverside: Riverside
@@ -465,6 +473,7 @@ start_now: Start Now
 start_date: Start date
 state: State
 status: Status
+status_reason: Status Reason
 street: Street
 suggestions: Suggestions
 subscribe: Subscribe
