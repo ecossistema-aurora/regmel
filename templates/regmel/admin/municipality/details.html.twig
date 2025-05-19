@@ -113,8 +113,51 @@
                                     </p>
                                 </div>
                             </div>
+                            <div class="tab-pane" id="pills-proposal" role="tabpanel" aria-labelledby="pills-proposal-tab" tabindex="0">
+                                <div class="modal fade" id="modalAgreement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form id="proposalStatusForm" method="post">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Anuência</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-4">
+                                                        <label class="form-label fw-bold">Status *</label>
+                                                        <div class="d-flex gap-4">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="status" id="statusAgreement" value="Anuída" required>
+                                                                <label class="form-check-label" for="statusAgreement">
+                                                                    <i class="bi bi-check-circle-fill text-success me-2"></i>Anuída
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="status" id="statusNotAgreement" value="Não Anuída" required>
+                                                                <label class="form-check-label" for="statusNotAgreement">
+                                                                    <i class="bi bi-x-circle-fill text-danger me-2"></i>Não Anuída
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-text">Selecione uma opção obrigatória</div>
+                                                    </div>
 
-                            <div style="" class="tab-pane" id="pills-proposal" role="tabpanel" aria-labelledby="pills-proposal-tab" tabindex="0">
+                                                    <div class="mb-3">
+                                                        <label for="reasonText" class="form-label fw-bold">Motivo *</label>
+                                                        <textarea name="reason" id="reasonText" class="form-control" rows="4"
+                                                                  placeholder="Descreva o motivo da sua decisão..." required></textarea>
+                                                        <div class="form-text">Mínimo de 20 caracteres</div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                    <button type="submit" class="btn btn-primary">Submeter</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="modal fade" id="modalConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -188,6 +231,15 @@
                                                 >
                                                     Ver Proposta
                                                 </button>
+                                                {% if is_granted('ROLE_MUNICIPALITY') and proposal.extraFields.status == 'Recebida' %}
+                                                    <a  onclick="openAgreementModal('{{ municipality.id }}', '{{ proposal.id }}')"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalAgreement"
+                                                        href="#"
+                                                        class="btn btn-outline-success btn-sm">
+                                                        Anuir
+                                                    </a>
+                                                {% endif %}
                                                 {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') %}
                                                     <a href="" data-bs-toggle="modal" data-bs-target="#modalConfirmation" class="btn btn-outline-success btn-sm">Avaliar</a>
                                                 {% endif %}
@@ -353,4 +405,11 @@
     <script src="{{ asset('js/modal-confirm-remove.js') }}"></script>
     <script src="{{ asset('js/modal-proposal-details.js') }}"></script>
     <script type="module" src="{{ asset('js/grid-init.js') }}"></script>
+
+    <script>
+        function openAgreementModal(municipalityId, proposalId) {
+            const form = document.getElementById('proposalStatusForm');
+            form.action = `/painel/admin/municipios/${municipalityId}/propostas/${proposalId}/status`;
+        }
+    </script>
 {% endblock %}

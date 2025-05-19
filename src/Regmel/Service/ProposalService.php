@@ -21,6 +21,7 @@ use App\Repository\OrganizationRepository;
 use App\Service\AbstractEntityService;
 use App\Service\InitiativeService;
 use App\Service\Interface\CityServiceInterface;
+use App\Service\Interface\EmailServiceInterface;
 use App\Service\Interface\FileServiceInterface;
 use App\Service\Interface\OrganizationServiceInterface;
 use App\Service\OpportunityService;
@@ -60,6 +61,7 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         private UrlGeneratorInterface $urlGenerator,
         private TranslatorInterface $translator,
         private readonly ConfigEnvironment $configEnvironment,
+        private readonly EmailServiceInterface $emailService,
     ) {
         parent::__construct(
             $this->security,
@@ -349,5 +351,27 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         $path = $this->parameterBag->get('kernel.project_dir');
 
         return "{$path}/storage/regmel/company/documents/{$file}";
+    }
+
+    public function updateStatusProposal(Uuid $id, StatusProposalEnum $status, string $reason): void
+    {
+        $initiative = $this->initiativeService->get($id);
+        $extraFields = $initiative->getExtraFields();
+        $extraFields['status'] = $status->value;
+        $extraFields['status_reason'] = $status->value;
+        $initiative->setExtraFields($extraFields);
+        $this->initiativeRepository->save($initiative);
+
+        $emails = $initiative->getOrganizationTo()->getAgents()->map(fn ($agent) => $agent->getUser()?->getEmail())->toArray();
+
+        $this->emailService->sendTemplatedEmail(
+            $emails,
+            'Status da proposta atualizado',
+            '_emails/new-proposal-status.html.twig',
+            [
+                'municipalityName' => $initiative->getOrganizationTo()->getName(),
+                'companyName' => $initiative->getOrganizationFrom()->getName(),
+            ]
+        );
     }
 }

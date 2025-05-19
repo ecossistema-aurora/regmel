@@ -8,8 +8,10 @@ use App\Controller\Web\Admin\AbstractAdminController;
 use App\DocumentService\OrganizationTimelineDocumentService;
 use App\Enum\OrganizationTypeEnum;
 use App\Enum\RegionEnum;
+use App\Enum\StatusProposalEnum;
 use App\Enum\UserRolesEnum;
 use App\Regmel\Service\Interface\MunicipalityServiceInterface;
+use App\Regmel\Service\Interface\ProposalServiceInterface;
 use App\Regmel\Service\Interface\RegisterServiceInterface;
 use App\Service\Interface\OrganizationServiceInterface;
 use App\Service\Interface\StateServiceInterface;
@@ -30,6 +32,7 @@ class MunicipalityAdminController extends AbstractAdminController
     public function __construct(
         private readonly OrganizationServiceInterface $organizationService,
         private readonly OrganizationTimelineDocumentService $documentService,
+        private readonly ProposalServiceInterface $proposalService,
         private readonly MunicipalityServiceInterface $municipalityService,
         private readonly JWTTokenManagerInterface $jwtManager,
         private readonly Security $security,
@@ -235,5 +238,20 @@ class MunicipalityAdminController extends AbstractAdminController
             : $this->organizationService->findBy(['type' => $type]);
 
         return $this->organizationService->generateCsv($municipalities, 'municipios.csv', $type);
+    }
+
+    #[Route('/painel/admin/municipios/{municipalityId}/propostas/{id}/status', name: 'admin_regmel_proposal_update_status', methods: ['POST'])]
+    public function updateStatusProposal(Request $request, $municipalityId, Uuid $id): Response
+    {
+        $status = StatusProposalEnum::from($request->request->get('status'));
+        $reason = $request->request->get('reason');
+
+        if (true === empty(trim($reason))) {
+            $this->addFlash('error', 'O motivo é obrigatório');
+        } else {
+            $this->proposalService->updateStatusProposal($id, $status, $reason);
+        }
+
+        return $this->redirectToRoute('admin_regmel_municipality_details', ['id' => $municipalityId]);
     }
 }
