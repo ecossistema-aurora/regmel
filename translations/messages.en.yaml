@@ -424,6 +424,7 @@ user: User
 user_name: User Name
 users: Users
 updated_at: Updated at
+updated_success: Updated successfully.
 
 view_all: View All
 view_file: view file

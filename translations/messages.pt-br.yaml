@@ -422,6 +422,7 @@ user: Usuário
 user_name: Nome do Usuário
 users: Usuários
 updated_at: Atualizado em
+updated_success: Atualizado com sucesso.
 
 view_all: Ver todas
 view_file: ver arquivo
