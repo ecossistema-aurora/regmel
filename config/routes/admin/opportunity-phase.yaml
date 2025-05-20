@@ -12,3 +12,8 @@ store:
   path: /store
   controller: App\Controller\Web\Admin\OpportunityPhaseAdminController::store
   methods: ['POST']
+
+update:
+  path: /{phaseId}/editar
+  controller: App\Controller\Web\Admin\OpportunityPhaseAdminController::updatePhase
+  methods: ['POST']

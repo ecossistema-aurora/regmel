@@ -18,6 +18,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class OpportunityPhaseAdminController extends AbstractAdminController
 {
     public const CREATE_FORM_ID = 'add-opportunity-phase';
+    public const UPDATE_FORM_ID = 'update-opportunity-phase';
 
     public function __construct(
         private readonly PhaseServiceInterface $phaseService,
@@ -70,6 +71,31 @@ class OpportunityPhaseAdminController extends AbstractAdminController
             return $this->redirectToRoute('admin_phase_create', [
                 'opportunityId' => $opportunityId->toRfc4122(),
             ]);
+        }
+
+        return $this->redirectToRoute('admin_opportunity_get', [
+            'id' => $opportunityId->toRfc4122(),
+            '_fragment' => 'phases',
+        ]);
+    }
+
+    #[IsGranted(UserRolesEnum::ROLE_ADMIN->value, statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    public function updatePhase(Request $request, Uuid $opportunityId, Uuid $phaseId): Response
+    {
+        $this->validCsrfToken(self::UPDATE_FORM_ID, $request);
+
+        $data = $request->request->all();
+
+        try {
+            $data['status'] = (bool) $data['status'];
+
+            $this->phaseService->update($opportunityId, $phaseId, $data);
+
+            $this->addFlash('success', $this->translator->trans('updated_success'));
+        } catch (Exception $e) {
+            $this->addFlash('error', $this->translator->trans('phase_update_error', [
+                '%message%' => $e->getMessage(),
+            ]));
         }
 
         return $this->redirectToRoute('admin_opportunity_get', [

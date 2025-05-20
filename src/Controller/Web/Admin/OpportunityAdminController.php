@@ -31,6 +31,7 @@ class OpportunityAdminController extends AbstractAdminController
     public const CREATE_FORM_ID = 'add-opportunity';
     public const EDIT_FORM_ID = 'edit-opportunity';
     public const CREATE_PHASE_FORM_ID = 'add-opportunity-phase';
+    public const UPDATE_PHASE_ID = 'update-opportunity-phase';
 
     public function __construct(
         private readonly OpportunityServiceInterface $service,
@@ -212,6 +213,7 @@ class OpportunityAdminController extends AbstractAdminController
             'inscriptions' => $inscriptions,
             'phases' => $phases,
             'create_phase_form_id' => self::CREATE_PHASE_FORM_ID,
+            'update_phase_form_id' => self::UPDATE_PHASE_ID,
         ]);
     }
 
