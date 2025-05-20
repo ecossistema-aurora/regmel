@@ -20,6 +20,8 @@ interface InitiativeServiceInterface
 
     public function findBy(array $params = []): array;
 
+    public function listFiltered(?string $region, ?string $state, ?string $cityId, ?string $status, ?string $anticipation): array;
+
     public function list(int $limit = 50, array $params = [], string $order = 'DESC'): array;
 
     public function count(?Agent $createdBy = null): int;

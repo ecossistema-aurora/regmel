@@ -74,15 +74,29 @@
                         {{ status.value }}
                     </option>
                 {% endfor %}
-}
+            </select>
+        </div>
+
+        <div class="col-md-3 mt-2">
+            <label for="anticipation-filter" class="form-label">{{ 'proposal.anticipation'|trans }}</label>
+            <select id="anticipation-filter" name="anticipation" class="form-select" data-placeholder="{{ 'all'|trans }}">
+                <option value="">{{ 'all'|trans }}</option>
+                {% for option in anticipationOption %}
+                    <option
+                            value="{{ option.value }}"
+                            {% if option.value == app.request.get('anticipation') %}selected{% endif %}
+                    >
+                        {{ option.label }}
+                    </option>
+                {% endfor %}
             </select>
         </div>
     {% endif %}
 
+    <div class="col-md-3 d-flex align-items-end">
+        <a href="{{ path(app.request.attributes.get('_route')) }}" class="btn btn-outline-dark btn-sm">
+            {{ 'reset'|trans }}
+        </a>
+    </div>
 </form>
 
-<div class="col-md-3 d-flex align-items-end">
-    <a href="{{ path(app.request.attributes.get('_route')) }}" class="btn btn-outline-dark btn-sm">
-        {{ 'reset'|trans }}
-    </a>
-</div>

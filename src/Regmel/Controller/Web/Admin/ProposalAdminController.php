@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProposalAdminController extends AbstractAdminController
 {
@@ -40,6 +41,7 @@ class ProposalAdminController extends AbstractAdminController
         private readonly InitiativeServiceInterface $initiativeService,
         private readonly ConfigEnvironment $configEnvironment,
         private readonly PhaseServiceInterface $phaseService,
+        private readonly TranslatorInterface $translator,
         public readonly InscriptionOpportunityServiceInterface $inscriptionOpportunityService,
     ) {
     }
@@ -57,8 +59,13 @@ class ProposalAdminController extends AbstractAdminController
         $region = $request->query->get('region');
         $state = $request->query->get('state');
         $city = $request->query->get('city');
+        $anticipation = $request->query->get('anticipation');
         $cities = [];
         $states = [];
+        $anticipationOptions = [
+            ['value' => 'true', 'label' => $this->translator->trans('proposal.in_anticipation')],
+            ['value' => 'false', 'label' => $this->translator->trans('proposal.no_anticipation')],
+        ];
 
         if ($region) {
             $states = $this->stateService->findBy(['region' => $region]);
@@ -68,7 +75,7 @@ class ProposalAdminController extends AbstractAdminController
             $cities = $this->cityService->findByState($state);
         }
 
-        $filtered = $this->initiativeService->listFiltered($region, $state, $city, $status);
+        $filtered = $this->initiativeService->listFiltered($region, $state, $city, $status, $anticipation);
 
         $env = $this->configEnvironment->aurora();
 
@@ -92,6 +99,7 @@ class ProposalAdminController extends AbstractAdminController
                 'price_per_house' => $env['variables']['price_per_household'] ?? 1,
                 'map_file' => $extraFields['map_file'] ?? '',
                 'project_file' => $extraFields['project_file'] ?? '',
+                'anticipation' => $extraFields['anticipation'] ?? '',
             ];
         }, $filtered);
 
@@ -101,6 +109,8 @@ class ProposalAdminController extends AbstractAdminController
             'statuses' => $statuses,
             'states' => $states,
             'cities' => $cities,
+            'anticipation' => $extraFields['anticipation'] ?? '',
+            'anticipationOption' => $anticipationOptions,
         ], parentPath: '');
     }
 
@@ -144,7 +154,10 @@ class ProposalAdminController extends AbstractAdminController
             $company,
             $request->request->all(),
             $request->files->get('map'),
-            $request->files->get('project')
+            $request->files->get('project'),
+            $request->files->get('annex_iv_c_file'),
+            $request->files->get('technical-manager_file'),
+            $request->files->get('rrt_art_file')
         );
 
         $this->addFlashSuccess('Pronto, nova proposta enviada');

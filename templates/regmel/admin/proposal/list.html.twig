@@ -44,6 +44,7 @@
                             <th>Qtd. Domicílios</th>
                             <th>Área Total</th>
                             <th>Valor Global da Proposta</th>
+                            <th>{{ 'proposal.anticipation'|trans }}</th>
                             <th>{{ 'actions' | trans }}</th>
                         </tr>
                         </thead>
@@ -70,6 +71,17 @@
                                 <td>{{ proposal.quantity_houses }}</td>
                                 <td>{{ proposal.area_size }}</td>
                                 <td>R$ {{ (proposal.quantity_houses * env.aurora.variables.price_per_household)|number_format(2, ',', '.') }}</td>
+                                <td>
+                                    {% set anticipation = proposal.anticipation %}
+                                    {% set anticipationClass = ({
+                                        'true': 'bg-primary',
+                                        'false': 'bg-secondary',
+                                    }[anticipation] ?? 'bg-secondary') %}
+
+                                    <span class="badge {{ anticipationClass }}">
+                                        {{ proposal.anticipation == 'true' ? 'proposal.in_anticipation'|trans : 'proposal.no_anticipation'|trans }}
+                                    </span>
+                                </td>
                                 <td>
                                     <button
                                         class="btn btn-outline-info btn-sm"

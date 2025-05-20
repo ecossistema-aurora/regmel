@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const typeElement = document.getElementById('type-filter');
     const cityElement = document.getElementById('city-filter');
     const statusesElement = document.getElementById('status-filter');
+    const anticipationElement = document.getElementById('anticipation-filter');
 
     let stateSelect;
 
@@ -90,6 +91,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         citySelect.on('change', () => {
             cityElement.form.submit();
+        });
+    }
+
+    if (anticipationElement) {
+        anticipationElement.classList.remove('form-select');
+        new TomSelect(anticipationElement, {
+            create: false,
+            placeholder: anticipationElement.dataset.placeholder || 'Selecione',
+            allowEmptyOption: true,
+            sortField: { field: 'text', direction: 'asc' },
+        }).on('change', () => {
+            anticipationElement.form.submit();
         });
     }
 });
