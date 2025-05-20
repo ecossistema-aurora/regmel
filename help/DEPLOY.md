@@ -74,7 +74,24 @@ Para a aplicação REGMEL há um comando que cria um conjunto de dados necessár
 ```shell
 make demo-regmel
 ```
+
+Esse comando gerará um usuário padrão administrador para o sistema
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Senha</th>
+  </tr>
+  <tbody>
+    <tr>
+      <td>admin@regmel.com</td>
+      <td>Aurora@2024</td>
+    </tr>
+  </tbody>
+</table>
+
 </details>
+
 
 <details>
 <summary>Pós Instalação (Importante)</summary>
