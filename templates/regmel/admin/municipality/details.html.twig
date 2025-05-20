@@ -191,6 +191,7 @@
                                             <th>Titulo</th>
                                             <th>Empresa/OSC</th>
                                             <th>Status</th>
+                                            <th>{{ 'proposal.anticipation'|trans }}</th>
                                             <th>Ações</th>
                                         </tr>
                                     </thead>
@@ -211,8 +212,19 @@
                                                     'Não Selecionada':         'bg-danger text-white',
                                                 }[status] ?? 'bg-dark') %}
                                                 <span class="badge {{ badgeClass }} text-dark">
-                                        {{ status }}
-                                    </span>
+                                                    {{ status }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                {% set anticipation = proposal.extraFields.anticipation ?? 'false' %}
+                                                {% set anticipationClass = ({
+                                                    'true': 'bg-primary',
+                                                    'false': 'bg-secondary',
+                                                }[anticipation] ?? 'bg-secondary') %}
+
+                                                <span class="badge {{ anticipationClass }}">
+                                                    {{ anticipation == 'true' ? 'proposal.in_anticipation'|trans : 'proposal.no_anticipation'|trans }}
+                                                </span>
                                             </td>
                                             <td>
                                                 <button

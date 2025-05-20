@@ -93,12 +93,12 @@
                     <div class="row">
                         <div class="col">
                             <label for="map" class="form-label">Mapa Poligonal (PDF/JPG)</label>
-                            <input type="file" id="map" name="map" class="form-control"/>
+                            <input type="file" id="Mapa poligonal" name="map" data-allowed="pdf,jpg" class="form-control"/>
                         </div>
 
                         <div class="col">
                             <label for="project" class="form-label">Anexo (KMZ/KML/Shapefiles)</label>
-                            <input type="file" id="project" name="project" class="form-control"/>
+                            <input type="file" id="Anexo" name="project" data-allowed="kmz,kml,shp,shx,dbf" class="form-control"/>
                         </div>
                     </div>
 
@@ -130,6 +130,38 @@
                                     </div>
                                 </div>
                             </div>
+
+                        {% if company.extraFields.tipo == 'Entidade' %}
+                            <div class="mt-4 mb-2 text-primary">
+                                <strong>{{ 'proposal.need_advance'|trans }}<span class="text-danger">*</span></strong>
+                            </div>
+                            <div>
+                                <input type="radio" id="antecipacao_sim" name="anticipation" value="true" required>
+                                <label for="antecipacao_sim">{{ 'yes'|trans }}</label>
+                                <input class="ms-2" type="radio" id="antecipacao_nao" name="anticipation" value="false" required>
+                                <label for="antecipacao_nao">{{ 'no'|trans }}</label>
+                            </div>
+
+                            <div id="campos-antecipacao" style="display:none;">
+                                <div class="mt-3">
+                                    <label class="form-label fw-bold">
+                                        {{ 'proposal.experience_field'|trans }}
+                                        <br>
+                                        <a href="/files/exemplo-anexo-iv-c.docx" download>{{ 'proposal.download_model'|trans }}</a>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="file" name="annex_iv_c_file" data-allowed="pdf" accept="application/pdf" id="Anexo IV-C" class="form-control" required>
+                                </div>
+                                <div class="mt-3">
+                                    <label class="form-label fw-bold">{{ 'proposal.responsible_field'|trans }} <span class="text-danger">*</span></label>
+                                    <input type="file" name="technical-manager_file" data-allowed="pdf" id="Responsável técnico" accept="application/pdf" class="form-control" required>
+                                </div>
+                                <div class="mt-3">
+                                    <label class="form-label fw-bold">{{ 'proposal.rrt_art_field'|trans }} <span class="text-danger">*</span></label>
+                                    <input type="file" name="rrt_art_file" data-allowed="pdf" accept="application/pdf" id="RRT ART" class="form-control" required>
+                                </div>
+                            </div>
+                        {% endif %}
                         </div>
 
                         <div class="col">
@@ -163,4 +195,12 @@
             document.getElementById('x').innerHTML = 0;
         }
     }
+    document.querySelectorAll('input[name="anticipation"]').forEach(function(el) {
+        el.addEventListener('change', function() {
+            document.getElementById('campos-antecipacao').style.display = this.value === 'true' ? 'block' : 'none';
+            document.querySelectorAll('#campos-antecipacao input').forEach(function(input) {
+                input.required = (el.value === 'true');
+            });
+        });
+    });
 </script>

@@ -33,7 +33,7 @@
                 <div class="logout-submit">
                     <button class="btn btn-outline-light">{{ 'logout' | trans }}</button>
                     <button class="btn btn-outline-light">{{ 'draft' | trans }}</button>
-                    <button form="space-edit-form" type="submit" class="btn btn-light">{{ 'save' | trans}}</button>
+                    <button form="space-edit-form" type="submit" id="submit-btn" class="btn btn-light">{{ 'save' | trans}}</button>
                 </div>
             </div>
 
@@ -49,5 +49,6 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="module" src="{{ asset('js/load-cities.js') }}"></script>
+    <script type="module" src="{{ asset('js/files-validation.js') }}"></script>
 {% endblock %}
 

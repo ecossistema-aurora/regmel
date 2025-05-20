@@ -167,7 +167,7 @@ readonly class InitiativeService extends AbstractEntityService implements Initia
         return $initiative;
     }
 
-    public function listFiltered(?string $region, ?string $state, ?string $cityId, ?string $status): array
+    public function listFiltered(?string $region, ?string $state, ?string $cityId, ?string $status, ?string $anticipation): array
     {
         $cityName = null;
 
@@ -175,6 +175,6 @@ readonly class InitiativeService extends AbstractEntityService implements Initia
             $cityName = $this->cityService->get($cityId)->getName().'-'.$state;
         }
 
-        return $this->repository->findByFilters($region, $state, $cityName, $status);
+        return $this->repository->findByFilters($region, $state, $cityName, $status, $anticipation);
     }
 }

@@ -105,6 +105,7 @@
                                 <th>Num. de Domicílios</th>
                                 <th>Valor Global da Proposta</th>
                                 <th>Status</th>
+                                <th>{{ 'proposal.anticipation'|trans }}</th>
                                 <th>Ações</th>
                             </tr>
                             </thead>
@@ -128,6 +129,17 @@
                                     }[status] ?? 'bg-dark') %}
                                     <span class="badge {{ badgeClass }} text-dark">
                                         {{ status }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% set anticipation = proposal.extraFields.anticipation ?? 'false' %}
+                                    {% set anticipationClass = ({
+                                        'true': 'bg-primary',
+                                        'false': 'bg-secondary',
+                                    }[anticipation] ?? 'bg-secondary') %}
+
+                                    <span class="badge {{ anticipationClass }}">
+                                        {{ anticipation == 'true' ? 'proposal.in_anticipation'|trans : 'proposal.no_anticipation'|trans }}
                                     </span>
                                 </td>
                                 <td>

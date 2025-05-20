@@ -1112,6 +1112,14 @@ view:
     text_out_of_period: Infelizmente, o período de inscrição não está disponível no momento. Por favor, aguarde o próximo oficio.
 
 proposal:
+  need_advance: Precisa de antecipação do recurso financeiro para esta proposta?
+  download_model: Baixar modelo
+  experience_field: a) Experiência na realização de ações de mobilização social em programas e políticas públicas de habitação, comprovada por meio de declaração de experiência, na forma do Anexo IV-C.
+  responsible_field: b) Indicação de responsável(is) técnico(s), com registro ativo nas áreas de arquitetura ou engenharia, comprovada por meio de documento que demonstre a existência de contrato permanente ou temporário, ou vínculo associativo, com exercício na mesma unidade da federação da sede ou filial da OSC.
+  rrt_art_field: c) RRT ou ART
+  anticipation: Antecipação do Recurso
+  in_anticipation: Com antecipação
+  no_anticipation: Sem antecipação
   status:
     sent: Enviada
     no_municipality: Sem Adesão do Município

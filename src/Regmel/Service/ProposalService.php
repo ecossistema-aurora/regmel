@@ -74,8 +74,15 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         );
     }
 
-    public function saveProposal(Organization $company, array $data, ?UploadedFile $map = null, ?UploadedFile $project = null): Initiative
-    {
+    public function saveProposal(
+        Organization $company,
+        array $data,
+        ?UploadedFile $map = null,
+        ?UploadedFile $project = null,
+        ?UploadedFile $annexIvC = null,
+        ?UploadedFile $technicalManager = null,
+        ?UploadedFile $rrtArt = null
+    ): Initiative {
         $user = $this->security->getUser();
 
         $municipality = $this->organizationRepository->findOrganizationByCityId(
@@ -114,6 +121,9 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
 
         $mapFileName = null;
         $projectFileName = null;
+        $annexIvCFileName = null;
+        $technicalManagerFileName = null;
+        $rrtArtFileName = null;
 
         if (null !== $map) {
             $mapFileName = $this->uploadFile($map, $company->getName(), $cityName, $cityCode, extraName: 'area-poligonal');
@@ -121,6 +131,18 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
 
         if (null !== $project) {
             $projectFileName = $this->uploadFile($project, $company->getName(), $cityName, $cityCode, extraName: 'projeto');
+        }
+
+        if (($data['anticipation'] ?? null) === 'true') {
+            if ($annexIvC) {
+                $annexIvCFileName = $this->uploadFile($annexIvC, $company->getName(), $cityName, $cityCode, extraName: 'anexo-iv-c');
+            }
+            if ($technicalManager) {
+                $technicalManagerFileName = $this->uploadFile($technicalManager, $company->getName(), $cityName, $cityCode, extraName: 'responsavel-tecnico');
+            }
+            if ($rrtArt) {
+                $rrtArtFileName = $this->uploadFile($rrtArt, $company->getName(), $cityName, $cityCode, extraName: 'rrt-art');
+            }
         }
 
         $initiative->setExtraFields([
@@ -135,6 +157,10 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
             'city_id' => $cityId,
             'state' => $state,
             'region' => $region,
+            'anticipation' => $data['anticipation'] ?? 'false',
+            'annex_iv_c_file' => $annexIvCFileName,
+            'technical-manager_file' => $technicalManagerFileName,
+            'rrt_art_file' => $rrtArtFileName,
         ]);
 
         $this->initiativeRepository->save($initiative);
