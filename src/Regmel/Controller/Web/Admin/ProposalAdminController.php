@@ -258,4 +258,19 @@ class ProposalAdminController extends AbstractAdminController
 
         return $response;
     }
+
+    #[Route('/painel/admin/propostas/{id}/status', name: 'admin_regmel_proposal_update_status', methods: ['POST'])]
+    public function updateStatusProposal(Request $request, Uuid $id): Response
+    {
+        $status = StatusProposalEnum::from($request->request->get('status'));
+        $reason = $request->request->get('reason');
+
+        if (true === empty(trim($reason))) {
+            $this->addFlash('error', 'O motivo é obrigatório');
+        } else {
+            $this->proposalService->updateStatusProposal($id, $status, $reason);
+        }
+
+        return $this->redirectToRoute('admin_regmel_proposal_list');
+    }
 }
