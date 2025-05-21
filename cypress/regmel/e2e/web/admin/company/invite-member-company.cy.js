@@ -1,20 +1,21 @@
 const empresas = [
-    { nome: 'Empresa Norte', cnpj: '12345678000101', site: 'https://empresa-norte.com' },
-    { nome: 'Empresa Nordeste', cnpj: '12345678000102', site: 'https://empresa-nordeste.com' },
+    { nome: 'Empresa Norte', site: 'https://empresa-norte.com' },
+    { nome: 'Empresa Nordeste', site: 'https://empresa-nordeste.com' },
 ];
 
 empresas.forEach((empresa, index) => {
     const timestamp = Date.now();
     const emailEmpresa = `empresa${index}_${timestamp}@teste.com`;
     const emailUsuario = `criador${index}_${timestamp}@empresa.com`;
-    const cpf = `${Math.floor(10000000000 + Math.random() * 89999999999)}`;
 
     describe(`Fluxo convite de membro - ${empresa.nome}`, () => {
 
         it(`1. Cadastra a empresa ${empresa.nome}`, () => {
             cy.visit('/cadastro/empresa');
 
-            cy.get('input[name="cnpj"]').type(empresa.cnpj);
+            cy.gerarCNPJ().then((cnpj) => {
+                cy.get('input[name="cnpj"]').type(cnpj);
+            });
             cy.get('input[name="name"]').type(empresa.nome);
             cy.get('input[name="email"]').type(emailEmpresa);
             cy.get('input[name="site"]').type(empresa.site);
@@ -24,7 +25,9 @@ empresas.forEach((empresa, index) => {
             cy.get('input[name="lastname"]').type('Silva');
             cy.get('input[name="userPhone"]').type('11988888888');
             cy.get('input[name="position"]').type('Diretor');
-            cy.get('input[name="cpf"]').type(cpf);
+            cy.gerarCPF().then((cpf) => {
+                cy.get('input[name="cpf"]').type(cpf);
+            });
             cy.get('input[name="userEmail"]').type(emailUsuario);
             cy.get('input[name="password"]').type('Aurora@2024');
             cy.get('input[name="confirm_password"]').type('Aurora@2024');

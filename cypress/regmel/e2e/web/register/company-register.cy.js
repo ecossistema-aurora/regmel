@@ -1,21 +1,23 @@
 describe('Cadastro de Empresa/OSC', () => {
-    let timestamp, randomEmailEmpresa, randomCPF;
+    let timestamp, randomEmailEmpresa;
 
     beforeEach(() => {
-        timestamp = Date.now();
-        randomEmailEmpresa = `empresa${timestamp}@teste.com`;
-        randomCPF = `${Math.floor(10000000000 + Math.random() * 89999999999)}`;
         cy.visit('/cadastro/empresa');
     });
 
     it('preenche e envia o formulário com sucesso', () => {
+        timestamp = Date.now();
+        randomEmailEmpresa = `empresa${timestamp}@teste.com`;
+
         cy.get('select#opportunity').then($select => {
             if ($select.find('option').length > 1) {
                 cy.get('select#opportunity').select(1);
             }
         });
 
-        cy.get('input[name="cnpj"]').type('12345678000199');
+        cy.gerarCNPJ().then((cnpj) => {
+            cy.get('input[name="cnpj"]').type(cnpj);
+        });
         cy.get('select[name="framework"]', { timeout: 10000 }).should('be.visible').select('profit');
         cy.get('input[name="name"]').type('Empresa Teste LTDA');
         cy.get('input[name="email"]').first().type(randomEmailEmpresa);
@@ -26,7 +28,9 @@ describe('Cadastro de Empresa/OSC', () => {
         cy.get('input[name="lastname"]').type('Silva');
         cy.get('input[name="userPhone"]').type('11988888888');
         cy.get('input[name="position"]').type('Diretor');
-        cy.get('input[name="cpf"]').type(randomCPF);
+        cy.gerarCPF().then((cpf) => {
+            cy.get('input[name="cpf"]').type(cpf);
+        });
         cy.get('input[name="userEmail"]').type('joao@empresa.com');
         cy.get('input[name="password"]').type('Aurora@2024');
         cy.get('input[name="confirm_password"]').type('Aurora@2024');
@@ -38,10 +42,9 @@ describe('Cadastro de Empresa/OSC', () => {
         cy.get('button[type="submit"]').click();
 
         cy.wait(5000);
-        cy.url().then(url => {
-            cy.log('URL após submit:', url);
-            cy.screenshot('pos-submit');
-        });
+
+        cy.get('.toast').contains('Empresa/OSC criada com sucesso.').should('be.visible');
+        cy.url().should('include', '/');
     });
 
     it('valida se a empresa aparece na listagem após login admin', () => {
