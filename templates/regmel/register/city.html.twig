@@ -64,8 +64,10 @@
 {% block extra_javascripts %}
     <script>
         window.SNP_EMAIL = "{{ env.aurora.email.address }}";
+        window.MAX_FILE_SIZE_MB = "{{ maxFileSize }}";
     </script>
     <script type="module" src="{{ asset('js/load-cities.js') }}"></script>
     <script type="module" src="{{ asset('js/check-duplicate-city.js') }}"></script>
     <script type="module" src="{{ asset('js/regmel/register.js') }}"></script>
+    <script type="module" src="{{ asset('js/files-validation.js') }}"></script>
 {% endblock %}

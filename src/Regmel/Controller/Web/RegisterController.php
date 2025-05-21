@@ -43,6 +43,8 @@ class RegisterController extends AbstractWebController
     {
         $snpEmail = $this->parameterBag->get('app.email.address');
 
+        $maxFileSize = $this->getParameter('max_file_size');
+
         $states = $this->stateService->list();
 
         $opportunity = $this->registerService->findOpportunityWithActivePhase(OrganizationTypeEnum::MUNICIPIO->value);
@@ -56,6 +58,7 @@ class RegisterController extends AbstractWebController
                 'form_id' => self::FORM_CITY,
                 'opportunities' => $this->registerService->findOpportunitiesBy(OrganizationTypeEnum::MUNICIPIO),
                 'states' => $states,
+                'maxFileSize' => $maxFileSize,
             ]);
         }
 
@@ -96,6 +99,7 @@ class RegisterController extends AbstractWebController
                 'states' => $states,
                 'opportunities' => $this->registerService->findOpportunitiesBy(OrganizationTypeEnum::MUNICIPIO),
                 'snp_email' => $snpEmail,
+                'maxFileSize' => $maxFileSize,
             ]);
         }
 
