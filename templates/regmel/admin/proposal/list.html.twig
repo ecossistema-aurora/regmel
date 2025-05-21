@@ -35,6 +35,43 @@
 
                     {% include 'regmel/_components/list-filters.html.twig' %}
 
+                    <div class="modal fade" id="modalProposalStatus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form id="proposalStatusForm" method="post">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Atualizar status da proposta</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-4">
+                                            <label class="form-label fw-bold">Status *</label>
+                                            <select class="form-select" name="status" required>
+                                                <option value="" selected disabled>Selecione o status</option>
+                                                <option value="Anuída">Anuída</option>
+                                                <option value="Não Anuída">Não Anuída</option>
+                                                <option value="Selecionada">Selecionada</option>
+                                                <option value="Não Selecionada">Não Selecionada</option>
+                                            </select>
+                                            <div class="form-text">Selecione uma opção obrigatória</div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="reasonText" class="form-label fw-bold">Motivo *</label>
+                                            <textarea name="reason" id="reasonText" class="form-control" rows="4"
+                                                      placeholder="Descreva o motivo da sua decisão..." required></textarea>
+                                            <div class="form-text">Mínimo de 20 caracteres</div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-primary">Salvar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <table class="js-grid table table-hover table-striped">
                         <thead class="table-dark">
                         <tr>
@@ -59,9 +96,9 @@
                                         'Sem Adesão do Município': 'bg-dark text-white',
                                         'Enviada':                 'bg-warning',
                                         'Recebida':                'bg-info',
-                                        'Anuída':                  'bg-success',
+                                        'Anuída':                  'bg-success text-white',
                                         'Não Anuída':              'bg-danger text-white',
-                                        'Selecionada':             'bg-success',
+                                        'Selecionada':             'bg-success text-white',
                                         'Não Selecionada':         'bg-danger text-white',
                                     }[status] ?? 'bg-dark') %}
                                     <span class="badge {{ badgeClass }} text-dark">
@@ -90,6 +127,15 @@
                                     >
                                         Ver Proposta
                                     </button>
+                                    {% if proposal.status != 'Recebida' and  proposal.status != 'Sem Adesão do Município' %}
+                                        <a  onclick="openProposalStatusModal('{{ proposal.id }}')"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalProposalStatus"
+                                            href="#"
+                                            class="btn btn-outline-success btn-sm">
+                                            Status
+                                        </a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% else %}
@@ -113,4 +159,11 @@
     <script type="module" src="{{ asset('js/grid-init.js') }}"></script>
     <script src="{{ asset('js/modal-proposal-details.js') }}"></script>
     <script type="module" src="{{ asset('js/load-filters.js') }}"></script>
+
+    <script>
+        function openProposalStatusModal(proposalId) {
+            const form = document.getElementById('proposalStatusForm');
+            form.action = `/painel/admin/propostas/${proposalId}/status`;
+        }
+    </script>
 {% endblock %}

@@ -388,10 +388,11 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         $initiative->setExtraFields($extraFields);
         $this->initiativeRepository->save($initiative);
 
-        $emails = $initiative->getOrganizationTo()->getAgents()->map(fn ($agent) => $agent->getUser()?->getEmail())->toArray();
+        $municipalityEmails = $initiative->getOrganizationTo()->getAgents()->map(fn ($agent) => $agent->getUser()?->getEmail())->toArray();
+        $companyEmails = $initiative->getOrganizationFrom()->getAgents()->map(fn ($agent) => $agent->getUser()?->getEmail())->toArray();
 
         $this->emailService->sendTemplatedEmail(
-            $emails,
+            [...$municipalityEmails, ...$companyEmails],
             'Status da proposta atualizado',
             '_emails/new-proposal-status.html.twig',
             [

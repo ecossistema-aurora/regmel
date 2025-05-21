@@ -240,7 +240,7 @@ class MunicipalityAdminController extends AbstractAdminController
         return $this->organizationService->generateCsv($municipalities, 'municipios.csv', $type);
     }
 
-    #[Route('/painel/admin/municipios/{municipalityId}/propostas/{id}/status', name: 'admin_regmel_proposal_update_status', methods: ['POST'])]
+    #[Route('/painel/admin/municipios/{municipalityId}/propostas/{id}/status', name: 'admin_regmel_municipality_proposal_update_status', methods: ['POST'])]
     public function updateStatusProposal(Request $request, $municipalityId, Uuid $id): Response
     {
         $status = StatusProposalEnum::from($request->request->get('status'));
