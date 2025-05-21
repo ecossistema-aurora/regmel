@@ -6,11 +6,7 @@
     <div class="accordion accordion-flush accordion-cards mt-4" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
             <h2 class="accordion-header">
-                <button class="accordion-button" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#panelsStayOpen-collapseOne"
-                        aria-expanded="true"
-                        aria-controls="panelsStayOpen-collapseOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                     Identificação da Proposta
                 </button>
             </h2>
@@ -131,37 +127,43 @@
                                 </div>
                             </div>
 
-                        {% if company.extraFields.tipo == 'Entidade' %}
-                            <div class="mt-4 mb-2 text-primary">
-                                <strong>{{ 'proposal.need_advance'|trans }}<span class="text-danger">*</span></strong>
-                            </div>
-                            <div>
-                                <input type="radio" id="antecipacao_sim" name="anticipation" value="true" required>
-                                <label for="antecipacao_sim">{{ 'yes'|trans }}</label>
-                                <input class="ms-2" type="radio" id="antecipacao_nao" name="anticipation" value="false" required>
-                                <label for="antecipacao_nao">{{ 'no'|trans }}</label>
-                            </div>
+                            {% if company.extraFields.tipo == 'Entidade' %}
+                                <div class="mt-4 mb-2 text-primary">
+                                    <strong>{{ 'proposal.need_advance'|trans }}<span class="text-danger">*</span></strong>
+                                </div>
+                                <div>
+                                    <input type="radio" id="antecipacao_sim" name="anticipation" value="true" required>
+                                    <label for="antecipacao_sim">{{ 'yes'|trans }}</label>
+                                    <input class="ms-2" type="radio" id="antecipacao_nao" name="anticipation" value="false" required>
+                                    <label for="antecipacao_nao">{{ 'no'|trans }}</label>
+                                </div>
 
-                            <div id="campos-antecipacao" style="display:none;">
-                                <div class="mt-3">
-                                    <label class="form-label fw-bold">
-                                        {{ 'proposal.experience_field'|trans }}
-                                        <br>
-                                        <a href="/files/ANEXO IV - DECLARAÇÃO DE EXPERIENCIA.docx" download>{{ 'proposal.download_model'|trans }}</a>
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="file" name="annex_iv_c_file" data-allowed="pdf" accept="application/pdf" data-label="Anexo IV-C" class="form-control" required>
+                                <div id="campos-antecipacao" style="display:none;">
+                                    <div class="alert alert-info border border-primary shadow-sm mt-3">
+                                        <i class="material-icons align-middle text-primary me-2">info</i>
+                                        <strong>{{ 'attention' | trans }}</strong> {{ 'all_documents' | trans }}
+                                        <hr class="my-2">
+                                            {{ 'several_documents' | trans }}
+                                    </div>
+
+                                    <div class="mt-3">
+                                        <label class="form-label fw-bold">
+                                            {{ 'proposal.experience_field'|trans }}<br>
+                                            <a href="/files/exemplo-anexo-iv-c.docx" download>{{ 'proposal.download_model'|trans }}</a>
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" name="annex_iv_c_file" data-allowed="pdf" accept="application/pdf" id="Anexo IV-C" class="form-control" required>
+                                    </div>
+                                    <div class="mt-3">
+                                        <label class="form-label fw-bold">{{ 'proposal.responsible_field'|trans }} <span class="text-danger">*</span></label>
+                                        <input type="file" name="technical-manager_file" data-allowed="pdf" id="Responsável técnico" accept="application/pdf" class="form-control" required>
+                                    </div>
+                                    <div class="mt-3">
+                                        <label class="form-label fw-bold">{{ 'proposal.rrt_art_field'|trans }} <span class="text-danger">*</span></label>
+                                        <input type="file" name="rrt_art_file" data-allowed="pdf" accept="application/pdf" id="RRT ART" class="form-control" required>
+                                    </div>
                                 </div>
-                                <div class="mt-3">
-                                    <label class="form-label fw-bold">{{ 'proposal.responsible_field'|trans }} <span class="text-danger">*</span></label>
-                                    <input type="file" name="technical-manager_file" data-allowed="pdf" data-label="Responsável técnico" accept="application/pdf" class="form-control" required>
-                                </div>
-                                <div class="mt-3">
-                                    <label class="form-label fw-bold">{{ 'proposal.rrt_art_field'|trans }} <span class="text-danger">*</span></label>
-                                    <input type="file" name="rrt_art_file" data-allowed="pdf" accept="application/pdf" data-label="RRT ART" class="form-control" required>
-                                </div>
-                            </div>
-                        {% endif %}
+                            {% endif %}
                         </div>
 
                         <div class="col">
@@ -185,7 +187,7 @@
 
 <script>
     function atualizarValor() {
-        let value = parseInt(document.getElementById('quantity_houses').value)
+        let value = parseInt(document.getElementById('quantity_houses').value);
 
         if (true !== isNaN(value)) {
             document.getElementById('x').innerHTML = (
