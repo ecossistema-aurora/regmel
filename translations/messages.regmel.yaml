@@ -1112,6 +1112,7 @@ view:
     text_out_of_period: Infelizmente, o período de inscrição não está disponível no momento. Por favor, aguarde o próximo oficio.
 
 proposal:
+  new: Nova Proposta
   need_advance: Precisa de antecipação do recurso financeiro para esta proposta?
   download_model: Baixar modelo
   experience_field: a) Experiência na realização de ações de mobilização social em programas e políticas públicas de habitação, comprovada por meio de declaração de experiência, na forma do Anexo IV-C.

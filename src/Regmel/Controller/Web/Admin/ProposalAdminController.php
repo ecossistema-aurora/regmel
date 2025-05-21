@@ -124,6 +124,8 @@ class ProposalAdminController extends AbstractAdminController
 
         $isPhaseActive = $this->phaseService->isPhaseActive($opportunity->getId());
 
+        $maxFileSize = $this->getParameter('max_file_size');
+
         if (false === $isPhaseActive) {
             return $this->render(
                 'regmel/admin/proposal/add-proposal-not-active.html.twig',
@@ -146,6 +148,7 @@ class ProposalAdminController extends AbstractAdminController
                 'regions' => $regions,
                 'token' => $this->jwtManager->create($user),
                 'company' => $company,
+                'maxFileSize' => $maxFileSize,
                 // 'opportunities' => $opportunities,
             ], parentPath: '');
         }

@@ -10,6 +10,7 @@ parameters:
     app.dir.storage.images: '%env(resolve:STORAGE_IMAGES_DIR)%'
     app.url.storage.images: '%env(resolve:STORAGE_IMAGES_BASE_URL)%'
     app.email.address: '%env(EMAIL_ADDRESS)%'
+    max_file_size: '%env(MAX_FILE_SIZE_MB)%'
 
 imports:
     - { resource: directories.yaml }

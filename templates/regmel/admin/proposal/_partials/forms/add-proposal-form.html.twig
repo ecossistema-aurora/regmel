@@ -1,4 +1,4 @@
-<form id="space-edit-form" method="POST" class="entity-edit-form" enctype="multipart/form-data">
+<form id="proposal-add-form" method="POST" class="entity-add-form" enctype="multipart/form-data">
     <input type="hidden" name="token" value="">
 
     <input type="hidden" name="company" value="{{ company.id }}">
@@ -93,12 +93,12 @@
                     <div class="row">
                         <div class="col">
                             <label for="map" class="form-label">Mapa Poligonal (PDF/JPG)</label>
-                            <input type="file" id="Mapa poligonal" name="map" data-allowed="pdf,jpg" class="form-control"/>
+                            <input type="file" data-label="Mapa poligonal" name="map" data-allowed="pdf,jpg" class="form-control"/>
                         </div>
 
                         <div class="col">
                             <label for="project" class="form-label">Anexo (KMZ/KML/Shapefiles)</label>
-                            <input type="file" id="Anexo" name="project" data-allowed="kmz,kml,shp,shx,dbf" class="form-control"/>
+                            <input type="file" data-label="Anexo" name="project" data-allowed="kmz,kml,shp,shx,dbf" class="form-control"/>
                         </div>
                     </div>
 
@@ -147,18 +147,18 @@
                                     <label class="form-label fw-bold">
                                         {{ 'proposal.experience_field'|trans }}
                                         <br>
-                                        <a href="/files/exemplo-anexo-iv-c.docx" download>{{ 'proposal.download_model'|trans }}</a>
+                                        <a href="/files/ANEXO IV - DECLARAÇÃO DE EXPERIENCIA.docx" download>{{ 'proposal.download_model'|trans }}</a>
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="file" name="annex_iv_c_file" data-allowed="pdf" accept="application/pdf" id="Anexo IV-C" class="form-control" required>
+                                    <input type="file" name="annex_iv_c_file" data-allowed="pdf" accept="application/pdf" data-label="Anexo IV-C" class="form-control" required>
                                 </div>
                                 <div class="mt-3">
                                     <label class="form-label fw-bold">{{ 'proposal.responsible_field'|trans }} <span class="text-danger">*</span></label>
-                                    <input type="file" name="technical-manager_file" data-allowed="pdf" id="Responsável técnico" accept="application/pdf" class="form-control" required>
+                                    <input type="file" name="technical-manager_file" data-allowed="pdf" data-label="Responsável técnico" accept="application/pdf" class="form-control" required>
                                 </div>
                                 <div class="mt-3">
                                     <label class="form-label fw-bold">{{ 'proposal.rrt_art_field'|trans }} <span class="text-danger">*</span></label>
-                                    <input type="file" name="rrt_art_file" data-allowed="pdf" accept="application/pdf" id="RRT ART" class="form-control" required>
+                                    <input type="file" name="rrt_art_file" data-allowed="pdf" accept="application/pdf" data-label="RRT ART" class="form-control" required>
                                 </div>
                             </div>
                         {% endif %}

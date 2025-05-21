@@ -1,75 +1,42 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const MAX_TOTAL_SIZE = 1024 * 1024;
-    const form = document.getElementById('space-edit-form');
-    const fileInputs = form.querySelectorAll('input[type="file"]');
-    const submitButton = document.getElementById('submit-btn') || form.querySelector('input[type="submit"]');
+document.addEventListener('DOMContentLoaded', () => {
+    const MAX_MB = window.MAX_FILE_SIZE_MB || 5;
+    const MAX_SIZE = MAX_MB * 1024 * 1024;
 
-    let errorMsg = document.createElement('div');
-    errorMsg.className = 'alert alert-danger mt-3';
-    errorMsg.style.display = 'none';
-    form.appendChild(errorMsg);
+    document.querySelectorAll('form').forEach(form => {
+        const fileInputs = form.querySelectorAll('input[type="file"]');
+        if (!fileInputs.length) return;
 
-    function isValidFileType(file, allowedTypes) {
-        const ext = file.name.split('.').pop().toLowerCase();
-        return allowedTypes.includes(ext);
-    }
-
-    function updateFileValidation() {
-        let totalSize = 0;
-        let typeError = false;
-        let typeErrorMsg = '';
-
-        fileInputs.forEach(input => {
-            if (input.files.length > 0) {
-                const allowed = input.dataset.allowed ? input.dataset.allowed.split(',').map(e => e.trim().toLowerCase()) : null;
-                for (let file of input.files) {
-                    totalSize += file.size;
-                    if (allowed && !isValidFileType(file, allowed)) {
-                        typeError = true;
-                        typeErrorMsg = `Tipo de arquivo inválido em "${input.id}". Permitidos: ${allowed.join(', ').toUpperCase()}`;
-                    }
-                }
-            }
-        });
-
-        if (totalSize > MAX_TOTAL_SIZE) {
-            errorMsg.textContent = 'O tamanho total dos arquivos enviados não pode ultrapassar 1MB.';
-            errorMsg.style.display = 'block';
-            if (submitButton) submitButton.disabled = true;
-        } else if (typeError) {
-            errorMsg.textContent = typeErrorMsg;
-            errorMsg.style.display = 'block';
-            if (submitButton) submitButton.disabled = true;
-        } else {
+        let errorMsg = form.querySelector('.file-validation-error');
+        if (!errorMsg) {
+            errorMsg = document.createElement('div');
+            errorMsg.className = 'alert alert-danger mt-3 file-validation-error';
             errorMsg.style.display = 'none';
-            if (submitButton) submitButton.disabled = false;
+            form.appendChild(errorMsg);
         }
-    }
+        const submitBtn = form.querySelector('button[type="submit"],input[type="submit"]');
 
-    fileInputs.forEach(input => {
-        input.addEventListener('change', updateFileValidation);
-    });
-
-    form.addEventListener('submit', function (e) {
-        let totalSize = 0;
-        let typeError = false;
-
-        fileInputs.forEach(input => {
-            if (input.files.length > 0) {
-                const allowed = input.dataset.allowed ? input.dataset.allowed.split(',').map(e => e.trim().toLowerCase()) : null;
-                for (let file of input.files) {
-                    totalSize += file.size;
-                    if (allowed && !isValidFileType(file, allowed)) {
-                        typeError = true;
+        function validate() {
+            let total = 0, error = '', allowed, ext;
+            fileInputs.forEach(input => {
+                allowed = (input.dataset.allowed || '').split(',').map(e => e.trim().toLowerCase());
+                Array.from(input.files).forEach(file => {
+                    total += file.size;
+                    ext = file.name.split('.').pop().toLowerCase();
+                    if (allowed[0] && !allowed.includes(ext)) {
+                        error = `Tipo de arquivo inválido em "${input.dataset.label}". Permitidos: ${allowed.join(', ').toUpperCase()}`;
                     }
-                }
+                });
+            });
+            if (!error && total > MAX_SIZE) {
+                error = `O tamanho total dos arquivos enviados não pode ultrapassar ${MAX_MB}MB.`;
             }
-        });
-
-        if (totalSize > MAX_TOTAL_SIZE || typeError) {
-            e.preventDefault();
-            errorMsg.textContent = 'O envio foi bloqueado. Verifique o tamanho e o tipo dos arquivos.';
-            errorMsg.style.display = 'block';
+            errorMsg.textContent = error;
+            errorMsg.style.display = error ? 'block' : 'none';
+            if (submitBtn) submitBtn.disabled = !!error;
+            return !error;
         }
+
+        fileInputs.forEach(input => input.addEventListener('change', validate));
+        form.addEventListener('submit', e => { if (!validate()) e.preventDefault(); });
     });
 });
