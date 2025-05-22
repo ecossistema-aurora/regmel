@@ -76,24 +76,17 @@
                                             </a>
                                         </td>
                                         <td>
-                                                <span class="badge {{ status_class_map[item.status|lower] }}">
-                                                    {{ status_map[item.status|lower]|trans }}
-                                                </span>
-
-                                            {% if item.status|lower == 'awaitingconfirmation' and is_granted('ROLE_ADMIN') %}
-                                                <button onclick="modalConfirmUser('{{ item.id }}', '{{ item.name }}', '{{ item.email }}')"
-                                                        class="btn btn-outline-success btn-sm mt-2">
-                                                    {{ 'confirm_user'|trans }}
-                                                </button>
-                                            {% endif %}
+                                            <span class="badge {{ status_class_map[item.status|lower] }}">
+                                                {{ status_map[item.status|lower]|trans }}
+                                            </span>
                                         </td>
                                         <td>{{ item.createdAt.format('d/m/Y H:i:s') }}</td>
                                         <td>
                                             {% for role in item.roles %}
                                                 {% if role != 'ROLE_USER' %}
                                                     <span class="badge {{ role_color_map[role]|default('bg-secondary') }} me-1">
-                                                            {{ 'role'|trans }}
-                                                        </span>
+                                                        {{ role|trans }}
+                                                    </span>
                                                 {% endif %}
                                             {% endfor %}
                                         </td>
@@ -125,6 +118,14 @@
                                                             {{ 'edit'|trans }}
                                                         </a>
                                                     </li>
+                                                    {% if item.status|lower == 'awaitingconfirmation' and is_granted('ROLE_ADMIN') %}
+                                                        <li>
+                                                            <a href="#" class="dropdown-item text-success"
+                                                               onclick="modalConfirmUser('{{ item.id }}', '{{ item.name }}', '{{ item.email }}')">
+                                                                {{ 'confirm_user'|trans }}
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
                                                 </ul>
                                             </div>
                                         </td>
