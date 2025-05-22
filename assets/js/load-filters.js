@@ -11,6 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let stateSelect, regionSelect;
 
+    const limparSeOpcaoPadrao = (select, textoPadrao) => {
+        const valor = select.getValue();
+        const texto = select.options[valor]?.text?.toLowerCase() || '';
+        if (texto.includes(textoPadrao.toLowerCase())) {
+            select.clear(true);
+        }
+    };
+
+    const configurarComportamentoPadrao = (select, textoPadrao) => {
+        select.on('type', () => limparSeOpcaoPadrao(select, textoPadrao));
+        select.on('dropdown_open', () => limparSeOpcaoPadrao(select, textoPadrao));
+    };
+
     if (regionElement) {
         regionElement.classList.remove('form-select');
         regionSelect = new TomSelect(regionElement, {
@@ -19,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
             allowEmptyOption: true,
             sortField: { field: 'text', direction: 'asc' },
         });
+
+        configurarComportamentoPadrao(regionSelect, 'todas as regiões');
 
         regionSelect.on('change', async value => {
             if (!stateElement) return;
@@ -49,46 +64,49 @@ document.addEventListener('DOMContentLoaded', () => {
             allowEmptyOption: true,
         });
 
-        stateSelect.on('change', async value => {
-            if (!value || !regionElement) {
-                stateElement.form.submit();
-                return;
-            }
+        configurarComportamentoPadrao(stateSelect, 'todos os estados');
 
-            const data = await fetch(`/api/regions/${encodeURIComponent(value)}/region`)
-                .then(res => res.ok ? res.json() : null)
-                .catch(() => null);
-
-            if (data && data.region) {
-                regionElement.value = data.region;
-                if (regionSelect) {
-                    regionSelect.setValue(data.region, true);
-                }
-            }
+        stateSelect.on('change', () => {
             stateElement.form.submit();
         });
     }
 
     if (typeElement) {
         typeElement.classList.remove('form-select');
-        new TomSelect(typeElement, {
+        const typeSelect = new TomSelect(typeElement, {
             create: false,
-            placeholder: typeElement.dataset.placeholder || 'Selecione',
+            placeholder: typeElement.dataset.placeholder || 'Todos os tipos',
             allowEmptyOption: true,
-            sortField: { field: 'text', direction: 'asc' },
-        }).on('change', () => {
+            persist: false,
+            selectOnTab: true,
+            hideSelected: true,
+            maxOptions: null,
+            render: {
+                option: function(data, escape) {
+                    return `<div>${escape(data.text)}</div>`;
+                }
+            }
+        });
+
+        configurarComportamentoPadrao(typeSelect, 'todos os tipos');
+
+        typeSelect.on('change', () => {
             typeElement.form.submit();
         });
     }
 
     if (statusesElement) {
         statusesElement.classList.remove('form-select');
-        new TomSelect(statusesElement, {
+        const statusesSelect = new TomSelect(statusesElement, {
             create: false,
             placeholder: statusesElement.dataset.placeholder || 'Selecione',
             allowEmptyOption: true,
             sortField: { field: 'text', direction: 'asc' },
-        }).on('change', () => {
+        });
+
+        configurarComportamentoPadrao(statusesSelect, 'todos os status');
+
+        statusesSelect.on('change', () => {
             statusesElement.form.submit();
         });
     }
@@ -104,6 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
             maxOptions: null,
         });
 
+        configurarComportamentoPadrao(citySelect, '');
+
         citySelect.on('change', () => {
             cityElement.form.submit();
         });
@@ -111,12 +131,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (anticipationElement) {
         anticipationElement.classList.remove('form-select');
-        new TomSelect(anticipationElement, {
+        const anticipationSelect = new TomSelect(anticipationElement, {
             create: false,
             placeholder: anticipationElement.dataset.placeholder || 'Selecione',
             allowEmptyOption: true,
             sortField: { field: 'text', direction: 'asc' },
-        }).on('change', () => {
+        });
+
+        configurarComportamentoPadrao(anticipationSelect, 'todos');
+
+        anticipationSelect.on('change', () => {
             anticipationElement.form.submit();
         });
     }
