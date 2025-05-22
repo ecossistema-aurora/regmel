@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
             placeholder: regionElement.dataset.placeholder || 'Selecione',
             allowEmptyOption: true,
             sortField: { field: 'text', direction: 'asc' },
+            onDropdownOpen() {
+                this.clear();
+            }
         });
 
         regionSelect.on('change', async value => {
@@ -47,13 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
             create: false,
             placeholder: stateElement.dataset.placeholder || 'Selecione',
             allowEmptyOption: true,
+            onDropdownOpen() {
+                this.clear();
+            }
         });
 
         stateSelect.on('change', async value => {
-            if (!value || !regionElement) {
-                stateElement.form.submit();
-                return;
-            }
+            if (!regionElement || !value) return;
 
             const data = await fetch(`/api/regions/${encodeURIComponent(value)}/region`)
                 .then(res => res.ok ? res.json() : null)
@@ -76,7 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
             placeholder: typeElement.dataset.placeholder || 'Selecione',
             allowEmptyOption: true,
             sortField: { field: 'text', direction: 'asc' },
-        }).on('change', () => {
+            onDropdownOpen() {
+                this.clear();
+            }
+        }).on('change', async value => {
+            if (!value) return;
             typeElement.form.submit();
         });
     }
@@ -88,7 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
             placeholder: statusesElement.dataset.placeholder || 'Selecione',
             allowEmptyOption: true,
             sortField: { field: 'text', direction: 'asc' },
-        }).on('change', () => {
+            onDropdownOpen() {
+                this.clear();
+            }
+        }).on('change', async value => {
+            if (!value) return;
             statusesElement.form.submit();
         });
     }
@@ -102,9 +113,13 @@ document.addEventListener('DOMContentLoaded', () => {
             persist: false,
             selectOnTab: true,
             maxOptions: null,
+            onDropdownOpen() {
+                this.clear();
+            }
         });
 
-        citySelect.on('change', () => {
+        citySelect.on('change', async value => {
+            if (!value) return;
             cityElement.form.submit();
         });
     }
@@ -116,7 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
             placeholder: anticipationElement.dataset.placeholder || 'Selecione',
             allowEmptyOption: true,
             sortField: { field: 'text', direction: 'asc' },
-        }).on('change', () => {
+            onDropdownOpen() {
+                this.clear();
+            }
+        }).on('change', async value => {
+            if (!value) return;
             anticipationElement.form.submit();
         });
     }
