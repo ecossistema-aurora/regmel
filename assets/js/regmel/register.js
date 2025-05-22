@@ -49,7 +49,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    async function validateFields() {
+    const allValidations = [];
+
+    function refreshValues() {
+        allValidations.length = 0;
         const firstName = inputs.firstName.value.trim();
         const lastName = inputs.lastName.value.trim();
         const cpf = inputs.cpf.value.trim();
@@ -57,18 +60,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const email = inputs.email.value.trim();
         const password = inputs.password.value.trim();
         const confirmPassword = inputs.confirmPassword.value.trim();
-        const userEmail = inputs.userEmail ? inputs.userEmail.value.trim() : '';
-        const userPhone = inputs.userPhone ? inputs.userPhone.value.trim() : '';
-        const cnpj= inputs.cnpj ? inputs.cnpj.value.trim() : '';
-        let errorMessage = '';
+        const userEmail = inputs.userEmail?.value.trim() || '';
+        const userPhone = inputs.userPhone?.value.trim() || '';
+        const cnpj = inputs.cnpj?.value.trim() || '';
 
-        Object.values(inputs).forEach(input => {
-            if (input) {
-                input.classList.remove('border-danger');
-            }
-        });
-
-        const validations = [
+        allValidations.push(
             {
                 valid: () => validateName(firstName),
                 input: inputs.firstName,
@@ -108,44 +104,72 @@ document.addEventListener('DOMContentLoaded', function () {
                 valid: () => calculatePasswordStrength(password) === 5,
                 input: inputs.password,
                 message: trans(VIEW_AUTHENTICATION_ERROR_INVALID_PASSWORD)
-            },
-        ];
+            }
+        );
 
         if (inputs.userPhone) {
-            validations.push({
+            allValidations.push({
                 valid: () => validatePhone(userPhone),
                 input: inputs.userPhone,
                 message: trans(VIEW_AUTHENTICATION_ERROR_PHONE_INVALID)
             });
         }
 
+        if (inputs.userEmail) {
+            allValidations.push({
+                valid: () => validateEmail(userEmail),
+                input: inputs.userEmail,
+                message: trans(VIEW_AUTHENTICATION_ERROR_INVALID_EMAIL)
+            });
+        }
+
         if (inputs.cnpj) {
-            validations.push({
+            allValidations.push({
                 valid: () => validateCnpj(cnpj),
                 input: inputs.cnpj,
                 message: trans(VIEW_AUTHENTICATION_ERROR_CNPJ_INVALID)
             });
         }
+    }
 
-        for (const rule of validations) {
-            const isValid = await rule.valid();
-            if (!isValid) {
-                errorMessage = rule.message;
-                if (rule.input) {
-                    rule.input.classList.add('border-danger');
-                }
-                break;
+    async function validateField(changedInput) {
+        refreshValues();
+
+        const rule = allValidations.find(r => r.input === changedInput);
+        if (!rule) return true;
+
+        const isValid = await rule.valid();
+
+        if (isValid) {
+            ERROR_MESSAGE_ELEMENT.classList.add('d-none');
+            changedInput.classList.remove('border-danger');
+            return true;
+        } else {
+            ERROR_MESSAGE_ELEMENT.textContent = rule.message;
+            ERROR_MESSAGE_ELEMENT.classList.remove('d-none');
+            changedInput.classList.add('border-danger');
+            return false;
+        }
+    }
+
+
+    async function validateFields() {
+        refreshValues();
+
+        Object.values(inputs).forEach(i => i && i.classList.remove('border-danger'));
+
+        for (const rule of allValidations) {
+            const ok = await rule.valid();
+            if (!ok) {
+                ERROR_MESSAGE_ELEMENT.textContent = rule.message;
+                ERROR_MESSAGE_ELEMENT.classList.remove('d-none');
+                if (rule.input) rule.input.classList.add('border-danger');
+                return false;
             }
         }
 
-        if (errorMessage) {
-            ERROR_MESSAGE_ELEMENT.textContent = errorMessage;
-            ERROR_MESSAGE_ELEMENT.classList.remove('d-none');
-            return false;
-        } else {
-            ERROR_MESSAGE_ELEMENT.classList.add('d-none');
-            return true;
-        }
+        ERROR_MESSAGE_ELEMENT.classList.add('d-none');
+        return true;
     }
 
     async function validateEmailAvailability() {
@@ -176,22 +200,30 @@ document.addEventListener('DOMContentLoaded', function () {
         if (key === 'userEmail') {
             input.addEventListener('blur', validateEmailAvailability);
         } else {
-            input.addEventListener('input', validateFields);
+            input.addEventListener('input', e => validateField(e.target));
         }
     });
 
-    inputs.password.addEventListener('input', function() {
+    inputs.password.addEventListener('input', () => {
         updatePasswordStrength(inputs.password.value);
     });
 
-    FORM.addEventListener('submit', async function (event) {
+    FORM.addEventListener('submit', async event => {
+        event.preventDefault();
+
         const isFieldsValid = await validateFields();
-        const isEmailAvailable = inputs.userEmail ? await validateEmailAvailability() : true;
-        const isValid = isFieldsValid && isEmailAvailable;
-        if (!isValid) {
-            event.preventDefault();
+        if (!isFieldsValid) {
+            return;
         }
+
+        const isEmailAvailable = inputs.userEmail ? await validateEmailAvailability() : true;
+        if (!isEmailAvailable) {
+            return;
+        }
+
+        FORM.submit();
     });
+
 
     function updatePasswordStrength(password) {
         const progressBar = document.getElementById('progressBar');
