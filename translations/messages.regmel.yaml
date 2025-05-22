@@ -53,6 +53,7 @@ all_regions: Todas as regiões
 all_states: Todos os estados
 all_types: Todos os tipos
 all_status: Todos os status
+all_documents: Todos os documentos abaixo devem ser enviados em um único arquivo PDF.
 allow_free_linking: Permitir livre vinculação com
 allowed: Com permissão
 admin_options: Opções do Administrador
@@ -82,6 +83,7 @@ apply_filter: Aplicar Filtros
 attachments_and_links: Anexos e links
 attitudinal_accessibility: Acessibilidade atitudinal
 audio_description: Áudio descrição
+attention: Atenção
 awaiting: Aguardando
 awaiting_confirmation: Aguardando Confirmar Conta
 
@@ -476,6 +478,7 @@ ROLE_SNP: Administrador SNP
 rejected: Rejeitado
 
 selection: Seleção
+several_documents: Caso existam diversos documentos, reúna todos em um único arquivo PDF antes do envio.
 
 tags: Tags
 term: Termo
