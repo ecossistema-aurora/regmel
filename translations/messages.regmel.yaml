@@ -9,6 +9,7 @@ add_opening_hours: Adicionar horário de funcionamento
 add_phase: Adicionar Fase
 add_specific_objective: Adicionar Objetivo Específico
 adapted_bathroom: Banheiro adaptado
+additional_information: Informações adicionais
 account_confirmation: Confirmar conta
 account_confirmed: Conta confirmada
 account_privacy: Conta e Privacidade
@@ -380,6 +381,7 @@ other_options: Outras Opções
 opened_registrations: Inscrições abertas
 opens_at: Abre às
 opening-hours: Horário de funcionamento
+options_exclusive: as opções abaixo não são excludentes.
 opportunity: Oportunidade
 opportunities: Oportunidades
 organizations: Municípios

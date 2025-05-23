@@ -16,8 +16,7 @@
     </div>
     <div class="col-6 mb-3">
         <label for="city" class="form-label required">{{ 'city'| trans }}</label>
-        <select id="city" name="city" class="form-select"
-                data-placeholder="{{ 'select'|trans }}">
+        <select id="city" name="city" class="form-select" data-placeholder="{{ 'select'|trans }}">
             <option value="">{{ 'select'|trans }}</option>
         </select>
     </div>
@@ -26,20 +25,24 @@
 <div class="row">
     <div class="col-4 mb-3">
         <label for="site" class="form-label">{{ 'view.organization.site' | trans }}</label>
-        <input type="text" class="form-control" id="site" name="site" placeholder={{ 'view.organization.site' | trans}} required>
+        <input type="text" class="form-control" id="site" name="site" placeholder="{{ 'view.organization.site' | trans }}" required>
     </div>
     <div class="col-4 mb-3">
         <label for="phone" class="form-label">{{ 'view.organization.phone' | trans }}</label>
-        <input type="tel" class="form-control" maxlength="16" data-mask="phone" id="phone" name="phone" placeholder={{ 'view.organization.phone' | trans}} required>
+        <input type="tel" class="form-control" maxlength="16" data-mask="phone" id="phone" name="phone" placeholder="{{ 'view.organization.phone' | trans }}" required>
     </div>
-
     <div class="col-4 mb-3">
         <label for="email" class="form-label">{{ 'view.organization.email' | trans }}</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder={{ 'view.organization.email' | trans}} required>
+        <input type="email" class="form-control" id="email" name="email" placeholder="{{ 'view.organization.email' | trans }}" required>
     </div>
 </div>
 
-<div class="row mt-4">
+<div class="alert alert-info border border-primary shadow-sm mt-4">
+    <i class="material-icons align-middle text-primary me-2">info</i>
+    <strong>{{ 'additional_information' | trans }}</strong> — {{ 'options_exclusive' | trans }}
+</div>
+
+<div class="row mt-2">
     <div class="col-12 mb-3">
         <label class="form-label d-block">{{ 'improvement_municipality' | trans }}</label>
         <div class="form-check form-check-inline">
@@ -70,14 +73,13 @@
 <div class="row mt-2">
     <div class="col-12 mb-3">
         <label for="joinForm" class="form-label">
-            {{ 'view.organization.file_part1' | trans}}
+            {{ 'view.organization.file_part1' | trans }}
         </label>
         <a class="mx-1" href="/files/adesao-ao-programa.docx" download>{{ 'view.organization.download_form_model' | trans }}</a>
-        {{ 'view.organization.file_part2' | trans}}
-
+        {{ 'view.organization.file_part2' | trans }}
         <input class="form-control" type="file" id="joinForm" name="joinForm" data-allowed="pdf" data-label="Termo de Adesão" accept="application/pdf" required>
         <div class="form-text">
-            {{ 'view.organization.pdf_advice' | trans}}
+            {{ 'view.organization.pdf_advice' | trans }}
         </div>
     </div>
 </div>
