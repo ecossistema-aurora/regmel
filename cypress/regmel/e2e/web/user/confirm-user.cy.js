@@ -17,4 +17,20 @@ describe('Confirmação do usuário', () => {
         cy.get('a[data-modal-button="confirm-link"]').click();
         cy.get('table tbody tr').contains('Ativo').should('exist');
     });
+
+    it('Acessa e confirma usuário especifico não validado', () => {
+        cy.get('a').contains('Usuários').click();
+
+        cy.get('.gridjs-input').type('Empresa Norte');
+
+        cy.get('table tbody tr').contains('Empresa Norte').parents('tr').within(() => {
+            cy.contains('Confirmar Usuário').click();
+        });
+        cy.get('.modal-body').should('be.visible');
+        cy.get('a[data-modal-button="confirm-link"]').click();
+
+        cy.get('button').contains('Próximo').click();
+        cy.get('table tbody tr').contains('Empresa Norte').parents('tr').contains('Ativo').should('exist');
+
+    });
 });

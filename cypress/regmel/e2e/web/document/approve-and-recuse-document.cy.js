@@ -1,4 +1,4 @@
-describe('', () => {
+describe('Aprovar ou recusar o termo de adesão', () => {
     beforeEach(() => {
         cy.loginRegmel('admin@regmel.com', 'Aurora@2024');
     });

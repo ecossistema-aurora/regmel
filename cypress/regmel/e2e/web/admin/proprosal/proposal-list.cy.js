@@ -20,19 +20,23 @@ describe('Listagem de propostas', () => {
             'Qtd. Domicílios',
             'Área Total',
             'Valor Global da Proposta',
+            'Antecipação do Recurso',
             'Ações',
         ];
         headers.forEach(text =>
             cy.contains('.gridjs-th-content', text)
         );
 
+        cy.get('.gridjs-input').type('Empresa Teste LTDA');
         cy.get(':nth-child(2) > [data-column-id="empresa"] > span').should('contain.text', 'Empresa Teste LTDA');
         cy.get(':nth-child(2) > [data-column-id="município"] > span').should('contain.text','Russas-CE');
         cy.get(':nth-child(2) > [data-column-id="status"] > :nth-child(1)').should('contain.text','Sem Adesão do Município');
         cy.get(':nth-child(2) > [data-column-id="qtd.Domicílios"] > span').should('contain.text','100');
         cy.get(':nth-child(2) > [data-column-id="áreaTotal"] > span').should('contain.text','1000');
         cy.get(':nth-child(2) > [data-column-id="valorGlobalDaProposta"] > span').should('contain.text','R$ 4.500.000,00');
-        cy.get(':nth-child(2) > [data-column-id="ações"] > span > .btn').should('contain.text','Ver Proposta').click();
+        cy.get(':nth-child(2) > [data-column-id="ações"] > span > div > button').click();
+        cy.get(':nth-child(2) > [data-column-id="ações"] > span > .dropdown > .dropdown-menu > :nth-child(1) > .dropdown-item').click();
+
 
         cy.get('#proposalDetailsLabel').should('contain.text','Proposta - Área Teste');
 
