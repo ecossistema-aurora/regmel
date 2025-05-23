@@ -119,23 +119,56 @@
                                         {{ proposal.anticipation == 'true' ? 'proposal.in_anticipation'|trans : 'proposal.no_anticipation'|trans }}
                                     </span>
                                 </td>
-                                <td>
-                                    <button
-                                        class="btn btn-outline-info btn-sm"
-                                        data-proposal="{{ proposal|json_encode }}"
-                                        onClick="modalProposalDetails(this)"
-                                    >
-                                        Ver Proposta
-                                    </button>
-                                    {% if proposal.status != 'Recebida' and  proposal.status != 'Sem Adesão do Município' %}
-                                        <a  onclick="openProposalStatusModal('{{ proposal.id }}')"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#modalProposalStatus"
-                                            href="#"
-                                            class="btn btn-outline-success btn-sm">
-                                            Status
-                                        </a>
-                                    {% endif %}
+                                <td style="position: relative;">
+                                    <div class="dropdown">
+                                        <button
+                                                class="btn btn-outline-warning btn-sm dropdown-toggle"
+                                                type="button"
+                                                id="dropdownMenu{{ proposal.id }}"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false"
+                                                style="--bs-dropdown-min-width: 0; width: auto;"
+                                        >
+                                            {{ 'actions'|trans }}
+                                        </button>
+                                        <ul
+                                                class="dropdown-menu dropdown-menu-end"
+                                                aria-labelledby="dropdownMenu{{ proposal.id }}"
+                                                style="--bs-dropdown-min-width: 0; width: auto;"
+                                        >
+                                            <li>
+                                                <a
+                                                        href="#"
+                                                        class="dropdown-item"
+                                                        onclick="modalProposalDetails(this)"
+                                                        data-proposal="{{ proposal|json_encode }}"
+                                                >
+                                                    Ver Proposta
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a
+                                                        href="#"
+                                                        class="dropdown-item"
+                                                        onclick="openProposalStatusModal('{{ proposal.id }}')"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalProposalStatus"
+                                                >
+                                                    Atualizar Status
+                                                </a>
+                                            </li>
+                                            {% if proposal.anticipation == 'true' %}
+                                                <li>
+                                                    <a
+                                                            href="{{ path('admin_regmel_proposal_anticipation_files_download', {'id': proposal.id}) }}"
+                                                            class="dropdown-item"
+                                                    >
+                                                        Baixar documentos de antecipação
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                         {% else %}

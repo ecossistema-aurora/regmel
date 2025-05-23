@@ -315,6 +315,7 @@ message: Mensagem
 months: meses
 most_recent: Mais Recente
 municipality: Município
+municipalities: Municípios
 municipality_found: Município não encontrado
 municipality_created: Município criado com sucesso. Veja no seu email o link para confirmar sua conta.
 my_account: Minha Conta
