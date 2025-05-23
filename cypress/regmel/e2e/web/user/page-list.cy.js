@@ -20,6 +20,7 @@ describe('Listagem de Usuários - Painel Administrativo', () => {
 
     it('Filtra usuários pelo campo de busca', () => {
         cy.get('.gridjs-input').type('João');
+        cy.wait(1000);
         cy.get('table tbody tr').each(($tr) => {
             cy.wrap($tr).should('contain.text', 'João');
         });

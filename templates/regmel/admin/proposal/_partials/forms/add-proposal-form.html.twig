@@ -141,15 +141,15 @@
                                             <a href="/files/exemplo-anexo-iv-c.docx" download>{{ 'proposal.download_model'|trans }}</a>
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="file" name="annex_iv_c_file" data-allowed="pdf" accept="application/pdf" id="Anexo IV-C" class="form-control" required>
+                                        <input type="file" name="annex_iv_c_file" data-allowed="pdf" data-label='Anexo IV-C' accept="application/pdf" class="form-control" required>
                                     </div>
                                     <div class="mt-3">
                                         <label class="form-label fw-bold">{{ 'proposal.responsible_field'|trans }} <span class="text-danger">*</span></label>
-                                        <input type="file" name="technical-manager_file" data-allowed="pdf" id="Responsável técnico" accept="application/pdf" class="form-control" required>
+                                        <input type="file" name="technical-manager_file" data-allowed="pdf" data-label='Responsável técnico' accept="application/pdf" class="form-control" required>
                                     </div>
                                     <div class="mt-3">
                                         <label class="form-label fw-bold">{{ 'proposal.rrt_art_field'|trans }} <span class="text-danger">*</span></label>
-                                        <input type="file" name="rrt_art_file" data-allowed="pdf" accept="application/pdf" id="RRT ART" class="form-control" required>
+                                        <input type="file" name="rrt_art_file" data-allowed="pdf" data-label='RRT ART' accept="application/pdf" class="form-control" required>
                                     </div>
                                 </div>
                             {% endif %}
