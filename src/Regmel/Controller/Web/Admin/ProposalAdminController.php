@@ -262,6 +262,38 @@ class ProposalAdminController extends AbstractAdminController
         return $response;
     }
 
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    #[Route('/painel/admin/propostas/{id}/anticipation-files/download', name: 'admin_regmel_proposal_anticipation_files_download', methods: ['GET'])]
+    public function downloadAnticipationFiles(Uuid $id): Response
+    {
+        $initiative = $this->initiativeService->get($id);
+
+        $extraFields = $initiative->getExtraFields();
+
+        $municipality = $extraFields['city_name'];
+
+        $proposal = $initiative->getName();
+
+        $company = $initiative->getOrganizationFrom()?->getName();
+
+        if (($extraFields['anticipation'] ?? 'false') !== 'true') {
+            throw $this->createNotFoundException('Proposta não possui antecipação.');
+        }
+
+        $zipFilePath = $this->proposalService->exportAnticipationFiles([$initiative]);
+
+        $zipFileName = sprintf('%s_documentos_antecipacao_%s_%s.zip', $company, $proposal, $municipality);
+
+        $response = new BinaryFileResponse($zipFilePath, headers: ['Content-Type' => 'application/zip']);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $zipFileName);
+        $response->deleteFileAfterSend(true);
+
+        return $response;
+    }
+
     #[Route('/painel/admin/propostas/{id}/status', name: 'admin_regmel_proposal_update_status', methods: ['POST'])]
     public function updateStatusProposal(Request $request, Uuid $id): Response
     {
