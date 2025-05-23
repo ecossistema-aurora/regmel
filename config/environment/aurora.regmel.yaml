@@ -315,3 +315,5 @@ homepage:
       control_panel: false
       help: false
       social_network: false
+
+default_timezone: America/Fortaleza
