@@ -41,10 +41,15 @@ document.addEventListener('DOMContentLoaded', function () {
     async function checkEmailExists(email) {
         try {
             const response = await fetch(`/api/users/exists?email=${encodeURIComponent(email)}`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+
             const data = await response.json();
             return data.exists;
         } catch (error) {
-            console.error('erro ao verificar o email:', error);
+            console.error('Erro ao verificar o email:', error);
             return false;
         }
     }
