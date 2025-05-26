@@ -293,7 +293,9 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
 
         $region = $extraFields['region'];
         $state = $extraFields['state'];
-        $modificationDate = $entity->getUpdatedAt() ?? $this->translator->trans('csv.info.not_modified');
+
+        $modificationDate = $entity->getUpdatedAt()?->format('d/m/Y H:i:s') ?? $this->translator->trans('csv.info.not_modified');
+
         $phoneCompany = $organizationFrom->getExtraFields()['telefone'] ?? '';
 
         return [
