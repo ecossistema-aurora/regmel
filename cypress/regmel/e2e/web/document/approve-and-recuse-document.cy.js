@@ -1,36 +1,36 @@
-describe('', () => {
+describe('Teste de aprovação de termo de adesão', () => {
     beforeEach(() => {
         cy.loginRegmel('admin@regmel.com', 'Aurora@2024');
     });
 
-    it('Garante que é possivel aprovar um termo de adesão ', () => {
+    it('Garante que é possível aprovar um termo de adesão disponível', () => {
+        cy.visit('painel/admin/municipios-documentos');
 
-        cy.visit('painel/admin/municipios-documentos')
-        cy.get(':nth-child(1) > [data-column-id="termoDeAdesão"] > span > a').click()
+        cy.get('tbody tr').each(($row) => {
+            const statusText = $row.find('td[data-column-id="status"] span').text().trim();
+            const cidade = $row.find('td').first().text().trim();
 
-        cy.get("input[name='reason']").type('Teste de aprovação')
+            if (statusText === 'AGUARDANDO') {
+                cy.wrap($row).within(() => {
+                    cy.get('[data-column-id="termoDeAdesão"] a').click();
+                });
 
-        cy.get("button[onclick='confirmDecision(this)']").click()
+                cy.get('#documentDecisionForm').should('be.visible');
 
-        cy.get("#confirmDecisionButton").click()
+                cy.get("input[name='reason']").type(`Aprovação automática - ${cidade}`);
+                cy.get("button[onclick='confirmDecision(this)']").click();
+                cy.get("#confirmDecisionButton").click();
 
-        cy.get("span[class='badge bg-success text-white text-dark text-uppercase']")
+                cy.get('#modalDocument').should('not.be.visible');
 
+                cy.contains('td', cidade)
+                    .parent('tr')
+                    .find('td[data-column-id="status"] span')
+                    .should('contain.text', 'ACEITO')
+                    .and('have.class', 'bg-success');
 
-    });
-
-    it('Garante que é possivel recusar um termo de adesão ', () => {
-
-        cy.visit('painel/admin/municipios-documentos')
-        cy.get(':nth-child(4) > [data-column-id="termoDeAdesão"] > span > a').click()
-
-        cy.get("input[name='reason']").type('Teste de recusa')
-
-        cy.get("button[onclick='confirmDecision(this, false)']").click()
-
-        cy.get("#confirmDecisionButton").click()
-
-        cy.get("span[class='badge bg-danger text-white text-dark text-uppercase']")
-
+                return false;
+            }
+        });
     });
 });
