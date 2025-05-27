@@ -53,6 +53,7 @@ describe('Listagem de Usuários - Painel Administrativo', () => {
     });
 
     it('Valida paginação e navegação entre páginas', () => {
+        cy.get('#gridLimitSelect').select('10');
         cy.get('button').contains('Próximo').click();
         cy.get('table tbody tr').should('have.length.greaterThan', 0);
         cy.get('button').contains('Anterior').click();
@@ -60,6 +61,7 @@ describe('Listagem de Usuários - Painel Administrativo', () => {
     });
 
     it('Garante atualização dos dados ao trocar de página', () => {
+        cy.get('#gridLimitSelect').select('10');
         let firstPageFirstUser;
         cy.get('table tbody tr').first().find('td').first().invoke('text').then(text => {
             firstPageFirstUser = text;
