@@ -9,7 +9,7 @@ describe('Listagem de propostas', () => {
     });
 
     it('Verifica a visualização da proposta e seus detalhes', () => {
-        const today = new Date().toLocaleDateString('pt-BR');
+        const today = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
 
         cy.get('h2').contains('Empresas - Propostas');
 

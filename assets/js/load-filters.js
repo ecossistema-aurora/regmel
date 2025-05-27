@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusesElement = document.getElementById('status-filter');
     const anticipationElement = document.getElementById('anticipation-filter');
 
-    let stateSelect;
+    let stateSelect, regionSelect;
 
     if (regionElement) {
         regionElement.classList.remove('form-select');
-        const regionSelect = new TomSelect(regionElement, {
+        regionSelect = new TomSelect(regionElement, {
             create: false,
             placeholder: regionElement.dataset.placeholder || 'Selecione',
             allowEmptyOption: true,
@@ -49,7 +49,22 @@ document.addEventListener('DOMContentLoaded', () => {
             allowEmptyOption: true,
         });
 
-        stateSelect.on('change', () => {
+        stateSelect.on('change', async value => {
+            if (!value || !regionElement) {
+                stateElement.form.submit();
+                return;
+            }
+
+            const data = await fetch(`/api/regions/${encodeURIComponent(value)}/region`)
+                .then(res => res.ok ? res.json() : null)
+                .catch(() => null);
+
+            if (data && data.region) {
+                regionElement.value = data.region;
+                if (regionSelect) {
+                    regionSelect.setValue(data.region, true);
+                }
+            }
             stateElement.form.submit();
         });
     }

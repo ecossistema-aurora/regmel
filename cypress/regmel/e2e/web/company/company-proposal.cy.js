@@ -13,15 +13,13 @@ describe('Cadastro de proposta', () => {
     it('Acessa, preenche e envia o formulário de proposta para município não credenciado', () => {
         cy.get('a').contains('Nova Proposta').click();
 
-        cy.get('select#region').select('Nordeste', {force: true});
-
         cy.get('#state + .ts-wrapper')
             .click()
             .find('.ts-dropdown .ts-dropdown-content')
             .contains('Ceará')
             .click();
 
-        cy.wait(2000);
+        cy.wait(1000);
 
         cy.get('#city + .ts-wrapper')
             .click()
@@ -41,7 +39,6 @@ describe('Cadastro de proposta', () => {
 
         cy.get('button[type="submit"]').click();
 
-        // Verifica se a proposta foi criada com sucesso
         cy.contains('Empresa Teste LTDA').click();
         cy.contains('Propostas').click();
         cy.get('table > tbody').contains('tr', 'Área Teste').find('[data-column-id="status"]').should('contain', 'Sem Adesão do Município');
@@ -50,15 +47,13 @@ describe('Cadastro de proposta', () => {
     it('Acessa, preenche e envia o formulário de proposta para município credenciado', () => {
         cy.get('a').contains('Nova Proposta').click();
 
-        cy.get('select#region').select('Nordeste', {force: true});
-
         cy.get('#state + .ts-wrapper')
             .click()
             .find('.ts-dropdown .ts-dropdown-content')
             .contains('Ceará')
             .click();
 
-        cy.wait(2000);
+        cy.wait(1000);
 
         cy.get('#city + .ts-wrapper')
             .click()
@@ -78,7 +73,6 @@ describe('Cadastro de proposta', () => {
 
         cy.get('button[type="submit"]').click();
 
-        // Verifica se a proposta foi criada com sucesso
         cy.contains('Empresa Teste LTDA').click();
         cy.contains('Propostas').click();
         cy.get('table > tbody').contains('tr', 'Área nas Brenhas').find('[data-column-id="status"]').should('contain', 'Enviada');

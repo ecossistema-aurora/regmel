@@ -64,7 +64,9 @@ class MunicipalityAdminController extends AbstractAdminController
         $filterState = $request->query->get('state');
 
         $regions = RegionEnum::cases();
-        $states = $this->stateService->findBy(['region' => $filterRegion]);
+        $states = $filterRegion
+            ? $this->stateService->findBy(['region' => $filterRegion])
+            : $this->stateService->list();
 
         if (true === in_array(UserRolesEnum::ROLE_ADMIN->value, $user->getRoles())) {
             $criteria = ['type' => OrganizationTypeEnum::MUNICIPIO->value];

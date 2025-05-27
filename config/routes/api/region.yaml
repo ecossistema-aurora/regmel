@@ -2,3 +2,8 @@ listStatesByRegion:
   path: /{region}/states
   controller: App\Controller\Api\StateApiController::listByRegion
   methods: ['GET']
+
+listeRegionByState:
+  path: /{state}/region
+  controller: App\Controller\Api\StateApiController::listeRegionByState
+  methods: ['GET']
