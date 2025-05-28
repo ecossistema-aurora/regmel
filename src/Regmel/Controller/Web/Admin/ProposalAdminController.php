@@ -61,7 +61,7 @@ class ProposalAdminController extends AbstractAdminController
         $city = $request->query->get('city');
         $anticipation = $request->query->get('anticipation');
         $cities = [];
-        $states = [];
+        $states = $this->stateService->list();
         $anticipationOptions = [
             ['value' => 'true', 'label' => $this->translator->trans('proposal.in_anticipation')],
             ['value' => 'false', 'label' => $this->translator->trans('proposal.no_anticipation')],
@@ -137,15 +137,13 @@ class ProposalAdminController extends AbstractAdminController
         $company = $this->organizationService->get($id);
 
         if (false === $request->isMethod(Request::METHOD_POST)) {
-            $regions = RegionEnum::cases();
-            $states = $this->stateService->findBy();
+            $states = $this->stateService->list();
             $cities = $this->cityService->findBy();
             // $opportunities = $this->registerService->findOpportunitiesBy(OrganizationTypeEnum::EMPRESA);
 
             return $this->render('regmel/admin/proposal/add.html.twig', [
                 'states' => $states,
                 'cities' => $cities,
-                'regions' => $regions,
                 'token' => $this->jwtManager->create($user),
                 'company' => $company,
                 'maxFileSize' => $maxFileSize,

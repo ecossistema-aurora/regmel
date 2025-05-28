@@ -49,4 +49,17 @@ class StateApiController extends AbstractApiController
             'groups' => 'city.get',
         ]);
     }
+
+    public function listeRegionByState(string $state): JsonResponse
+    {
+        if (Uuid::isValid($state)) {
+            $stateEntity = $this->stateService->findOneBy(['id' => Uuid::fromString($state)]);
+        } else {
+            $stateEntity = $this->stateService->findOneBy(['acronym' => $state]);
+        }
+
+        return $this->json([
+            'region' => $stateEntity?->getRegion(),
+        ]);
+    }
 }

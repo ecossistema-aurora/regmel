@@ -75,7 +75,9 @@ class MunicipalityDocumentAdminController extends AbstractAdminController
         $filterStatus = $request->query->get('status');
 
         $regions = RegionEnum::cases();
-        $states = $this->stateService->findBy(['region' => $filterRegion]);
+        $states = $filterRegion
+            ? $this->stateService->findBy(['region' => $filterRegion])
+            : $this->stateService->list();
         $status = [
             'approved',
             'rejected',
