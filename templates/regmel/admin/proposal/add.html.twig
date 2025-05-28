@@ -50,6 +50,17 @@
     {{ parent() }}
     <script>
         window.MAX_FILE_SIZE_MB = "{{ maxFileSize }}";
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('proposal-add-form');
+            const submitBtn = document.getElementById('submit-btn');
+            if (form && submitBtn) {
+                form.addEventListener('submit', function () {
+                    submitBtn.disabled = true;
+                    submitBtn.innerText = 'Enviando...';
+                });
+            }
+        });
     </script>
     <script type="module" src="{{ asset('js/load-cities.js') }}"></script>
     <script type="module" src="{{ asset('js/files-validation.js') }}"></script>
