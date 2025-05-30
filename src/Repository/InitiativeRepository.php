@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Entity\Initiative;
 use App\Repository\Interface\InitiativeRepositoryInterface;
+use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 
 class InitiativeRepository extends AbstractRepository implements InitiativeRepositoryInterface
@@ -65,5 +66,42 @@ class InitiativeRepository extends AbstractRepository implements InitiativeRepos
             ['id' => $ids],
             ['createdAt' => 'DESC']
         );
+    }
+
+    public function isRecentDuplicateProposal(
+        string $companyId,
+        string $cityId,
+        string $name,
+        float $quantityHouses,
+        string $areaCharacteristic,
+        DateTimeImmutable $since
+    ): bool {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $sql = <<<SQL
+        SELECT COUNT(*) AS total
+        FROM initiative
+        WHERE organization_from_id = :companyId
+          AND organization_to_id = :cityId
+          AND name = :name
+          AND (extra_fields->>'quantity_houses')::float = :quantityHouses
+          AND extra_fields->>'area_characteristic' = :areaCharacteristic
+          AND created_at >= :since
+    SQL;
+
+        $statement = $connection->prepare($sql);
+
+        $result = $statement->executeQuery([
+            'companyId' => $companyId,
+            'cityId' => $cityId,
+            'name' => $name,
+            'quantityHouses' => (string)$quantityHouses,
+            'areaCharacteristic' => $areaCharacteristic,
+            'since' => $since->format('Y-m-d H:i:s'),
+        ]);
+
+        $count = (int) $result->fetchOne();
+
+        return $count > 0;
     }
 }
