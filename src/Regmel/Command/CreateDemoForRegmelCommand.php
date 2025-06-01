@@ -139,8 +139,8 @@ class CreateDemoForRegmelCommand extends Command
         $phase1Municipality->setName('Credenciamento e Termo de Adesão');
         $phase1Municipality->setDescription('Cadastro e Validação do Termo de Adesão do Município');
         $phase1Municipality->setSequence(1);
-        $phase1Municipality->setStartDate(new DateTime('2025-04-22'));
-        $phase1Municipality->setEndDate(new DateTime('2025-05-31'));
+        $phase1Municipality->setStartDate(new DateTime('2025-05-30'));
+        $phase1Municipality->setEndDate(new DateTime('2025-06-30'));
         $phase1Municipality->setCriteria([
             'oficio' => true,
         ]);
@@ -159,8 +159,8 @@ class CreateDemoForRegmelCommand extends Command
         $phase1->setName('Cadastro e Envio de Propostas');
         $phase1->setDescription('Envio de Propostas aos Municipios');
         $phase1->setSequence(1);
-        $phase1->setStartDate(new DateTime('2025-04-22'));
-        $phase1->setEndDate(new DateTime('2025-05-31'));
+        $phase1->setStartDate(new DateTime('2025-05-30'));
+        $phase1->setEndDate(new DateTime('2025-06-30'));
         $phase1->setCriteria([
             'oficio' => true,
         ]);

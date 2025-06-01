@@ -16,6 +16,13 @@ describe('Confirmação do usuário', () => {
         cy.get('.modal-body').should('be.visible');
         cy.get('a[data-modal-button="confirm-link"]').click();
         cy.get('table tbody tr').contains('Ativo').should('exist');
+
+        cy.contains('table tbody tr', 'jose1@municipio.com').within(() => {
+            cy.contains('Confirmar Usuário').click();
+        });
+        cy.get('.modal-body').should('be.visible');
+        cy.get('a[data-modal-button="confirm-link"]').click();
+        cy.get('table tbody tr').contains('Ativo').should('exist');
     });
 
     it('Acessa e confirma usuário especifico não validado', () => {

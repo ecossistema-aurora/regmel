@@ -14,7 +14,7 @@ describe('Cadastro de Município', () => {
 
         timestamp = Date.now();
         randomEmailMunicipio = `municipio${timestamp}@teste.com`;
-        randomEmailUsuario = `jose${timestamp}@municipio.com`;
+        randomEmailUsuario = `jose1@municipio.com`;
 
         cy.get('select#opportunity').then(($select) => {
             if ($select.find('option').length > 1) {

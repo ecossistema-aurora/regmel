@@ -49,7 +49,7 @@ readonly class MunicipalityDocumentService implements MunicipalityDocumentServic
         $emails[] = $municipality->getExtraFields()['email'] ?? null;
 
         $subject = $approved ? $this->translator->trans('term_approved') : $this->translator->trans('term_rejected');
-        $htmlTemplate = $approved ? '_emails/notifications/municipality/document_approved.html.twig' : '_emails/notifications/municipality/document_rejected.html.twig';
+        $htmlTemplate = $approved ? '_emails/notifications/municipality/document-approved.html.twig' : '_emails/notifications/municipality/document-rejected.html.twig';
 
         $loginPage = $this->urlGenerator->generate('web_auth_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
