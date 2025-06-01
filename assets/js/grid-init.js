@@ -45,10 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
         selectLimit.id = 'gridLimitSelect';
         selectLimit.className = 'form-select form-select-sm w-auto';
 
-        [10, 20, 30, 50, 100].forEach(option => {
+        [10, 20, 30, 50, 100, 'all'].forEach(option => {
             const opt = document.createElement('option');
-            opt.value = option;
-            opt.textContent = option;
+            opt.value = option === 'all' ? -1 : option;
+            opt.textContent = option === 'all' ? 'Mostrar todos' : option;
             if (option === 50) opt.selected = true;
             selectLimit.appendChild(opt);
         });
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectContainer.appendChild(selectWrapper);
 
         wrapper.appendChild(selectContainer);
-        
+
         const gridContainer = document.createElement('div');
         wrapper.appendChild(gridContainer);
 
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })),
             data,
             search: true,
-            pagination: {
+            pagination: Number(selectLimit.value) === -1 ? false : {
                 enabled: true,
                 limit: Number(selectLimit.value),
                 page: 1,
@@ -103,18 +103,21 @@ document.addEventListener('DOMContentLoaded', () => {
         table.remove();
 
         selectLimit.addEventListener('change', () => {
-            setTimeout(() => {
-                grid
-                    .updateConfig({
-                        pagination: {
-                            enabled: true,
-                            limit:  Number(selectLimit.value),
-                            page:   1,
-                            resetPageOnUpdate: true
-                        }
-                    })
-                    .forceRender();
-            }, 1000);
+            const newLimit = Number(selectLimit.value);
+
+            const newPagination = newLimit === -1 ? false : {
+                enabled: true,
+                limit: newLimit,
+                page: 1,
+                resetPageOnUpdate: true
+            };
+
+            grid
+                .updateConfig({
+                    data,
+                    pagination: newPagination
+                })
+                .forceRender();
         });
     });
 });
