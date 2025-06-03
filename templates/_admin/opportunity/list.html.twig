@@ -102,5 +102,6 @@
 {% block extra_javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/modal-confirm-remove.js') }}"></script>
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
     <script type="module" src="{{ asset('js/grid-init.js') }}"></script>
 {% endblock %}

@@ -189,6 +189,7 @@
 
 {% block extra_javascripts %}
     {{ parent() }}
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
     <script type="module" src="{{ asset('js/grid-init.js') }}"></script>
     <script src="{{ asset('js/modal-proposal-details.js') }}"></script>
     <script type="module" src="{{ asset('js/load-filters.js') }}"></script>
