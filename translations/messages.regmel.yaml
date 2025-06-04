@@ -1106,12 +1106,30 @@ view:
       deleted: A Acessibilidade Arquitetônica foi excluída
 
   not-found:
+    title: Página não encontrada
     error-404: Error 404
     error-text_first: Ops, página não encontrada.
     error-text_second: Essa página não existe mais ou mudou de endereço.
     error-text_third: Mas não se preocupe, existem muitas outras páginas para conhecer aqui na Plataforma Minha Casa Melhor.
     error-homepage: Voltar para a página inicial
     error-image: Imagem de dúvida
+
+  forbidden:
+    title: Acesso Negado
+    error-403: Erro 403
+    error-title: Ops, acesso negado.
+    error-text_first: Você não tem permissão para acessar esta página ou o conteúdo está restrito.
+    error-text_second: Mas não se preocupe, você pode explorar outras áreas da Plataforma Minha Casa Melhor.
+    error-dashboard: Voltar para o painel de controle
+    error-image: Erro 403
+
+  error_general:
+    title: Ocorreu um erro
+    subtitle: Algo inesperado aconteceu.
+    text_first: Não conseguimos processar sua solicitação agora.
+    text_second: Mas não se preocupe, você pode tentar novamente mais tarde ou navegar por outras páginas da Plataforma Minha Casa Melhor.
+    dashboard: Voltar para o painel de controle
+    image: Erro
 
   phase:
     out_of_period: Fora do prazo de inscrição

@@ -15,6 +15,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Twig\Environment;
@@ -44,6 +45,27 @@ class ApiCustomResponseSubscriber implements EventSubscriberInterface
             return;
         }
 
+        if ($exception instanceof AccessDeniedHttpException) {
+            if (false === $this->isApiRequest($event->getRequest())) {
+                $response = new Response(
+                    $this->twig->render('forbidden/forbidden.html.twig'),
+                    Response::HTTP_FORBIDDEN
+                );
+                $event->setResponse($response);
+
+                return;
+            }
+            $event->setResponse(
+                new ErrorGeneralResponse(
+                    'access_denied',
+                    Response::HTTP_FORBIDDEN,
+                    ['description' => $exception->getMessage()]
+                )
+            );
+
+            return;
+        }
+
         if ($exception instanceof ValidatorException) {
             $this->generateValidationError($event);
 
@@ -57,6 +79,16 @@ class ApiCustomResponseSubscriber implements EventSubscriberInterface
         }
 
         Log::critical('critical', ['message' => $exception->getMessage()]);
+
+        if (false === $this->isApiRequest($event->getRequest())) {
+            $response = new Response(
+                $this->twig->render('error-general/error-general.html.twig'),
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+            $event->setResponse($response);
+
+            return;
+        }
 
         $event->setResponse(
             new ErrorGeneralResponse(
