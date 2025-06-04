@@ -117,15 +117,16 @@
                                 <td>{{ proposal.extraFields.quantity_houses }}</td>
                                 <td>R$ {{ (proposal.extraFields.quantity_houses * env.aurora.variables.price_per_household)|number_format(2, ',', '.') }}</td>
                                 <td>
-                                    {% set status = proposal.extraFields.status ?? 'Enviada'  %}
+                                    {% set status = proposal.extraFields.status ?? ''  %}
+                                    {% set statusEnum = enum('App\\Enum\\StatusProposalEnum') %}
                                     {% set badgeClass = ({
-                                        'Sem Adesão do Município': 'bg-dark text-white',
-                                        'Enviada':                 'bg-warning',
-                                        'Recebida':                'bg-info',
-                                        'Anuída':                  'bg-success',
-                                        'Não Anuída':              'bg-danger text-white',
-                                        'Selecionada':             'bg-success',
-                                        'Não Selecionada':         'bg-danger text-white',
+                                        (statusEnum.SEM_ADESAO.value): 'bg-dark text-white',
+                                        (statusEnum.ENVIADA.value): 'bg-warning',
+                                        (statusEnum.RECEBIDA.value): 'bg-info',
+                                        (statusEnum.ANUIDA.value): 'bg-success text-white',
+                                        (statusEnum.NAO_ANUIDA.value): 'bg-danger text-white',
+                                        (statusEnum.SELECIONADA.value): 'bg-success text-white',
+                                        (statusEnum.NAO_SELECIONADA.value): 'bg-danger text-white',
                                     }[status] ?? 'bg-dark') %}
                                     <span class="badge {{ badgeClass }} text-dark">
                                         {{ status }}
