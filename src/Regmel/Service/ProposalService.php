@@ -34,6 +34,7 @@ use InvalidArgumentException;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -74,6 +75,21 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         );
     }
 
+    private function isRecentDuplicateProposal(Organization $company, array $data): bool
+    {
+        $now = new DateTimeImmutable();
+        $fiveMinutesAgo = $now->modify('-5 minutes');
+
+        return $this->initiativeRepository->isRecentDuplicateProposal(
+            $company->getId()->toRfc4122(),
+            $data['city'],
+            $data['name'],
+            (float) $data['quantity_houses'],
+            $data['area_characteristic'],
+            $fiveMinutesAgo
+        );
+    }
+
     public function saveProposal(
         Organization $company,
         array $data,
@@ -83,6 +99,13 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         ?UploadedFile $technicalManager = null,
         ?UploadedFile $rrtArt = null
     ): Initiative {
+        if ($this->isRecentDuplicateProposal($company, $data)) {
+            throw new BadRequestHttpException(
+                'Já existe uma proposta com esses dados enviada recentemente. Tente novamente mais tarde.'
+            );
+        }
+        dd($this->isRecentDuplicateProposal($company, $data));
+
         $user = $this->security->getUser();
 
         $municipality = $this->organizationRepository->findOrganizationByCityId(
