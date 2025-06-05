@@ -217,7 +217,7 @@ class ProposalAdminController extends AbstractAdminController
     {
         $initiatives = $this->initiativeService->list();
 
-        return $this->proposalService->generateCsv($initiatives, 'propostas.csv', null);
+        return $this->proposalService->generateSpreadSheet($initiatives, 'propostas', null);
     }
 
     #[IsGranted(new Expression('

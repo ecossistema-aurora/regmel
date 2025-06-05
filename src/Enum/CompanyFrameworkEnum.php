@@ -10,6 +10,6 @@ enum CompanyFrameworkEnum: string
 {
     use EnumTrait;
 
-    case PROFIT = 'Organização com fins lucarativos';
-    case NO_PROFIT = 'Organização sem fins lucarativos';
+    case PROFIT = 'Organização com fins lucrativos';
+    case NO_PROFIT = 'Organização sem fins lucrativos';
 }

@@ -229,7 +229,7 @@ readonly class OrganizationService extends AbstractEntityService implements Orga
         return [
             'Nome da Organização',
             'Tipo',
-            'Equadramento',
+            'Enquadramento',
             'CNPJ',
             'E-mail',
             'Site',

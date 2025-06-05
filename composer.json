@@ -16,6 +16,7 @@
         "league/flysystem-bundle": "^3.3",
         "lexik/jwt-authentication-bundle": "^3.1",
         "nelmio/cors-bundle": "^2.5",
+        "phpoffice/phpspreadsheet": "^4.3",
         "symfony/asset": "7.2.*",
         "symfony/asset-mapper": "7.2.*",
         "symfony/console": "7.2.*",
