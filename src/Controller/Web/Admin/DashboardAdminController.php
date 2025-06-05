@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Web\Admin;
 
 use App\Enum\OrganizationTypeEnum;
+use App\Enum\UserRolesEnum;
 use App\Service\Interface\AgentServiceInterface;
 use App\Service\Interface\EventServiceInterface;
 use App\Service\Interface\InitiativeServiceInterface;
@@ -30,6 +31,33 @@ class DashboardAdminController extends AbstractAdminController
     public function index(): Response
     {
         $user = $this->getUser();
+
+        if (
+            true === in_array(UserRolesEnum::ROLE_COMPANY->value, $user->getRoles())
+            && 1 === $user->getAgents()->count()
+        ) {
+            $companies = $this->organizationService->getCompaniesByAgents($user->getAgents());
+
+            if (1 === count($companies)) {
+                $company = reset($companies);
+
+                return $this->redirectToRoute('admin_regmel_company_details', ['id' => $company->getId()]);
+            }
+        }
+
+        if (
+            true === in_array(UserRolesEnum::ROLE_MUNICIPALITY->value, $user->getRoles())
+            && 1 === $user->getAgents()->count()
+        ) {
+            $cities = $this->organizationService->getMunicipalitiesByAgents($user->getAgents());
+
+            if (1 === count($cities)) {
+                $city = reset($cities);
+
+                return $this->redirectToRoute('admin_regmel_municipality_details', ['id' => $city->getId()]);
+            }
+        }
+
         $recentRegistrations = $this->inscriptionService->findRecentByUser($user->getId());
         $createdBy = $this->agentService->getAgentsFromLoggedUser()[0];
 

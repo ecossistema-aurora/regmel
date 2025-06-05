@@ -33,7 +33,7 @@ describe('Listagem de propostas', () => {
         cy.get(':nth-child(2) > [data-column-id="status"] > :nth-child(1)').should('contain.text','Sem Adesão do Município');
         cy.get(':nth-child(2) > [data-column-id="qtd.Domicílios"] > span').should('contain.text','100');
         cy.get(':nth-child(2) > [data-column-id="áreaTotal"] > span').should('contain.text','1000');
-        cy.get(':nth-child(2) > [data-column-id="valorGlobalDaProposta"] > span').should('contain.text','R$ 4.500.000,00');
+        cy.get(':nth-child(2) > [data-column-id="valorGlobalDaProposta"] > span').should('contain.text','R$ 3.500.000,00');
         cy.get(':nth-child(2) > [data-column-id="ações"] > span > div > button').click();
         cy.get(':nth-child(2) > [data-column-id="ações"] > span > .dropdown > .dropdown-menu > :nth-child(1) > .dropdown-item').click();
 
@@ -72,8 +72,8 @@ describe('Listagem de propostas', () => {
         cy.get('.align-items-end > .mt-4 > strong').should('contain.text','Valor Global da Proposta');
         cy.get(':nth-child(11) > :nth-child(1) > p').should('contain.text','1000  m²');
         cy.get('#quantity-houses').should('contain.text','100');
-        cy.get('#price-per-household').contains('R$ 45.000,00').should('exist');
-        cy.get('#total-price').contains('R$ 4.500.000,00').should('exist');
+        cy.get('#price-per-household').contains('R$ 35.000,00').should('exist');
+        cy.get('#total-price').contains('R$ 3.500.000,00').should('exist');
 
         cy.get('.modal-body > :nth-child(13)').should('contain.text','Baixar arquivo KML/KMZ/SHP');
         cy.get(':nth-child(14) > .col > .mt-4 > strong').should('contain.text','Arquivo do Projeto');

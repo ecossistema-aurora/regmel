@@ -35,13 +35,12 @@
 
                         <table class="js-grid table table-hover table-striped">
                             <thead class="table-dark">
-                            <tr>
-                                <th>{{ 'name'|trans }}</th>
-                                <th>{{ 'document.title'|trans }}</th>
-                                <th>{{ 'updated_at'|trans }}</th>
-                                <th>{{ 'status'|trans }}</th>
-                                <th>{{ 'actions'|trans }}</th>
-                            </tr>
+                                <tr>
+                                    <th>{{ 'name'|trans }}</th>
+                                    <th>{{ 'document.title'|trans }}</th>
+                                    <th>{{ 'updated_at'|trans }}</th>
+                                    <th>{{ 'status'|trans }}</th>
+                                </tr>
                             </thead>
                             <tbody>
                             {% for municipality in municipalities %}
@@ -82,38 +81,6 @@
                                                     {{ 'unknown'|trans }}
                                                 {% endif %}
                                             </span>
-                                    </td>
-                                    <td style="position: relative;">
-                                        <div class="dropdown">
-                                            <button
-                                                    class="btn btn-outline-warning btn-sm dropdown-toggle"
-                                                    type="button"
-                                                    id="dropdownMenu{{ municipality.id }}"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                    style="--bs-dropdown-min-width: 0; width: auto;"
-                                            >
-                                                {{ 'actions'|trans }}
-                                            </button>
-                                            <ul
-                                                    class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenu{{ municipality.id }}"
-                                                    style="--bs-dropdown-min-width: 0; width: auto;"
-                                            >
-                                                <li>
-                                                    <a
-                                                            href="#"
-                                                            class="dropdown-item edit-organization"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#modalEditOrganization"
-                                                            data-id="{{ municipality.id }}"
-                                                            data-token="{{ token }}"
-                                                    >
-                                                        {{ 'edit'|trans }}
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </td>
                                 </tr>
                             {% else %}
