@@ -6,8 +6,7 @@ describe('Convite de membro', () => {
     const index = Math.floor(Math.random() * 1000);
 
     it(`Criador loga e envia convite`, () => {
-        cy.contains('Empresas/OSC').click();
-        cy.contains('Empresa Norte').click();
+        cy.visit('/painel/admin/empresas');
 
         cy.get('#pills-members-tab').click();
         cy.get('#pills-members')
@@ -26,8 +25,8 @@ describe('Convite de membro', () => {
         const membroNome = `Agente ${index}`;
         const membroEmail = `membro${index}_${timestamp}@empresa.com`;
 
-        cy.get('input[name="name"]').should('be.visible').type(membroNome);
-        cy.get('input[name="email"]')
+        cy.get('[data-cy="name"]').should('be.visible').type(membroNome);
+        cy.get('[data-cy="email"]')
             .focus()
             .should('be.visible')
             .clear()

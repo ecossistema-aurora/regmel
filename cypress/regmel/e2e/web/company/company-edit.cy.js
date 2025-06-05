@@ -7,9 +7,7 @@ describe('Editar empresa', () => {
 
     it('acessa a lista de empress e garante que é possível editar uma empresa', () => {
 
-        cy.get("button[aria-expanded='false']").click();
-
-        cy.get("a.dropdown-item.edit-company").click();
+        cy.get("a.btn.btn-secondary.edit-company").click()
 
         cy.get("#company-description")
             .should('be.visible')
