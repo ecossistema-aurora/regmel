@@ -10,9 +10,12 @@ use App\Exception\NoEntitiesProvidedForExportException;
 use App\Exception\ValidatorException;
 use App\Service\Interface\FileServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -115,26 +118,31 @@ abstract readonly class AbstractEntityService
         return $data;
     }
 
-    public function generateCsv(array $entities, string $filename, ?string $type): StreamedResponse
+    public function generateSpreadSheet(array $entities, string $filename, ?string $type): BinaryFileResponse
     {
         if (empty($entities)) {
             throw new NoEntitiesProvidedForExportException();
         }
 
-        $response = new StreamedResponse(function () use ($entities, $type): void {
-            $handle = fopen('php://output', 'w+');
+        $filename = sprintf('%s_%s.xlsx', $filename, date('Y-m-d_H-i-s'));
+        $filePath = sprintf('%s/storage/regmel/%s', $this->parameterBag->get('kernel.project_dir'), $filename);
 
-            fputcsv($handle, $this->getCsvHeaders($type));
+        $data = [$this->getCsvHeaders($type)];
+        foreach ($entities as $entity) {
+            $data[] = $this->getCsvRow($entity, $type);
+        }
 
-            foreach ($entities as $entity) {
-                fputcsv($handle, $this->getCsvRow($entity, $type));
-            }
+        $spreadSheet = new Spreadsheet();
+        $active = $spreadSheet->getActiveSheet();
+        $active->fromArray($data, null, 'A1', true);
 
-            fclose($handle);
-        });
+        $writer = new Xlsx($spreadSheet);
+        $writer->setPreCalculateFormulas(false);
+        $writer->save($filePath);
 
-        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
-        $response->headers->set('Content-Disposition', "attachment; filename=\"$filename\"");
+        $response = new BinaryFileResponse($filePath, headers: ['Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename);
+        $response->deleteFileAfterSend(true);
 
         return $response;
     }

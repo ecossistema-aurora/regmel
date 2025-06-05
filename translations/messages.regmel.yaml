@@ -204,7 +204,7 @@ evidences: Evidências
 elderly_person: Pessoa idosa
 execution_period: Período de execução
 explore_repository: Conheça o repositório
-export_csv: Exportar CSV
+export_csv: Exportar Planilha
 extra_fields: Campos extras
 export_project_file: Baixar Arquivos Geográficos
 export_map_file: Baixar Áreas Poligonais
@@ -1170,6 +1170,7 @@ csv:
     company_cnpj: CNPJ da Empresa
     company_phone: Telefone da Empresa
     project_file: Arquivo do Projeto
+    map_file: Arquivo da Área Poligonal
     houses_quantity: Quantidade de Domicílios
     total_area: Área Total
     total_value: Valor Global da Proposta

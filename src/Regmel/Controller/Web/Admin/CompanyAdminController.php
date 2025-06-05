@@ -202,6 +202,6 @@ class CompanyAdminController extends AbstractAdminController
             ? $this->organizationService->findByCompanyFilters($tipo)
             : $this->organizationService->findBy(['type' => $type]);
 
-        return $this->organizationService->generateCsv($companies, 'empresas.csv', $type);
+        return $this->organizationService->generateSpreadSheet($companies, 'empresas', $type);
     }
 }

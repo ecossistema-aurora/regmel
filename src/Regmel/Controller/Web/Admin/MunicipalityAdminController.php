@@ -239,7 +239,7 @@ class MunicipalityAdminController extends AbstractAdminController
             ? $this->organizationService->findByMunicipalityFilters($region, $state)
             : $this->organizationService->findBy(['type' => $type]);
 
-        return $this->organizationService->generateCsv($municipalities, 'municipios.csv', $type);
+        return $this->organizationService->generateSpreadSheet($municipalities, 'municipios', $type);
     }
 
     #[Route('/painel/admin/municipios/{municipalityId}/propostas/{id}/status', name: 'admin_regmel_municipality_proposal_update_status', methods: ['POST'])]
