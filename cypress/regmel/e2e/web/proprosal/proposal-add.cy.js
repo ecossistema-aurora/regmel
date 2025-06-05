@@ -5,8 +5,7 @@ describe('Cadastro de proposta', () => {
         cy.get('input[name="password"]').type('Aurora@2024');
         cy.get('button[data-cy="submit"]').click();
         cy.wait(1000);
-        cy.contains('Empresas/OSC').click();
-        cy.contains('Empresa Teste LTDA').click();
+        cy.visit('/painel/admin/empresas');
         cy.contains('Propostas').click();
     });
 
@@ -87,8 +86,7 @@ describe('Cadastro de proposta com empresa do tipo entidade', () => {
     beforeEach(() => {
         cy.loginRegmel('usuarioNorte@empresa.com', 'Aurora@2024');
         cy.wait(1000);
-        cy.contains('Empresas/OSC').click();
-        cy.contains('Empresa Norte').click();
+        cy.visit('/painel/admin/empresas');
         cy.contains('Propostas').click();
     });
 

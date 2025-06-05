@@ -11,6 +11,13 @@
                     {% endif %}
                 {% endfor %}
 
+                {% if key == 'admin_regmel_company_list'
+                    and 'ROLE_COMPANY' in app.user.roles
+                    and app.user.agents|length == 1
+                    and app.user.agents.first.organizations|length == 1 %}
+                    {% set hasAccess = false %}
+                {% endif %}
+
                 {% if hasAccess == true %}
                     <li class="nav-item{% if not app.request or not app.request.attributes.get('_route') == key %} active{% endif %}">
                         <a href="{{ path(key) }}" class="{{ item.color ?? '' }} nav-link d-flex align-items-center">

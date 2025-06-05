@@ -4,6 +4,7 @@
 
 {% block content %}
     {% include '_components/modal-confirm-remove.html.twig' %}
+    {% include 'regmel/admin/company/_partials/modal-edit.html.twig' %}
     {% include 'regmel/admin/company/_partials/modal-add-proposal-not-active.html.twig' %}
 
     <section class="d-flex">
@@ -13,6 +14,17 @@
             <div class="card card-body shadow">
                 <div class="d-flex justify-content-between">
                     <h2>{{ 'company'|trans }} - {{ company.name }}</h2>
+
+                    <div class="col text-end">
+                        <a href="#"
+                           class="btn btn-secondary edit-company"
+                           data-bs-toggle="modal"
+                           data-bs-target="#modalEditCompany"
+                           data-id="{{ company.id }}"
+                           data-token="{{ token }}">
+                            {{ 'edit'|trans }}
+                        </a>
+                    </div>
                 </div>
 
                 <hr>

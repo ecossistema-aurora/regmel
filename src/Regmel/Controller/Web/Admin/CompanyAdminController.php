@@ -57,6 +57,18 @@ class CompanyAdminController extends AbstractAdminController
         $user = $this->security->getUser();
         $filterType = $request->query->get('tipo');
 
+        if (in_array(UserRolesEnum::ROLE_COMPANY->value, $user->getRoles())) {
+            $agents = $user->getAgents();
+            if (1 === $agents->count()) {
+                $companies = $this->organizationService->getCompaniesByAgents($agents);
+                if (1 === count($companies)) {
+                    $company = reset($companies);
+
+                    return $this->redirectToRoute('admin_regmel_company_details', ['id' => $company->getId()]);
+                }
+            }
+        }
+
         if (true === in_array(UserRolesEnum::ROLE_ADMIN->value, $user->getRoles())) {
             $criteria = ['type' => OrganizationTypeEnum::EMPRESA->value];
             $allCompanies = $this->organizationService->findBy($criteria);
@@ -100,6 +112,8 @@ class CompanyAdminController extends AbstractAdminController
     #[Route('/painel/admin/empresas/{id}', name: 'admin_regmel_company_details', methods: ['GET'])]
     public function details(Uuid $id): Response
     {
+        $user = $this->security->getUser();
+
         $company = $this->organizationService->findOneBy([
             'id' => $id,
             'type' => OrganizationTypeEnum::EMPRESA->value,
@@ -125,6 +139,7 @@ class CompanyAdminController extends AbstractAdminController
             'timeline' => $timeline,
             'createdById' => $createdById,
             'phase' => $isPhaseActive,
+            'token' => $this->jwtManager->create($user),
         ], parentPath: '');
     }
 
