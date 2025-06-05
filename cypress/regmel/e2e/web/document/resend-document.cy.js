@@ -5,8 +5,9 @@ describe('Teste de reenvio de termo de adesão', () => {
     });
 
     it('Garante que é possível reenviar o termo de adesão do município', () => {
-        cy.get('.mb-3 > :nth-child(2) > .nav-link > .font-title').contains('Municípios').click();
-        cy.get('span > a').contains('Santana do Acaraú-CE').click();
+        cy.wait(500);
+
+        cy.contains('Santana do Acaraú-CE');
         cy.get('#pills-files-tab').contains('Termo de Adesão').click();
         cy.get('.alert-danger').contains('RECUSADO').should('be.visible');
         cy.wait(1000)

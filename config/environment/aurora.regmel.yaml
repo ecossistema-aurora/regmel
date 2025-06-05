@@ -11,7 +11,9 @@ email:
     Este é um email automático, por favor, não responda.
 
 variables:
-  price_per_household: 45000
+  price_per_household: 35000
+  min_houses: 20
+  max_houses: 140
 
 visit_repository: false
 logo:

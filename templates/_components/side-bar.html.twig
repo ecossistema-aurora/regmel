@@ -11,8 +11,8 @@
                     {% endif %}
                 {% endfor %}
 
-                {% if key == 'admin_regmel_company_list'
-                    and 'ROLE_COMPANY' in app.user.roles
+                {% if (key == 'admin_regmel_company_list' or key == 'admin_regmel_municipality_list')
+                    and ('ROLE_COMPANY' in app.user.roles or 'ROLE_MUNICIPALITY' in app.user.roles)
                     and app.user.agents|length == 1
                     and app.user.agents.first.organizations|length == 1 %}
                     {% set hasAccess = false %}
