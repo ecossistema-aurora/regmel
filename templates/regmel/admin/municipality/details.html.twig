@@ -4,6 +4,7 @@
 
 {% block content %}
     {% include '_components/modal-confirm-remove.html.twig' %}
+    {% include 'regmel/admin/municipality/_partials/modal-edit.html.twig' %}
 
     <section class="d-flex">
         {% include "_components/side-bar.html.twig" %}
@@ -15,6 +16,18 @@
                     <div class="card card-body shadow">
                         <div class="d-flex justify-content-between">
                             <h2>{{ 'municipality'|trans }} - {{ municipality.name }}-{{ municipality.extraFields.state }}</h2>
+
+                            <div class="col text-end">
+                                <a href="#"
+                                class="btn btn-secondary edit-organization"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalEditOrganization"
+                                data-id="{{ municipality.id }}"
+                                data-token="{{ token }}"
+                                >
+                                    {{ 'edit'|trans }}
+                                </a>
+                            </div>
                         </div>
 
                         <hr>
@@ -101,15 +114,13 @@
 
                                     <p>
                                         <strong>Possui experiência habitacional: </strong>
-                                        {% if 'hasHousingExperience' in municipality.extraFields %}
-                                            {{ municipality.extraFields.hasHousingExperience ? 'Sim' : 'Não' }}
-                                        {% endif %}
+                                        {% set hasHousingExperience = 'true' == municipality.extraFields.hasHousingExperience ?? '' %}
+                                        {{ hasHousingExperience ? 'Sim' : 'Não' }}
                                     </p>
                                     <p>
                                         <strong>Possui PLHIS: </strong>
-                                        {% if 'hasPlhis' in municipality.extraFields %}
-                                            {{ municipality.extraFields.hasPlhis ? 'Sim' : 'Não' }}
-                                        {% endif %}
+                                        {% set hasPlhis = 'true' == municipality.extraFields.hasPlhis ?? '' %}
+                                        {{ hasPlhis ? 'Sim' : 'Não' }}
                                     </p>
                                 </div>
                             </div>

@@ -115,6 +115,8 @@ class MunicipalityAdminController extends AbstractAdminController
     #[Route('/painel/admin/municipios/{id}', name: 'admin_regmel_municipality_details', methods: ['GET'])]
     public function details(Uuid $id): Response
     {
+        $user = $this->security->getUser();
+
         $municipality = $this->organizationService->findOneBy([
             'id' => $id,
             'type' => OrganizationTypeEnum::MUNICIPIO->value,
@@ -137,6 +139,7 @@ class MunicipalityAdminController extends AbstractAdminController
             'timeline' => $timeline,
             'proposals' => $proposals,
             'createdById' => $createdById,
+            'token' => $this->jwtManager->create($user),
         ], parentPath: '');
     }
 
@@ -185,6 +188,11 @@ class MunicipalityAdminController extends AbstractAdminController
             $this->addFlashError($exception->getMessage());
 
             return $this->list($request);
+        }
+
+        $referer = $request->headers->get('referer');
+        if ($referer) {
+            return $this->redirect($referer);
         }
 
         return $this->redirectToRoute('admin_regmel_municipality_list');

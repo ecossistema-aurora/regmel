@@ -11,21 +11,24 @@ document.addEventListener('click', function (event) {
             .then(response => response.json())
             .then(data => {
                 document.getElementById('edit-organization').action = `/painel/admin/municipios/${organizationId}/editar`;
-                document.getElementById('profile-img').src = data.image || 'img/city.png';
                 document.getElementById('organization-description').value = data.description ?? '';
                 document.getElementById('organization-site').value = data.extraFields?.site ?? '';
                 document.getElementById('organization-phone').value = data.extraFields?.telefone ?? '';
                 document.getElementById('organization-email').value = data.extraFields?.email ?? '';
 
-                if (data.extraFields?.hasHousingExperience === true) {
+                if (data.image) {
+                    document.getElementById('profile-img').src = data.image;
+                }
+
+                if (data.extraFields?.hasHousingExperience === 'true') {
                     document.getElementById('edit-hasHousingExperienceYes').checked = true;
-                } else if (data.extraFields?.hasHousingExperience === false) {
+                } else if (data.extraFields?.hasHousingExperience === 'false') {
                     document.getElementById('edit-hasHousingExperienceNo').checked = true;
                 }
 
-                if (data.extraFields?.hasPlhis === true) {
+                if (data.extraFields?.hasPlhis === 'true') {
                     document.getElementById('edit-hasPlhisYes').checked = true;
-                } else if (data.extraFields?.hasPlhis === false) {
+                } else if (data.extraFields?.hasPlhis === 'false') {
                     document.getElementById('edit-hasPlhisNo').checked = true;
                 }
             })
