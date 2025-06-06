@@ -153,9 +153,26 @@
                                                         <div class="form-text">Selecione uma opção obrigatória</div>
                                                     </div>
 
-                                                    <div class="mb-3">
-                                                        <label for="reasonText" class="form-label fw-bold">Motivo *</label>
-                                                        <textarea name="reason" id="reasonText" class="form-control" rows="4"
+                                                    <input type="hidden" name="reason" id="hiddenReason">
+
+                                                    <div class="mb-3 d-none" id="agreementFields">
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="checkbox" id="confirmAgreement" required>
+                                                            <label class="form-check-label" for="confirmAgreement">
+                                                                Declaro, para os devidos fins;<br>
+                                                                I – Que anuo expressamente com a proposta apresentada;<br>
+                                                                II – Que o a área urbana objeto de referida proposta se enquadra em uma ou mais critérios de elegibilidade indicados a seguir:<br>
+                                                                a. é um núcleo urbano regularizado ou em processo de regularização fundiária, desde que predominantemente de baixa renda;<br>
+                                                                b. é um núcleo urbano informal classificados como área de Regularização Fundiária Urbana de Interesse Social - Reurb-S;<br>
+                                                                c. é uma zona especial de interesse social, conforme o art. 4º, inciso V, alínea "f", da Lei nº 10.257, de 10 de julho de 2001;<br>
+                                                                d. é um caso excepcional em que o núcleo urbano ainda não tenha dado início ao processo de regularização fundiária nem se caracterize como zona especial de interesse social, mas que possui potenciais beneficiários de baixa renda que poderão receber obras de melhorias destinadas a garantir segurança ou salubridade para preservação de vidas.<br>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3 d-none" id="notAgreementFields">
+                                                        <label for="declineReasonText" class="form-label fw-bold">Motivo *</label>
+                                                        <textarea name="declineReason" id="declineReasonText" class="form-control" rows="4"
                                                                   placeholder="Descreva o motivo da sua decisão..." required></textarea>
                                                         <div class="form-text">Mínimo de 20 caracteres</div>
                                                     </div>
@@ -454,5 +471,51 @@
             const form = document.getElementById('proposalStatusForm');
             form.action = `/painel/admin/municipios/${municipalityId}/propostas/${proposalId}/status`;
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusAgreement = document.getElementById('statusAgreement');
+            const statusNotAgreement = document.getElementById('statusNotAgreement');
+            const hiddenReason = document.getElementById('hiddenReason');
+            const agreementFields = document.getElementById('agreementFields');
+            const notAgreementFields = document.getElementById('notAgreementFields');
+            const reasonText = document.getElementById('reasonText');
+            const confirmAgreement = document.getElementById('confirmAgreement');
+            const declineReasonText = document.getElementById('declineReasonText');
+
+
+            function toggleFields() {
+                if (statusAgreement.checked) {
+                    agreementFields.classList.remove('d-none');
+                    notAgreementFields.classList.add('d-none');
+
+                    confirmAgreement.setAttribute('required', '');
+                    declineReasonText.removeAttribute('required');
+
+                    const declarationLabel = document.querySelector('#agreementFields .form-check-label');
+                    hiddenReason.value = declarationLabel.textContent.trim();
+                }
+
+                if (statusNotAgreement.checked) {
+                    agreementFields.classList.add('d-none');
+                    notAgreementFields.classList.remove('d-none');
+
+                    confirmAgreement.removeAttribute('required');
+                    declineReasonText.setAttribute('required', '');
+
+                    hiddenReason.value = declineReasonText.textContent.trim();
+                }
+            }
+
+            statusAgreement.addEventListener('change', toggleFields);
+            statusNotAgreement.addEventListener('change', toggleFields);
+
+            declineReasonText.addEventListener('input', function() {
+                if (statusNotAgreement.checked) {
+                    hiddenReason.value = this.value;
+                }
+            });
+
+            toggleFields();
+        });
     </script>
 {% endblock %}
