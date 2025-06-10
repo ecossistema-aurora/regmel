@@ -25,9 +25,11 @@
                                 {{ 'export_project_file'|trans }}
                             </a>
 
-                            <a href="{{ path('admin_regmel_proposal_list_download', app.request.query.all) }}" class="btn btn-sm btn-secondary">
-                                {{ 'export_csv'|trans }}
-                            </a>
+                            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') %}
+                                <a href="{{ path('admin_regmel_proposal_list_download', app.request.query.all) }}" class="btn btn-sm btn-secondary">
+                                    {{ 'export_csv'|trans }}
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
 

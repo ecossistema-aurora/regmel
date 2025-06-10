@@ -18,10 +18,12 @@
                                 <h2>{{ 'companies'|trans }}</h2>
                             </div>
                             <div class="col text-end">
-                                <a href="{{ path('admin_regmel_company_list_download', app.request.query.all) }}"
-                                   class="btn btn-secondary">
-                                    {{ 'export_csv'|trans }}
-                                </a>
+                                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') %}
+                                    <a href="{{ path('admin_regmel_company_list_download', app.request.query.all) }}"
+                                       class="btn btn-secondary">
+                                        {{ 'export_csv'|trans }}
+                                    </a>
+                                {% endif %}
                             </div>
                         </div>
 
