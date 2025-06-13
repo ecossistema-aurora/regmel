@@ -34,10 +34,16 @@ describe('Listagem de Usuários - Painel Administrativo', () => {
         cy.get('table tbody tr').each(($tr) => {
             cy.wrap($tr).within(() => {
                 cy.get('td[data-column-id="status"]').then($status => {
-                    if ($status.text().includes('Aguardando Confirmar Conta')) {
-                        cy.contains('Confirmar Usuário').should('exist');
-                    } else {
+                    if ($status.text().includes('Ativo')) {
+                        cy.get('[data-cy="dropdown-actions"]').click();
                         cy.contains('Confirmar Usuário').should('not.exist');
+                        cy.get('[data-cy="dropdown-actions"]').click();
+                    }
+
+                    if ($status.text().includes('Aguardando Confirmar Conta')) {
+                        cy.get('[data-cy="dropdown-actions"]').click();
+                        cy.contains('Confirmar Usuário').should('exist');
+                        cy.get('[data-cy="dropdown-actions"]').click();
                     }
                 });
             });
@@ -46,6 +52,7 @@ describe('Listagem de Usuários - Painel Administrativo', () => {
 
     it('Confirma usuário pendente e atualiza status', () => {
         cy.get('table tbody tr').contains('Aguardando Confirmar Conta').parents('tr').within(() => {
+            cy.get('[data-cy="dropdown-actions"]').click();
             cy.contains('Confirmar Usuário').click();
         });
         cy.get('.modal-body').should('be.visible');
