@@ -306,4 +306,20 @@ class ProposalAdminController extends AbstractAdminController
 
         return $this->redirectToRoute('admin_regmel_proposal_list');
     }
+
+    #[IsGranted(new Expression('
+        is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or 
+        is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")
+    '), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    #[Route('/painel/admin/propostas/bulk-update-status', name: 'admin_regmel_proposal_bulk_update_status', methods: ['POST'])]
+    public function bulkUpdateStatus(Request $request): Response
+    {
+        $body = json_decode($request->getContent(), true);
+        $selectedRows = $body['ids'] ?? [];
+        $status = $body['status'] ?? '';
+
+        $this->proposalService->bulkUpdateStatus($selectedRows, $status);
+
+        return $this->redirectToRoute('admin_regmel_proposal_list');
+    }
 }
