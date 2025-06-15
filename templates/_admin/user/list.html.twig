@@ -119,6 +119,13 @@
                                                             {{ 'edit'|trans }}
                                                         </a>
                                                     </li>
+                                                    {% if ['ROLE_MUNICIPALITY', 'ROLE_COMPANY']|filter(r => r in item.roles)|length == 0 %}
+                                                        <li>
+                                                            <a href="#" class="dropdown-item text-primary" onclick="modalEditRoles('{{ item.id }}', '{{ item.roles|join(', ') }}')">
+                                                                {{ 'edit_roles'|trans }}
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
                                                     {% if item.status|lower == 'awaitingconfirmation' and is_granted('ROLE_ADMIN') %}
                                                         <li>
                                                             <a href="#" class="dropdown-item text-success"
@@ -142,12 +149,14 @@
     </section>
 
     {% include '_components/modal-confirm-user.html.twig' %}
+    {% include '_admin/user/_partials/modal-edit-roles.html.twig' %}
 {% endblock %}
 
 {% block extra_javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/modal-photo.js') }}"></script>
     <script src="{{ asset('js/modal-confirm-user.js') }}"></script>
+    <script src="{{ asset('js/modal-edit-roles.js') }}"></script>
     <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
     <script type="module" src="{{ asset('js/grid-init.js') }}"></script>
 {% endblock %}

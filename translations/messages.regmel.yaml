@@ -182,6 +182,7 @@ edit_activity_area: Editar Área de Atuação
 edit_data: Editar dados
 edit_municipality: Editar Município
 edit_company: Editar Empresa/OSC
+edit_roles: Editar Perfis
 email: Email
 entity_banner: Banner da Entidade
 entity: Entidade
@@ -478,6 +479,7 @@ ROLE_MUNICIPALITY: Administrador de Município
 ROLE_MANAGER: Gestor
 ROLE_ADMIN: Administrador Geral
 ROLE_SNP: Administrador SNP
+ROLE_SUPPORT: Suporte
 rejected: Rejeitado
 
 selection: Seleção
@@ -659,6 +661,7 @@ view:
     message:
       created: O usuário foi criado com sucesso
       updated: O usuário foi atualizado
+      not_found: Usuário não encontrado
       confirmed: O usuário foi confirmado
       not_confirmed: Não foi possível confirmar o usuário
       confirm_question: Deseja confirmar este usuário?
