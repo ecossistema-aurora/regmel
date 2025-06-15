@@ -179,6 +179,7 @@ export declare const EDIT_ACTIVITY_AREA: Message<{ 'messages': { parameters: NoP
 export declare const EDIT_DATA: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const EDIT_MUNICIPALITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const EDIT_COMPANY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const EDIT_ROLES: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const EMAIL: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ENTITY_BANNER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const ENTITY: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
@@ -462,6 +463,7 @@ export declare const ROLEMUNICIPALITY: Message<{ 'messages': { parameters: NoPar
 export declare const ROLEMANAGER: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ROLEADMIN: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const ROLESNP: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const ROLESUPPORT: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const REJECTED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'|'pt-br'|'en'|'es'>;
 export declare const SELECTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const SEVERAL_DOCUMENTS: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
@@ -615,6 +617,7 @@ export declare const TABLE_ERROR: Message<{ 'messages': { parameters: NoParamete
 export declare const VIEW_USER_CREATE: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_USER_MESSAGE_CREATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_USER_MESSAGE_UPDATED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
+export declare const VIEW_USER_MESSAGE_NOT_FOUND: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_USER_MESSAGE_CONFIRMED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_USER_MESSAGE_NOT_CONFIRMED: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;
 export declare const VIEW_USER_MESSAGE_CONFIRM_QUESTION: Message<{ 'messages': { parameters: NoParametersType } }, 'regmel'>;

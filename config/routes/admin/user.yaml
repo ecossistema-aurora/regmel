@@ -27,4 +27,9 @@ confirm:
   path: /{id}/confirmar
   controller: App\Controller\Web\Admin\UserAdminController::confirmAccount
   methods: ['GET']
+
+edit_roles:
+  path: /{id}/edit-user-roles
+  controller: App\Controller\Web\Admin\UserAdminController::editUserRoles
+  methods: ['POST']
   

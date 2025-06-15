@@ -25,4 +25,6 @@ interface UserServiceInterface
     public function getMainAgent(User $user): Agent;
 
     public function confirmAccount(Uuid $id): void;
+
+    public function updateRoles(Uuid $id, array $roles): User;
 }

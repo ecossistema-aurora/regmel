@@ -263,4 +263,21 @@ class UserAdminController extends AbstractAdminController
 
         return $this->redirectToRoute('admin_user_list');
     }
+
+    #[IsGranted(new Expression(
+        'is_granted("'.UserRolesEnum::ROLE_ADMIN->value.'") or '.
+        'is_granted("'.UserRolesEnum::ROLE_MANAGER->value.'")'
+    ), statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    public function editUserRoles(Uuid $id, Request $request): Response
+    {
+        try {
+            $this->service->updateRoles($id, array_keys($request->get('roles', [])));
+
+            $this->addFlashSuccess($this->translator->trans('view.user.message.updated'));
+        } catch (UserResourceNotFoundException) {
+            $this->addFlashError($this->translator->trans('view.user.message.not_found'));
+        }
+
+        return $this->redirectToRoute('admin_user_list');
+    }
 }

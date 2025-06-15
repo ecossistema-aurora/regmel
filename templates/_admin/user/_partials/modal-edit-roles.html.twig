@@ -1,0 +1,36 @@
+<div class="modal fade" id="modalEditRoles" tabindex="-1" aria-labelledby="modal-edit-roles-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="formEditRoles" action="" method="post">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modal-edit-roles-title">{{ 'edit_roles'|trans }}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-check">
+                        <input type="checkbox" data-role="ROLE_ADMIN" name="roles[ROLE_ADMIN]" id="checkbox-admin" class="form-check-input">
+                        <label for="checkbox-admin" class="form-check-label">
+                            {{ 'ROLE_ADMIN'|trans }}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" data-role="ROLE_MANAGER" name="roles[ROLE_MANAGER]" id="checkbox-manager" class="form-check-input">
+                        <label for="checkbox-manager" class="form-check-label">
+                            {{ 'ROLE_MANAGER'|trans }}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" data-role="ROLE_SUPPORT" name="roles[ROLE_SUPPORT]" id="checkbox-support" class="form-check-input">
+                        <label for="checkbox-support" class="form-check-label">
+                            {{ 'ROLE_SUPPORT'|trans }}
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'cancel'|trans }}</button>
+                    <button type="submit" class="btn btn-success">{{ 'confirm'|trans }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

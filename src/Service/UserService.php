@@ -188,4 +188,14 @@ readonly class UserService extends AbstractEntityService implements UserServiceI
 
         $this->repository->save($user);
     }
+
+    public function updateRoles(Uuid $id, array $roles): User
+    {
+        $user = $this->get($id);
+
+        $user->setRoles($roles);
+        $user->setUpdatedAt(new DateTime());
+
+        return $this->repository->save($user);
+    }
 }
