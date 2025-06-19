@@ -15,6 +15,7 @@ use App\Enum\OrganizationTypeEnum;
 use App\Enum\StatusProposalEnum;
 use App\Environment\ConfigEnvironment;
 use App\Exception\UnableCreateFileException;
+use App\Regmel\Repository\Interface\ProposalRepositoryInterface;
 use App\Regmel\Service\Interface\ProposalServiceInterface;
 use App\Repository\Interface\InitiativeRepositoryInterface;
 use App\Repository\OrganizationRepository;
@@ -62,6 +63,7 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
         private TranslatorInterface $translator,
         private readonly ConfigEnvironment $configEnvironment,
         private readonly EmailServiceInterface $emailService,
+        private readonly ProposalRepositoryInterface $proposalRepository,
     ) {
         parent::__construct(
             $this->security,
@@ -435,5 +437,10 @@ readonly class ProposalService extends AbstractEntityService implements Proposal
                 'companyName' => $initiative->getOrganizationFrom()->getName(),
             ]
         );
+    }
+
+    public function bulkUpdateStatus(array $proposals, string $status): void
+    {
+        $this->proposalRepository->bulkUpdateStatus($proposals, $status);
     }
 }
