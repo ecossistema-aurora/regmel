@@ -17,17 +17,19 @@
                         <div class="d-flex justify-content-between">
                             <h2>{{ 'municipality'|trans }} - {{ municipality.name }}-{{ municipality.extraFields.state }}</h2>
 
-                            <div class="col text-end">
-                                <a href="#"
-                                class="btn btn-secondary edit-organization"
-                                data-bs-toggle="modal"
-                                data-bs-target="#modalEditOrganization"
-                                data-id="{{ municipality.id }}"
-                                data-token="{{ token }}"
-                                >
-                                    {{ 'edit'|trans }}
-                                </a>
-                            </div>
+                            {% if is_granted('ROLE_ADMIN') or is_granted('edit', municipality) %}
+                                <div class="col text-end">
+                                    <a href="#"
+                                    class="btn btn-secondary edit-organization"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalEditOrganization"
+                                    data-id="{{ municipality.id }}"
+                                    data-token="{{ token }}"
+                                    >
+                                        {{ 'edit'|trans }}
+                                    </a>
+                                </div>
+                            {% endif %}
                         </div>
 
                         <hr>
@@ -395,7 +397,7 @@
                                 </table>
                             </div>
                             <div class="tab-pane fade pt-3" id="pills-files" role="tabpanel" aria-labelledby="pills-files-tab" tabindex="0">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="mb-3">
                                     <div class="modal fade" id="modalResendTerm" tabindex="-1" aria-labelledby="" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -420,6 +422,8 @@
                                     </div>
                                     {% if  municipality.extraFields['term_status'] != 'approved' %}
                                         <a href="" data-bs-toggle="modal" data-bs-target="#modalResendTerm" class="btn btn-outline-success btn-sm">Reenviar</a>
+
+                                        <a class="mx-1 btn btn-link" href="/files/adesao-ao-programa.pdf" download>Modelo do Termo de Adesão ao Programa</a>
                                     {% endif %}
                                 </div>
 
