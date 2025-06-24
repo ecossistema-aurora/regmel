@@ -12,7 +12,7 @@ describe('Teste de reenvio de termo de adesão', () => {
         cy.get('.alert-danger').contains('RECUSADO').should('be.visible');
         cy.wait(1000)
         cy.get('#pills-files').should('contain.text', 'Termo-SantanaDoAcarau-CE-1.pdf');
-        cy.get('.d-flex > .btn-outline-success').contains('Reenviar').click();
+        cy.get('.btn-outline-success').contains('Reenviar').click();
         cy.get('#joinForm').selectFile('./cypress/regmel/fixtures/file2.pdf');
         cy.get('#modalResendTerm > .modal-dialog > .modal-content > form > .modal-footer > .btn-primary').contains('Enviar').click();
         cy.get('.toast').contains('Termo enviado com sucesso!').should('be.visible');
