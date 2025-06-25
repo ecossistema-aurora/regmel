@@ -56,9 +56,20 @@ describe('Cadastro de Município', () => {
 
         cy.get('input[type=file]').selectFile('./cypress/regmel/fixtures/file.pdf');
 
-        cy.get('input[name="acceptTerms"]').check({ force: true });
-        cy.get('input[name="acceptPrivacy"]').check({ force: true });
-        cy.get('input[name="acceptImage"]').check({ force: true });
+        const terms = [
+            { link: 'Aceito os Termos e condições de uso', modal: '#modalLGPD' },
+            { link: 'Aceito a Política de Privacidade', modal: '#modalPrivacy' },
+            { link: 'Autorizo o Uso de Imagem', modal: '#modalImageAuthorization' }
+        ];
+
+        terms.forEach((term) => {
+            cy.contains(term.link).click();
+
+            cy.wait(500);
+
+            cy.get(term.modal).contains('button', 'Aceitar').click();
+
+        });
 
         cy.get('button[type="submit"]').click();
         cy.wait(3000);
