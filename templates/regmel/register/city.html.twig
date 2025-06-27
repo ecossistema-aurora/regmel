@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="" enctype="multipart/form-data">
+                        <form method="POST" action="" enctype="multipart/form-data" id="registerCityForm">
                             <input type="hidden" name="token" value="{{ csrf_token(form_id) }}">
 
                             {% if errors is defined and errors is not empty %}
@@ -49,7 +49,7 @@
                             {% include "regmel/register/_partials/accept-terms.html.twig" %}
 
                             <div class="btn-form-group">
-                                <button class="btn btn-primary w-100 btn-lg" type="submit">
+                                <button class="btn btn-primary w-100 btn-lg" type="submit" id="submitBtn" disabled>
                                     {{ 'save' | trans }}
                                 </button>
                             </div>
@@ -70,4 +70,5 @@
     <script type="module" src="{{ asset('js/check-duplicate-city.js') }}"></script>
     <script type="module" src="{{ asset('js/regmel/register.js') }}"></script>
     <script type="module" src="{{ asset('js/files-validation.js') }}"></script>
+    <script type="module" src="{{ asset('js/regmel/accept-polices.js') }}"></script>
 {% endblock %}

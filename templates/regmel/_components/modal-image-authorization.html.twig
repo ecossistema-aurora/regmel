@@ -8,8 +8,9 @@
             <div class="modal-body">
                 {{ env.aurora.terms.image_authorization.text | raw }}
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            <div class="modal-footer container justify-content-center">
+                <button type="button" class="btn btn-lg btn-secondary col-4 me-4 cancel-policy" data-policy="image" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-lg btn-primary col-4 accept-policy" data-policy="image" data-bs-dismiss="modal">Aceitar</button>
             </div>
         </div>
     </div>
