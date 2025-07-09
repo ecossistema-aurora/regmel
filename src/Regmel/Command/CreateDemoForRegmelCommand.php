@@ -25,6 +25,9 @@ use Symfony\Component\Uid\Uuid;
 
 class CreateDemoForRegmelCommand extends Command
 {
+    public const DEMO_MUNICIPALITY_PHASE_ID = 'ef62e816-00a4-43cf-930f-796edb7c6175';
+    public const DEMO_COMPANY_PHASE_ID = 'e9075d53-abd6-4568-b531-4f3bb90fb734';
+
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly UserRepositoryInterface $userRepository,
@@ -134,7 +137,7 @@ class CreateDemoForRegmelCommand extends Command
         $phase1Municipality = new Phase();
         $phase1Municipality->setOpportunity($opportunityForMunicipality);
         $phase1Municipality->setCreatedBy($opportunityForMunicipality->getCreatedBy());
-        $phase1Municipality->setId(Uuid::fromString('ef62e816-00a4-43cf-930f-796edb7c6175'));
+        $phase1Municipality->setId(Uuid::fromString(self::DEMO_MUNICIPALITY_PHASE_ID));
         $phase1Municipality->setStatus(true);
         $phase1Municipality->setName('Credenciamento e Termo de Adesão');
         $phase1Municipality->setDescription('Cadastro e Validação do Termo de Adesão do Município');
@@ -154,7 +157,7 @@ class CreateDemoForRegmelCommand extends Command
         $phase1 = new Phase();
         $phase1->setOpportunity($opportunity);
         $phase1->setCreatedBy($opportunity->getCreatedBy());
-        $phase1->setId(Uuid::fromString('e9075d53-abd6-4568-b531-4f3bb90fb734'));
+        $phase1->setId(Uuid::fromString(self::DEMO_COMPANY_PHASE_ID));
         $phase1->setStatus(true);
         $phase1->setName('Cadastro e Envio de Propostas');
         $phase1->setDescription('Envio de Propostas aos Municipios');

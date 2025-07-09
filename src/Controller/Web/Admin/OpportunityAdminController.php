@@ -206,7 +206,7 @@ class OpportunityAdminController extends AbstractAdminController
         $opportunity = $this->service->get($id);
 
         $inscriptions = $this->inscriptionOpportunityService->list($id);
-        $phases = $opportunity->getPhases();
+        $phases = $opportunity->getPhases()->filter(fn ($phase) => null === $phase->getDeletedAt());
 
         return $this->render('opportunity/details.html.twig', [
             'opportunity' => $opportunity,

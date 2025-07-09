@@ -58,7 +58,7 @@ class Phase
     #[Groups(['phase.get'])]
     private ?Opportunity $opportunity = null;
 
-    #[ORM\OneToMany(targetEntity: InscriptionPhase::class, mappedBy: 'phases')]
+    #[ORM\OneToMany(targetEntity: InscriptionPhase::class, mappedBy: 'phase')]
     private Collection $inscriptions;
 
     #[ORM\JoinTable(name: 'phase_reviewers')]
