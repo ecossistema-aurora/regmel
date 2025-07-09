@@ -820,6 +820,8 @@ view:
     people: Gente
     period: Período de la oportunidad
     phases: Fases
+    delete_phase: Eliminar Fase
+    confirm_delete_phase: ¿Estás seguro de que quieres eliminar esta fase?
     public_info:
       presentation_info:
         title: Información de presentación

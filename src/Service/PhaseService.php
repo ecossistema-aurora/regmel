@@ -7,7 +7,9 @@ namespace App\Service;
 use App\DTO\PhaseDto;
 use App\Entity\Phase;
 use App\Environment\ConfigEnvironment;
+use App\Exception\Phase\CannotRemovePhaseException;
 use App\Exception\Phase\PhaseResourceNotFoundException;
+use App\Regmel\Command\CreateDemoForRegmelCommand;
 use App\Repository\Interface\PhaseRepositoryInterface;
 use App\Service\Interface\PhaseServiceInterface;
 use DateTime;
@@ -75,6 +77,13 @@ readonly class PhaseService extends AbstractEntityService implements PhaseServic
 
         if (null === $phase) {
             throw new PhaseResourceNotFoundException();
+        }
+
+        $isDefaultPhase = in_array($phase->getId()->toRfc4122(), [CreateDemoForRegmelCommand::DEMO_MUNICIPALITY_PHASE_ID, CreateDemoForRegmelCommand::DEMO_COMPANY_PHASE_ID], true);
+        $existsInscriptions = false === $phase->getInscriptions()->isEmpty();
+
+        if ($isDefaultPhase || $existsInscriptions) {
+            throw new CannotRemovePhaseException();
         }
 
         $phase->setDeletedAt(new DateTime());

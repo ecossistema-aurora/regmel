@@ -818,6 +818,8 @@ view:
     people: People
     period: Opportunity period
     phases: Phases
+    delete_phase: Delete Phase
+    confirm_delete_phase: Are you sure you want to delete this phase?
     public_info:
       presentation_info:
         title: Presentation Information
