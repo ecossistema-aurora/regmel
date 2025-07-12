@@ -930,6 +930,10 @@ view:
     people: Pessoas
     period: Período da oportunidade
     phases: Fases
+    delete_phase: Excluir fase
+    confirm_delete_phase: Deseja realmente excluir esta fase?
+    phase_delete_success: Fase excluída com sucesso
+    phase_delete_error: Ocorreu um erro ao excluir a fase
     public_info:
       presentation_info:
         title: Informações de apresentação

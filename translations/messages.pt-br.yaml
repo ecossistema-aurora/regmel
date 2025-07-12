@@ -798,6 +798,8 @@ view:
     people: Pessoas
     period: Período da oportunidade
     phases: Fases
+    delete_phase: Excluir fase
+    confirm_delete_phase: Deseja realmente excluir esta fase?
     public_info:
       presentation_info:
         title: Informações de apresentação

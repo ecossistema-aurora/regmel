@@ -82,6 +82,21 @@
                                         {{ 'edit'|trans }}
                                     </button>
                                 </li>
+                                {% if phases|length > 1 %}
+                                    <li>
+                                        <button class="dropdown-item text-danger"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#deletePhaseModal"
+                                                data-href="{{ path('admin_opportunity_phase_delete', {
+                                                    opportunityId: opportunity.id,
+                                                    phaseId: phase.id
+                                                }) }}"
+                                                onclick="confirmRemove(this)"
+                                        >
+                                            {{ 'delete'|trans }}
+                                        </button>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </td>
@@ -194,3 +209,25 @@
         </form>
     </div>
 </div>
+
+<div class="modal fade" id="deletePhaseModal" tabindex="-1" aria-labelledby="deletePhaseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletePhaseModalLabel">{{ 'view.opportunity.delete_phase'|trans }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>{{ 'view.opportunity.confirm_delete_phase'|trans }}</p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-secondary" data-bs-dismiss="modal">{{ 'Cancel'|trans }}</a>
+                <a href="#" class="btn btn-danger" data-modal-button="confirm-link">{{ 'view.opportunity.delete_phase'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_javascripts %}
+    <script src="{{ asset('js/modal-confirm-remove.js') }}"></script>
+{% endblock %}
