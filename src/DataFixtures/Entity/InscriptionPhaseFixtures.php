@@ -430,8 +430,8 @@ final class InscriptionPhaseFixtures extends AbstractFixture implements Dependen
         ],
         [
             'id' => self::INSCRIPTION_PHASE_ID_38,
-            'agent' => AgentFixtures::AGENT_ID_3,
-            'phase' => PhaseFixtures::PHASE_ID_15,
+            'agent' => AgentFixtures::AGENT_ID_5,
+            'phase' => PhaseFixtures::PHASE_ID_14,
             'status' => InscriptionPhaseStatusEnum::ACTIVE->value,
             'extraFields' => [],
             'createdAt' => '2024-09-15T11:00:00+00:00',
@@ -440,8 +440,8 @@ final class InscriptionPhaseFixtures extends AbstractFixture implements Dependen
         ],
         [
             'id' => self::INSCRIPTION_PHASE_ID_39,
-            'agent' => AgentFixtures::AGENT_ID_5,
-            'phase' => PhaseFixtures::PHASE_ID_15,
+            'agent' => AgentFixtures::AGENT_ID_6,
+            'phase' => PhaseFixtures::PHASE_ID_14,
             'status' => InscriptionPhaseStatusEnum::ACTIVE->value,
             'extraFields' => [],
             'createdAt' => '2024-09-15T12:00:00+00:00',

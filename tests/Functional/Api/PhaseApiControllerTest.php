@@ -472,7 +472,7 @@ class PhaseApiControllerTest extends AbstractApiTestCase
     {
         $client = static::apiClient();
 
-        $url = sprintf('%s/%s', str_replace('{opportunity}', OpportunityFixtures::OPPORTUNITY_ID_2, self::BASE_URL), PhaseFixtures::PHASE_ID_4);
+        $url = sprintf('%s/%s', str_replace('{opportunity}', OpportunityFixtures::OPPORTUNITY_ID_10, self::BASE_URL), PhaseFixtures::PHASE_ID_15);
 
         $client->request(Request::METHOD_DELETE, $url);
 

@@ -17,3 +17,8 @@ update:
   path: /{phaseId}/editar
   controller: App\Controller\Web\Admin\OpportunityPhaseAdminController::updatePhase
   methods: ['POST']
+
+delete:
+  path: /{phaseId}/delete
+  controller: App\Controller\Web\Admin\OpportunityPhaseAdminController::delete
+  methods: ['GET']

@@ -103,4 +103,20 @@ class OpportunityPhaseAdminController extends AbstractAdminController
             '_fragment' => 'phases',
         ]);
     }
+
+    #[IsGranted(UserRolesEnum::ROLE_ADMIN->value, statusCode: self::ACCESS_DENIED_RESPONSE_CODE)]
+    public function delete(Uuid $opportunityId, Uuid $phaseId): Response
+    {
+        try {
+            $this->phaseService->remove($opportunityId, $phaseId);
+            $this->addFlash('success', $this->translator->trans('view.opportunity.phase_delete_success'));
+        } catch (Exception $e) {
+            $this->addFlash('error', $this->translator->trans('view.opportunity.phase_delete_error'));
+        }
+
+        return $this->redirectToRoute('admin_opportunity_get', [
+            'id' => $opportunityId->toRfc4122(),
+            '_fragment' => 'phases',
+        ]);
+    }
 }
